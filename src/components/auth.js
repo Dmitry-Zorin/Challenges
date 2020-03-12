@@ -7,32 +7,35 @@ class Auth extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      loggedIn: false,
+      authorized: false,
     }
   }
 
   componentDidMount() {
+    if (!!localStorage.getItem('authorized'))
+      return this.setState({ authorized: true })
+
     axios.post(this.props.data.apiServer, {
       query: `{
         user {
-          loggedIn
+          authorized
         }
       }`,
     }).then(res => {
-      console.log(res.data)
-
-      if (!res.data.data.user.loggedIn)
+      if (!res.data.data.user.authorized)
         return this.props.navigate("/login")
 
+      localStorage.setItem("authorized", "true")
+
       localStorage.getItem("challenges") ?
-        this.setState({ loggedIn: true })
+        this.setState({ authorized: true })
         : getChallenges(this.props.data.apiServer)
-          .then(() => this.setState({ loggedIn: true }))
+          .then(() => this.setState({ authorized: true }))
     })
   }
 
   render = () =>
-    this.state.loggedIn &&
+    this.state.authorized &&
     <LazyComponent {...this.props}/>
 }
 

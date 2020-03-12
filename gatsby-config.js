@@ -1,4 +1,4 @@
-const notifications = require("./notifications")
+const notifications = require("./src/scripts/notifications")
 
 require("dotenv").config()
 

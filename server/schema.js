@@ -14,7 +14,7 @@ const schema = gql`
   }
   
   type Status {
-    loggedIn: Boolean
+    authorized: Boolean
   }
   
   type User {
@@ -58,6 +58,7 @@ const schema = gql`
     challengeEdit(id: String!, name: String!): Challenge
     signUp(username: String!, password: String!): AuthPayload
     login(username: String!, password: String!): AuthPayload
+    logout: AuthPayload
   }  
 `
 

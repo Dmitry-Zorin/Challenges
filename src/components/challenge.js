@@ -1,18 +1,14 @@
-import React, { useEffect } from "react"
+import React from "react"
 import axios from "axios"
 import { Form, Grid } from "uikit-react"
 import InnerLayout from "./inner-layout"
 import { addNotification, getChallenges } from "../scripts/functions"
 
 const Challenge = props => {
-  let nameInput
   const data = new Proxy({}, {
     get: (target, name) =>
       target[name] || "",
   })
-
-  useEffect(() =>
-    nameInput.focus())
 
   const defaultName = "Challenge from " + new Date().toString()
     .split(" ").slice(1, 5).join(" ").slice(0, -3)
@@ -70,13 +66,15 @@ const Challenge = props => {
         <div className='uk-margin-medium'>
           <label>
             Name
-            <input className='uk-input' ref={e => nameInput = e} onChange={e => setProp("name", e)}
+            {/* eslint-disable-next-line jsx-a11y/no-autofocus*/}
+            <input className='uk-input' autoFocus onChange={e => setProp("name", e)}
                    placeholder={defaultName}/>
           </label>
         </div>
 
         <div className='uk-margin-medium'>
           Difficulty
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions*/}
           <ul className="uk-subnav uk-subnav-pill" data-uk-switcher={true} onClick={e => setProp("difficulty", e)}>
             <li className='uk-width-1-3 uk-text-center'>
               <a className='a-button' href="/#">

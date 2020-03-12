@@ -4,7 +4,7 @@ import { faChevronLeft, faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "@reach/router"
 
-const Layout = props =>
+const Layout = props => (
   <div>
     <NavbarSticky>
       <NavbarContainer>
@@ -23,7 +23,7 @@ const Layout = props =>
             <NavItem>
               <Link to='/login'>
                 <FontAwesomeIcon icon={faSignInAlt} className='icon' transform='down-0.65'/>
-                Log in
+                {props.action}
               </Link>
             </NavItem>
           </Navbar>
@@ -39,5 +39,6 @@ const Layout = props =>
       {props.children}
     </Container>
   </div>
+)
 
 export default Layout

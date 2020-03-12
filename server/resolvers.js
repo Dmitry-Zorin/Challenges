@@ -1,7 +1,7 @@
 const resolvers = {
   Query: {
     user: (_, __, context) => {
-      return { loggedIn: !!context.getUser() }
+      return { authorized: !!context.getUser() }
     },
     challenges: (_, __, context) => {
       return context.getUser().challenges.map(c => {
@@ -93,7 +93,14 @@ const resolvers = {
       return context.authenticate("graphql-local", { username, password })
         .then(({ user }) => context.login(user)
           .then(() => ({ username: user.username })))
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+          return { username: "" }
+        })
+    },
+    logout: (_, __, context) => {
+      context.logout()
+      return { username: "out" }
     },
   },
 }
