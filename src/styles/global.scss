@@ -1,0 +1,162 @@
+@import './colors.scss';
+
+html {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+body {
+  min-height: 100%;
+  background-color: $primary-bg-color;
+  font-family: $font-family;
+}
+
+nav {
+  background-color: $tertiary-bg-color !important;
+  width: 100%;
+
+  & div {
+    width: 100%;
+  }
+}
+
+p {
+  font-family: $font-family !important;
+  color: $secondary-color !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+a {
+  font-family: $font-family !important;
+  text-decoration: none !important;
+  color: $secondary-color !important;
+
+  &:hover, &:not(.a-button):hover p {
+    color: $primary-color !important;
+  }
+}
+
+#nav-title {
+  color: $primary-color !important;
+}
+
+#title {
+  color: $primary-color !important;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.label {
+  height: 1.5em;
+  margin-top: 0.6em !important;
+}
+
+.overlay {
+  width: 3em;
+  background-color: rgba(lighten($secondary-bg-color, 2.5), 0.9) !important;
+  opacity: 0.5;
+}
+
+hr {
+  border-color: $secondary-color !important;
+}
+
+.uk-accordion-title {
+  height: 2.4em;
+  padding-top: 1em;
+}
+
+.uk-accordion-content {
+  margin-top: 0 !important;
+}
+
+.icon {
+  margin-right: 0.3em;
+}
+
+.margin {
+  margin: 1em;
+}
+
+.card {
+  margin-bottom: 2em;
+  padding: 1.5em 2em;
+  border-radius: 1em;
+  background-color: $secondary-bg-color !important;
+  color: $secondary-color !important;
+  overflow: hidden;
+}
+
+#start {
+  padding-top: 1.5em !important;
+  padding-bottom: 0 !important;
+}
+
+input:not([type=radio]), textarea {
+  background-color: $secondary-color !important;
+}
+
+input, .round-border {
+  border-radius: 0.5em !important;
+}
+
+.uk-subnav li a {
+  @extend .round-border;
+
+  height: 1.85em;
+  padding-top: .65em !important;
+
+  &[aria-expanded=false]:hover {
+    color: $secondary-color !important;
+    background-color: $primary-color;
+  }
+
+  &[aria-expanded=true] {
+    color: $secondary-color !important;
+    background-color: darken($primary-color, 4);
+  }
+}
+
+button {
+  @extend .round-border;
+
+  background-color: $primary-color;
+  color: $secondary-color !important;
+
+  &:hover {
+    background-color: darken($primary-color, 4);
+  }
+}
+
+.button {
+  width: 3em;
+  margin-left: 0.5em !important;
+}
+
+#inner-layout {
+  padding: 2em 2em;
+  min-height: calc(100% - 2em);
+}
+
+@media (max-width: 800px) {
+  #left-column {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  #layout {
+    padding: 0;
+  }
+
+  .card {
+    margin: 1em 0;
+  }
+
+  #inner-layout {
+    padding: 1em 1em;
+  }
+}
