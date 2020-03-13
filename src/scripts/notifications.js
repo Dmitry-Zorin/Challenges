@@ -32,6 +32,14 @@ const notifications = [
     },
   },
   {
+    name: "error",
+    value: {
+      title: "Error",
+      message: "Something went wrong",
+      type: "danger",
+    },
+  },
+  {
     name: "loginFailed",
     value: {
       title: "Login fail",

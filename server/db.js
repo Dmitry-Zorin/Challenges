@@ -7,7 +7,7 @@ const connectToDb = () => {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
-  })
+  }).catch(err => console.log(err))
 
   mongoose.connection.once("open", () => {
     console.log("MongoDB database connection established successfully")

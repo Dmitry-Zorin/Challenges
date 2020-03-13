@@ -1,6 +1,6 @@
 const { gql } = require("apollo-server-express")
 
-const schema = gql`
+const typeDefs = gql`
   enum Difficulty {
     Easy
     Medium
@@ -62,4 +62,4 @@ const schema = gql`
   }  
 `
 
-module.exports = schema
+module.exports = typeDefs

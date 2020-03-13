@@ -21,9 +21,13 @@ class Auth extends React.Component {
           authorized
         }
       }`,
+    }, {
+      withCredentials: true,
     }).then(res => {
-      if (!res.data.data.user.authorized)
+      if (!res.data.data.user.authorized) {
+        localStorage.clear()
         return this.props.navigate("/login")
+      }
 
       localStorage.setItem("authorized", "true")
 

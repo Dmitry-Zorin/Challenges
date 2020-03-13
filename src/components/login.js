@@ -5,14 +5,20 @@ import InnerLayout from "./inner-layout"
 import { addNotification } from "../scripts/functions"
 import { navigate } from "@reach/router"
 
+const loginState = {
+  login: true,
+  action: "Log In",
+}
+
+const signUpState = {
+  login: false,
+  action: "Sign Up",
+}
+
 class Login extends React.Component {
   constructor(props) {
     super(props || null)
-    this.state = {
-      login: true,
-      action: "Log In",
-    }
-    this.switch = this.switch.bind(this)
+    this.state = loginState
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
   }
@@ -20,18 +26,6 @@ class Login extends React.Component {
   componentDidMount() {
     if (this.props.auth)
       this.logout()
-  }
-
-  switch() {
-    this.setState(
-      this.state.login ? {
-        login: false,
-        action: "Sign Up",
-      } : {
-        login: true,
-        action: "Log In",
-      },
-    )
   }
 
   login(data) {
@@ -51,18 +45,19 @@ class Login extends React.Component {
         username: data.username,
         password: data.password,
       },
+    }, {
+      withCredentials: true,
     })
       .then(res => {
         if (this.state.login) {
           if (!res.data.data.login.username)
             return addNotification(this.props.data.getNotification("loginFailed"))
-
-          this.props.login()
-          navigate(-1)
         } else {
-          res.data.data.signUp.username
-            ? navigate(-1) : alert("wrong!")
+          if (!res.data.data.signUp.username)
+            return addNotification(this.props.data.getNotification("error"))
         }
+        this.props.login()
+        navigate(-1)
       })
       .catch(err => alert(err))
   }
@@ -74,13 +69,16 @@ class Login extends React.Component {
           username
         }
       }`,
+    }, {
+      withCredentials: true,
     })
       .then(res => {
-        console.log(res)
-        if (res.data.data.logout.username)
+        if (res.data.data.logout.username) {
+          localStorage.clear()
           return this.props.logout()
+        }
 
-        addNotification(this.props.data.getNotification("loginFailed"))
+        addNotification(this.props.data.getNotification("error"))
         navigate(-1)
       })
       .catch(err => alert(err))
@@ -94,23 +92,22 @@ class Login extends React.Component {
     })
 
     const setProp = (prop, e) =>
-      data[prop] = e.target.value || data[prop]
+      data[prop] = e.target.value// || data[prop]
 
     return (
       <InnerLayout>
         <p className='uk-h2 uk-text-center'>
           {this.state.action}
         </p>
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions*/}
-        <ul className="uk-subnav uk-subnav-pill uk-flex-center" data-uk-switcher={true} onClick={this.switch}>
+        <ul className="uk-subnav uk-subnav-pill uk-flex-center" data-uk-switcher={true}>
           <li className='uk-width-1-3@m uk-width-1-2@s uk-text-center'>
-            <a className='a-button' href="/#">
-              Log In
+            <a className='a-button' href="/#" onClick={() => this.setState(loginState)}>
+              {loginState.action}
             </a>
           </li>
           <li className='uk-width-1-3@m uk-width-1-2@s uk-text-center'>
-            <a className='a-button' href="/#">
-              Sign Up
+            <a className='a-button' href="/#" onClick={() => this.setState(signUpState)}>
+              {signUpState.action}
             </a>
           </li>
         </ul>

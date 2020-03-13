@@ -14,7 +14,7 @@ const Challenge = props => {
     .split(" ").slice(1, 5).join(" ").slice(0, -3)
 
   const setProp = (prop, e) =>
-    data[prop] = e.target.value || e.target.text || data[prop]
+    data[prop] = e.target.value// || data[prop]
 
   const startChallenge = () => {
     axios.post(props.data.apiServer, {
@@ -44,6 +44,8 @@ const Challenge = props => {
         duration: 24 * +data.durationD + +data.durationH + +data.durationM / 60,
         delay: 24 * +data.delayD + +data.delayH + +data.delayM / 60,
       },
+    }, {
+      withCredentials: true,
     })
       .then(res => getChallenges(props.data.apiServer)
         .then(() => {
@@ -74,20 +76,19 @@ const Challenge = props => {
 
         <div className='uk-margin-medium'>
           Difficulty
-          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions*/}
-          <ul className="uk-subnav uk-subnav-pill" data-uk-switcher={true} onClick={e => setProp("difficulty", e)}>
+          <ul className="uk-subnav uk-subnav-pill" data-uk-switcher={true}>
             <li className='uk-width-1-3 uk-text-center'>
-              <a className='a-button' href="/#">
+              <a className='a-button' href="/#" onClick={e => setProp("difficulty", e)}>
                 Easy
               </a>
             </li>
             <li className='uk-width-1-3 uk-text-center'>
-              <a className='a-button' href="/#">
+              <a className='a-button' href="/#" onClick={e => setProp("difficulty", e)}>
                 Medium
               </a>
             </li>
             <li className='uk-width-1-3 uk-text-center'>
-              <a className='a-button' href="/#">
+              <a className='a-button' href="/#" onClick={e => setProp("difficulty", e)}>
                 Hard
               </a>
             </li>

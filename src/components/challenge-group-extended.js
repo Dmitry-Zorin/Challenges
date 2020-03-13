@@ -62,6 +62,8 @@ class ChallengeGroupExtended extends React.Component {
       variables: {
         id: challenge._id,
       },
+    }, {
+      withCredentials: true,
     })
       .then(() => {
         const d = this.props.data
@@ -121,6 +123,8 @@ class ChallengeGroupExtended extends React.Component {
         id: id,
         name: name,
       },
+    }, {
+      withCredentials: true,
     })
       .then(() => getChallenges(this.props.data.apiServer)
         .then(res => this.initState(res)))

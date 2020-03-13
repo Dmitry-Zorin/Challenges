@@ -13,6 +13,8 @@ export const getChallenges = api_server =>
         endDate
       }
     }`,
+  }, {
+    withCredentials: true,
   })
     .then(res => {
       const challenges = sortChallenges(res.data.data.challenges)
