@@ -2,7 +2,7 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 
-class Loading extends React.Component {
+export class Loading extends React.Component {
   constructor(props = null) {
     super(props)
     this.state = {
@@ -26,5 +26,3 @@ class Loading extends React.Component {
       <FontAwesomeIcon icon={faSpinner} transform='grow-8' pulse/>
     </p>
 }
-
-export default Loading

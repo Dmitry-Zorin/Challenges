@@ -1,10 +1,14 @@
 import React from "react"
 import axios from "axios"
 import { Form, Grid } from "uikit-react"
-import InnerLayout from "./inner-layout"
+import { InnerLayout } from "./inner-layout"
 import { addNotification, getChallenges } from "../scripts/functions"
+import { DataContext } from "../context/DataContext"
+import { notifications } from "../data/notifications"
 
 const Challenge = props => {
+  const context = React.useContext(DataContext)
+
   const data = new Proxy({}, {
     get: (target, name) =>
       target[name] || "",
@@ -17,7 +21,7 @@ const Challenge = props => {
     data[prop] = e.target.value// || data[prop]
 
   const startChallenge = () => {
-    axios.post(props.data.apiServer, {
+    axios.post(context.apiServer, {
       query: `mutation(
         $username: String!,
         $name: String,
@@ -47,10 +51,10 @@ const Challenge = props => {
     }, {
       withCredentials: true,
     })
-      .then(res => getChallenges(props.data.apiServer)
+      .then(res => getChallenges(context.apiServer)
         .then(() => {
           addNotification({
-            ...props.data.getNotification("challengeCreated"),
+            ...notifications.challengeCreated,
             message: res.data.data.challengeAdd.name,
           })
           props.navigate("..")

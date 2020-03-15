@@ -81,10 +81,11 @@ export const updateTime = (state, api_server) => {
         .then(res => resolve(res)))
 }
 
-export const getChallengeName = c =>
-  c.progress === "Ongoing" ? `${c.name} (${c.timeLeft} left)`
-    : c.progress === "Upcoming" ? `${c.name} (starts in ${c.startsIn})`
-    : c.name
+export const getChallengeTime = c =>
+  "\xa0".repeat(2) + (
+    c.progress === "Upcoming" ? `starts in ${c.startsIn}`
+      : c.progress === "Ongoing" ? `${c.timeLeft} left` : ""
+  )
 
 export const addNotification = settings =>
   store.addNotification({

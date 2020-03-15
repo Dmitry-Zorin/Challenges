@@ -1,14 +1,7 @@
-const notifications = require("./src/scripts/notifications")
-
-require("dotenv").config()
+const metadata = require('./src/data/data')
 
 module.exports = {
-  siteMetadata: {
-    title: "Challenges",
-    apiServer: `${process.env.API_SERVER}/graphql`,
-    timeout: 15000,
-    notifications: notifications,
-  },
+  siteMetadata: metadata,
   plugins: [
     "gatsby-plugin-react-helmet",
     {

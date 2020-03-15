@@ -1,40 +1,43 @@
 import React from "react"
 import axios from "axios"
 import { Form } from "uikit-react"
-import InnerLayout from "./inner-layout"
+import { InnerLayout } from "./inner-layout"
 import { addNotification } from "../scripts/functions"
-import { navigate } from "@reach/router"
+import { DataContext } from "../context/DataContext"
+import { notifications } from "../data/notifications"
 
 const loginState = {
-  login: true,
-  action: "Log In",
+  action: "login",
+  title: "Log In",
 }
 
 const signUpState = {
-  login: false,
-  action: "Sign Up",
+  action: "signUp",
+  title: "Sign Up",
 }
 
-class Login extends React.Component {
+export class Login extends React.Component {
+  static contextType = DataContext
+
   constructor(props) {
-    super(props || null)
+    super(props)
     this.state = loginState
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
   }
 
   componentDidMount() {
-    if (this.props.auth)
+    if (this.context.authorized)
       this.logout()
   }
 
   login(data) {
-    axios.post(this.props.data.apiServer, {
+    axios.post(this.context.apiServer, {
       query: `mutation(
         $username: String!,
         $password: String!,
       ) {
-        ${this.state.login ? "login" : "signUp"}(
+        ${this.state.action}(
           username: $username,
           password: $password,
         ) {
@@ -49,21 +52,20 @@ class Login extends React.Component {
       withCredentials: true,
     })
       .then(res => {
-        if (this.state.login) {
-          if (!res.data.data.login.username)
-            return addNotification(this.props.data.getNotification("loginFailed"))
-        } else {
-          if (!res.data.data.signUp.username)
-            return addNotification(this.props.data.getNotification("error"))
-        }
+        if (!res.data.data[this.state.action].username)
+          return this.state.action === "login" ?
+            addNotification(notifications.loginFailed)
+            : addNotification(notifications.error)
+
         this.props.login()
-        navigate(-1)
+        localStorage.clear()
+        this.props.navigate("/")
       })
       .catch(err => alert(err))
   }
 
   logout() {
-    axios.post(this.props.data.apiServer, {
+    axios.post(this.context.apiServer, {
       query: `mutation {
         logout {
           username
@@ -73,13 +75,11 @@ class Login extends React.Component {
       withCredentials: true,
     })
       .then(res => {
-        if (res.data.data.logout.username) {
-          localStorage.clear()
+        if (res.data.data.logout.username)
           return this.props.logout()
-        }
 
-        addNotification(this.props.data.getNotification("error"))
-        navigate(-1)
+        addNotification(notifications.error)
+        window.history.back()
       })
       .catch(err => alert(err))
   }
@@ -92,22 +92,22 @@ class Login extends React.Component {
     })
 
     const setProp = (prop, e) =>
-      data[prop] = e.target.value// || data[prop]
+      data[prop] = e.target.value
 
     return (
       <InnerLayout>
         <p className='uk-h2 uk-text-center'>
-          {this.state.action}
+          {this.state.title}
         </p>
         <ul className="uk-subnav uk-subnav-pill uk-flex-center" data-uk-switcher={true}>
           <li className='uk-width-1-3@m uk-width-1-2@s uk-text-center'>
             <a className='a-button' href="/#" onClick={() => this.setState(loginState)}>
-              {loginState.action}
+              {loginState.title}
             </a>
           </li>
           <li className='uk-width-1-3@m uk-width-1-2@s uk-text-center'>
             <a className='a-button' href="/#" onClick={() => this.setState(signUpState)}>
-              {signUpState.action}
+              {signUpState.title}
             </a>
           </li>
         </ul>
@@ -129,12 +129,10 @@ class Login extends React.Component {
 
           <button className='round-border uk-button uk-align-center uk-margin-remove-bottom uk-margin-large-top'
                   onClick={() => this.login(data)}>
-            {this.state.action}
+            {this.state.title}
           </button>
         </Form>
       </InnerLayout>
     )
   }
 }
-
-export default Login

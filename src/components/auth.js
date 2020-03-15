@@ -1,46 +1,38 @@
 import React from "react"
-import axios from "axios"
+import { LazyComponent } from "./lazy-component"
+import { Loading } from "./loading"
+import { DataContext } from "../context/DataContext"
 import { getChallenges } from "../scripts/functions"
-import LazyComponent from "./lazy-component"
 
-class Auth extends React.Component {
+export class Auth extends React.Component {
+  static contextType = DataContext
+
   constructor(props) {
     super(props)
     this.state = {
-      authorized: false,
+      loading: true,
     }
+    this.authorize = this.authorize.bind(this)
   }
 
-  componentDidMount() {
-    if (!!localStorage.getItem('authorized'))
-      return this.setState({ authorized: true })
-
-    axios.post(this.props.data.apiServer, {
-      query: `{
-        user {
-          authorized
-        }
-      }`,
-    }, {
-      withCredentials: true,
-    }).then(res => {
-      if (!res.data.data.user.authorized) {
-        localStorage.clear()
-        return this.props.navigate("/login")
-      }
-
-      localStorage.setItem("authorized", "true")
-
-      localStorage.getItem("challenges") ?
-        this.setState({ authorized: true })
-        : getChallenges(this.props.data.apiServer)
-          .then(() => this.setState({ authorized: true }))
-    })
+  authorize() {
+    localStorage.getItem("challenges") ?
+      this.setState({ loading: false })
+      : getChallenges(this.context.apiServer)
+        .then(() => this.setState({ loading: false }))
   }
 
-  render = () =>
-    this.state.authorized &&
-    <LazyComponent {...this.props}/>
+  render = () => {
+    if (!this.context.authorized) {
+      this.props.navigate('/login')
+      return null
+    }
+
+    if (this.state.loading) {
+      this.authorize()
+      return <Loading/>
+    }
+
+    return <LazyComponent {...this.props}/>
+  }
 }
-
-export default Auth

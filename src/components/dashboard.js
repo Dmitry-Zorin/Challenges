@@ -1,11 +1,14 @@
 import React from "react"
 import { Flex } from "uikit-react"
-import ChallengeGroup from "./challenge-group"
+import { ChallengeGroup } from "./challenge-group"
 import { updateTime } from "../scripts/functions"
-import LeftColumn from "./left-column"
-import NewChallengeButton from "./new-challenge-button"
+import { LeftColumn } from "./left-column"
+import { NewChallengeButton } from "./new-challenge-button"
+import { DataContext } from "../context/DataContext"
 
-class Dashboard extends React.Component {
+export default class Dashboard extends React.Component {
+  static contextType = DataContext
+
   constructor(props) {
     super(props)
     this.state = {
@@ -17,7 +20,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.updateState, this.props.data.timeout)
+    this.interval = setInterval(this.updateState, this.context.timeout)
     this.updateState(JSON.parse(
       localStorage.getItem("challenges")
     ))
@@ -28,7 +31,7 @@ class Dashboard extends React.Component {
   }
 
   updateState(state = this.state) {
-    updateTime(state, this.props.data.apiServer)
+    updateTime(state, this.context.apiServer)
       .then(res => this.setState({
         ...state,
         ...res,
@@ -46,5 +49,3 @@ class Dashboard extends React.Component {
       </div>
     </Flex>
 }
-
-export default Dashboard

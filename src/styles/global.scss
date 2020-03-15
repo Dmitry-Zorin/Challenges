@@ -1,4 +1,5 @@
 @import './colors.scss';
+@import './node_modules/uikit/src/scss/components/animation.scss';
 
 html {
   height: 100%;
@@ -19,9 +20,13 @@ nav {
   & div {
     width: 100%;
   }
+
+  & a {
+    padding: 0 3em !important;
+  }
 }
 
-p {
+p, .wrap {
   font-family: $font-family !important;
   color: $secondary-color !important;
   white-space: nowrap;
@@ -39,12 +44,26 @@ a {
   }
 }
 
-#nav-title {
+hr {
+  border-color: $secondary-color !important;
+  border-width: 0.01em !important;
+  opacity: 0.3 !important;
+}
+
+.primary, .uk-open a {
   color: $primary-color !important;
 }
 
+.font-size-1-15 {
+  font-size: 1.15em;
+}
+
+.font-size-1-4 {
+  font-size: 1.4em;
+}
+
 #title {
-  color: $primary-color !important;
+  @extend .primary;
   font-size: 3em;
   font-weight: bold;
 }
@@ -60,12 +79,9 @@ a {
   opacity: 0.5;
 }
 
-hr {
-  border-color: $secondary-color !important;
-}
-
 .uk-accordion-title {
-  height: 2.4em;
+  height: auto;
+  min-height: 2em;
   padding-top: 1em;
 }
 
@@ -74,7 +90,7 @@ hr {
 }
 
 .icon {
-  margin-right: 0.3em;
+  margin-right: 0.4em;
 }
 
 .margin {
@@ -88,6 +104,11 @@ hr {
   background-color: $secondary-bg-color !important;
   color: $secondary-color !important;
   overflow: hidden;
+
+  & > div {
+    @extend .uk-animation-fade;
+    animation-duration: 0.25s;
+  }
 }
 
 #start {
@@ -105,7 +126,6 @@ input, .round-border {
 
 .uk-subnav li a {
   @extend .round-border;
-
   height: 1.85em;
   padding-top: .65em !important;
 
@@ -122,9 +142,8 @@ input, .round-border {
 
 button {
   @extend .round-border;
-
-  background-color: $primary-color;
   color: $secondary-color !important;
+  background-color: $primary-color;
 
   &:hover {
     background-color: darken($primary-color, 4);
@@ -148,6 +167,10 @@ button {
 }
 
 @media (max-width: 500px) {
+  nav a {
+    padding: 0 1em !important;
+  }
+
   #layout {
     padding: 0;
   }

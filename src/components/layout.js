@@ -1,44 +1,52 @@
 import React from "react"
 import { Container, Flex, Navbar, NavbarContainer, NavbarSticky, NavItem } from "uikit-react"
-import { faChevronLeft, faSignInAlt } from "@fortawesome/free-solid-svg-icons"
+import { faChevronLeft, faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "@reach/router"
+import { DataContext } from "../context/DataContext"
 
-const Layout = props => (
-  <div>
-    <NavbarSticky>
-      <NavbarContainer>
-        <Container>
-          <Navbar>
-            <NavItem>
-              <Link id='nav-title' to='/'>
+export const Layout = props => {
+  const context = React.useContext(DataContext)
+
+  return (
+    <div>
+      <NavbarSticky>
+        <NavbarContainer>
+          <Container>
+            <Navbar>
+              <NavItem>
                 {
-                  window.location.pathname !== "/" &&
-                  <FontAwesomeIcon icon={faChevronLeft} className='icon' transform='shrink-2 down-0.65'/>
+                  window.location.pathname === "/" ?
+                    <Link to='/' className="primary">
+                      {props.title}
+                    </Link>
+                    :
+                    <Link to='/'>
+                      <FontAwesomeIcon icon={faChevronLeft} className='icon' transform='shrink-2 down-0.65'/>
+                      Dashboard
+                    </Link>
                 }
-                {props.title}
-              </Link>
-            </NavItem>
-            <NavItem className='uk-width-expand'/>
-            <NavItem>
-              <Link to='/login'>
-                <FontAwesomeIcon icon={faSignInAlt} className='icon' transform='down-0.65'/>
-                {props.action}
-              </Link>
-            </NavItem>
-          </Navbar>
-        </Container>
-      </NavbarContainer>
-    </NavbarSticky>
-    <Container id='layout' style={{ paddingBottom: "2em" }}>
-      <Flex className='uk-flex-middle' style={{ height: "6em", marginTop: "2.5em" }}>
-        <p id='title' className='uk-align-center'>
-          {props.title}
-        </p>
-      </Flex>
-      {props.children}
-    </Container>
-  </div>
-)
-
-export default Layout
+              </NavItem>
+              <NavItem className='uk-width-expand'/>
+              <NavItem>
+                <Link to='/login'>
+                  <FontAwesomeIcon icon={context.authorized ? faSignOutAlt : faSignInAlt} className='icon'
+                                   transform='down-0.65'/>
+                  {context.authorized ? "Log Out" : "Log In"}
+                </Link>
+              </NavItem>
+            </Navbar>
+          </Container>
+        </NavbarContainer>
+      </NavbarSticky>
+      <Container id='layout' style={{ paddingBottom: "2em" }}>
+        <Flex className='uk-flex-middle' style={{ height: "6em", marginTop: "2.5em" }}>
+          <p id='title' className='uk-align-center'>
+            {props.title}
+          </p>
+        </Flex>
+        {props.children}
+      </Container>
+    </div>
+  )
+}

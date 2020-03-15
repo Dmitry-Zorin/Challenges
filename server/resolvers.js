@@ -4,7 +4,10 @@ const resolvers = {
       return { authorized: !!context.getUser() }
     },
     challenges: (_, __, context) => {
-      return context.getUser().challenges.map(c => {
+      let update = false
+      const user = context.getUser()
+
+      user.challenges = user.challenges.map(c => {
         const progress = c.progress
         const now = new Date().getTime()
 
@@ -15,10 +18,15 @@ const resolvers = {
           c.progress = "Completed"
 
         if (progress !== c.progress)
-          c.save().catch(err => console.log(err))
+          update = true
 
         return c
       })
+
+      if (update) user.save()
+        .catch(err => console.log(err))
+
+      return user.challenges
     },
   },
   Mutation: {

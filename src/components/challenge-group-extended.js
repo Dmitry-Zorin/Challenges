@@ -1,19 +1,23 @@
 import React from "react"
-import InnerLayout from "./inner-layout"
 import axios from "axios"
+import { InnerLayout } from "./inner-layout"
 import { Accordion, AccordionItem, Grid } from "uikit-react"
-import { addNotification, getChallengeName, getChallenges, updateTime } from "../scripts/functions"
+import { addNotification, getChallengeTime, getChallenges, updateTime } from "../scripts/functions"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheck, faEdit, faPlay, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { DataContext } from "../context/DataContext"
+import { notifications } from "../data/notifications"
 
-class ChallengeGroupExtended extends React.Component {
+export default class ChallengeGroupExtended extends React.Component {
+  static contextType = DataContext
+
   constructor(props) {
     super(props)
     this.state = {
-      groupName: props.location.pathname.slice(1),
       group: [],
-      titles: {},
     }
+    this.groupName = props.location.pathname.slice(1)
+
     this.updateState = this.updateState.bind(this)
     this.initState = this.initState.bind(this)
     this.update = this.update.bind(this)
@@ -22,7 +26,7 @@ class ChallengeGroupExtended extends React.Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.updateState, this.props.data.timeout)
+    this.interval = setInterval(this.updateState, this.context.timeout)
     this.updateState(JSON.parse(
       localStorage.getItem("challenges"),
     ))
@@ -34,24 +38,20 @@ class ChallengeGroupExtended extends React.Component {
 
   updateState(state) {
     updateTime({
-      [this.state.groupName]: state ? state[this.state.groupName] : this.state.group,
-    }, this.props.data.apiServer)
+      [this.groupName]: state ? state[this.groupName] : this.state.group,
+    }, this.context.apiServer)
       .then(res => this.initState(res))
   }
 
   initState(state) {
-    const group = state[this.state.groupName]
+    const group = state[this.groupName]
     this.setState({
       group: group,
-      titles: group.reduce((d, c) => {
-        d[c._id] = getChallengeName(c)
-        return d
-      }, {}),
     })
   }
 
   update(challenge, action) {
-    axios.post(this.props.data.apiServer, {
+    axios.post(this.context.apiServer, {
       query: `mutation(
         $id: String!
       ) {
@@ -66,21 +66,20 @@ class ChallengeGroupExtended extends React.Component {
       withCredentials: true,
     })
       .then(() => {
-        const d = this.props.data
         addNotification({
-          ...action === "Start" ? d.getNotification("challengeStarted")
-            : action === "Complete" ? d.getNotification("challengeCompleted")
-              : d.getNotification("challengeDeleted"),
+          ...action === "Start" ? notifications.challengeStarted
+            : action === "Complete" ? notifications.challengeCompleted
+              : notifications.challengeDeleted,
           message: challenge.name,
         })
-        getChallenges(this.props.data.apiServer)
+        getChallenges(this.context.apiServer)
           .then(res => this.initState(res))
       })
       .catch(err => alert(err))
   }
 
-  edit(id) {
-    if (typeof this.state.titles[id] !== "string")
+  edit(c) {
+    if (typeof c.name !== "string")
       return
 
     clearInterval(this.interval)
@@ -88,26 +87,26 @@ class ChallengeGroupExtended extends React.Component {
       .forEach(e => e.href = "")
 
     this.setState({
-      titles: {
-        ...this.state.titles,
-        [id]:
+      group: this.state.group.map(e => {
+        if (e._id === c._id) e.name = (
           <input
             // eslint-disable-next-line jsx-a11y/no-autofocus
-            className='uk-input uk-width-auto' autoFocus
-            defaultValue={this.state.titles[id].match(/([^(]*)(?= \(|$)/)[0]}
-            onKeyDown={e => /Enter|Esc/.test(e.key) && this.save(id, e.target.value)}
-            onBlur={e => this.save(id, e.target.value)}
-          />,
-      },
+            className='uk-input uk-width-auto' autoFocus defaultValue={c.name}
+            onKeyDown={e => /Enter|Esc/.test(e.key) && this.save(c._id, e.target.value)}
+            onBlur={e => this.save(c._id, e.target.value)}
+          />
+        )
+        return e
+      }),
     })
   }
 
   save(id, name) {
-    this.interval = setInterval(this.updateState, this.props.data.timeout)
+    this.interval = setInterval(this.updateState, this.context.timeout)
     document.querySelectorAll(".uk-accordion-title")
       .forEach(e => e.href = "#")
 
-    axios.post(this.props.data.apiServer, {
+    axios.post(this.context.apiServer, {
       query: `mutation(
         $id: String!
         $name: String!
@@ -126,7 +125,7 @@ class ChallengeGroupExtended extends React.Component {
     }, {
       withCredentials: true,
     })
-      .then(() => getChallenges(this.props.data.apiServer)
+      .then(() => getChallenges(this.context.apiServer)
         .then(res => this.initState(res)))
       .catch(err => console.log(err))
   }
@@ -136,7 +135,7 @@ class ChallengeGroupExtended extends React.Component {
       "ongoing": ["complete", "delete"],
       "upcoming": ["start", "delete"],
       "completed": ["delete"],
-    }[this.state.groupName]
+    }[this.groupName]
 
     const getLabelClass = c =>
       c.difficulty === "Hard" ? "uk-label-danger"
@@ -147,14 +146,23 @@ class ChallengeGroupExtended extends React.Component {
     return (
       <InnerLayout>
         <p className='uk-h2 uk-text-center' autoCapitalize='on'>
-          {this.state.groupName}
+          {this.groupName[0].toUpperCase() + this.groupName.slice(1)}
         </p>
         <Accordion>
           {this.state.group.map(c =>
             <AccordionItem
               key={c._id}
               className='uk-margin-remove'
-              title={this.state.titles[c._id]}
+              title={
+                <div>
+                  <span>
+                    {c.name}
+                  </span>
+                  <span className='uk-text-meta'>
+                    {getChallengeTime(c)}
+                  </span>
+                </div>
+              }
               content={
                 <div>
                   <Grid className='uk-margin-remove'>
@@ -163,7 +171,7 @@ class ChallengeGroupExtended extends React.Component {
                     </div>
                     <div className='uk-width-expand uk-text-right'>
                       <button className='button round-border uk-button uk-padding-remove'
-                              data-uk-tooltip='Edit' onClick={() => this.edit(c._id)}>
+                              data-uk-tooltip='Edit' onClick={() => this.edit(c)}>
                         <FontAwesomeIcon icon={faEdit} transform='grow-3'/>
                       </button>
 
@@ -202,5 +210,3 @@ class ChallengeGroupExtended extends React.Component {
     )
   }
 }
-
-export default ChallengeGroupExtended

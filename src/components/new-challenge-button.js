@@ -2,7 +2,7 @@ import React from "react"
 import { Card } from "uikit-react"
 import { Link } from "@reach/router"
 
-const NewChallengeButton = props =>
+export const NewChallengeButton = props =>
   <div className='margin'>
     <Link to='/challenge' className='uk-margin-remove uk-padding-remove'>
       <Card id='start' className='card uk-transition-toggle' tabindex='0' style={{ zIndex: 0 }}>
@@ -17,5 +17,3 @@ const NewChallengeButton = props =>
       </Card>
     </Link>
   </div>
-
-export default NewChallengeButton
