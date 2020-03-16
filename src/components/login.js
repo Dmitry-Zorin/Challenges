@@ -48,9 +48,7 @@ export class Login extends React.Component {
         username: data.username,
         password: data.password,
       },
-    }, {
-      withCredentials: true,
-    })
+    }, { withCredentials: true })
       .then(res => {
         if (!res.data.data[this.state.action].username)
           return this.state.action === "login" ?
@@ -71,9 +69,7 @@ export class Login extends React.Component {
           username
         }
       }`,
-    }, {
-      withCredentials: true,
-    })
+    }, { withCredentials: true })
       .then(res => {
         if (res.data.data.logout.username)
           return this.props.logout()

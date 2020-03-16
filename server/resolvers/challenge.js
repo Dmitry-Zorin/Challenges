@@ -1,8 +1,5 @@
-const resolvers = {
+const challenge = {
   Query: {
-    user: (_, __, context) => {
-      return { authorized: !!context.getUser() }
-    },
     challenges: (_, __, context) => {
       let update = false
       const user = context.getUser()
@@ -88,29 +85,7 @@ const resolvers = {
         .then(() => c)
         .catch(err => console.log(err))
     },
-    signUp: (_, { username, password }, context) => {
-      return context.User.findOne({ username }).then(user =>
-        user ? null : new context.User({ username, password }).save()
-          .then(() => context.authenticate("graphql-local", { username, password })
-            .then(({ user }) => context.login(user)
-              .then(() => ({ username: user.username }))))
-          .catch(err => console.log(err)),
-      )
-    },
-    login: (_, { username, password }, context) => {
-      return context.authenticate("graphql-local", { username, password })
-        .then(({ user }) => context.login(user)
-          .then(() => ({ username: user.username })))
-        .catch(err => {
-          console.log(err)
-          return { username: "" }
-        })
-    },
-    logout: (_, __, context) => {
-      context.logout()
-      return { username: "out" }
-    },
   },
 }
 
-module.exports = resolvers
+module.exports = challenge

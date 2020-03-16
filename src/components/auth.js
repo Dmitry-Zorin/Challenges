@@ -16,15 +16,17 @@ export class Auth extends React.Component {
   }
 
   authorize() {
-    localStorage.getItem("challenges") ?
+    const stopLoading = () =>
       this.setState({ loading: false })
-      : getChallenges(this.context.apiServer)
-        .then(() => this.setState({ loading: false }))
+
+    localStorage.getItem("challenges") ? stopLoading()
+      : getChallenges(this.context.apiServer).then(stopLoading)
   }
 
   render = () => {
+    console.log(this.context.authorized)
     if (!this.context.authorized) {
-      this.props.navigate('/login')
+      //this.props.navigate('/login')
       return null
     }
 

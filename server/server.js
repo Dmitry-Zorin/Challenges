@@ -35,8 +35,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 new ApolloServer({
-  typeDefs: require("./typeDefs"),
-  resolvers: require("./resolvers"),
+  typeDefs: require("./typeDefs/all"),
+  resolvers: require("./resolvers/all"),
   context: ({ req, res }) =>
     buildContext({ req, res, User }),
 }).applyMiddleware({ app, path: "/graphql", cors: false })

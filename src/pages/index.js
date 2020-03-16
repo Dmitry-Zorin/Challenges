@@ -25,10 +25,17 @@ export default class IndexPage extends React.Component {
         authorized: false,
       },
     }
-    this.authorize = this.authorize.bind(this)
+    this.authResult = axios.post(
+      this.state.context.apiServer, {
+        query: `{
+          user {
+            authorized
+          }
+        }`,
+      }, { withCredentials: true },
+    )
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
-    this.authResult = this.authorize()
   }
 
   componentDidMount() {
@@ -39,18 +46,6 @@ export default class IndexPage extends React.Component {
         return this.login()
 
       this.props.navigate("/login")
-    })
-  }
-
-  authorize() {
-    return axios.post(this.state.context.apiServer, {
-      query: `{
-        user {
-          authorized
-        }
-      }`,
-    }, {
-      withCredentials: true,
     })
   }
 
@@ -100,7 +95,6 @@ export const query = graphql`{
   site {
     siteMetadata {
       title
-      apiServer
     }
   }
 }`

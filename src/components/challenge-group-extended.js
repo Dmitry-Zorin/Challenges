@@ -17,7 +17,6 @@ export default class ChallengeGroupExtended extends React.Component {
       group: [],
     }
     this.groupName = props.location.pathname.slice(1)
-
     this.updateState = this.updateState.bind(this)
     this.initState = this.initState.bind(this)
     this.update = this.update.bind(this)
@@ -62,9 +61,7 @@ export default class ChallengeGroupExtended extends React.Component {
       variables: {
         id: challenge._id,
       },
-    }, {
-      withCredentials: true,
-    })
+    }, { withCredentials: true })
       .then(() => {
         addNotification({
           ...action === "Start" ? notifications.challengeStarted
@@ -122,9 +119,7 @@ export default class ChallengeGroupExtended extends React.Component {
         id: id,
         name: name,
       },
-    }, {
-      withCredentials: true,
-    })
+    }, { withCredentials: true })
       .then(() => getChallenges(this.context.apiServer)
         .then(res => this.initState(res)))
       .catch(err => console.log(err))

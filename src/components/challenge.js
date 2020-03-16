@@ -48,9 +48,7 @@ const Challenge = props => {
         duration: 24 * +data.durationD + +data.durationH + +data.durationM / 60,
         delay: 24 * +data.delayD + +data.delayH + +data.delayM / 60,
       },
-    }, {
-      withCredentials: true,
-    })
+    }, { withCredentials: true })
       .then(res => getChallenges(context.apiServer)
         .then(() => {
           addNotification({
