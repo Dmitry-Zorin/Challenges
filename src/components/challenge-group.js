@@ -5,18 +5,18 @@ import { getChallengeTime } from "../scripts/functions"
 import { DataContext } from "../context/DataContext"
 import { Loading } from "./loading"
 
-export const ChallengeGroup = props => {
+export const ChallengeGroup = ({ to, title, group }) => {
   const context = React.useContext(DataContext)
 
   return (
     <div className='margin'>
-      <Link to={props.to}>
+      <Link to={to}>
         <Card className='card uk-transition-toggle' tabindex='0' style={{ height: "15em", zIndex: 0 }}>
           <p className='font-size-1-4 uk-text-center'>
-            {props.title}
+            {title}
           </p>
           {context.authorized === undefined ? <Loading/>
-            : (props.group || []).slice(0, 4).map(c =>
+            : (group || []).slice(0, 4).map(c =>
               <div className='wrap uk-margin-small' key={c._id}>
                 <span className='font-size-1-15'>
                   {c.name}

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 
 export class Loading extends React.Component {
-  constructor(props = null) {
+  constructor(props) {
     super(props)
     this.state = {
       render: false,

@@ -6,7 +6,7 @@ import { Link } from "@reach/router"
 import { DataContext } from "../context/DataContext"
 import { graphql, useStaticQuery } from "gatsby"
 
-export const Layout = props => {
+export const Layout = ({ title, children }) => {
   const context = React.useContext(DataContext)
   const data = useStaticQuery(graphql`{
     site {
@@ -29,7 +29,7 @@ export const Layout = props => {
                 {window.location.pathname === "/"
                   ?
                   <Link to='/' className="primary">
-                    {props.title}
+                    {title}
                   </Link>
                   :
                   <Link to='/'>
@@ -55,10 +55,10 @@ export const Layout = props => {
       <Container id='layout' style={{ paddingBottom: "2em" }}>
         <Flex className='uk-flex-middle' style={{ height: "6em", marginTop: "2.5em" }}>
           <p id='title' className='uk-align-center'>
-            {props.title}
+            {title}
           </p>
         </Flex>
-        {props.children}
+        {children}
       </Container>
     </div>
   )

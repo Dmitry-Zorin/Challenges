@@ -11,15 +11,16 @@ import { Loading } from "./loading"
 
 export class ChallengeGroupExtended extends React.Component {
   static contextType = DataContext
-  groupName = window.location.pathname.slice(1)
 
   constructor(props) {
     super(props)
     this.edit = this.edit.bind(this)
     this.save = this.save.bind(this)
+
     this.state = {
       input: "",
     }
+    this.groupName = window.location.pathname.slice(1)
   }
 
   edit(c) {

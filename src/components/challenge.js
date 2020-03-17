@@ -6,7 +6,7 @@ import { addNotification, getChallenges, handleError } from "../scripts/function
 import { DataContext } from "../context/DataContext"
 import { notifications } from "../data/notifications"
 
-export const Challenge = props => {
+export const Challenge = ({ navigate }) => {
   const context = React.useContext(DataContext)
 
   const data = new Proxy({}, {
@@ -49,15 +49,14 @@ export const Challenge = props => {
         delay: 24 * +data.delayD + +data.delayH + +data.delayM / 60,
       },
     }, { withCredentials: true })
-      .then(res => getChallenges(context.apiServer)
-        .then(() => {
-          addNotification({
-            ...notifications.challengeCreated,
-            message: res.data.data.challengeAdd.name,
-          })
-          props.navigate("..")
-        }),
-      )
+      .then(res => {
+        context.updateChallenges()
+        addNotification({
+          ...notifications.challengeCreated,
+          message: res.data.data.challengeAdd.name,
+        })
+        navigate("..")
+      })
       .catch(err => handleError(err, "Failed to create challenge"))
   }
 

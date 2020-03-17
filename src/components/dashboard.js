@@ -8,7 +8,6 @@ import { DataContext } from "../context/DataContext"
 export const Dashboard = () => {
   const context = React.useContext(DataContext)
   const challenges = context.challenges || {}
-  console.log(context)
 
   return (
     <Flex>
