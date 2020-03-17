@@ -4,7 +4,7 @@ import { InnerLayout } from "./inner-layout"
 import { Accordion, AccordionItem, Grid } from "uikit-react"
 import { addNotification, getChallengeTime, handleError } from "../scripts/functions"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheck, faEdit, faPlay, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { faArrowDown, faArrowUp, faCheck, faEdit, faPlay, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { DataContext } from "../context/DataContext"
 import { notifications } from "../data/notifications"
 import { Loading } from "./loading"
@@ -71,6 +71,12 @@ export class ChallengeGroupExtended extends React.Component {
       "completed": ["delete"],
     }[this.groupName]
 
+    const icon = {
+      "ongoing": faArrowDown,
+      "upcoming": faArrowUp,
+      "completed": faCheck,
+    }[this.groupName]
+
     const getLabelClass = c =>
       c.difficulty === "Hard" ? "uk-label-danger"
         : c.difficulty === "Medium" ? "uk-label-warning"
@@ -116,12 +122,13 @@ export class ChallengeGroupExtended extends React.Component {
                 className='uk-margin-remove'
                 title={this.state.input !== c._id
                   ?
-                  <div>
-                    <span>{c.name}</span>
-                    <span className='uk-text-meta'>
+                  <Grid>
+                    <p className='uk-width-expand'>{c.name}</p>
+                    <div className='uk-text-meta uk-padding-remove uk-text-right' style={{ marginTop: "0.35em" }}>
+                      <FontAwesomeIcon icon={icon} transform='shrink-2'/>
                       {getChallengeTime(c)}
-                    </span>
-                  </div>
+                    </div>
+                  </Grid>
                   :
                   <input
                     // eslint-disable-next-line jsx-a11y/no-autofocus

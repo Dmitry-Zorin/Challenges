@@ -59,7 +59,7 @@ export default class IndexPage extends React.Component {
   }
 
   updateState(challenges, authorized = true) {
-    updateTime(challenges || this.state.challenges)
+    updateTime(challenges || this.state.challenges, this.state.apiServer)
       .then(res => this.setState({ challenges: res, authorized }))
   }
 

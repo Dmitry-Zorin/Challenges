@@ -2,7 +2,7 @@ import React from "react"
 import axios from "axios"
 import { Form, Grid } from "uikit-react"
 import { InnerLayout } from "./inner-layout"
-import { addNotification, getChallenges, handleError } from "../scripts/functions"
+import { addNotification, handleError } from "../scripts/functions"
 import { DataContext } from "../context/DataContext"
 import { notifications } from "../data/notifications"
 

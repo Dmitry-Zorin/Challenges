@@ -42,8 +42,8 @@ export const Layout = ({ title, children }) => {
               <NavItem>
                 {context.authorized !== undefined &&
                 <Link to='/login'>
-                  <FontAwesomeIcon icon={context.authorized ? faSignOutAlt : faSignInAlt} className='icon'
-                                   transform='down-0.65'/>
+                  <FontAwesomeIcon icon={context.authorized ? faSignOutAlt : faSignInAlt}
+                                   className='icon' transform='down-0.65'/>
                   {context.authorized ? data.logout : data.login}
                 </Link>
                 }
