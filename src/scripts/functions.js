@@ -1,5 +1,6 @@
 import axios from "axios"
 import { store } from "react-notifications-component"
+import { notifications } from "../data/notifications"
 
 export const getChallenges = api_server =>
   axios.post(api_server, {
@@ -19,7 +20,10 @@ export const getChallenges = api_server =>
       localStorage.setItem("challenges", JSON.stringify(challenges))
       return updateTime(challenges, api_server)
     })
-    .catch(err => alert(err))
+    .catch(err => {
+      handleError(err, 'Failed to get challenges')
+      return {}
+    })
 
 const sortChallenges = challenges => ({
   ongoing: challenges.filter(c => c.progress === "Ongoing")
@@ -76,7 +80,7 @@ export const updateTime = (state, api_server) => {
   return new Promise(resolve =>
     !update ? resolve(updatedState)
       : getChallenges(api_server)
-        .then(res => resolve(res)))
+        .then(resolve))
 }
 
 export const getChallengeTime = c =>
@@ -97,3 +101,11 @@ export const addNotification = settings =>
     },
     ...settings,
   })
+
+export const handleError = (err, message) => {
+  console.log(err.toJSON ? err.toJSON() : err)
+  addNotification({
+    ...notifications.error,
+    message: message || err.message
+  })
+}

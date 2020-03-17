@@ -9,24 +9,26 @@ import { Auth } from "../components/auth"
 import { NotFoundPage } from "../components/404"
 import { DataContext } from "../context/DataContext"
 import { graphql } from "gatsby"
-import { Loading } from "../components/loading"
-
-const Dashboard = React.lazy(() => import("../components/dashboard"))
-const Challenge = React.lazy(() => import("../components/challenge"))
-const ChallengeGroupExtended = React.lazy(() => import("../components/challenge-group-extended"))
+import { Dashboard } from "../components/dashboard"
+import { Challenge } from "../components/challenge"
+import { ChallengeGroupExtended } from "../components/challenge-group-extended"
+import { getChallenges, handleError, updateTime } from "../scripts/functions"
 
 export default class IndexPage extends React.Component {
   constructor(props) {
     super(props)
+    this.updateChallenges = this.updateChallenges.bind(this)
+    this.updateState = this.updateState.bind(this)
+    this.login = this.login.bind(this)
+    this.logout = this.logout.bind(this)
+
     this.state = {
-      loading: true,
-      context: {
-        ...DataContext._currentValue,
-        authorized: false,
-      },
+      ...DataContext._currentValue,
+      challenges: {},
+      updateChallenges: this.updateChallenges,
     }
     this.authResult = axios.post(
-      this.state.context.apiServer, {
+      this.state.apiServer, {
         query: `{
           user {
             authorized
@@ -34,36 +36,51 @@ export default class IndexPage extends React.Component {
         }`,
       }, { withCredentials: true },
     )
-    this.login = this.login.bind(this)
-    this.logout = this.logout.bind(this)
+    this.data = this.props.data.site.siteMetadata
   }
 
   componentDidMount() {
-    this.authResult.then(res => {
-      this.setState({ loading: false })
-
-      if (res.data.data.user.authorized)
-        return this.login()
-
-      this.props.navigate("/login")
-    })
+    this.authResult
+      .then(res =>
+        res.data.data.user.authorized
+          ? this.login(true)
+          : this.logout(),
+      )
+      .catch(err => handleError(err, "Failed to check user authorization"))
   }
 
-  login() {
-    this.setState({
-      context: {
-        ...this.state.context,
-        authorized: true,
-      },
-    })
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+  updateChallenges() {
+    getChallenges(this.state.apiServer)
+      .then(res => this.updateState(res))
+  }
+
+  updateState(challenges, authorized = true) {
+    updateTime(challenges || this.state.challenges)
+      .then(res => this.setState({ challenges: res, authorized }))
+  }
+
+  login(useStorage = false) {
+    this.interval = setInterval(this.updateState, this.data.timeout)
+
+    const challenges = useStorage &&
+      JSON.parse(localStorage.getItem("challenges"))
+
+    challenges
+      ? this.updateState(challenges)
+      : this.updateChallenges()
   }
 
   logout() {
+    clearInterval(this.interval)
+    localStorage.clear()
+
     this.setState({
-      context: {
-        ...this.state.context,
-        authorized: false,
-      },
+      challenges: {},
+      authorized: false,
     })
   }
 
@@ -71,21 +88,19 @@ export default class IndexPage extends React.Component {
     <div>
       <ReactNotification/>
       <Helmet>
-        <title>{this.props.data.site.siteMetadata.title}</title>
+        <title>{this.data.title}</title>
       </Helmet>
-      <DataContext.Provider value={this.state.context}>
-        <Layout title={this.props.data.site.siteMetadata.title}>
-          {this.state.loading ? <Loading/> :
-            <Router>
-              <NotFoundPage default/>
-              <Login path="/login" login={this.login} logout={this.logout}/>
-              <Auth path="/" Component={Dashboard}/>
-              <Auth path="/challenge" Component={Challenge}/>
-              <Auth path="/ongoing" Component={ChallengeGroupExtended}/>
-              <Auth path="/upcoming" Component={ChallengeGroupExtended}/>
-              <Auth path="/completed" Component={ChallengeGroupExtended}/>
-            </Router>
-          }
+      <DataContext.Provider value={this.state}>
+        <Layout title={this.data.title}>
+          <Router>
+            <NotFoundPage default/>
+            <Dashboard path='/'/>
+            <Login path="/login" login={this.login} logout={this.logout}/>
+            <Auth path="/challenge" component={Challenge}/>
+            <ChallengeGroupExtended path="/ongoing"/>
+            <ChallengeGroupExtended path="/upcoming"/>
+            <ChallengeGroupExtended path="/completed"/>
+          </Router>
         </Layout>
       </DataContext.Provider>
     </div>
@@ -94,6 +109,7 @@ export default class IndexPage extends React.Component {
 export const query = graphql`{
   site {
     siteMetadata {
+      timeout
       title
     }
   }

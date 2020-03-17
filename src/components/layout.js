@@ -4,9 +4,20 @@ import { faChevronLeft, faSignInAlt, faSignOutAlt } from "@fortawesome/free-soli
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "@reach/router"
 import { DataContext } from "../context/DataContext"
+import { graphql, useStaticQuery } from "gatsby"
 
 export const Layout = props => {
   const context = React.useContext(DataContext)
+  const data = useStaticQuery(graphql`{
+    site {
+      siteMetadata {
+        title
+        dashboard
+        login
+        logout
+      }
+    }
+  }`).site.siteMetadata
 
   return (
     <div>
@@ -15,25 +26,27 @@ export const Layout = props => {
           <Container>
             <Navbar>
               <NavItem>
-                {
-                  window.location.pathname === "/" ?
-                    <Link to='/' className="primary">
-                      {props.title}
-                    </Link>
-                    :
-                    <Link to='/'>
-                      <FontAwesomeIcon icon={faChevronLeft} className='icon' transform='shrink-2 down-0.65'/>
-                      Dashboard
-                    </Link>
+                {window.location.pathname === "/"
+                  ?
+                  <Link to='/' className="primary">
+                    {props.title}
+                  </Link>
+                  :
+                  <Link to='/'>
+                    <FontAwesomeIcon icon={faChevronLeft} className='icon' transform='shrink-2 down-0.65'/>
+                    {data.dashboard}
+                  </Link>
                 }
               </NavItem>
               <NavItem className='uk-width-expand'/>
               <NavItem>
+                {context.authorized !== undefined &&
                 <Link to='/login'>
                   <FontAwesomeIcon icon={context.authorized ? faSignOutAlt : faSignInAlt} className='icon'
                                    transform='down-0.65'/>
-                  {context.authorized ? "Log Out" : "Log In"}
+                  {context.authorized ? data.logout : data.login}
                 </Link>
+                }
               </NavItem>
             </Navbar>
           </Container>

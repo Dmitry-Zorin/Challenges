@@ -2,11 +2,11 @@ import React from "react"
 import axios from "axios"
 import { Form, Grid } from "uikit-react"
 import { InnerLayout } from "./inner-layout"
-import { addNotification, getChallenges } from "../scripts/functions"
+import { addNotification, getChallenges, handleError } from "../scripts/functions"
 import { DataContext } from "../context/DataContext"
 import { notifications } from "../data/notifications"
 
-const Challenge = props => {
+export const Challenge = props => {
   const context = React.useContext(DataContext)
 
   const data = new Proxy({}, {
@@ -20,7 +20,7 @@ const Challenge = props => {
   const setProp = (prop, e) =>
     data[prop] = e.target.value// || data[prop]
 
-  const startChallenge = () => {
+  const createChallenge = () => {
     axios.post(context.apiServer, {
       query: `mutation(
         $username: String!,
@@ -58,7 +58,7 @@ const Challenge = props => {
           props.navigate("..")
         }),
       )
-      .catch(err => alert(err))
+      .catch(err => handleError(err, "Failed to create challenge"))
   }
 
   return (
@@ -70,9 +70,7 @@ const Challenge = props => {
         <div className='uk-margin-medium'>
           <label>
             Name
-            {/* eslint-disable-next-line jsx-a11y/no-autofocus*/}
-            <input className='uk-input' autoFocus onChange={e => setProp("name", e)}
-                   placeholder={defaultName}/>
+            <input className='uk-input' onChange={e => setProp("name", e)} placeholder={defaultName}/>
           </label>
         </div>
 
@@ -136,12 +134,10 @@ const Challenge = props => {
         </div>
 
         <button className='round-border uk-button uk-align-center uk-margin-remove-bottom uk-margin-large-top'
-                onClick={startChallenge}>
+                onClick={createChallenge}>
           Create Challenge
         </button>
       </Form>
     </InnerLayout>
   )
 }
-
-export default Challenge

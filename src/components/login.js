@@ -2,7 +2,7 @@ import React from "react"
 import axios from "axios"
 import { Form } from "uikit-react"
 import { InnerLayout } from "./inner-layout"
-import { addNotification } from "../scripts/functions"
+import { addNotification, handleError } from "../scripts/functions"
 import { DataContext } from "../context/DataContext"
 import { notifications } from "../data/notifications"
 
@@ -21,9 +21,9 @@ export class Login extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = loginState
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
+    this.state = loginState
   }
 
   componentDidMount() {
@@ -52,14 +52,13 @@ export class Login extends React.Component {
       .then(res => {
         if (!res.data.data[this.state.action].username)
           return this.state.action === "login" ?
-            addNotification(notifications.loginFailed)
-            : addNotification(notifications.error)
+            addNotification(notifications.loginFailed) :
+            addNotification(notifications.error)
 
         this.props.login()
-        localStorage.clear()
         this.props.navigate("/")
       })
-      .catch(err => alert(err))
+      .catch(err => handleError(err, `Failed to ${this.state.title.toLowerCase()}`))
   }
 
   logout() {
@@ -77,7 +76,7 @@ export class Login extends React.Component {
         addNotification(notifications.error)
         window.history.back()
       })
-      .catch(err => alert(err))
+      .catch(err => handleError(err, "Failed to log out"))
   }
 
 
@@ -111,8 +110,7 @@ export class Login extends React.Component {
           <div className='uk-margin-medium'>
             <label>
               Username
-              {/* eslint-disable-next-line jsx-a11y/no-autofocus*/}
-              <input className='uk-input' autoFocus onChange={e => setProp("username", e)}/>
+              <input className='uk-input' onChange={e => setProp("username", e)}/>
             </label>
           </div>
 
