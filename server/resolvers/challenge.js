@@ -8,11 +8,8 @@ const challenge = {
         const progress = c.progress
         const now = new Date().getTime()
 
-        if (now > c.startDate)
-          c.progress = "Ongoing"
-
-        if (now > c.endDate)
-          c.progress = "Completed"
+        c.progress = now < c.startDate ? "Upcoming"
+          : now > c.endDate ? "Completed" : "Ongoing"
 
         if (progress !== c.progress)
           update = true
@@ -39,6 +36,20 @@ const challenge = {
 
       const user = context.getUser()
       user.challenges.push(c)
+
+      return user.save()
+        .then(() => c)
+        .catch(err => console.log(err))
+    },
+    challengeEdit: (_, { id, challenge }, context) => {
+      const user = context.getUser()
+      const c = user.challenges.find(c => c._id.toString() === id)
+
+      c.name = challenge.name || c.name
+      c.difficulty = challenge.difficulty || c.difficulty
+
+      c.startDate = new Date().getTime() + (challenge.delay || 0) * 36e5
+      c.endDate = c.startDate + (challenge.duration || 0) * 36e5
 
       return user.save()
         .then(() => c)
@@ -73,16 +84,6 @@ const challenge = {
 
       return user.save()
         .then(() => "Completed!")
-        .catch(err => console.log(err))
-    },
-    challengeEdit: (_, { id, name }, context) => {
-      const user = context.getUser()
-      const c = user.challenges.find(c => c._id.toString() === id)
-
-      c.name = name
-
-      return user.save()
-        .then(() => c)
         .catch(err => console.log(err))
     },
   },

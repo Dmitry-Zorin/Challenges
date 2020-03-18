@@ -96,7 +96,8 @@ export default class IndexPage extends React.Component {
             <NotFoundPage default/>
             <Dashboard path='/'/>
             <Login path="/login" login={this.login} logout={this.logout}/>
-            <Auth path="/challenge" Component={Challenge}/>
+            <Auth path="/create" Component={Challenge}/>
+            <Auth path="/edit" Component={Challenge}/>
             <ChallengeGroupExtended path="/ongoing"/>
             <ChallengeGroupExtended path="/upcoming"/>
             <ChallengeGroupExtended path="/completed"/>

@@ -1,10 +1,10 @@
 import React from "react"
 import { DataContext } from "../context/DataContext"
 
-export const Auth = ({ Component, navigate }) => {
+export const Auth = ({ Component, ...props }) => {
   const context = React.useContext(DataContext)
 
-  return context.authorized ? <Component navigate={navigate}/>
+  return context.authorized ? <Component {...props}/>
     : context.authorized === undefined ? null
-      : navigate("/login") && null
+      : props.navigate("/login") && null
 }

@@ -10,12 +10,11 @@ const challenge = gql`
     challengeDelete(id: String!): String
     challengeStart(id: String!): String
     challengeComplete(id: String!): String
-    challengeEdit(id: String!, name: String!): Challenge
+    challengeEdit(id: String!, challenge: ChallengeInput!): Challenge
   }
 
   type Challenge {
     _id: String!
-    username: String!
     name: String!
     difficulty: Difficulty!
     progress: Progress!
@@ -24,7 +23,6 @@ const challenge = gql`
   }
 
   input ChallengeInput {
-    username: String!
     name: String
     difficulty: Difficulty = Easy
     duration: Float = 0

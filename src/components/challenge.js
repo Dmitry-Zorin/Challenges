@@ -6,76 +6,98 @@ import { addNotification, handleError } from "../scripts/functions"
 import { DataContext } from "../context/DataContext"
 import { notifications } from "../data/notifications"
 
-export const Challenge = ({ navigate }) => {
+export const Challenge = ({ navigate, location }) => {
   const context = React.useContext(DataContext)
+  const challenge = location && location.state.challenge
+  const data = {}
 
-  const data = new Proxy({}, {
-    get: (target, name) =>
-      target[name] || "",
-  })
-
-  const defaultName = "Challenge from " + new Date().toString()
-    .split(" ").slice(1, 5).join(" ").slice(0, -3)
+  const state = challenge ? {
+    id: "$id: String!",
+    id_var: "id: $id",
+    api: "challengeEdit",
+    navigate: () => window.history.back(),
+    action: "Update",
+    title: "Edit Challenge",
+    active: ["Easy", "Medium", "Hard"].indexOf(challenge.difficulty),
+    save: "Save",
+  } : {
+    id: "",
+    id_var: "",
+    api: "challengeAdd",
+    navigate: () => navigate(".."),
+    action: "Create",
+    title: "New Challenge",
+    active: 0,
+    save: "Create Challenge",
+  }
 
   const setProp = (prop, e) =>
-    data[prop] = e.target.value// || data[prop]
+    data[prop] = e.target.value || e.target.text
 
-  const createChallenge = () => {
+  const cancel = () => {
+    window.history.back()
+  }
+
+  const save = () => {
+    console.log(data)
     axios.post(context.apiServer, {
       query: `mutation(
-        $username: String!,
-        $name: String,
-        $difficulty: Difficulty,
-        $duration: Float,
-        $delay: Float,
+        ${state.id}
+        $name: String
+        $difficulty: Difficulty
+        $duration: Float
+        $delay: Float
       ) {
-        challengeAdd(
+        ${state.api}(
+          ${state.id_var}
           challenge: {
-            username: $username,
-            name: $name,
-            difficulty: $difficulty,
-            duration: $duration,
-            delay: $delay,
+            name: $name
+            difficulty: $difficulty
+            duration: $duration
+            delay: $delay
           }
         ) {
           name
         }
       }`,
       variables: {
-        username: "dima",
+        id: challenge && challenge._id,
         name: data.name,
-        difficulty: data.difficulty || "Easy",
-        duration: 24 * +data.durationD + +data.durationH + +data.durationM / 60,
-        delay: 24 * +data.delayD + +data.delayH + +data.delayM / 60,
+        difficulty: data.difficulty,
+        duration: 24 * +(data.durationD || 0) + +(data.durationH || 0) + +(data.durationM || 0) / 60,
+        delay: 24 * +(data.delayD || 0) + +(data.delayH || 0) + +(data.delayM || 0) / 60,
       },
     }, { withCredentials: true })
       .then(res => {
         context.updateChallenges()
         addNotification({
           ...notifications.challengeCreated,
-          message: res.data.data.challengeAdd.name,
+          message: res.data.data[state.api].name,
         })
-        navigate("..")
+        state.navigate()
       })
-      .catch(err => handleError(err, "Failed to create challenge"))
+      .catch(err => handleError(err, `Failed to ${state.action} challenge`))
   }
 
   return (
     <InnerLayout>
       <p className='uk-h2 uk-text-center'>
-        New Challenge
+        {state.title}
       </p>
       <Form>
         <div className='uk-margin-medium'>
           <label>
             Name
-            <input className='uk-input' onChange={e => setProp("name", e)} placeholder={defaultName}/>
+            <input className='uk-input' onChange={e => setProp("name", e)}
+                   placeholder={!challenge && "Challenge from " + new Date().toString()
+                     .split(" ").slice(1, 5).join(" ").slice(0, -3)}
+                   defaultValue={challenge && challenge.name}/>
           </label>
         </div>
 
         <div className='uk-margin-medium'>
           Difficulty
-          <ul className="uk-subnav uk-subnav-pill" data-uk-switcher={true}>
+          <ul className="uk-subnav uk-subnav-pill" data-uk-switcher={true} data-active={state.active}>
             <li className='uk-width-1-3 uk-text-center'>
               <a className='a-button' href="/#" onClick={e => setProp("difficulty", e)}>
                 Easy
@@ -132,10 +154,20 @@ export const Challenge = ({ navigate }) => {
           </Grid>
         </div>
 
-        <button className='round-border uk-button uk-align-center uk-margin-remove-bottom uk-margin-large-top'
-                onClick={createChallenge}>
-          Create Challenge
-        </button>
+        <Grid className='uk-flex-center uk-margin-large-top'>
+          {challenge &&
+          <div className='uk-width-1-3'>
+            <button className='round-border uk-button uk-width-expand' onClick={cancel}>
+              Cancel
+            </button>
+          </div>
+          }
+          <div className='uk-width-1-3'>
+            <button className='round-border uk-button uk-width-expand' onClick={save}>
+              {state.save}
+            </button>
+          </div>
+        </Grid>
       </Form>
     </InnerLayout>
   )
