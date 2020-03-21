@@ -1,6 +1,6 @@
 import axios from "axios"
 import { store } from "react-notifications-component"
-import { notifications } from "../data/notifications"
+import { notifications } from "./data/notifications"
 
 export const getChallenges = apiServer =>
   axios.post(apiServer,

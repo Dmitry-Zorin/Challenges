@@ -1,9 +1,9 @@
 import React from "react"
 import { Card, Grid } from "uikit-react"
 import { Link } from "@reach/router"
-import { getChallengeTime } from "../../scripts/functions"
-import { DataContext } from "../../context/DataContext"
-import { Loading } from "../loading"
+import { getChallengeTime } from "../../../services/helper"
+import { DataContext } from "../../../services/contexts/DataContext"
+import { Loading } from "../../../components/loading"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowDown, faArrowUp, faCheck } from "@fortawesome/free-solid-svg-icons"
 

@@ -1,5 +1,5 @@
 import React from "react"
-import { DataContext } from "../../context/DataContext"
+import { DataContext } from "../../../services/contexts/DataContext"
 import { graphql, useStaticQuery } from "gatsby"
 import { Container, Navbar, NavbarContainer, NavbarSticky, NavItem } from "uikit-react"
 import { Link } from "@reach/router"

@@ -1,13 +1,13 @@
 import React from "react"
 import axios from "axios"
-import { InnerLayout } from "./inner-layout"
+import { InnerLayout } from "../../components/inner-layout"
 import { Accordion, AccordionItem, Grid } from "uikit-react"
-import { addNotification, getChallengeTime, handleError } from "../scripts/functions"
+import { addNotification, getChallengeTime, handleError } from "../../services/helper"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowDown, faArrowUp, faCheck, faEdit, faPlay, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
-import { DataContext } from "../context/DataContext"
-import { notifications } from "../data/notifications"
-import { Loading } from "./loading"
+import { DataContext } from "../../services/contexts/DataContext"
+import { notifications } from "../../services/data/notifications"
+import { Loading } from "../../components/loading"
 
 const challenges = {
   ongoing: {

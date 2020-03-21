@@ -1,14 +1,14 @@
 import React from "react"
 import axios from "axios"
 import { Form } from "uikit-react"
-import { InnerLayout } from "../inner-layout"
-import { addNotification, handleError } from "../../scripts/functions"
-import { DataContext } from "../../context/DataContext"
-import { notifications } from "../../data/notifications"
-import { DifficultyInput } from "./difficulty-input"
-import { TimeInput } from "./time-input"
-import { Buttons } from "./buttons"
-import { TextInput } from "../text-input"
+import { InnerLayout } from "../../components/inner-layout"
+import { addNotification, handleError } from "../../services/helper"
+import { DataContext } from "../../services/contexts/DataContext"
+import { notifications } from "../../services/data/notifications"
+import { DifficultyInput } from "./components/difficulty-input"
+import { TimeInput } from "./components/time-input"
+import { Buttons } from "./components/buttons"
+import { TextInput } from "../../components/text-input"
 
 const info = {
   create: {

@@ -1,6 +1,6 @@
 import React from "react"
 import { Container, Flex } from "uikit-react"
-import { NavigationBar } from "./navbar"
+import { NavigationBar } from "./components/navbar"
 
 export const Layout = ({ title, children }) => (
   <div>

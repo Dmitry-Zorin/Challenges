@@ -1,12 +1,12 @@
 import React from "react"
 import axios from "axios"
 import { Form } from "uikit-react"
-import { InnerLayout } from "./inner-layout"
-import { addNotification, handleError } from "../scripts/functions"
-import { DataContext } from "../context/DataContext"
-import { notifications } from "../data/notifications"
-import { SwitcherItem } from "./switcher-item"
-import { TextInput } from "./text-input"
+import { InnerLayout } from "../../components/inner-layout"
+import { addNotification, handleError } from "../../services/helper"
+import { DataContext } from "../../services/contexts/DataContext"
+import { notifications } from "../../services/data/notifications"
+import { SwitcherItem } from "../../components/switcher-item"
+import { TextInput } from "../../components/text-input"
 
 const states = {
   login: {
@@ -100,9 +100,8 @@ export class Login extends React.PureComponent {
         className="uk-subnav uk-subnav-pill uk-flex-center uk-child-width-1-3@m uk-child-width-1-2@s"
         data-uk-switcher={true}
       >
-        {Object.values(states).map(s =>
-          <SwitcherItem key={s.action} value={s.title} onClick={() => this.setState(s)}/>,
-        )}
+        <SwitcherItem value={states.login.title} onClick={() => this.setState(states.login)}/>
+        <SwitcherItem value={states.signUp.title} onClick={() => this.setState(states.signUp)}/>
       </ul>
       <Form>
         <TextInput label='username' value={this.state.username} handleChange={this.handleChange}/>
