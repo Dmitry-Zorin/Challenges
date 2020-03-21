@@ -2,15 +2,15 @@ import React from "react"
 import ReactNotification from "react-notifications-component"
 import axios from "axios"
 import { Router } from "@reach/router"
-import { Layout } from "../components/layout"
+import { Layout } from "../components/layout/layout"
 import { Helmet } from "react-helmet"
 import { Login } from "../components/login"
 import { Auth } from "../components/auth"
 import { NotFoundPage } from "../components/404"
 import { DataContext } from "../context/DataContext"
 import { graphql } from "gatsby"
-import { Dashboard } from "../components/dashboard"
-import { Challenge } from "../components/challenge"
+import { Dashboard } from "../components/dashboard/dashboard"
+import { Challenge } from "../components/challenge/challenge"
 import { ChallengeGroupExtended } from "../components/challenge-group-extended"
 import { getChallenges, handleError, updateTime } from "../scripts/functions"
 
@@ -28,24 +28,18 @@ export default class IndexPage extends React.PureComponent {
       updateChallenges: this.updateChallenges,
     }
     this.authResult = axios.post(
-      this.state.apiServer, {
-        query: `{
-          user {
-            authorized
-          }
-        }`,
-      }, { withCredentials: true },
+      this.state.apiServer,
+      { query: "{ user { isAuthorized } }" },
+      { withCredentials: true },
     )
     this.data = this.props.data.site.siteMetadata
   }
 
   componentDidMount() {
     this.authResult
-      .then(res =>
-        res.data.data.user.authorized
-          ? this.login(true)
-          : this.logout(),
-      )
+      .then(res => res.data.data.user.isAuthorized
+        ? this.login(true)
+        : this.logout())
       .catch(err => handleError(err, "Failed to check user authorization"))
   }
 
@@ -58,9 +52,9 @@ export default class IndexPage extends React.PureComponent {
       .then(res => this.updateState(res))
   }
 
-  updateState(challenges, authorized = true) {
+  updateState(challenges, isAuthorized = true) {
     updateTime(challenges || this.state.challenges, this.state.apiServer)
-      .then(res => this.setState({ challenges: res, authorized }))
+      .then(res => this.setState({ challenges: res, isAuthorized }))
   }
 
   login(useStorage = false) {
@@ -80,7 +74,7 @@ export default class IndexPage extends React.PureComponent {
 
     this.setState({
       challenges: {},
-      authorized: false,
+      isAuthorized: false,
     })
   }
 

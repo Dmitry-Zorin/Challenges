@@ -12,7 +12,7 @@ const auth = gql`
   }
   
   type Status {
-    authorized: Boolean
+    isAuthorized: Boolean
   }
   
   type AuthPayload {

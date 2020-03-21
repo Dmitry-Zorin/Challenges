@@ -3,7 +3,7 @@ import { Flex } from "uikit-react"
 import { ChallengeGroup } from "./challenge-group"
 import { LeftColumn } from "./left-column"
 import { NewChallengeButton } from "./new-challenge-button"
-import { DataContext } from "../context/DataContext"
+import { DataContext } from "../../context/DataContext"
 
 export const Dashboard = () => {
   const context = React.useContext(DataContext)

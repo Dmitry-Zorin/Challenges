@@ -2,26 +2,18 @@ import axios from "axios"
 import { store } from "react-notifications-component"
 import { notifications } from "../data/notifications"
 
-export const getChallenges = api_server =>
-  axios.post(api_server, {
-    query: `{
-      challenges {
-        _id
-        name
-        difficulty
-        progress
-        startDate
-        endDate
-      }
-    }`,
-  }, { withCredentials: true })
+export const getChallenges = apiServer =>
+  axios.post(apiServer,
+    { query: "{ challenges { _id name difficulty progress startDate endDate } }" },
+    { withCredentials: true },
+  )
     .then(res => {
       const challenges = sortChallenges(res.data.data.challenges)
       localStorage.setItem("challenges", JSON.stringify(challenges))
-      return updateTime(challenges, api_server)
+      return updateTime(challenges, apiServer)
     })
     .catch(err => {
-      handleError(err, 'Failed to get challenges')
+      handleError(err, "Failed to get challenges")
       return {}
     })
 
@@ -36,9 +28,9 @@ const sortChallenges = challenges => ({
     .sort((a, b) => b.endDate - a.endDate),
 })
 
-export const updateTime = (state, api_server) => {
+export const updateTime = (state, apiServer) => {
   const date = new Date().getTime()
-  let update = false
+  let needsUpdate = false
 
   const timeToString = t =>
     ((t = t / 60000) > 1440 ? `${t / 1440 | 0}d ` : "")
@@ -50,7 +42,7 @@ export const updateTime = (state, api_server) => {
       ongoing: state.ongoing.map(c => {
         const time = c.endDate - date
         if (time < 0) {
-          update = true
+          needsUpdate = true
           addNotification({
             title: "Challenge completed!",
             message: c.name,
@@ -65,7 +57,7 @@ export const updateTime = (state, api_server) => {
       upcoming: state.upcoming.map(c => {
         const time = c.startDate - date
         if (time < 0) {
-          update = true
+          needsUpdate = true
           addNotification({
             title: "Challenge started!",
             message: c.name,
@@ -75,12 +67,13 @@ export const updateTime = (state, api_server) => {
         return c
       }),
     },
-    ...state.completed && { completed: state.completed },
+    ...state.completed && {
+      completed: state.completed,
+    },
   }
   return new Promise(resolve =>
-    !update ? resolve(updatedState)
-      : getChallenges(api_server)
-        .then(resolve))
+    !needsUpdate ? resolve(updatedState)
+      : getChallenges(apiServer).then(resolve))
 }
 
 export const getChallengeTime = c =>
@@ -96,9 +89,7 @@ export const addNotification = settings =>
     container: "top-right",
     animationIn: ["animated", "fadeIn"],
     animationOut: ["animated", "fadeOut"],
-    dismiss: {
-      duration: 3000,
-    },
+    dismiss: { duration: 3000 },
     ...settings,
   })
 
@@ -106,6 +97,6 @@ export const handleError = (err, message) => {
   console.log(err.toJSON ? err.toJSON() : err)
   addNotification({
     ...notifications.error,
-    message: message || err.message
+    message: message || err.message,
   })
 }

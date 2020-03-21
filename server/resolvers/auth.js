@@ -1,7 +1,7 @@
 const auth = {
   Query: {
     user: (_, __, context) => {
-      return { authorized: !!context.getUser() }
+      return { isAuthorized: !!context.getUser() }
     },
   },
   Mutation: {
