@@ -7,10 +7,10 @@ const challenge = gql`
 
   extend type Mutation {
     challengeAdd(challenge: ChallengeInput!): Challenge
+    challengeEdit(id: String!, challenge: ChallengeInput!): Challenge
     challengeDelete(id: String!): String
     challengeStart(id: String!): String
     challengeComplete(id: String!): String
-    challengeEdit(id: String!, challenge: ChallengeInput!): Challenge
   }
 
   type Challenge {
@@ -23,10 +23,10 @@ const challenge = gql`
   }
 
   input ChallengeInput {
-    name: String
+    name: String!
     difficulty: Difficulty = Easy
-    duration: Float = 0
-    delay: Float = 0
+    startDate: Float = 0
+    endDate: Float = 0
   }
 
   enum Difficulty {

@@ -9,7 +9,7 @@ import { DataContext } from "../context/DataContext"
 import { notifications } from "../data/notifications"
 import { Loading } from "./loading"
 
-export class ChallengeGroupExtended extends React.Component {
+export class ChallengeGroupExtended extends React.PureComponent {
   static contextType = DataContext
 
   constructor(props) {
@@ -20,10 +20,10 @@ export class ChallengeGroupExtended extends React.Component {
     this.search = this.search.bind(this)
   }
 
-  search = e => {
+  search = ({ target }) => {
     this.setState({
       pattern: new RegExp(
-        e.target.value.split(" ").join(".*"), "i"),
+        target.value.split(" ").join(".*"), "i"),
     })
   }
 

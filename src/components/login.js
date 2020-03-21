@@ -16,7 +16,7 @@ const signUpState = {
   title: "Sign Up",
 }
 
-export class Login extends React.Component {
+export class Login extends React.PureComponent {
   static contextType = DataContext
 
   constructor(props) {
@@ -86,8 +86,8 @@ export class Login extends React.Component {
         target[name] || "",
     })
 
-    const setProp = (prop, e) =>
-      data[prop] = e.target.value
+    const setProp = (prop, { target }) =>
+      data[prop] = target.value
 
     return (
       <InnerLayout>

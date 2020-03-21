@@ -6,169 +6,203 @@ import { addNotification, handleError } from "../scripts/functions"
 import { DataContext } from "../context/DataContext"
 import { notifications } from "../data/notifications"
 
-export const Challenge = ({ navigate, location }) => {
-  const context = React.useContext(DataContext)
-  const challenge = location && location.state.challenge
-  const data = {}
+export class Challenge extends React.Component {
+  static contextType = DataContext
 
-  const state = challenge ? {
-    id: "$id: String!",
-    id_var: "id: $id",
-    api: "challengeEdit",
-    navigate: () => window.history.back(),
-    action: "Update",
-    title: "Edit Challenge",
-    active: ["Easy", "Medium", "Hard"].indexOf(challenge.difficulty),
-    save: "Save",
-  } : {
-    id: "",
-    id_var: "",
-    api: "challengeAdd",
-    navigate: () => navigate(".."),
-    action: "Create",
-    title: "New Challenge",
-    active: 0,
-    save: "Create Challenge",
+  constructor(props) {
+    super(props)
+    this.getChallenge = this.getChallenge.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.save = this.save.bind(this)
+
+    this.state = {
+      ...this.getChallenge(),
+    }
+    this.info = !this.state._id ? {
+      id: "",
+      id_var: "",
+      api: "challengeAdd",
+      notification: "challengeCreated",
+      navigate: () => props.navigate(".."),
+      action: "Create",
+      title: "New Challenge",
+      save: "Create Challenge",
+    } : {
+      id: "$id: String!",
+      id_var: "id: $id",
+      api: "challengeEdit",
+      notification: "challengeEdited",
+      navigate: () => window.history.back(),
+      action: "Update",
+      title: "Edit Challenge",
+      save: "Save",
+    }
   }
 
-  const setProp = (prop, e) =>
-    data[prop] = e.target.value || e.target.text
+  getChallenge() {
+    const c = this.props.location.state.challenge
+    if (!c) return
 
-  const cancel = () => {
-    window.history.back()
+    const now = new Date().getTime()
+    c.duration = Math.max(0, c.endDate - Math.max(c.startDate, now))
+    c.delay = Math.max(0, c.startDate - now)
+    return c
   }
 
-  const save = () => {
-    console.log(data)
-    axios.post(context.apiServer, {
+  handleChange(name, value) {
+    this.setState({
+      [name]: value,
+    })
+  }
+
+  save(defaultName) {
+    const startDate = new Date().getTime() + (this.state.delay || 0)
+    const endDate = startDate + (this.state.duration || 0)
+
+    axios.post(this.context.apiServer, {
       query: `mutation(
-        ${state.id}
-        $name: String
+        ${this.info.id}
+        $name: String!
         $difficulty: Difficulty
-        $duration: Float
-        $delay: Float
+        $startDate: Float
+        $endDate: Float
       ) {
-        ${state.api}(
-          ${state.id_var}
+        ${this.info.api}(
+          ${this.info.id_var}
           challenge: {
             name: $name
             difficulty: $difficulty
-            duration: $duration
-            delay: $delay
+            startDate: $startDate
+            endDate: $endDate
           }
         ) {
           name
         }
       }`,
       variables: {
-        id: challenge && challenge._id,
-        name: data.name,
-        difficulty: data.difficulty,
-        duration: 24 * +(data.durationD || 0) + +(data.durationH || 0) + +(data.durationM || 0) / 60,
-        delay: 24 * +(data.delayD || 0) + +(data.delayH || 0) + +(data.delayM || 0) / 60,
+        id: this.state._id,
+        name: this.state.name || defaultName,
+        difficulty: this.state.difficulty,
+        startDate, endDate,
       },
     }, { withCredentials: true })
       .then(res => {
-        context.updateChallenges()
+        this.context.updateChallenges()
         addNotification({
-          ...notifications.challengeCreated,
-          message: res.data.data[state.api].name,
+          ...notifications[this.info.notification],
+          message: res.data.data[this.info.api].name,
         })
-        state.navigate()
+        this.info.navigate()
       })
-      .catch(err => handleError(err, `Failed to ${state.action} challenge`))
+      .catch(err => handleError(err, `Failed to ${this.info.action} challenge`))
   }
 
+  render = () => {
+    const defaultName = "Challenge from " + new Date().toString()
+      .split(" ").slice(1, 5).join(" ").slice(0, -3)
+
+    return (
+      <InnerLayout>
+        <p className='uk-h2 uk-text-center'>{this.info.title}</p>
+        <Form>
+          <NameInput value={this.state.name} defaultName={defaultName} handleChange={this.handleChange}/>
+          <DifficultyInput difficulty={this.state.difficulty} handleChange={this.handleChange}/>
+          <TimeInput name='duration' ms={this.state.duration} handleChange={this.handleChange}/>
+          <TimeInput name='delay' ms={this.state.delay} handleChange={this.handleChange}/>
+          <Buttons save={() => this.save(defaultName)} saveValue={this.info.save} cancel={!!this.info.id}/>
+        </Form>
+      </InnerLayout>
+    )
+  }
+}
+
+const NameInput = ({ value, defaultName, handleChange }) => (
+  <div className='uk-margin-medium'>
+    <label>
+      Name
+      <input
+        className='uk-input' value={value || ""} placeholder={value ? undefined : defaultName}
+        onChange={e => handleChange("name", e.target.value)}
+      />
+    </label>
+  </div>
+)
+
+const DifficultyInput = ({ difficulty, handleChange }) => {
+  const difficulties = ["Easy", "Medium", "Hard"]
+  const widthClass = `uk-child-width-1-${difficulties.length}`
+  const active = difficulties.indexOf(difficulty)
+
   return (
-    <InnerLayout>
-      <p className='uk-h2 uk-text-center'>
-        {state.title}
-      </p>
-      <Form>
-        <div className='uk-margin-medium'>
-          <label>
-            Name
-            <input className='uk-input' onChange={e => setProp("name", e)}
-                   placeholder={!challenge && "Challenge from " + new Date().toString()
-                     .split(" ").slice(1, 5).join(" ").slice(0, -3)}
-                   defaultValue={challenge && challenge.name}/>
-          </label>
-        </div>
-
-        <div className='uk-margin-medium'>
-          Difficulty
-          <ul className="uk-subnav uk-subnav-pill" data-uk-switcher={true} data-active={state.active}>
-            <li className='uk-width-1-3 uk-text-center'>
-              <a className='a-button' href="/#" onClick={e => setProp("difficulty", e)}>
-                Easy
-              </a>
-            </li>
-            <li className='uk-width-1-3 uk-text-center'>
-              <a className='a-button' href="/#" onClick={e => setProp("difficulty", e)}>
-                Medium
-              </a>
-            </li>
-            <li className='uk-width-1-3 uk-text-center'>
-              <a className='a-button' href="/#" onClick={e => setProp("difficulty", e)}>
-                Hard
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div className='uk-margin-medium'>
-          <Grid>
-            <label className='uk-width-1-3'>
-              Duration
-              <input type='number' className='uk-input' placeholder='days' onChange={e => setProp("durationD", e)}/>
-            </label>
-            <label className='uk-width-1-3'>
-              Duration
-              <input type='number' className='uk-input' placeholder='hours' min='-23' max='23'
-                     onChange={e => setProp("durationH", e)}/>
-            </label>
-            <label className='uk-width-1-3'>
-              Duration
-              <input type='number' className='uk-input' placeholder='minutes' step='10' min='-60' max='60'
-                     onChange={e => setProp("durationM", e)}/>
-            </label>
-          </Grid>
-        </div>
-
-        <div className='uk-margin-medium'>
-          <Grid>
-            <label className='uk-width-1-3'>
-              Delay
-              <input type='number' className='uk-input' placeholder='days' onChange={e => setProp("delayD", e)}/>
-            </label>
-            <label className='uk-width-1-3'>
-              Delay
-              <input type='number' className='uk-input' placeholder='hours' min='-23' max='23'
-                     onChange={e => setProp("delayH", e)}/>
-            </label>
-            <label className='uk-width-1-3'>
-              Delay
-              <input type='number' className='uk-input' placeholder='minutes' step='10' min='-60' max='60'
-                     onChange={e => setProp("delayM", e)}/>
-            </label>
-          </Grid>
-        </div>
-
-        <Grid className='uk-flex-center uk-margin-large-top'>
-          {challenge &&
-          <div className='uk-width-1-3'>
-            <button className='round-border uk-button uk-width-expand' onClick={cancel}>
-              Cancel
-            </button>
-          </div>
-          }
-          <div className='uk-width-1-3'>
-            <button className='round-border uk-button uk-width-expand' onClick={save}>
-              {state.save}
-            </button>
-          </div>
-        </Grid>
-      </Form>
-    </InnerLayout>
+    <div className='uk-margin-medium'>
+      Difficulty
+      <ul className={"uk-subnav uk-subnav-pill " + widthClass} data-uk-switcher={true} data-active={active}>
+        {difficulties.map(d => <Item key={d} difficulty={d} handleChange={handleChange}/>)}
+      </ul>
+    </div>
   )
 }
+
+const Item = ({ difficulty, handleChange }) => (
+  <li className='uk-text-center'>
+    <a className='a-button' href="/#" onClick={() => handleChange("difficulty", difficulty)}>
+      {difficulty}
+    </a>
+  </li>
+)
+
+const TimeInput = ({ name, ms = 0, handleChange }) => (
+  <div className='uk-margin-medium'>
+    {name[0].toUpperCase() + name.slice(1)}
+    <Grid>
+      <NumberInput name={name} type='days' ms={ms} handleChange={handleChange}/>
+      <NumberInput name={name} type='hours' ms={ms} handleChange={handleChange}/>
+      <NumberInput name={name} type='minutes' ms={ms} handleChange={handleChange} step={10}/>
+    </Grid>
+  </div>
+)
+
+const NumberInput = ({ name, type, ms, handleChange, step }) => {
+  const msInDay = 864e5
+  const msInHour = 36e5
+  const msInMinute = 6e4
+
+  const time = {
+    days: ms / msInDay | 0,
+    hours: ms % msInDay / msInHour | 0,
+    minutes: ms % msInHour / msInMinute | 0,
+  }[type]
+
+  const toMs = {
+    days: msInDay,
+    hours: msInHour,
+    minutes: msInMinute,
+  }[type]
+
+  return (
+    <label className='uk-width-1-3 uk-text-right'>
+      {type}
+      <input
+        type='number' className='uk-input' value={time || ""} placeholder={time ? undefined : 0} step={step}
+        onChange={e => handleChange(name, ms + (e.target.value - time) * toMs)}
+      />
+    </label>
+  )
+}
+
+const Buttons = ({ save, saveValue, cancel }) => (
+  <Grid className='uk-flex-center uk-margin-large-top uk-child-width-1-3'>
+    {cancel &&
+    <Button value='Cancel' onClick={() => window.history.back()}/>
+    }
+    <Button value={saveValue} onClick={save}/>
+  </Grid>
+)
+
+const Button = ({ value, onClick }) => (
+  <div>
+    <button className="round-border uk-button uk-width-expand" onClick={onClick}>
+      {value}
+    </button>
+  </div>
+)

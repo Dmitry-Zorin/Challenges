@@ -129,17 +129,19 @@ input, .round-border {
   border-radius: 0.5em !important;
 }
 
-.uk-subnav li a {
-  @extend .round-border;
-  height: 1.85em;
-  padding-top: .65em !important;
+.uk-subnav li {
+  & a {
+    @extend .round-border;
+    height: 1.85em;
+    padding-top: .65em !important;
 
-  &[aria-expanded=false]:hover {
-    color: $secondary-color !important;
-    background-color: $primary-color;
+    &:hover {
+      color: $secondary-color !important;
+      background-color: $primary-color;
+    }
   }
 
-  &[aria-expanded=true] {
+  &.uk-active a {
     color: $secondary-color !important;
     background-color: darken($primary-color, 4);
   }

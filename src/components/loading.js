@@ -2,7 +2,7 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 
-export class Loading extends React.Component {
+export class Loading extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {

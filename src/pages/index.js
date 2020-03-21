@@ -14,7 +14,7 @@ import { Challenge } from "../components/challenge"
 import { ChallengeGroupExtended } from "../components/challenge-group-extended"
 import { getChallenges, handleError, updateTime } from "../scripts/functions"
 
-export default class IndexPage extends React.Component {
+export default class IndexPage extends React.PureComponent {
   constructor(props) {
     super(props)
     this.updateChallenges = this.updateChallenges.bind(this)
