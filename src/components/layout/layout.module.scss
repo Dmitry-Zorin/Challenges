@@ -1,0 +1,20 @@
+@import '../../styles/variables';
+
+.layout {
+  padding-bottom: 2em;
+
+  @media (max-width: 500px) {
+    padding: 0;
+  }
+}
+
+.header {
+  height: 6em;
+  margin-top: 2.5em;
+}
+
+.title {
+  color: $primary-color;
+  font-size: 3em;
+  font-weight: bold;
+}

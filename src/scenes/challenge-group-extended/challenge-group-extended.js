@@ -8,6 +8,7 @@ import { faArrowDown, faArrowUp, faCheck, faEdit, faPlay, faTrashAlt } from "@fo
 import { DataContext } from "../../services/contexts/DataContext"
 import { notifications } from "../../services/data/notifications"
 import { Loading } from "../../components/loading"
+import styles from "./challenge-group-extended.module.scss"
 
 const challenges = {
   ongoing: {
@@ -102,7 +103,7 @@ export class ChallengeGroupExtended extends React.PureComponent {
                   title={
                     <Grid>
                       <p className='uk-width-expand'>{c.name}</p>
-                      <div className='uk-text-meta uk-padding-remove uk-text-right' style={{ marginTop: "0.35em" }}>
+                      <div className={styles.marginTop + " uk-text-meta uk-padding-remove uk-text-right"}>
                         <FontAwesomeIcon icon={challenges[this.groupName].icon} transform='shrink-2'/>
                         {getChallengeTime(c)}
                       </div>
@@ -111,7 +112,7 @@ export class ChallengeGroupExtended extends React.PureComponent {
                   content={
                     <div>
                       <Grid className='uk-margin-remove'>
-                        <div className={"label uk-label " + labelClasses[c.difficulty]}>
+                        <div className={styles.label + " uk-label " + labelClasses[c.difficulty]}>
                           {c.difficulty}
                         </div>
                         <div className='uk-width-expand uk-text-right'>
@@ -143,7 +144,7 @@ export class ChallengeGroupExtended extends React.PureComponent {
 }
 
 const Button = ({ icon, tooltip, onClick }) => (
-  <button className='button uk-button uk-padding-remove' data-uk-tooltip={tooltip} onClick={onClick}>
+  <button className={styles.button + " uk-button uk-padding-remove"} data-uk-tooltip={tooltip} onClick={onClick}>
     <FontAwesomeIcon icon={icon} transform='grow-3'/>
   </button>
 )

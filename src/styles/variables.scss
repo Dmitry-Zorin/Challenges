@@ -1,0 +1,18 @@
+// Colors
+$primary-bg-color: #292C33;
+$secondary-bg-color: #34373D;
+$tertiary-bg-color: #20232A;
+
+$primary-color: #767CFF;
+$secondary-color: #EEEEEE;
+$tertiary-color: $secondary-bg-color;
+
+$secondary-bg-color-lightened: lighten($secondary-bg-color, 2.5);
+$primary-color-darkened: darken($primary-color, 4);
+
+// Dimensions
+$font-size-medium: 1.15em;
+$font-size-large: 1.4em;
+$primary-border-radius: 1em;
+$secondary-border-radius: 0.5em;
+$navbar-item-padding: 3em;

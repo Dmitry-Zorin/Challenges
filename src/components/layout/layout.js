@@ -1,19 +1,17 @@
 import React from "react"
-import { Container, Flex } from "uikit-react"
+import { Container } from "uikit-react"
 import { NavigationBar } from "./components/navbar"
+import styles from "./layout.module.scss"
 
-export const Layout = ({ title, children }) => (
+export const Layout = ({ title, children }) =>
   <div>
     <NavigationBar title={title}/>
-    <Container id='layout' style={{ paddingBottom: "2em" }}>
-      <Flex className='uk-flex-middle' style={{ height: "6em", marginTop: "2.5em" }}>
-        <p id='title' className='uk-align-center'>
+    <Container className={styles.layout}>
+      <div className={styles.header + " uk-text-center"}>
+        <p className={styles.title}>
           {title}
         </p>
-      </Flex>
+      </div>
       {children}
     </Container>
   </div>
-)
-
-

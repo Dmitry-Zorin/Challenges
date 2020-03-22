@@ -1,0 +1,39 @@
+@import '../variables';
+
+$global-color: $secondary-color;
+$global-link-hover-color: $primary-color;
+$base-body-background: $primary-bg-color;
+$base-heading-color: $secondary-color;
+$base-link-hover-text-decoration: none;
+
+// Accordion
+$accordion-title-color: $secondary-color;
+$accordion-title-hover-color: $primary-color;
+$accordion-content-margin-top: 0;
+
+// Animation
+$animation-fade-duration: 0.25s;
+
+// Card
+$card-default-background: $secondary-bg-color;
+
+// Form
+$form-background: $secondary-color;
+$form-color: $tertiary-color;
+$form-focus-background: $secondary-color;
+$form-focus-color: $tertiary-color;
+
+// Navbar
+$navbar-background: $tertiary-bg-color;
+$navbar-nav-item-padding-horizontal: $navbar-item-padding;
+$navbar-nav-item-color: $secondary-color;
+$navbar-nav-item-hover-color: $primary-color;
+
+// Search
+$search-color: $tertiary-color;
+$search-default-background: $secondary-color;
+
+// Subnav
+$subnav-item-color: $secondary-color;
+$subnav-pill-item-hover-background: $primary-color;
+$subnav-pill-item-active-background: $primary-color-darkened;

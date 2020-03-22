@@ -1,0 +1,69 @@
+@import '../variables';
+@import '../mixins';
+@import './variables';
+@import "node_modules/uikit/src/scss/variables-theme";
+
+@mixin hook-accordion-title() {
+  height: auto;
+  min-height: 2em;
+  padding-top: 1em;
+  overflow: hidden;
+
+  .uk-open & {
+    color: $primary-color;
+  }
+}
+
+@mixin hook-base-hr() {
+  border-width: 0.01em;
+  opacity: 0.3;
+}
+
+@mixin hook-button() {
+  @include round-border;
+  text-transform: $button-text-transform;
+  transition: 0.1s ease-in-out;
+  transition-property: color, background-color, border-color;
+}
+
+@mixin hook-card() {
+  @include round-border($primary-border-radius);
+  margin: 1em 1em 2em;
+  padding: 1.5em 2em;
+  overflow: hidden;
+
+  & > div {
+    @extend .uk-animation-fade;
+  }
+
+  @media (max-width: 500px) {
+    margin: 1em 0.5em;
+    padding: 1.5em 1em;
+  }
+}
+
+@mixin hook-form() {
+  @include round-border;
+}
+
+@mixin hook-navbar-nav-item() {
+  text-transform: $navbar-nav-item-text-transform;
+  transition: 0.1s ease-in-out;
+  transition-property: color, background-color;
+
+  @media (max-width: 500px) {
+    & {
+      padding: 0 1em;
+    }
+  }
+}
+
+@mixin hook-search-input() {
+  @include round-border;
+}
+
+@mixin hook-subnav-pill-item() {
+  @include round-border;
+  height: 1.85em;
+  padding-top: 0.65em;
+}
