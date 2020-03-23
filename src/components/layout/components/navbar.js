@@ -6,7 +6,7 @@ import { Link } from "@reach/router"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronLeft, faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
 
-export const NavigationBar = ({ title }) => {
+export const NavigationBar = () => {
   const context = React.useContext(DataContext)
   const data = useStaticQuery(graphql`{
     site {
@@ -28,7 +28,7 @@ export const NavigationBar = ({ title }) => {
               {window.location.pathname === "/"
                 ?
                 <Link to='/' className="primary">
-                  {title}
+                  {data.title}
                 </Link>
                 :
                 <Link to='/'>

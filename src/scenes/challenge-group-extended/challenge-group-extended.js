@@ -1,5 +1,7 @@
 import React from "react"
 import axios from "axios"
+import styles from "./challenge-group-extended.module.scss"
+import { graphql, StaticQuery } from "gatsby"
 import { InnerLayout } from "../../components/inner-layout"
 import { Accordion, AccordionItem, Grid } from "uikit-react"
 import { addNotification, getChallengeTime, handleError } from "../../services/helper"
@@ -8,7 +10,6 @@ import { faArrowDown, faArrowUp, faCheck, faEdit, faPlay, faTrashAlt } from "@fo
 import { DataContext } from "../../services/contexts/DataContext"
 import { notifications } from "../../services/data/notifications"
 import { Loading } from "../../components/loading"
-import styles from "./challenge-group-extended.module.scss"
 
 const challenges = {
   ongoing: {
@@ -31,7 +32,26 @@ const labelClasses = {
   "Hard": "uk-label-danger",
 }
 
-export class ChallengeGroupExtended extends React.PureComponent {
+export const ChallengeGroupExtended = props => (
+  <StaticQuery
+    query={
+      graphql`{
+        site {
+          siteMetadata {
+            search
+            edit start complete delete
+            ongoing upcoming completed
+          }
+        }
+      }`
+    }
+    render={
+      data => <Component data={data.site.siteMetadata} {...props}/>
+    }
+  />
+)
+
+class Component extends React.PureComponent {
   static contextType = DataContext
 
   constructor(props) {
@@ -81,16 +101,17 @@ export class ChallengeGroupExtended extends React.PureComponent {
   }
 
   render = () => {
+    const { data } = this.props
     const options = challenges[this.groupName].options
 
     return (
       <InnerLayout>
         <p className='uk-h2 uk-text-center'>
-          {this.groupName[0].toUpperCase() + this.groupName.slice(1)}
+          {data[this.groupName]}
         </p>
         <div className="uk-search uk-search-default uk-width-expand uk-margin-small">
           <span data-uk-search-icon={true}/>
-          <input type="search" className="uk-search-input" placeholder="Search..." onChange={this.search}/>
+          <input type="search" className="uk-search-input" placeholder={data.search + "..."} onChange={this.search}/>
         </div>
         {this.context.isAuthorized === undefined ? <Loading/>
           :
@@ -116,18 +137,30 @@ export class ChallengeGroupExtended extends React.PureComponent {
                           {c.difficulty}
                         </div>
                         <div className='uk-width-expand uk-text-right'>
-                          <Button icon={faEdit} tooltip='Edit' onClick={() => this.edit(c)}/>
+                          <Button
+                            icon={faEdit} tooltip={data.edit}
+                            onClick={() => this.edit(c)}
+                          />
 
                           {options.includes("start") &&
-                          <Button icon={faPlay} tooltip='Start' onClick={() => this.update(c, "Start")}/>
+                          <Button
+                            icon={faPlay} tooltip={data.start}
+                            onClick={() => this.update(c, "Start")}
+                          />
                           }
 
                           {options.includes("complete") &&
-                          <Button icon={faCheck} tooltip='Complete' onClick={() => this.update(c, "Complete")}/>
+                          <Button
+                            icon={faCheck} tooltip={data.complete}
+                            onClick={() => this.update(c, "Complete")}
+                          />
                           }
 
                           {options.includes("delete") &&
-                          <Button icon={faTrashAlt} tooltip='Delete' onClick={() => this.update(c, "Delete")}/>
+                          <Button
+                            icon={faTrashAlt} tooltip={data.delete}
+                            onClick={() => this.update(c, "Delete")}
+                          />
                           }
                         </div>
                       </Grid>

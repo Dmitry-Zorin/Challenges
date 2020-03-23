@@ -2,6 +2,12 @@ import axios from "axios"
 import { store } from "react-notifications-component"
 import { notifications } from "./data/notifications"
 
+export const toMs = {
+  DAY: 864e5,
+  HOUR: 36e5,
+  MINUTE: 6e4,
+}
+
 export const getChallenges = apiServer =>
   axios.post(apiServer,
     { query: "{ challenges { _id name difficulty progress startDate endDate } }" },
@@ -29,18 +35,13 @@ const sortChallenges = challenges => ({
 })
 
 export const updateTime = (state, apiServer) => {
-  const date = new Date().getTime()
+  const now = new Date().getTime()
   let needsUpdate = false
-
-  const timeToString = t =>
-    ((t = t / 60000) > 1440 ? `${t / 1440 | 0}d ` : "")
-    + ((t %= 1440) > 60 ? `${t / 60 | 0}h ` : "")
-    + (t < 1 ? "<1" : t % 60 | 0) + "m"
 
   const updatedState = {
     ...state.ongoing && {
       ongoing: state.ongoing.map(c => {
-        const time = c.endDate - date
+        const time = c.endDate - now
         if (time < 0) {
           needsUpdate = true
           addNotification({
@@ -49,13 +50,13 @@ export const updateTime = (state, apiServer) => {
             type: "success",
           })
         }
-        c.timeLeft = timeToString(time)
+        c.timeLeft = getTimeString(time)
         return c
       }),
     },
     ...state.upcoming && {
       upcoming: state.upcoming.map(c => {
-        const time = c.startDate - date
+        const time = c.startDate - now
         if (time < 0) {
           needsUpdate = true
           addNotification({
@@ -63,7 +64,7 @@ export const updateTime = (state, apiServer) => {
             message: c.name,
           })
         }
-        c.startsIn = timeToString(time)
+        c.startsIn = getTimeString(time)
         return c
       }),
     },
@@ -75,6 +76,23 @@ export const updateTime = (state, apiServer) => {
     !needsUpdate ? resolve(updatedState)
       : getChallenges(apiServer).then(resolve))
 }
+
+const getTimeString = ms => {
+  const time = getTimeObj(ms)
+  const timeStrings = {
+    days: time.days ? time.days + "d " : "",
+    hours: time.hours ? time.hours + "h " : "",
+    minutes: time.minutes ? time.minutes + "m" : "",
+  }
+  console.log(time)
+  return timeStrings.days + timeStrings.hours + timeStrings.minutes
+}
+
+export const getTimeObj = ms => ({
+  days: ms / toMs.DAY | 0,
+  hours: ms % toMs.DAY / toMs.HOUR | 0,
+  minutes: Math.ceil(ms % toMs.HOUR / toMs.MINUTE),
+})
 
 export const getChallengeTime = c =>
   "\xa0".repeat(2) + (

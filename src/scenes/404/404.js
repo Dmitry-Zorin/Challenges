@@ -1,8 +1,24 @@
 import React from "react"
+import { graphql, useStaticQuery } from "gatsby"
 
-export const NotFoundPage = () => (
-  <div className='uk-text-center'>
-    <p className='uk-h2'>NOT FOUND</p>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </div>
-)
+export const NotFoundPage = () => {
+  const data = useStaticQuery(graphql`{
+    site {
+      siteMetadata {
+        notFound
+        notFoundMessage
+      }
+    }
+  }`).site.siteMetadata
+
+  return (
+    <div className='uk-text-center'>
+      <p className='uk-h2'>
+        {data.notFound.toUpperCase()}
+      </p>
+      <p>
+        {data.notFoundMessage}
+      </p>
+    </div>
+  )
+}

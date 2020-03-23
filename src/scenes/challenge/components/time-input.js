@@ -1,43 +1,28 @@
-import { Grid } from "uikit-react"
 import React from "react"
-
-const toMs = {
-  DAY: 864e5,
-  HOUR: 36e5,
-  MINUTE: 6e4
-}
+import { graphql, useStaticQuery } from "gatsby"
+import { getTimeObj, toMs } from "../../../services/helper"
+import { Grid } from "uikit-react"
 
 export const TimeInput = props => {
-  const _props = {
-    ...props,
-    ms: props.ms || 0,
-  }
+  const data = useStaticQuery(graphql`{
+    site {
+      siteMetadata {
+        days
+        hours
+        minutes
+      }
+    }
+  }`).site.siteMetadata
 
-  const types = {
-    days: {
-      label: "days",
-      time: _props.ms / toMs.DAY | 0,
-      toMs: toMs.DAY,
-    },
-    hours: {
-      label: "hours",
-      time: _props.ms % toMs.DAY / toMs.HOUR | 0,
-      toMs: toMs.HOUR,
-    },
-    minutes: {
-      label: "minutes",
-      time: _props.ms % toMs.HOUR / toMs.MINUTE | 0,
-      toMs: toMs.MINUTE,
-    },
-  }
+  const time = getTimeObj(props.ms)
 
   return (
     <div className='uk-margin-medium'>
-      {_props.name[0].toUpperCase() + _props.name.slice(1)}
+      {props.name}
       <Grid>
-        <NumberInput {...types.days} {..._props}/>
-        <NumberInput {...types.hours} {..._props}/>
-        <NumberInput {...types.minutes} {..._props} step={10}/>
+        <NumberInput label={data.days} time={time.days} toMs={toMs.DAY} {...props}/>
+        <NumberInput label={data.hours} time={time.hours} toMs={toMs.HOUR} {...props}/>
+        <NumberInput label={data.minutes} time={time.minutes} toMs={toMs.MINUTE} {...props} step={10}/>
       </Grid>
     </div>
   )

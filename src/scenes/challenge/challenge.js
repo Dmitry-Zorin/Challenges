@@ -26,7 +26,7 @@ const info = {
     action: "Update",
     title: "Edit Challenge",
     save: "Save",
-  }
+  },
 }
 
 const getQuery = info =>
@@ -124,10 +124,10 @@ export class Challenge extends React.Component {
           {this.info.title}
         </p>
         <Form>
-          <TextInput label='name' value={this.state.name} defaultValue={defaultName} handleChange={this.handleChange}/>
+          <TextInput label='Name' value={this.state.name} defaultValue={defaultName} handleChange={this.handleChange}/>
           <DifficultyInput difficulty={this.state.difficulty} handleChange={this.handleChange}/>
-          <TimeInput name='duration' ms={this.state.duration} handleChange={this.handleChange}/>
-          <TimeInput name='delay' ms={this.state.delay} handleChange={this.handleChange}/>
+          <TimeInput name='Duration' ms={this.state.duration || 0} handleChange={this.handleChange}/>
+          <TimeInput name='Delay' ms={this.state.delay || 0} handleChange={this.handleChange}/>
           <Buttons save={() => this.save(defaultName)} saveValue={this.info.save} showCancel={!!this.state._id}/>
         </Form>
       </InnerLayout>

@@ -1,4 +1,7 @@
 import React from "react"
+import styles from "./challenge-group.module.scss"
+import dashboardStyles from "../dashboard.module.scss"
+import { graphql, useStaticQuery } from "gatsby"
 import { Card, Grid } from "uikit-react"
 import { Link } from "@reach/router"
 import { getChallengeTime } from "../../../services/helper"
@@ -6,11 +9,16 @@ import { DataContext } from "../../../services/contexts/DataContext"
 import { Loading } from "../../../components/loading"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowDown, faArrowUp, faCheck } from "@fortawesome/free-solid-svg-icons"
-import styles from "./challenge-group.module.scss"
-import dashboardStyles from "../dashboard.module.scss"
 
 export const ChallengeGroup = ({ to, title, group }) => {
   const context = React.useContext(DataContext)
+  const data = useStaticQuery(graphql`{
+    site {
+      siteMetadata {
+        seeAll
+      }
+    }
+  }`).site.siteMetadata
 
   return (
     <Link to={to}>
@@ -25,7 +33,7 @@ export const ChallengeGroup = ({ to, title, group }) => {
         }
         <div className={dashboardStyles.overlay + " uk-position-right uk-overlay uk-transition-slide-right"}>
           <p className='font-size-medium uk-position-center'>
-            See all
+            {data.seeAll}
           </p>
         </div>
       </Card>

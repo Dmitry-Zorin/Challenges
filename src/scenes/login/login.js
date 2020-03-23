@@ -1,5 +1,6 @@
 import React from "react"
 import axios from "axios"
+import { graphql, StaticQuery } from "gatsby"
 import { Form } from "uikit-react"
 import { InnerLayout } from "../../components/inner-layout"
 import { addNotification, handleError } from "../../services/helper"
@@ -32,7 +33,25 @@ const getQuery = action =>
     }
   }`
 
-export class Login extends React.PureComponent {
+export const Login = props => (
+  <StaticQuery
+    query={
+      graphql`{
+        site {
+          siteMetadata {
+            username
+            password
+          }
+        }
+      }`
+    }
+    render={
+      data => <Component data={data.site.siteMetadata} {...props}/>
+    }
+  />
+)
+
+class Component extends React.PureComponent {
   static contextType = DataContext
 
   constructor(props) {
@@ -49,6 +68,7 @@ export class Login extends React.PureComponent {
   }
 
   handleChange(name, value) {
+    console.log(this.state)
     this.setState({ [name]: value })
   }
 
@@ -91,28 +111,44 @@ export class Login extends React.PureComponent {
       .catch(err => handleError(err, "Failed to log out"))
   }
 
-  render = () => (
-    <InnerLayout>
-      <p className='uk-h2 uk-text-center'>
-        {this.state.title}
-      </p>
-      <ul
-        className="uk-subnav uk-subnav-pill uk-flex-center uk-child-width-1-3@m uk-child-width-1-2@s"
-        data-uk-switcher={true}
-      >
-        <SwitcherItem value={states.login.title} onClick={() => this.setState(states.login)}/>
-        <SwitcherItem value={states.signUp.title} onClick={() => this.setState(states.signUp)}/>
-      </ul>
-      <Form>
-        <TextInput label='username' value={this.state.username} handleChange={this.handleChange}/>
-        <TextInput label='password' value={this.state.password} handleChange={this.handleChange} isPassword={true}/>
-        <button
-          className='uk-button uk-align-center uk-margin-remove-bottom uk-margin-large-top'
-          onClick={this.login}
-        >
+  render = () => {
+    const { data } = this.props
+
+    return (
+      <InnerLayout>
+        <p className='uk-h2 uk-text-center'>
           {this.state.title}
-        </button>
-      </Form>
-    </InnerLayout>
-  )
+        </p>
+        <ul
+          className="uk-subnav uk-subnav-pill uk-flex-center uk-child-width-1-3@m uk-child-width-1-2@s"
+          data-uk-switcher={true}
+        >
+          <SwitcherItem
+            value={states.login.title}
+            onClick={() => this.setState(states.login)}
+          />
+          <SwitcherItem
+            value={states.signUp.title}
+            onClick={() => this.setState(states.signUp)}
+          />
+        </ul>
+        <Form>
+          <TextInput
+            label={data.username} value={this.state.username}
+            handleChange={this.handleChange}
+          />
+          <TextInput
+            label={data.password} value={this.state.password}
+            handleChange={this.handleChange} isPassword={true}
+          />
+          <button
+            className='uk-button uk-align-center uk-margin-remove-bottom uk-margin-large-top'
+            onClick={this.login}
+          >
+            {this.state.title}
+          </button>
+        </Form>
+      </InnerLayout>
+    )
+  }
 }
