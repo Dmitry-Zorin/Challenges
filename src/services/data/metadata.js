@@ -7,13 +7,13 @@ const metadata = {
   notFound: "Not found",
   notFoundMessage: "You just hit a route that doesn't exist... the sadness.",
 
-  // login
+  // Login
   login: "Log In",
   logout: "Log Out",
   username: "Username",
   password: "Password",
 
-  // dashboard
+  // Dashboard
   info: "Info",
   newChallenge: "New challenge",
   create: "Create",
@@ -22,15 +22,17 @@ const metadata = {
   completed: "Completed",
   seeAll: "See all",
 
-  // challenge
+  // Challenge
   difficulty: "Difficulty",
   days: "days",
   hours: "hours",
   minutes: "minutes",
   cancel: "Cancel",
 
-  // challenge group extended
+  // Challenge group extended
   search: "Search",
+  previous: "Previous",
+  next: "Next",
   edit: "Edit",
   start: "Start",
   complete: "Complete",

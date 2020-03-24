@@ -84,7 +84,6 @@ const getTimeString = ms => {
     hours: time.hours ? time.hours + "h " : "",
     minutes: time.minutes ? time.minutes + "m" : "",
   }
-  console.log(time)
   return timeStrings.days + timeStrings.hours + timeStrings.minutes
 }
 
