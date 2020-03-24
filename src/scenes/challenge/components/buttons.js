@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react'
 import styles from './buttons.module.scss'
-import { graphql, useStaticQuery } from "gatsby"
-import { Grid } from "uikit-react"
+import { graphql, useStaticQuery } from 'gatsby'
+import { Grid } from 'uikit-react'
 
 export const Buttons = ({ save, saveValue, showCancel }) => {
   const data = useStaticQuery(graphql`{
@@ -22,7 +22,7 @@ export const Buttons = ({ save, saveValue, showCancel }) => {
 
 const Button = ({ value, onClick }) => (
   <div>
-    <button className="round-border uk-button uk-width-expand" onClick={onClick}>
+    <button className='round-border uk-button uk-width-expand' onClick={onClick}>
       {value}
     </button>
   </div>

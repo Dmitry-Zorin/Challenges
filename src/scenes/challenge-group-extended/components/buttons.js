@@ -1,12 +1,12 @@
-import React from "react"
-import styles from "./challenge-accordion.module.scss"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheck, faEdit, faPlay, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
-import axios from "axios"
-import { addNotification, handleError } from "../../../services/helper"
-import { notifications } from "../../../services/data/notifications"
-import { DataContext } from "../../../services/contexts/DataContext"
-import { graphql, useStaticQuery } from "gatsby"
+import React from 'react'
+import styles from './challenge-accordion.module.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck, faEdit, faPlay, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
+import { addNotification, handleError } from '../../../services/helper'
+import { notifications } from '../../../services/data/notifications'
+import { DataContext } from '../../../services/contexts/DataContext'
+import { graphql, useStaticQuery } from 'gatsby'
 
 export const Buttons = ({ challenge, navigate, options }) => {
   const context = React.useContext(DataContext)
@@ -31,42 +31,42 @@ export const Buttons = ({ challenge, navigate, options }) => {
             id: $id
           )
         }`,
-        variables: { id: challenge._id },
+        variables: { id: challenge._id }
       },
-      { withCredentials: true },
+      { withCredentials: true }
     )
       .then(() => {
         context.updateChallenges()
         addNotification({
-          ...action === "Start" ? notifications.challengeStarted
-            : action === "Complete" ? notifications.challengeCompleted
+          ...action === 'Start' ? notifications.challengeStarted
+            : action === 'Complete' ? notifications.challengeCompleted
               : notifications.challengeDeleted,
-          message: challenge.name,
+          message: challenge.name
         })
       })
       .catch(err => handleError(err, `Failed to ${action.toLowerCase()} challenge`))
 
   return (
     <div className='uk-width-expand uk-text-right'>
-      <Button icon={faEdit} tooltip={data.edit} onClick={() => navigate("/edit", { state: { challenge } })}/>
+      <Button icon={faEdit} tooltip={data.edit} onClick={() => navigate('/edit', { state: { challenge } })}/>
 
-      {options.includes("start") &&
-      <Button icon={faPlay} tooltip={data.start} onClick={() => update("Start")}/>
+      {options.includes('start') &&
+      <Button icon={faPlay} tooltip={data.start} onClick={() => update('Start')}/>
       }
 
-      {options.includes("complete") &&
-      <Button icon={faCheck} tooltip={data.complete} onClick={() => update("Complete")}/>
+      {options.includes('complete') &&
+      <Button icon={faCheck} tooltip={data.complete} onClick={() => update('Complete')}/>
       }
 
-      {options.includes("delete") &&
-      <Button icon={faTrashAlt} tooltip={data.delete} onClick={() => update("Delete")}/>
+      {options.includes('delete') &&
+      <Button icon={faTrashAlt} tooltip={data.delete} onClick={() => update('Delete')}/>
       }
     </div>
   )
 }
 
 const Button = ({ icon, tooltip, onClick }) => (
-  <button className={styles.button + " uk-button uk-padding-remove"} data-uk-tooltip={tooltip} onClick={onClick}>
+  <button className={styles.button + ' uk-button uk-padding-remove'} data-uk-tooltip={tooltip} onClick={onClick}>
     <FontAwesomeIcon icon={icon} transform='grow-3'/>
   </button>
 )

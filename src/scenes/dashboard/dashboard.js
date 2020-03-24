@@ -1,10 +1,10 @@
-import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
-import { Flex } from "uikit-react"
-import { ChallengeGroup } from "./components/challenge-group"
-import { LeftColumn } from "./components/left-column"
-import { NewChallengeButton } from "./components/new-challenge-button"
-import { DataContext } from "../../services/contexts/DataContext"
+import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { Flex } from 'uikit-react'
+import { ChallengeGroup } from './components/challenge-group'
+import { LeftColumn } from './components/left-column'
+import { NewChallengeButton } from './components/new-challenge-button'
+import { DataContext } from '../../services/contexts/DataContext'
 
 export const Dashboard = () => {
   const data = useStaticQuery(graphql`{

@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server-express")
+const { gql } = require('apollo-server-express')
 
 const challenge = gql`
   extend type Query {

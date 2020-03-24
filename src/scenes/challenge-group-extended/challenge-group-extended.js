@@ -1,11 +1,11 @@
-import React from "react"
-import { graphql, StaticQuery } from "gatsby"
-import { InnerLayout } from "../../components/inner-layout"
-import { DataContext } from "../../services/contexts/DataContext"
-import { Loading } from "../../components/loading"
-import { Pagination } from "./components/pagination"
-import { ChallengeAccordion } from "./components/challenge-accordion"
-import { Search } from "./components/search"
+import React from 'react'
+import { graphql, StaticQuery } from 'gatsby'
+import { InnerLayout } from '../../components/inner-layout'
+import { DataContext } from '../../services/contexts/DataContext'
+import { Loading } from '../../components/loading'
+import { Pagination } from './components/pagination'
+import { ChallengeAccordion } from './components/challenge-accordion'
+import { Search } from './components/search'
 
 const ITEMS_PER_PAGE = 10
 
@@ -38,14 +38,14 @@ class Component extends React.PureComponent {
 
     this.state = {
       pattern: /.*/,
-      page: 0,
+      page: 0
     }
     this.groupName = window.location.pathname.slice(1)
   }
 
   search({ target }) {
     this.setState({
-      pattern: new RegExp(target.value.split(" ").join(".*"), "i"),
+      pattern: new RegExp(target.value.split(' ').join('.*'), 'i')
     })
   }
 

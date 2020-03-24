@@ -1,44 +1,44 @@
-import React from "react"
-import axios from "axios"
-import { Form } from "uikit-react"
-import { InnerLayout } from "../../components/inner-layout"
-import { addNotification, handleError } from "../../services/helper"
-import { DataContext } from "../../services/contexts/DataContext"
-import { notifications } from "../../services/data/notifications"
-import { DifficultyInput } from "./components/difficulty-input"
-import { TimeInput } from "./components/time-input"
-import { Buttons } from "./components/buttons"
-import { TextInput } from "../../components/text-input"
+import React from 'react'
+import axios from 'axios'
+import { Form } from 'uikit-react'
+import { InnerLayout } from '../../components/inner-layout'
+import { addNotification, handleError } from '../../services/helper'
+import { DataContext } from '../../services/contexts/DataContext'
+import { notifications } from '../../services/data/notifications'
+import { DifficultyInput } from './components/difficulty-input'
+import { TimeInput } from './components/time-input'
+import { Buttons } from './components/buttons'
+import { TextInput } from '../../components/text-input'
 
 const info = {
   create: {
-    api: "challengeAdd",
-    notification: "challengeCreated",
-    action: "Create",
-    title: "New Challenge",
-    save: "Create Challenge",
+    api: 'challengeAdd',
+    notification: 'challengeCreated',
+    action: 'Create',
+    title: 'New Challenge',
+    save: 'Create Challenge'
   },
   edit: {
-    id: "$id: String!",
-    id_var: "id: $id",
-    api: "challengeEdit",
-    notification: "challengeEdited",
-    action: "Update",
-    title: "Edit Challenge",
-    save: "Save",
-  },
+    id: '$id: String!',
+    id_var: 'id: $id',
+    api: 'challengeEdit',
+    notification: 'challengeEdited',
+    action: 'Update',
+    title: 'Edit Challenge',
+    save: 'Save'
+  }
 }
 
 const getQuery = info =>
   `mutation(
-    ${info.id || ""}
+    ${info.id || ''}
     $name: String!
     $difficulty: Difficulty
     $startDate: Float
     $endDate: Float
   ) {
     ${info.api}(
-      ${info.id_var || ""}
+      ${info.id_var || ''}
       challenge: {
         name: $name
         difficulty: $difficulty
@@ -60,15 +60,15 @@ export class Challenge extends React.Component {
     this.save = this.save.bind(this)
 
     this.state = {
-      ...this.getChallenge(),
+      ...this.getChallenge()
     }
 
     this.info = !this.state._id ? {
       ...info.create,
-      navigate: () => props.navigate(".."),
+      navigate: () => props.navigate('..')
     } : {
       ...info.edit,
-      navigate: () => window.history.back(),
+      navigate: () => window.history.back()
     }
   }
 
@@ -98,16 +98,16 @@ export class Challenge extends React.Component {
           id: this.state._id,
           name: this.state.name || defaultName,
           difficulty: this.state.difficulty,
-          startDate, endDate,
-        },
+          startDate, endDate
+        }
       },
-      { withCredentials: true },
+      { withCredentials: true }
     )
       .then(res => {
         this.context.updateChallenges()
         addNotification({
           ...notifications[this.info.notification],
-          message: res.data.data[this.info.api].name,
+          message: res.data.data[this.info.api].name
         })
         this.info.navigate()
       })
@@ -115,8 +115,8 @@ export class Challenge extends React.Component {
   }
 
   render = () => {
-    const defaultName = "Challenge from " + new Date().toString()
-      .split(" ").slice(1, 5).join(" ").slice(0, -3)
+    const defaultName = 'Challenge from ' + new Date().toString()
+      .split(' ').slice(1, 5).join(' ').slice(0, -3)
 
     return (
       <InnerLayout>

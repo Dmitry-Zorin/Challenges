@@ -1,10 +1,10 @@
-import React from "react"
-import { DataContext } from "../../../services/contexts/DataContext"
-import { graphql, useStaticQuery } from "gatsby"
-import { Container, Navbar, NavbarContainer, NavbarSticky, NavItem } from "uikit-react"
-import { Link } from "@reach/router"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faChevronLeft, faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
+import React from 'react'
+import { DataContext } from '../../../services/contexts/DataContext'
+import { graphql, useStaticQuery } from 'gatsby'
+import { Container, Navbar, NavbarContainer, NavbarSticky, NavItem } from 'uikit-react'
+import { Link } from '@reach/router'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 export const NavigationBar = () => {
   const context = React.useContext(DataContext)
@@ -25,9 +25,9 @@ export const NavigationBar = () => {
         <Container>
           <Navbar>
             <NavItem>
-              {window.location.pathname === "/"
+              {window.location.pathname === '/'
                 ?
-                <Link to='/' className="primary">
+                <Link to='/' className='primary'>
                   {data.title}
                 </Link>
                 :
