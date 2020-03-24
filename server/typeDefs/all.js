@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server-express")
+const { gql } = require('apollo-server-express')
 const auth = require('./auth')
 const challenge = require('./challenge')
 

@@ -1,23 +1,23 @@
-import React from "react"
-import axios from "axios"
-import { graphql, StaticQuery } from "gatsby"
-import { Form } from "uikit-react"
-import { InnerLayout } from "../../components/inner-layout"
-import { addNotification, handleError } from "../../services/helper"
-import { DataContext } from "../../services/contexts/DataContext"
-import { notifications } from "../../services/data/notifications"
-import { SwitcherItem } from "../../components/switcher-item"
-import { TextInput } from "../../components/text-input"
+import React from 'react'
+import axios from 'axios'
+import { graphql, StaticQuery } from 'gatsby'
+import { Form } from 'uikit-react'
+import { InnerLayout } from '../../components/inner-layout'
+import { addNotification, handleError } from '../../services/helper'
+import { DataContext } from '../../services/contexts/DataContext'
+import { notifications } from '../../services/data/notifications'
+import { SwitcherItem } from '../../components/switcher-item'
+import { TextInput } from '../../components/text-input'
 
 const states = {
   login: {
-    action: "login",
-    title: "Log In",
+    action: 'login',
+    title: 'Log In'
   },
   signUp: {
-    action: "signUp",
-    title: "Sign Up",
-  },
+    action: 'signUp',
+    title: 'Sign Up'
+  }
 }
 
 const getQuery = action =>
@@ -78,19 +78,19 @@ class Component extends React.PureComponent {
         query: getQuery(this.state.action),
         variables: {
           username: this.state.username,
-          password: this.state.password,
-        },
+          password: this.state.password
+        }
       },
-      { withCredentials: true },
+      { withCredentials: true }
     )
       .then(res => {
         if (!res.data.data[this.state.action].username)
-          return this.state.action === "login"
+          return this.state.action === 'login'
             ? addNotification(notifications.loginFailed)
             : addNotification(notifications.error)
 
         this.props.login()
-        this.props.navigate("/")
+        this.props.navigate('/')
       })
       .catch(err => handleError(err, `Failed to ${this.state.title.toLowerCase()}`))
   }
@@ -98,8 +98,8 @@ class Component extends React.PureComponent {
   logout() {
     axios.post(
       this.context.apiServer,
-      { query: "mutation { logout { username } }" },
-      { withCredentials: true },
+      { query: 'mutation { logout { username } }' },
+      { withCredentials: true }
     )
       .then(res => {
         if (res.data.data.logout.username)
@@ -108,7 +108,7 @@ class Component extends React.PureComponent {
         addNotification(notifications.error)
         window.history.back()
       })
-      .catch(err => handleError(err, "Failed to log out"))
+      .catch(err => handleError(err, 'Failed to log out'))
   }
 
   render = () => {

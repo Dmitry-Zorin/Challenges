@@ -1,32 +1,32 @@
-import React from "react"
-import styles from "./challenge-accordion.module.scss"
-import { Accordion, AccordionItem, Grid } from "uikit-react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { getChallengeTime } from "../../../services/helper"
-import { Buttons } from "./buttons"
-import { faArrowDown, faArrowUp, faCheck } from "@fortawesome/free-solid-svg-icons"
+import React from 'react'
+import styles from './challenge-accordion.module.scss'
+import { Accordion, AccordionItem, Grid } from 'uikit-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { getChallengeTime } from '../../../services/helper'
+import { Buttons } from './buttons'
+import { faArrowDown, faArrowUp, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const ITEMS_PER_PAGE = 10
 
 const challengeInfo = {
   ongoing: {
-    options: ["complete", "delete"],
-    icon: faArrowDown,
+    options: ['complete', 'delete'],
+    icon: faArrowDown
   },
   upcoming: {
-    options: ["start", "delete"],
-    icon: faArrowUp,
+    options: ['start', 'delete'],
+    icon: faArrowUp
   },
   completed: {
-    options: ["delete"],
-    icon: faCheck,
-  },
+    options: ['delete'],
+    icon: faCheck
+  }
 }
 
 const labelClasses = {
-  "Easy": "uk-label-success",
-  "Medium": "uk-label-warning",
-  "Hard": "uk-label-danger",
+  'Easy': 'uk-label-success',
+  'Medium': 'uk-label-warning',
+  'Hard': 'uk-label-danger'
 }
 
 export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) => (
@@ -37,7 +37,7 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
         title={
           <Grid>
             <p className='uk-width-expand'>{c.name}</p>
-            <div className={styles.marginTop + " uk-text-meta uk-padding-remove uk-text-right"}>
+            <div className={styles.marginTop + ' uk-text-meta uk-padding-remove uk-text-right'}>
               <FontAwesomeIcon icon={challengeInfo[groupName].icon} transform='shrink-2'/>
               {getChallengeTime(c)}
             </div>
@@ -46,7 +46,7 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
         content={
           <div>
             <Grid className='uk-margin-remove'>
-              <div className={styles.label + " uk-label " + labelClasses[c.difficulty]}>
+              <div className={styles.label + ' uk-label ' + labelClasses[c.difficulty]}>
                 {c.difficulty}
               </div>
               <Buttons
@@ -57,7 +57,7 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
             <hr/>
           </div>
         }
-      />,
+      />
     )}
   </Accordion>
 )

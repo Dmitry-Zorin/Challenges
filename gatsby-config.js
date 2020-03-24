@@ -3,23 +3,23 @@ const metadata = require('./src/services/data/metadata')
 module.exports = {
   siteMetadata: metadata,
   plugins: [
-    "gatsby-plugin-react-helmet",
+    'gatsby-plugin-react-helmet',
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "images",
-        path: `${__dirname}/src/images`,
-      },
+        name: 'images',
+        path: `${__dirname}/src/images`
+      }
     },
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     {
-      resolve: "gatsby-plugin-manifest",
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        start_url: "/",
-        icon: "src/images/challenges-logo.png",
-      },
+        start_url: '/',
+        icon: 'src/images/challenges-logo.png'
+      }
     },
-    "gatsby-plugin-sass",
-  ],
+    'gatsby-plugin-sass'
+  ]
 }

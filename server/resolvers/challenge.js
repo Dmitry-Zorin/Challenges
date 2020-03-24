@@ -1,7 +1,7 @@
 const getProgress = c => {
   const now = new Date().getTime()
-  return now < c.startDate ? "Upcoming"
-    : now > c.endDate ? "Completed" : "Ongoing"
+  return now < c.startDate ? 'Upcoming'
+    : now > c.endDate ? 'Completed' : 'Ongoing'
 }
 
 const findChallenge = (user, id) =>
@@ -13,13 +13,13 @@ const challenge = {
       const user = context.getUser()
 
       if (user.challenges.some(c =>
-        c.progress !== (c.progress = getProgress(c)),
+        c.progress !== (c.progress = getProgress(c))
       ))
         user.save()
           .catch(err => console.log(err))
 
       return user.challenges
-    },
+    }
   },
   Mutation: {
     challengeAdd: (_, { challenge: c }, context) => {
@@ -36,8 +36,8 @@ const challenge = {
         findChallenge(user, id),
         {
           ...challenge,
-          progress: getProgress(challenge),
-        },
+          progress: getProgress(challenge)
+        }
       )
       return user.save()
         .then(() => c)
@@ -49,7 +49,7 @@ const challenge = {
         .filter(c => c._id.toString() !== id)
 
       return user.save()
-        .then(() => "Deleted!")
+        .then(() => 'Deleted!')
         .catch(err => console.log(err))
     },
     challengeStart: (_, { id }, context) => {
@@ -61,7 +61,7 @@ const challenge = {
       c.startDate = now
 
       return user.save()
-        .then(() => "Started!")
+        .then(() => 'Started!')
         .catch(err => console.log(err))
     },
     challengeComplete: (_, { id }, context) => {
@@ -69,10 +69,10 @@ const challenge = {
       findChallenge(user, id).endDate = new Date().getTime()
 
       return user.save()
-        .then(() => "Completed!")
+        .then(() => 'Completed!')
         .catch(err => console.log(err))
-    },
-  },
+    }
+  }
 }
 
 module.exports = challenge
