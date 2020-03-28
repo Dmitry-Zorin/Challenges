@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import axios from 'axios'
-import { graphql, StaticQuery } from 'gatsby'
 import { Form } from 'uikit-react'
-import { InnerLayout } from '../../components/inner-layout'
+import { InnerLayout } from '../../components/InnerLayout'
 import { addNotification, handleError } from '../../services/helper'
 import { DataContext } from '../../services/contexts/DataContext'
 import { notifications } from '../../services/data/notifications'
-import { SwitcherItem } from '../../components/switcher-item'
-import { TextInput } from '../../components/text-input'
+import { SwitcherItem } from '../../components/SwitcherItem'
+import { TextInput } from '../../components/TextInput'
 
 const states = {
   login: {
@@ -33,25 +32,7 @@ const getQuery = action =>
     }
   }`
 
-export const Login = props => (
-  <StaticQuery
-    query={
-      graphql`{
-        site {
-          siteMetadata {
-            username
-            password
-          }
-        }
-      }`
-    }
-    render={
-      data => <Component data={data.site.siteMetadata} {...props}/>
-    }
-  />
-)
-
-class Component extends React.PureComponent {
+export class Login extends PureComponent {
   static contextType = DataContext
 
   constructor(props) {
@@ -68,7 +49,6 @@ class Component extends React.PureComponent {
   }
 
   handleChange(name, value) {
-    console.log(this.state)
     this.setState({ [name]: value })
   }
 
@@ -92,7 +72,8 @@ class Component extends React.PureComponent {
         this.props.login()
         this.props.navigate('/')
       })
-      .catch(err => handleError(err, `Failed to ${this.state.title.toLowerCase()}`))
+      .catch(
+        err => handleError(err, `Failed to ${this.state.title.toLowerCase()}`))
   }
 
   logout() {
@@ -111,44 +92,42 @@ class Component extends React.PureComponent {
       .catch(err => handleError(err, 'Failed to log out'))
   }
 
-  render = () => {
-    const { data } = this.props
-
-    return (
-      <InnerLayout>
-        <p className='uk-h2 uk-text-center'>
-          {this.state.title}
-        </p>
-        <ul
-          className='uk-subnav uk-subnav-pill uk-flex-center uk-child-width-1-3@m uk-child-width-1-2@s'
-          data-uk-switcher={true}
+  render = () => (
+    <InnerLayout>
+      <p className='uk-h2 uk-text-center'>
+        {this.state.title}
+      </p>
+      <ul className='uk-subnav uk-subnav-pill uk-flex-center uk-child-width-1-2 uk-child-width-1-3@m'>
+        <SwitcherItem
+          value={states.login.title}
+          active={this.state.action === 'login'}
+          onClick={() => this.setState(states.login)}
+        />
+        <SwitcherItem
+          value={states.signUp.title}
+          active={this.state.action === 'signUp'}
+          onClick={() => this.setState(states.signUp)}
+        />
+      </ul>
+      <Form>
+        <TextInput
+          label='Username'
+          value={this.state.username}
+          handleChange={this.handleChange}
+        />
+        <TextInput
+          label='Password'
+          value={this.state.password}
+          handleChange={this.handleChange}
+          isPassword={true}
+        />
+        <button
+          className='uk-button uk-align-center uk-width-1-3@m uk-width-1-2@s'
+          onClick={this.login}
         >
-          <SwitcherItem
-            value={states.login.title}
-            onClick={() => this.setState(states.login)}
-          />
-          <SwitcherItem
-            value={states.signUp.title}
-            onClick={() => this.setState(states.signUp)}
-          />
-        </ul>
-        <Form>
-          <TextInput
-            label={data.username} value={this.state.username}
-            handleChange={this.handleChange}
-          />
-          <TextInput
-            label={data.password} value={this.state.password}
-            handleChange={this.handleChange} isPassword={true}
-          />
-          <button
-            className='uk-button uk-align-center uk-margin-remove-bottom uk-margin-large-top'
-            onClick={this.login}
-          >
-            {this.state.title}
-          </button>
-        </Form>
-      </InnerLayout>
-    )
-  }
+          {this.state.title}
+        </button>
+      </Form>
+    </InnerLayout>
+  )
 }

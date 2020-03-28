@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { DataContext } from '../services/contexts/DataContext'
 
 export const Auth = ({ Component, ...props }) => {
-  const context = React.useContext(DataContext)
+  const context = useContext(DataContext)
 
   return context.isAuthorized ? <Component {...props}/>
     : context.isAuthorized === undefined ? null

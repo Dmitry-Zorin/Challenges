@@ -4,13 +4,23 @@
   padding-bottom: 2em;
 
   @media (max-width: 500px) {
-    padding: 0;
+    padding: 0 0 1em;
   }
 }
 
 .header {
   height: 6em;
   margin-top: 2.5em;
+
+  @media (max-height: 880px) {
+    height: 5.25em;
+    margin-top: 1.75em;
+  }
+
+  @media (max-height: 680px) {
+    height: 4.5em;
+    margin-top: 1em;
+  }
 }
 
 .title {

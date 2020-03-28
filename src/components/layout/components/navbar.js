@@ -1,23 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { DataContext } from '../../../services/contexts/DataContext'
-import { graphql, useStaticQuery } from 'gatsby'
 import { Container, Navbar, NavbarContainer, NavbarSticky, NavItem } from 'uikit-react'
 import { Link } from '@reach/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
-export const NavigationBar = () => {
-  const context = React.useContext(DataContext)
-  const data = useStaticQuery(graphql`{
-    site {
-      siteMetadata {
-        title
-        dashboard
-        login
-        logout
-      }
-    }
-  }`).site.siteMetadata
+export const NavigationBar = ({ location }) => {
+  const context = useContext(DataContext)
 
   return (
     <NavbarSticky>
@@ -25,15 +14,16 @@ export const NavigationBar = () => {
         <Container>
           <Navbar>
             <NavItem>
-              {window.location.pathname === '/'
+              {location.pathname === '/'
                 ?
                 <Link to='/' className='primary'>
-                  {data.title}
+                  Challenges
                 </Link>
                 :
                 <Link to='/'>
-                  <FontAwesomeIcon icon={faChevronLeft} className='icon' transform='shrink-2 down-0.65'/>
-                  {data.dashboard}
+                  <FontAwesomeIcon icon={faChevronLeft} className='icon'
+                                   transform='shrink-2 down-0.65'/>
+                  Dashboard
                 </Link>
               }
             </NavItem>
@@ -47,7 +37,7 @@ export const NavigationBar = () => {
                   icon={context.isAuthorized ? faSignOutAlt : faSignInAlt}
                   className='icon' transform='down-0.65'
                 />
-                {context.isAuthorized ? data.logout : data.login}
+                {context.isAuthorized ? 'Log out' : 'Log in'}
               </Link>
               }
             </NavItem>

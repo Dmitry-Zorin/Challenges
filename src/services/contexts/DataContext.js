@@ -1,4 +1,4 @@
-import React from 'react'
+import { createContext } from 'react'
 import { globalData } from '../data/global'
 
-export const DataContext = React.createContext(globalData)
+export const DataContext = createContext(globalData)

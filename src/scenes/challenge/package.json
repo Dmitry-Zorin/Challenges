@@ -1,3 +1,4 @@
 {
-  "main": "challenge.js"
+  "name": "challenge",
+  "main": "Challenge.js"
 }

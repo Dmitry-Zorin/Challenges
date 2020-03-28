@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import { Form } from 'uikit-react'
-import { InnerLayout } from '../../components/inner-layout'
+import { InnerLayout } from '../../components/InnerLayout'
 import { addNotification, handleError } from '../../services/helper'
 import { DataContext } from '../../services/contexts/DataContext'
 import { notifications } from '../../services/data/notifications'
-import { DifficultyInput } from './components/difficulty-input'
-import { TimeInput } from './components/time-input'
-import { Buttons } from './components/buttons'
-import { TextInput } from '../../components/text-input'
+import { DifficultyInput } from './components/DifficultyInput'
+import { TimeInput } from './components/TimeInput'
+import { Buttons } from './components/Buttons'
+import { TextInput } from '../../components/TextInput'
 
 const info = {
   create: {
@@ -50,7 +50,7 @@ const getQuery = info =>
     }
   }`
 
-export class Challenge extends React.Component {
+export class Challenge extends Component {
   static contextType = DataContext
 
   constructor(props) {
@@ -62,7 +62,6 @@ export class Challenge extends React.Component {
     this.state = {
       ...this.getChallenge()
     }
-
     this.info = !this.state._id ? {
       ...info.create,
       navigate: () => props.navigate('..')
@@ -73,7 +72,7 @@ export class Challenge extends React.Component {
   }
 
   getChallenge() {
-    const c = this.props.location.state.challenge
+    const c = (this.props.location.state || {}).challenge
     if (!c) return
 
     const now = new Date().getTime()
@@ -124,11 +123,31 @@ export class Challenge extends React.Component {
           {this.info.title}
         </p>
         <Form>
-          <TextInput label='Name' value={this.state.name} defaultValue={defaultName} handleChange={this.handleChange}/>
-          <DifficultyInput difficulty={this.state.difficulty} handleChange={this.handleChange}/>
-          <TimeInput name='Duration' ms={this.state.duration || 0} handleChange={this.handleChange}/>
-          <TimeInput name='Delay' ms={this.state.delay || 0} handleChange={this.handleChange}/>
-          <Buttons save={() => this.save(defaultName)} saveValue={this.info.save} showCancel={!!this.state._id}/>
+          <TextInput
+            label='Name'
+            value={this.state.name}
+            defaultValue={defaultName}
+            handleChange={this.handleChange}
+          />
+          <DifficultyInput
+            difficulty={this.state.difficulty || 'Easy'}
+            handleChange={this.handleChange}
+          />
+          <TimeInput
+            name='Duration'
+            ms={this.state.duration || 0}
+            handleChange={this.handleChange}
+          />
+          <TimeInput
+            name='Delay'
+            ms={this.state.delay || 0}
+            handleChange={this.handleChange}
+          />
+          <Buttons
+            save={() => this.save(defaultName)}
+            saveValue={this.info.save}
+            showCancel={!!this.state._id}
+          />
         </Form>
       </InnerLayout>
     )

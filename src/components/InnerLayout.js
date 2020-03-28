@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from 'uikit-react'
-import styles from './inner-layout.module.scss'
+import styles from './InnerLayout.module.scss'
 
 export const InnerLayout = ({ children }) => (
   <Card className={styles.innerLayout}>

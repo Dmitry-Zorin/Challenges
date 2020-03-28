@@ -15,7 +15,7 @@ connectToDb()
 const app = express()
 
 app.use(cors({
-  origin: process.env.UI_SERVER,
+  origin: [process.env.UI_SERVER],
   credentials: true
 }))
 app.use(session({
@@ -39,7 +39,7 @@ new ApolloServer({
   resolvers: require('./resolvers/all'),
   context: ({ req, res }) =>
     buildContext({ req, res, User })
-}).applyMiddleware({ app, path: '/graphql', cors: false })
+}).applyMiddleware({ app, cors: false })
 
 const port = process.env.PORT
 

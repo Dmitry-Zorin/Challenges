@@ -8,9 +8,10 @@ const auth = {
     signUp: (_, { username, password }, context) => {
       return context.User.findOne({ username }).then(user =>
         user ? null : new context.User({ username, password }).save()
-          .then(() => context.authenticate('graphql-local', { username, password })
-            .then(({ user }) => context.login(user)
-              .then(() => ({ username: user.username }))))
+          .then(
+            () => context.authenticate('graphql-local', { username, password })
+              .then(({ user }) => context.login(user)
+                .then(() => ({ username: user.username }))))
           .catch(err => console.log(err))
       )
     },

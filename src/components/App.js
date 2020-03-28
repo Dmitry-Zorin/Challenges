@@ -1,20 +1,17 @@
-import React from 'react'
-import ReactNotification from 'react-notifications-component'
+import React, { PureComponent } from 'react'
 import axios from 'axios'
 import { Router } from '@reach/router'
-import { Layout } from '../components/layout'
-import { Helmet } from 'react-helmet'
+import { Layout } from './layout'
 import { Login } from '../scenes/login'
-import { Auth } from '../components/auth'
+import { Auth } from './Auth'
 import { NotFoundPage } from '../scenes/404'
 import { DataContext } from '../services/contexts/DataContext'
-import { graphql } from 'gatsby'
 import { Dashboard } from '../scenes/dashboard'
 import { Challenge } from '../scenes/challenge'
 import { ChallengeGroupExtended } from '../scenes/challenge-group-extended'
 import { getChallenges, handleError, updateTime } from '../services/helper'
 
-export default class IndexPage extends React.PureComponent {
+export default class App extends PureComponent {
   constructor(props) {
     super(props)
     this.updateChallenges = this.updateChallenges.bind(this)
@@ -32,7 +29,6 @@ export default class IndexPage extends React.PureComponent {
       { query: '{ user { isAuthorized } }' },
       { withCredentials: true }
     )
-    this.data = this.props.data.site.siteMetadata
   }
 
   componentDidMount() {
@@ -58,7 +54,7 @@ export default class IndexPage extends React.PureComponent {
   }
 
   login(useStorage = false) {
-    this.interval = setInterval(this.updateState, this.data.timeout)
+    this.interval = setInterval(this.updateState, 15000)
 
     const challenges = useStorage &&
       JSON.parse(localStorage.getItem('challenges'))
@@ -78,34 +74,20 @@ export default class IndexPage extends React.PureComponent {
     })
   }
 
-  render = () =>
-    <div>
-      <ReactNotification/>
-      <Helmet>
-        <title>{this.data.title}</title>
-      </Helmet>
-      <DataContext.Provider value={this.state}>
-        <Layout title={this.data.title}>
-          <Router>
-            <NotFoundPage default/>
-            <Dashboard path='/'/>
-            <Login path='/login' login={this.login} logout={this.logout}/>
-            <Auth path='/create' Component={Challenge}/>
-            <Auth path='/edit' Component={Challenge}/>
-            <ChallengeGroupExtended path='/ongoing'/>
-            <ChallengeGroupExtended path='/upcoming'/>
-            <ChallengeGroupExtended path='/completed'/>
-          </Router>
+  render = () => (
+    <DataContext.Provider value={this.state}>
+      <Router primary={false}>
+        <Layout path='/'>
+          <NotFoundPage default/>
+          <Dashboard path='/'/>
+          <Login path='login' login={this.login} logout={this.logout}/>
+          <Auth path='create' Component={Challenge}/>
+          <Auth path='edit' Component={Challenge}/>
+          <ChallengeGroupExtended path='ongoing'/>
+          <ChallengeGroupExtended path='upcoming'/>
+          <ChallengeGroupExtended path='completed'/>
         </Layout>
-      </DataContext.Provider>
-    </div>
+      </Router>
+    </DataContext.Provider>
+  )
 }
-
-export const query = graphql`{
-  site {
-    siteMetadata {
-      timeout
-      title
-    }
-  }
-}`

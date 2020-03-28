@@ -1,23 +1,12 @@
-import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import React, { useContext } from 'react'
 import { Flex } from 'uikit-react'
-import { ChallengeGroup } from './components/challenge-group'
-import { LeftColumn } from './components/left-column'
-import { NewChallengeButton } from './components/new-challenge-button'
+import { ChallengeGroup } from './components/ChallengeGroup'
+import { LeftColumn } from './components/LeftColumn'
+import { NewChallengeButton } from './components/NewChallengeButton'
 import { DataContext } from '../../services/contexts/DataContext'
 
 export const Dashboard = () => {
-  const data = useStaticQuery(graphql`{
-    site {
-      siteMetadata {
-        ongoing
-        upcoming
-        completed
-      }
-    }
-  }`).site.siteMetadata
-
-  const context = React.useContext(DataContext)
+  const context = useContext(DataContext)
   const challenges = context.challenges || {}
 
   return (
@@ -25,9 +14,21 @@ export const Dashboard = () => {
       <LeftColumn/>
       <div className='uk-width-expand uk-padding-remove-left'>
         <NewChallengeButton/>
-        <ChallengeGroup to='/ongoing' title={data.ongoing} group={challenges.ongoing}/>
-        <ChallengeGroup to='/upcoming' title={data.upcoming} group={challenges.upcoming}/>
-        <ChallengeGroup to='/completed' title={data.completed} group={challenges.completed}/>
+        <ChallengeGroup
+          to='/ongoing'
+          title='Ongoing'
+          group={challenges.ongoing}
+        />
+        <ChallengeGroup
+          to='/upcoming'
+          title='Upcoming'
+          group={challenges.upcoming}
+        />
+        <ChallengeGroup
+          to='/completed'
+          title='Completed'
+          group={challenges.completed}
+        />
       </div>
     </Flex>
   )

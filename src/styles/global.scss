@@ -16,8 +16,10 @@ p {
   text-overflow: ellipsis;
 }
 
-a:not(.a-button):hover p {
-  color: $primary-color;
+a:hover p {
+  @media (hover: hover) {
+    color: $primary-color;
+  }
 }
 
 button {
