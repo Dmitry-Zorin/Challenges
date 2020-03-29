@@ -1,9 +1,9 @@
 .leftColumn {
-  @media (max-width: 800px) {
-    display: none;
-  }
+	@media (max-width: 800px) {
+		display: none;
+	}
 }
 
 .fullHeight {
-  height: calc(100% - 3em);
+	height: calc(100% - 3em);
 }

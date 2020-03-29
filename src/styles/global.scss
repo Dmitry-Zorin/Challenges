@@ -1,51 +1,51 @@
 @import 'variables';
 
 html {
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
 
 body {
-  min-height: 100%;
+	min-height: 100%;
 }
 
 p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 a:hover p {
-  @media (hover: hover) {
-    color: $primary-color;
-  }
+	@media (hover: hover) {
+		color: $primary-color;
+	}
 }
 
 button {
-  background-color: $primary-color;
+	background-color: $primary-color;
 
-  &:hover {
-    background-color: $primary-color-darkened;
-  }
+	&:hover {
+		background-color: $primary-color-darkened;
+	}
 }
 
 nav div {
-  width: 100%;
+	width: 100%;
 }
 
 .font-size-medium {
-  font-size: $font-size-medium;
+	font-size: $font-size-medium;
 }
 
 .font-size-large {
-  font-size: $font-size-large;
+	font-size: $font-size-large;
 }
 
 .icon {
-  margin-right: 0.4em;
+	margin-right: 0.4em;
 }
 
 .icon-inverse {
-  margin-left: 0.4em;
+	margin-left: 0.4em;
 }

@@ -1,3 +1,3 @@
 export const globalData = {
-  apiServer: `${process.env.REACT_APP_API_SERVER}/graphql`
+	apiServer: `${process.env.REACT_APP_API_SERVER}/graphql`,
 }

@@ -1,12 +1,12 @@
 .innerLayout {
-  padding: 2em 2em;
-  min-height: calc(100% - 2em);
+	padding: 2em 2em;
+	min-height: calc(100% - 2em);
 
-  @media (max-width: 500px) {
-    padding: 2em 1em;
-  }
+	@media (max-width: 500px) {
+		padding: 2em 1em;
+	}
 }
 
 .maxWidth {
-  max-width: 800px;
+	max-width: 800px;
 }

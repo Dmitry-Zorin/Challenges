@@ -7,11 +7,11 @@ import * as serviceWorker from './serviceWorker'
 import ReactNotification from 'react-notifications-component'
 
 ReactDOM.render(
-  <StrictMode>
-    <ReactNotification/>
-    <App/>
-  </StrictMode>,
-  document.getElementById('root')
+	<StrictMode>
+		<ReactNotification/>
+		<App/>
+	</StrictMode>,
+	document.getElementById('root'),
 )
 
 // If you want your app to work offline and load faster, you can change
