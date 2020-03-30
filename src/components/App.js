@@ -39,7 +39,7 @@ export default class App extends PureComponent {
 					: this.logout(),
 			)
 			.catch(err =>
-				handleError(err, 'Failed to check user authorization')
+				handleError(err, 'Failed to check user authorization'),
 			)
 	}
 

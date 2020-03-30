@@ -111,7 +111,7 @@ export class Challenge extends Component {
 				this.info.navigate()
 			})
 			.catch(err =>
-				handleError(err, `Failed to ${this.info.action} challenge`)
+				handleError(err, `Failed to ${this.info.action} challenge`),
 			)
 	}
 

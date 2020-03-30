@@ -73,7 +73,7 @@ export class Login extends PureComponent {
 				this.props.navigate('/')
 			})
 			.catch(err =>
-				handleError(err, `Failed to ${this.state.title.toLowerCase()}`)
+				handleError(err, `Failed to ${this.state.title.toLowerCase()}`),
 			)
 	}
 

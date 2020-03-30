@@ -39,7 +39,7 @@ export const Buttons = ({ challenge, navigate, options }) => {
 				})
 			})
 			.catch(err =>
-				handleError(err, `Failed to ${action.toLowerCase()} challenge`)
+				handleError(err, `Failed to ${action.toLowerCase()} challenge`),
 			)
 
 	return (
