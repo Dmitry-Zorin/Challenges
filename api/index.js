@@ -1,11 +1,11 @@
-const connectToDb = require('./db')
+const connectToDb = require('./_utilities/db')
 const express = require('serverless-express/express')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
-const passport = require('./auth')
+const passport = require('./_utilities/auth')
 const { ApolloServer } = require('apollo-server-express')
 const { buildContext } = require('graphql-passport')
-const User = require('./models/user.model')
+const User = require('./_utilities/models/user.model')
 const cors = require('cors')
 const path = require('path')
 
@@ -49,8 +49,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 new ApolloServer({
-	typeDefs: require('./typeDefs/all'),
-	resolvers: require('./resolvers/all'),
+	typeDefs: require('./_utilities/typeDefs/all'),
+	resolvers: require('./_utilities/resolvers/all'),
 	context: ({ req, res }) =>
 		buildContext({ req, res, User }),
 })
