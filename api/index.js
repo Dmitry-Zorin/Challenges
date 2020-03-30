@@ -1,5 +1,5 @@
 const connectToDb = require('./db')
-const express = require('express')
+const express = require('serverless-express/express')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 const passport = require('./auth')
@@ -57,6 +57,8 @@ new ApolloServer({
 	.applyMiddleware({ app, cors: false })
 
 const port = process.env.PORT
+
+module.exports = app
 
 app.listen(port, () =>
 	console.log(`Server is running on port: ${port}`),
