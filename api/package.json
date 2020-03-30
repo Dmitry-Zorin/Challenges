@@ -16,5 +16,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
+  },
+  "scripts": {
+    "start": "export NODE_ENV=production; node index.js",
+    "serve": "export NODE_ENV=development; npx nodemon index.js"
   }
 }
