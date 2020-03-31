@@ -1,7 +1,7 @@
 const app = require('../_utilities/app')
 
-const port = process.env.PORT
+const port = process.env.PORT || 5000
 
-app.listen(() =>
+app.listen(port, () =>
 	console.log(`Server is running on port: ${port}`),
 )
