@@ -13,7 +13,7 @@ const challenge = {
 			const user = context.getUser()
 
 			if (user.challenges.some(c =>
-				c.progress !== (c.progress = getProgress(c))
+				c.progress !== (c.progress = getProgress(c)),
 			))
 				user.save()
 					.catch(err => console.log(err))

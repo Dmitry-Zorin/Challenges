@@ -1,13 +1,14 @@
-const connectToDb = require('./_utilities/db')
-const express = require('serverless-express/express')
+const connectToDb = require('../_utilities/db')
+const express = require('express')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
-const passport = require('./_utilities/auth')
+const passport = require('../_utilities/auth')
 const { ApolloServer } = require('apollo-server-express')
 const { buildContext } = require('graphql-passport')
-const User = require('./_utilities/models/user.model')
+const typeDefs = require('../_utilities/typeDefs/all')
+const resolvers = require('../_utilities/resolvers/all')
+const User = require('../_utilities/models/user.model')
 const cors = require('cors')
-const path = require('path')
 
 require('dotenv').config({
 	path: '.env.' + process.env.NODE_ENV,
@@ -18,13 +19,7 @@ connectToDb()
 const app = express()
 const isProductionEnv = process.env.NODE_ENV === 'production'
 
-if (isProductionEnv) {
-	app.use(express.static(path.join(__dirname, '../build')))
-	app.get('/', (req, res) =>
-		res.sendFile(path.join(__dirname, 'build', 'index.html')),
-	)
-}
-else {
+if (!isProductionEnv) {
 	app.use(cors({
 		origin: [process.env.UI_SERVER],
 		credentials: true,
@@ -49,16 +44,14 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 new ApolloServer({
-	typeDefs: require('./_utilities/typeDefs/all'),
-	resolvers: require('./_utilities/resolvers/all'),
+	typeDefs,
+	resolvers,
 	context: ({ req, res }) =>
 		buildContext({ req, res, User }),
 })
-	.applyMiddleware({ app, cors: false })
+	.applyMiddleware({ app, path: '/', cors: false })
 
 const port = process.env.PORT
-
-module.exports = app
 
 app.listen(port, () =>
 	console.log(`Server is running on port: ${port}`),
