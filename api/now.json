@@ -1,0 +1,8 @@
+{
+  "build": {
+    "env": {
+      "REACT_APP_API_SERVER": "@api-server",
+      "ATLAS_URI": "@atlas-uri"
+    }
+  }
+}
