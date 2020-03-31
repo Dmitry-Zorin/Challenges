@@ -51,6 +51,6 @@ new ApolloServer({
 	context: ({ req, res }) =>
 		buildContext({ req, res, User }),
 })
-	.applyMiddleware({ app, path: '/', cors: false })
+	.applyMiddleware({ app, path: '/api/graphql', cors: false })
 
 module.exports = app
