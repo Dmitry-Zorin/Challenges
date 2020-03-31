@@ -1,7 +1,23 @@
-const app = require('../_utilities/app')
+const express = require('express')
+const { ApolloServer, gql } = require('apollo-server-express')
 
-const port = process.env.PORT || 5000
+const app = express()
 
-app.listen(port, () =>
-	console.log(`Server is running on port: ${port}`),
-)
+new ApolloServer({
+	typeDefs: gql`
+    type Query {
+      user: Status!
+    }
+    type Status {
+      isAuthorized: Boolean
+    }
+	`,
+	resolvers: {
+		Query: {
+			user: () => ({ isAuthorized: false }),
+		},
+	},
+})
+.applyMiddleware({ app, path: '/api/graphql', cors: false })
+
+app.listen(5000)

@@ -1,19 +1,18 @@
+require('dotenv').config({
+	path: __dirname + '/../.env.' + process.env.NODE_ENV,
+})
 const express = require('express')
 const session = require('express-session')
 const cors = require('cors')
 const MongoDBStore = require('connect-mongodb-session')(session)
-const passport = require('./auth')
+const passport = require('../_utilities/auth')
 const { ApolloServer } = require('apollo-server-express')
 const { buildContext } = require('graphql-passport')
-const typeDefs = require('./typeDefs/all')
-const resolvers = require('./resolvers/all')
-const User = require('./models/user.model')
-
-require('dotenv').config({
-	path: __dirname + '/../.env.' + process.env.NODE_ENV,
-})
-
+const typeDefs = require('../_utilities/typeDefs/all')
+const resolvers = require('../_utilities/resolvers/all')
+const User = require('../_utilities/models/user.model')
 const { db } = require('../_utilities/db')
+
 db.once('open', () => {
 	console.log('MongoDB database connection established successfully')
 })
@@ -53,4 +52,8 @@ new ApolloServer({
 })
 	.applyMiddleware({ app, path: '/api/graphql', cors: false })
 
-module.exports = app
+const port = process.env.PORT || 5000
+
+app.listen(port, () =>
+	console.log(`Server is running on port: ${port}`),
+)
