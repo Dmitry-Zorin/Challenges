@@ -1,11 +1,10 @@
 {
   "env": {
-    "NODE_ENV": "@node-env"
+    "NODE_ENV": "@node-env",
+    "ATLAS_URI": "@atlas-uri"
   },
   "build": {
     "env": {
-      "NODE_ENV": "@node-env",
-      "ATLAS_URI": "@atlas-uri",
       "REACT_APP_API_SERVER": "@api-server"
     }
   }
