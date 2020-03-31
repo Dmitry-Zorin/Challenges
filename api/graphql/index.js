@@ -16,12 +16,10 @@ require('../_utilities/db')
 const app = express()
 const isProductionEnv = process.env.NODE_ENV === 'production'
 
-if (!isProductionEnv) {
-	app.use(cors({
-		origin: [process.env.UI_SERVER],
-		credentials: true,
-	}))
-}
+app.use(cors({
+	origin: process.env.UI_SERVER || false,
+	credentials: true,
+}))
 
 app.use(session({
 	secret: 'secret',
