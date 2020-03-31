@@ -13,6 +13,11 @@ require('dotenv').config({
 	path: __dirname + '/../.env.' + process.env.NODE_ENV,
 })
 
+const { db } = require('../_utilities/db')
+db.once('open', () => {
+	console.log('MongoDB database connection established successfully')
+})
+
 const app = express()
 const isProductionEnv = process.env.NODE_ENV === 'production'
 
