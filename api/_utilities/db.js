@@ -7,6 +7,6 @@ mongoose.connect(process.env.ATLAS_URI, {
 })
 	.catch(err => console.log(err))
 
-const db = mongoose.connection
-
-exports.db = db
+mongoose.connection.once('open', () => {
+	console.log('MongoDB database connection established successfully')
+})

@@ -8,6 +8,7 @@ const { buildContext } = require('graphql-passport')
 const typeDefs = require('../_utilities/typeDefs/all')
 const resolvers = require('../_utilities/resolvers/all')
 const User = require('../_utilities/models/user.model')
+require('../_utilities/db')
 
 const app = express()
 
