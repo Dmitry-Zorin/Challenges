@@ -43,38 +43,32 @@ export const updateTime = async (state, apiServer) => {
 	let needsUpdate = false
 
 	const updatedState = {
-		...{
-			ongoing: state.ongoing?.map(c => {
-				const time = c.endDate - now
-				if (time < 0) {
-					needsUpdate = true
-					addNotification({
-						title: 'Challenge completed!',
-						message: c.name,
-						type: 'success',
-					})
-				}
-				c.timeLeft = getTimeString(time)
-				return c
-			}),
-		},
-		...{
-			upcoming: state.upcoming?.map(c => {
-				const time = c.startDate - now
-				if (time < 0) {
-					needsUpdate = true
-					addNotification({
-						title: 'Challenge started!',
-						message: c.name,
-					})
-				}
-				c.startsIn = getTimeString(time)
-				return c
-			}),
-		},
-		...{
-			completed: state.completed,
-		},
+		ongoing: state.ongoing?.map(c => {
+			const time = c.endDate - now
+			if (time < 0) {
+				needsUpdate = true
+				addNotification({
+					title: 'Challenge completed!',
+					message: c.name,
+					type: 'success',
+				})
+			}
+			c.timeLeft = getTimeString(time)
+			return c
+		}),
+		upcoming: state.upcoming?.map(c => {
+			const time = c.startDate - now
+			if (time < 0) {
+				needsUpdate = true
+				addNotification({
+					title: 'Challenge started!',
+					message: c.name,
+				})
+			}
+			c.startsIn = getTimeString(time)
+			return c
+		}),
+		completed: state.completed,
 	}
 
 	return needsUpdate
@@ -84,11 +78,12 @@ export const updateTime = async (state, apiServer) => {
 
 const getTimeString = ms => {
 	const time = getTimeObj(ms)
-	return [
-		time.days ? time.days + 'd' : '',
-		time.hours ? time.hours + 'h' : '',
-		time.minutes ? time.minutes + 'm' : '',
-	].join(' ')
+	const timeStrings = [
+		time.days + 'd',
+		time.hours + 'h',
+		time.minutes + 'm',
+	]
+	return timeStrings.filter(e => +e[0]).join(' ')
 }
 
 export const getTimeObj = ms => ({
@@ -97,11 +92,14 @@ export const getTimeObj = ms => ({
 	minutes: Math.ceil(ms % toMs.HOUR / toMs.MINUTE),
 })
 
-export const getChallengeTime = c => (
-	c.progress === 'Upcoming' ? c.startsIn
-		: c.progress === 'Ongoing' ? c.timeLeft
-		: ''
-)
+export const getChallengeTime = c => {
+	const space = '\xa0'
+	return (
+		c.progress === 'Upcoming' ? space + c.startsIn
+			: c.progress === 'Ongoing' ? space + c.timeLeft
+			: ''
+	)
+}
 
 export const addNotification = settings => (
 	store.addNotification({
