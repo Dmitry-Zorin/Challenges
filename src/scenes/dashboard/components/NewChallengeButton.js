@@ -15,7 +15,7 @@ export const NewChallengeButton = () => (
 			</p>
 			<div className={
 				dashboardStyles.overlay +
-				' uk-position-right uk-overlay uk-transition-slide-right'
+				' uk-position-right uk-overlay uk-transition-slide-right uk-hidden-touch'
 			}>
 				<p className='font-size-medium uk-position-center'>
 					Create

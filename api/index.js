@@ -5,13 +5,13 @@ const express = require('express')
 const session = require('express-session')
 const cors = require('cors')
 const MongoDBStore = require('connect-mongodb-session')(session)
-const passport = require('../_utilities/auth')
+const passport = require('./_utilities/auth')
 const { ApolloServer } = require('apollo-server-express')
 const { buildContext } = require('graphql-passport')
-const typeDefs = require('../_utilities/typeDefs/all')
-const resolvers = require('../_utilities/resolvers/all')
-const User = require('../_utilities/models/user.model')
-require('../_utilities/db')
+const typeDefs = require('./_utilities/typeDefs/all')
+const resolvers = require('./_utilities/resolvers/all')
+const User = require('./_utilities/models/user.model')
+require('./_utilities/db')
 
 const app = express()
 const isProductionEnv = process.env.NODE_ENV === 'production'
@@ -44,7 +44,7 @@ new ApolloServer({
 	context: ({ req, res }) =>
 		buildContext({ req, res, User }),
 })
-	.applyMiddleware({ app, path: '/api/graphql', cors: false })
+	.applyMiddleware({ app, path: '/api', cors: false })
 
 const port = process.env.PORT || 5000
 
