@@ -15,15 +15,11 @@ import { DataContext } from '../../../services/contexts/DataContext'
 export const Buttons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)
 
-	const update = action =>
+	const update = action => {
 		axios.post(context.apiServer,
 			{
-				query: `mutation(
-          $id: String!
-        ) {
-          challenge${action}(
-            id: $id
-          )
+				query: `mutation($id: String!) {
+          challenge${action}(id: $id)
         }`,
 				variables: { id: challenge._id },
 			},
@@ -38,9 +34,10 @@ export const Buttons = ({ challenge, navigate, options }) => {
 					message: challenge.name,
 				})
 			})
-			.catch(err =>
-				handleError(err, `Failed to ${action.toLowerCase()} challenge`),
-			)
+			.catch(err => {
+				handleError(err, `Failed to ${action.toLowerCase()} challenge`)
+			})
+	}
 
 	return (
 		<div className='uk-width-expand uk-text-right'>

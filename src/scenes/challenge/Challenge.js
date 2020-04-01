@@ -29,7 +29,7 @@ const info = {
 	},
 }
 
-const getQuery = info =>
+const getQuery = info => (
 	`mutation(
     ${info.id || ''}
     $name: String!
@@ -49,6 +49,7 @@ const getQuery = info =>
       name
     }
   }`
+)
 
 export class Challenge extends Component {
 	static contextType = DataContext
@@ -110,9 +111,9 @@ export class Challenge extends Component {
 				})
 				this.info.navigate()
 			})
-			.catch(err =>
-				handleError(err, `Failed to ${this.info.action} challenge`),
-			)
+			.catch(err => {
+				handleError(err, `Failed to ${this.info.action} challenge`)
+			})
 	}
 
 	render = () => {

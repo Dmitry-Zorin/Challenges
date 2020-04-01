@@ -5,7 +5,7 @@ mongoose.connect(process.env.ATLAS_URI, {
 	useCreateIndex: true,
 	useUnifiedTopology: true,
 })
-	.catch(err => console.log(err))
+	.catch(console.log)
 
 mongoose.connection.once('open', () => {
 	console.log('MongoDB database connection established successfully')

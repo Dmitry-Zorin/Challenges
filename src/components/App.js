@@ -33,14 +33,14 @@ export default class App extends PureComponent {
 
 	componentDidMount() {
 		this.authPromise
-			.then(res =>
+			.then(res => {
 				res.data.data.user.isAuthorized
 					? this.login(true)
-					: this.logout(),
-			)
-			.catch(err =>
-				handleError(err, 'Failed to check user authorization'),
-			)
+					: this.logout()
+			})
+			.catch(err => {
+				handleError(err, 'Failed to check user authorization')
+			})
 	}
 
 	componentWillUnmount() {
@@ -49,12 +49,17 @@ export default class App extends PureComponent {
 
 	updateChallenges() {
 		getChallenges(this.state.apiServer)
-			.then(res => this.updateState(res))
+			.then(this.updateState)
 	}
 
 	updateState(challenges, isAuthorized = true) {
 		updateTime(challenges || this.state.challenges, this.state.apiServer)
-			.then(res => this.setState({ challenges: res, isAuthorized }))
+			.then(res => {
+				this.setState({
+					challenges: res,
+					isAuthorized,
+				})
+			})
 	}
 
 	login(useStorage = false) {

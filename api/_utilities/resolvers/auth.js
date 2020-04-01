@@ -1,32 +1,35 @@
-const authenticate = ({ username, password }, context) =>
+const authenticate = ({ username, password }, context) => (
 	context.authenticate('graphql-local', { username, password })
-		.then(({ user }) =>
-			context.login(user)
-				.then(() => ({ username: user.username })),
-		)
+		.then(async ({ user }) => {
+			await context.login(user)
+			return { username: user.username }
+		})
+)
 
 const auth = {
 	Query: {
-		user: (_, __, context) => {
-			return { isAuthorized: !!context.getUser() }
-		},
+		user: (_, __, context) => (
+			{ isAuthorized: !!context.getUser() }
+		),
 	},
 	Mutation: {
-		signUp: (_, { username, password }, context) => {
-			return context.User.findOne({ username })
-				.then(user =>
-					user ? null : new context.User({ username, password }).save()
-						.then(() => authenticate({ username, password }, context))
-						.catch(err => console.log(err)),
-				)
-		},
-		login: (_, { username, password }, context) => {
-			return authenticate({ username, password }, context)
+		signUp: (_, { username, password }, context) => (
+			context.User.findOne({ username })
+				.then(async user => {
+					if (user) return null
+
+					await new context.User({ username, password }).save()
+					return authenticate({ username, password }, context)
+				})
+				.catch(console.log)
+		),
+		login: (_, { username, password }, context) => (
+			authenticate({ username, password }, context)
 				.catch(err => {
 					console.log(err)
 					return { username: '' }
 				})
-		},
+		),
 		logout: (_, __, context) => {
 			context.logout()
 			return { username: 'out' }

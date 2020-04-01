@@ -33,8 +33,7 @@ const labelClasses = {
 
 export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) => (
 	<Accordion>
-		{challenges.slice(page * 10,
-			(page + 1) * 10).map(c =>
+		{challenges.slice(page * 10, (page + 1) * 10).map(c => (
 			<AccordionItem
 				key={c._id}
 				className='uk-margin-remove'
@@ -72,7 +71,7 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
 						<hr/>
 					</div>
 				}
-			/>,
-		)}
+			/>
+		))}
 	</Accordion>
 )

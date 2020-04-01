@@ -8,7 +8,7 @@ export const toMs = {
 	MINUTE: 6e4,
 }
 
-export const getChallenges = apiServer =>
+export const getChallenges = apiServer => (
 	axios.post(apiServer,
 		{ query: '{ challenges { _id name difficulty progress startDate endDate } }' },
 		{ withCredentials: true },
@@ -22,6 +22,7 @@ export const getChallenges = apiServer =>
 			handleError(err, 'Failed to get challenges')
 			return {}
 		})
+)
 
 const sortChallenges = challenges => ({
 	ongoing: challenges
@@ -37,13 +38,13 @@ const sortChallenges = challenges => ({
 		.sort((a, b) => b.endDate - a.endDate),
 })
 
-export const updateTime = (state, apiServer) => {
+export const updateTime = async (state, apiServer) => {
 	const now = new Date().getTime()
 	let needsUpdate = false
 
 	const updatedState = {
-		...state.ongoing && {
-			ongoing: state.ongoing.map(c => {
+		...{
+			ongoing: state.ongoing?.map(c => {
 				const time = c.endDate - now
 				if (time < 0) {
 					needsUpdate = true
@@ -57,8 +58,8 @@ export const updateTime = (state, apiServer) => {
 				return c
 			}),
 		},
-		...state.upcoming && {
-			upcoming: state.upcoming.map(c => {
+		...{
+			upcoming: state.upcoming?.map(c => {
 				const time = c.startDate - now
 				if (time < 0) {
 					needsUpdate = true
@@ -71,23 +72,23 @@ export const updateTime = (state, apiServer) => {
 				return c
 			}),
 		},
-		...state.completed && {
+		...{
 			completed: state.completed,
 		},
 	}
-	return new Promise(resolve =>
-		!needsUpdate ? resolve(updatedState)
-			: getChallenges(apiServer).then(resolve))
+
+	return needsUpdate
+		? getChallenges(apiServer)
+		: updatedState
 }
 
 const getTimeString = ms => {
 	const time = getTimeObj(ms)
-	const timeStrings = {
-		days: time.days ? time.days + 'd ' : '',
-		hours: time.hours ? time.hours + 'h ' : '',
-		minutes: time.minutes ? time.minutes + 'm' : '',
-	}
-	return timeStrings.days + timeStrings.hours + timeStrings.minutes
+	return [
+		time.days && time.days + 'd',
+		time.hours && time.hours + 'h',
+		time.minutes && time.minutes + 'm',
+	].join(' ')
 }
 
 export const getTimeObj = ms => ({
@@ -96,14 +97,13 @@ export const getTimeObj = ms => ({
 	minutes: Math.ceil(ms % toMs.HOUR / toMs.MINUTE),
 })
 
-export const getChallengeTime = c =>
-	'\xa0'.repeat(2) + (
-		c.progress === 'Upcoming' ? `${c.startsIn}`
-			: c.progress === 'Ongoing' ? `${c.timeLeft}`
-			: ''
-	)
+export const getChallengeTime = c => (
+	c.progress === 'Upcoming' ? c.startsIn
+		: c.progress === 'Ongoing' ? c.timeLeft
+		: ''
+)
 
-export const addNotification = settings =>
+export const addNotification = settings => (
 	store.addNotification({
 		type: 'info',
 		insert: 'top',
@@ -113,6 +113,7 @@ export const addNotification = settings =>
 		dismiss: { duration: 3000 },
 		...settings,
 	})
+)
 
 export const handleError = (err, message) => {
 	console.log(err.toJSON ? err.toJSON() : err)

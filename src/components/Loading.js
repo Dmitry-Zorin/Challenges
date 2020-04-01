@@ -21,10 +21,11 @@ export class Loading extends PureComponent {
 		clearTimeout(this.timeout)
 	}
 
-	render = () =>
+	render = () => (
 		this.state.showSpinner && (
 			<p className='uk-text-center uk-width-expand uk-margin-large-top'>
 				<FontAwesomeIcon icon={faSpinner} transform='grow-8' pulse/>
 			</p>
 		)
+	)
 }

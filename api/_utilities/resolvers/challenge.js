@@ -1,22 +1,26 @@
 const getProgress = c => {
 	const now = new Date().getTime()
-	return now < c.startDate ? 'Upcoming'
-		: now > c.endDate ? 'Completed' : 'Ongoing'
+	return (
+		now < c.startDate ? 'Upcoming'
+			: now > c.endDate ? 'Completed'
+			: 'Ongoing'
+	)
 }
 
-const findChallenge = (user, id) =>
+const findChallenge = (user, id) => (
 	user.challenges.find(c => c._id.toString() === id)
+)
 
 const challenge = {
 	Query: {
 		challenges: (_, __, context) => {
 			const user = context.getUser()
 
-			if (user.challenges.some(c =>
-				c.progress !== (c.progress = getProgress(c)),
-			))
-				user.save()
-					.catch(err => console.log(err))
+			if (
+				user.challenges.some(c => (
+					c.progress !== (c.progress = getProgress(c))
+				))
+			) user.save().catch(console.log)
 
 			return user.challenges
 		},
@@ -28,7 +32,7 @@ const challenge = {
 
 			return user.save()
 				.then(() => c)
-				.catch(err => console.log(err))
+				.catch(console.log)
 		},
 		challengeEdit: (_, { id, challenge }, context) => {
 			const user = context.getUser()
@@ -41,7 +45,7 @@ const challenge = {
 			)
 			return user.save()
 				.then(() => c)
-				.catch(err => console.log(err))
+				.catch(console.log)
 		},
 		challengeDelete: (_, { id }, context) => {
 			const user = context.getUser()
@@ -50,7 +54,7 @@ const challenge = {
 
 			return user.save()
 				.then(() => 'Deleted!')
-				.catch(err => console.log(err))
+				.catch(console.log)
 		},
 		challengeStart: (_, { id }, context) => {
 			const user = context.getUser()
@@ -62,7 +66,7 @@ const challenge = {
 
 			return user.save()
 				.then(() => 'Started!')
-				.catch(err => console.log(err))
+				.catch(console.log)
 		},
 		challengeComplete: (_, { id }, context) => {
 			const user = context.getUser()
@@ -70,7 +74,7 @@ const challenge = {
 
 			return user.save()
 				.then(() => 'Completed!')
-				.catch(err => console.log(err))
+				.catch(console.log)
 		},
 	},
 }

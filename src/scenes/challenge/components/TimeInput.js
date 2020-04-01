@@ -42,10 +42,9 @@ const NumberInput = ({ label, time, toMs, name, ms, handleChange, step }) => (
 			value={time || ''}
 			placeholder={time ? undefined : 0}
 			step={step}
-			onChange={e => handleChange(
-				name.toLowerCase(),
-				ms + (e.target.value - time) * toMs,
-			)}
+			onChange={e => {
+				handleChange(name.toLowerCase(), ms + (e.target.value - time) * toMs)
+			}}
 		/>
 	</label>
 )

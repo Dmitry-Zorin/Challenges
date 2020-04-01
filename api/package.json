@@ -18,6 +18,6 @@
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "start": "export NODE_ENV=development; nodemon index.js"
+    "start": "nodemon index.js"
   }
 }

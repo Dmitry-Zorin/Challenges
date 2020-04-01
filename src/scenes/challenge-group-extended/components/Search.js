@@ -1,8 +1,7 @@
 import React from 'react'
 
 export const Search = ({ onChange }) => (
-	<div
-		className='uk-search uk-search-default uk-width-expand uk-margin-small'>
+	<div className='uk-search uk-search-default uk-width-expand uk-margin-small'>
 		<span data-uk-search-icon={true}/>
 		<input
 			type='search'
