@@ -4,7 +4,7 @@ import styles from './InnerLayout.module.scss'
 
 export const InnerLayout = ({ children }) => (
 	<Card className={styles.innerLayout}>
-		<div className={styles.maxWidth + ' uk-align-center'}>
+		<div className='uk-align-center' style={{ maxWidth: '800px' }}>
 			{children}
 		</div>
 	</Card>

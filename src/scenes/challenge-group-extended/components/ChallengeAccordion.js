@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './ChallengeAccordion.module.scss'
 import { Accordion, AccordionItem, Grid } from 'uikit-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getChallengeTime } from '../../../services/helper'
@@ -40,10 +39,10 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
 				title={
 					<Grid>
 						<p className='uk-width-expand'>{c.name}</p>
-						<div className={
-							styles.marginTop +
-							' uk-text-meta uk-padding-remove uk-text-right'
-						}>
+						<div
+							className='uk-text-meta uk-padding-remove uk-text-right'
+							style={{ marginTop: '0.35em' }}
+						>
 							<FontAwesomeIcon
 								icon={challengeInfo[groupName].icon}
 								transform='shrink-2'
@@ -55,11 +54,10 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
 				content={
 					<div>
 						<Grid className='uk-margin-remove'>
-							<div className={
-								styles.label +
-								' uk-label ' +
-								labelClasses[c.difficulty]
-							}>
+							<div
+								className={'uk-label ' + labelClasses[c.difficulty]}
+								style={{ height: '1.5em', marginTop: '0.6em' }}
+							>
 								{c.difficulty}
 							</div>
 							<Buttons

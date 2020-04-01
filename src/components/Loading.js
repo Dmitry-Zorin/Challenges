@@ -23,7 +23,8 @@ export class Loading extends PureComponent {
 
 	render = () => (
 		this.state.showSpinner && (
-			<p className='uk-text-center uk-width-expand uk-margin-large-top'>
+			<p className='uk-text-center uk-width-expand'
+				style={{ paddingTop: '3em' }}>
 				<FontAwesomeIcon icon={faSpinner} transform='grow-8' pulse/>
 			</p>
 		)

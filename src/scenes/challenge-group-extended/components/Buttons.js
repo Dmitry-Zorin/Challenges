@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import styles from './ChallengeAccordion.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faCheck,
@@ -75,8 +74,12 @@ export const Buttons = ({ challenge, navigate, options }) => {
 }
 
 const Button = ({ icon, tooltip, onClick }) => (
-	<button className={styles.button + ' uk-button uk-padding-remove'}
-		data-uk-tooltip={tooltip} onClick={onClick}>
+	<button
+		className='uk-button uk-padding-remove'
+		style={{ width: '3em', marginLeft: '0.5em' }}
+		data-uk-tooltip={tooltip}
+		onClick={onClick}
+	>
 		<FontAwesomeIcon icon={icon} transform='grow-3'/>
 	</button>
 )

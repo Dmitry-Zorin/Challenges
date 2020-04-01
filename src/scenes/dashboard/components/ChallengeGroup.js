@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import styles from './ChallengeGroup.module.scss'
 import dashboardStyles from '../Dashboard.module.scss'
 import { Card, Grid } from 'uikit-react'
 import { Link } from '@reach/router'
@@ -18,7 +17,10 @@ export const ChallengeGroup = ({ to, title, group }) => {
 
 	return (
 		<Link to={to}>
-			<Card className={styles.card + ' uk-transition-toggle'}>
+			<Card
+				className='uk-transition-toggle'
+				style={{ height: '15em' }}
+			>
 				<p className='font-size-large uk-text-center'>
 					{title}
 				</p>
@@ -54,7 +56,10 @@ const Item = ({ title, challenge }) => (
 		<div className='font-size-medium uk-width-expand'>
 			{challenge.name}
 		</div>
-		<div className={styles.marginTop + ' uk-text-meta uk-padding-remove'}>
+		<div
+			className='uk-text-meta uk-padding-remove'
+			style={{ marginTop: '0.3em' }}
+		>
 			<FontAwesomeIcon icon={icons[title]} transform='shrink-2'/>
 			{getChallengeTime(challenge)}
 		</div>

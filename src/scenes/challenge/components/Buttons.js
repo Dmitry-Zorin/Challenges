@@ -1,12 +1,11 @@
 import React from 'react'
-import styles from './Buttons.module.scss'
 import { Grid } from 'uikit-react'
 
 export const Buttons = ({ save, saveValue, showCancel }) => (
-	<Grid className={
-		styles.marginTop +
-		' uk-flex-center uk-child-width-1-3@m uk-child-width-1-2@s'
-	}>
+	<Grid
+		className='uk-flex-center uk-child-width-1-3@m uk-child-width-1-2@s'
+		style={{ marginTop: '4em' }}
+	>
 		{showCancel && (
 			<Button value='Cancel' onClick={() => window.history.back()}/>
 		)}
