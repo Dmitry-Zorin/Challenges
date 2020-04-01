@@ -85,9 +85,9 @@ export const updateTime = async (state, apiServer) => {
 const getTimeString = ms => {
 	const time = getTimeObj(ms)
 	return [
-		time.days && time.days + 'd',
-		time.hours && time.hours + 'h',
-		time.minutes && time.minutes + 'm',
+		time.days ? time.days + 'd' : '',
+		time.hours ? time.hours + 'h' : '',
+		time.minutes ? time.minutes + 'm' : '',
 	].join(' ')
 }
 

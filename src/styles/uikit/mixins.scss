@@ -30,7 +30,7 @@
 	@include round-border($primary-border-radius);
 	margin: 1em 1em 2em;
 	padding: 1.5em 2em;
-	overflow: hidden;
+	-webkit-mask-image: -webkit-radial-gradient(white, black);
 
 	& > div {
 		@extend .uk-animation-fade;
