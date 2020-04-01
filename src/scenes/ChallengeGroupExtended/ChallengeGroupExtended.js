@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { InnerLayout } from '../../components/InnerLayout'
+import { InnerLayout } from '../../components/InnerLayout/InnerLayout'
 import { DataContext } from '../../services/contexts/DataContext'
 import { Loading } from '../../components/Loading'
 import { Pagination } from './components/Pagination'

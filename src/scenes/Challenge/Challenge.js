@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Form } from 'uikit-react'
-import { InnerLayout } from '../../components/InnerLayout'
+import { InnerLayout } from '../../components/InnerLayout/InnerLayout'
 import { addNotification, handleError } from '../../services/helper'
 import { DataContext } from '../../services/contexts/DataContext'
 import { notifications } from '../../services/data/notifications'
