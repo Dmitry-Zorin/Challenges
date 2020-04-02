@@ -25,6 +25,10 @@ a:hover p {
 	}
 }
 
+a:active p {
+	color: $primary-color;
+}
+
 button {
 	background-color: $primary-color;
 

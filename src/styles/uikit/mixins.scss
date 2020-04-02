@@ -28,17 +28,17 @@
 
 @mixin hook-card() {
 	@include round-border($primary-border-radius);
-	margin: 1em 1em 2em;
-	padding: 1.5em 2em;
+	margin: 1em 0.5em;
+	padding: 1.5em 1em;
 	-webkit-mask-image: -webkit-radial-gradient(white, black);
 
 	& > div {
 		@extend .uk-animation-fade;
 	}
 
-	@media (max-width: 500px) {
-		margin: 1em 0.5em;
-		padding: 1.5em 1em;
+	@media (min-width: $breakpoint-small) {
+		margin: 1em 1em 2em;
+		padding: 1.5em 2em;
 	}
 }
 
@@ -47,14 +47,30 @@
 }
 
 @mixin hook-navbar-nav-item() {
+	height: 50px;
+	margin-top: env(safe-area-inset-top);
 	text-transform: $navbar-nav-item-text-transform;
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color;
 
-	@media (max-width: 500px) {
+	@media (min-height: $height-breakpoint-medium) {
+		height: 60px;
+	}
+
+	@media (min-height: $height-breakpoint-large) {
+		height: 70px;
+	}
+
+	@media (max-width: $breakpoint-small) {
 		& {
 			padding: 0 1em;
 		}
+	}
+}
+
+@mixin hook-navbar-nav-item-hover() {
+	@media (hover: hover) {
+		color: $primary-color;
 	}
 }
 
