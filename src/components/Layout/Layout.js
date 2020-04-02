@@ -7,6 +7,7 @@ import { ScrollToTop } from './components/ScrollToTop'
 export const Layout = ({ children, location }) => (
 	<div>
 		<ScrollToTop location={location}/>
+		<div className={styles.overlay}/>
 		<NavigationBar location={location}/>
 		<Container className={styles.layout}>
 			<div className={styles.header + ' uk-text-center'}>

@@ -1,5 +1,16 @@
 @import '../../styles/variables';
 
+.overlay {
+	position: fixed;
+	width: 150%;
+	height: 530px;
+	top: -450px;
+	left: -25%;
+	right: 25%;
+	bottom: 80px;
+	background-color: $tertiary-bg-color;
+}
+
 .layout {
 	padding-bottom: 2em;
 
