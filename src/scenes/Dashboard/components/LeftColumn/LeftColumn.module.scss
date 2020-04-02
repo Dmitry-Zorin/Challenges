@@ -1,9 +1,7 @@
 @import '../../../../styles/variables';
 
 .leftColumn {
-	display: none;
-
-	@media (min-width: $breakpoint-medium) {
-		display: block;
+	@media (max-width: $breakpoint-medium) {
+		display: none;
 	}
 }

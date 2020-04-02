@@ -53,7 +53,7 @@ const icons = {
 
 const Item = ({ title, challenge }) => (
 	<Grid className='uk-margin-small' key={challenge._id}>
-		<div className='font-size-medium uk-width-expand'>
+		<div className='wrap font-size-medium uk-width-expand'>
 			{challenge.name}
 		</div>
 		<div

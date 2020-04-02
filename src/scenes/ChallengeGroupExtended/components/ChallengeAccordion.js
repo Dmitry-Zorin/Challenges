@@ -38,7 +38,7 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
 				className='uk-margin-remove'
 				title={
 					<Grid>
-						<p className='uk-width-expand'>{c.name}</p>
+						<p className='wrap uk-width-expand'>{c.name}</p>
 						<div
 							className='uk-text-meta uk-padding-remove uk-text-right'
 							style={{ marginTop: '0.35em' }}

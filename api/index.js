@@ -18,7 +18,7 @@ const app = express()
 const isProductionEnv = process.env.NODE_ENV === 'production'
 
 app.use(cors({
-	origin: process.env.UI_SERVER || false,
+	origin: !isProductionEnv,
 	credentials: true,
 }))
 
@@ -47,8 +47,4 @@ new ApolloServer({
 	),
 }).applyMiddleware({ app, path: '/api', cors: false })
 
-const port = process.env.PORT
-
-app.listen(port, () => {
-	console.log(`Server is running on port: ${port}`)
-})
+app.listen(process.env.PORT)

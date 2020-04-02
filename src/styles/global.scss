@@ -13,12 +13,6 @@ body {
 	-webkit-touch-callout: none;
 }
 
-p {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
 a:hover p {
 	@media (hover: hover) {
 		color: $primary-color;
@@ -55,4 +49,10 @@ nav div {
 
 .icon-inverse {
 	margin-left: 0.4em;
+}
+
+.wrap {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { store } from 'react-notifications-component'
 import { Form } from 'uikit-react'
-import { InnerLayout } from '../../components/InnerLayout/InnerLayout'
+import { InnerLayout } from '../../components/InnerLayout'
 import { addNotification, handleError } from '../../services/helper'
 import { DataContext } from '../../services/contexts/DataContext'
 import { notifications } from '../../services/data/notifications'
@@ -90,6 +91,12 @@ export class Challenge extends Component {
 		const startDate = new Date().getTime() + (this.state.delay || 0)
 		const endDate = startDate + (this.state.duration || 0)
 
+		addNotification({
+			id: 'save',
+			message: 'Saving...',
+			dismiss: { duration: 0 },
+		})
+
 		axios.post(
 			this.context.apiServer,
 			{
@@ -104,6 +111,7 @@ export class Challenge extends Component {
 			{ withCredentials: true },
 		)
 			.then(res => {
+				store.removeNotification('save')
 				this.context.updateChallenges()
 				addNotification({
 					...notifications[this.info.notification],
