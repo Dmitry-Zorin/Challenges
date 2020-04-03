@@ -1,16 +1,16 @@
 const { gql } = require('apollo-server-express')
 
-const challenge = gql`
+const challengeTypeDefs = gql`
   extend type Query {
-    challenges: [Challenge]!
+    challenges: Challenges!
   }
 
   extend type Mutation {
-    challengeAdd(challenge: ChallengeInput!): Challenge
-    challengeEdit(id: String!, challenge: ChallengeInput!): Challenge
-    challengeDelete(id: String!): String
-    challengeStart(id: String!): String
-    challengeComplete(id: String!): String
+    challengeAdd(challenge: ChallengeInput!): Challenges!
+    challengeEdit(id: String!, challenge: ChallengeInput!): Challenges!
+    challengeDelete(id: String!): Challenges!
+    challengeStart(id: String!): Challenges!
+    challengeComplete(id: String!): Challenges!
   }
 
   type Challenge {
@@ -20,6 +20,10 @@ const challenge = gql`
     progress: Progress!
     startDate: Float!
     endDate: Float!
+  }
+
+  type Challenges {
+    challenges: [Challenge!]
   }
 
   input ChallengeInput {
@@ -42,4 +46,4 @@ const challenge = gql`
   }
 `
 
-module.exports = challenge
+module.exports = challengeTypeDefs

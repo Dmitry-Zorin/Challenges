@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import axios from 'axios'
 import { Router } from '@reach/router'
 import { Layout } from './Layout'
 import { Login } from '../scenes/Login'
@@ -9,34 +8,32 @@ import { DataContext } from '../services/contexts/DataContext'
 import { Dashboard } from '../scenes/Dashboard'
 import { Challenge } from '../scenes/Challenge'
 import { ChallengeGroupExtended } from '../scenes/ChallengeGroupExtended'
-import { getChallenges, handleError, updateTime } from '../services/helper'
+import {
+	getChallenges,
+	handleError,
+	sortChallenges,
+	updateTime,
+} from '../services/helper'
 
 export default class App extends PureComponent {
 	constructor(props) {
 		super(props)
 		this.updateChallenges = this.updateChallenges.bind(this)
-		this.updateState = this.updateState.bind(this)
 		this.login = this.login.bind(this)
 		this.logout = this.logout.bind(this)
 
 		this.state = {
 			...DataContext._currentValue,
 			challenges: {},
-			updateChallenges: this.updateChallenges,
+			update: this.updateChallenges,
 		}
-		this.authPromise = axios.post(
-			this.state.apiServer,
-			{ query: '{ user { isAuthorized } }' },
-			{ withCredentials: true },
-		)
+		this.challengesPromise = getChallenges(this.state.apiServer)
 	}
 
 	componentDidMount() {
-		this.authPromise
-			.then(res => {
-				res.data.data.user.isAuthorized
-					? this.login(true)
-					: this.logout()
+		this.challengesPromise
+			.then(({ ongoing }) => {
+				ongoing ? this.login() : this.logout()
 			})
 			.catch(err => {
 				handleError(err, 'Failed to check user authorization')
@@ -47,36 +44,25 @@ export default class App extends PureComponent {
 		clearInterval(this.interval)
 	}
 
-	updateChallenges() {
-		getChallenges(this.state.apiServer)
-			.then(this.updateState)
+	async updateChallenges(challenges, isAuthorized = true) {
+		challenges = await updateTime(
+			challenges
+				? sortChallenges(challenges)
+				: this.state.challenges.ongoing
+				? this.state.challenges
+				: await getChallenges(this.state.apiServer),
+			this.state.apiServer,
+		)
+		this.setState({ challenges, isAuthorized })
 	}
 
-	updateState(challenges, isAuthorized = true) {
-		updateTime(challenges || this.state.challenges, this.state.apiServer)
-			.then(res => {
-				this.setState({
-					challenges: res,
-					isAuthorized,
-				})
-			})
-	}
-
-	login(useStorage = false) {
-		this.interval = setInterval(this.updateState, 15000)
-
-		const challenges = useStorage &&
-			JSON.parse(localStorage.getItem('challenges'))
-
-		challenges
-			? this.updateState(challenges)
-			: this.updateChallenges()
+	login() {
+		this.interval = setInterval(this.updateChallenges, 15000)
+		this.updateChallenges()
 	}
 
 	logout() {
 		clearInterval(this.interval)
-		localStorage.clear()
-
 		this.setState({
 			challenges: {},
 			isAuthorized: false,

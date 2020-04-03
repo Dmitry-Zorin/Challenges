@@ -1,18 +1,10 @@
 const { gql } = require('apollo-server-express')
 
-const auth = gql`
-  extend type Query {
-    user: Status!
-  }
-
+const authTypeDefs = gql`
   extend type Mutation {
     signUp(username: String!, password: String!): AuthPayload
     login(username: String!, password: String!): AuthPayload
     logout: AuthPayload
-  }
-
-  type Status {
-    isAuthorized: Boolean
   }
 
   type AuthPayload {
@@ -20,4 +12,4 @@ const auth = gql`
   }
 `
 
-module.exports = auth
+module.exports = authTypeDefs

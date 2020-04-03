@@ -1,8 +1,8 @@
 const { gql } = require('apollo-server-express')
-const auth = require('./auth')
-const challenge = require('./challenge')
+const authTypeDefs = require('./auth')
+const challengeTypeDefs = require('./challenge')
 
-const all = gql`
+const allTypeDefs = gql`
   type Query {
     _empty: String
   }
@@ -12,4 +12,4 @@ const all = gql`
   }
 `
 
-module.exports = [all, auth, challenge]
+module.exports = [allTypeDefs, authTypeDefs, challengeTypeDefs]

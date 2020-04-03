@@ -6,12 +6,7 @@ const authenticate = ({ username, password }, context) => (
 		})
 )
 
-const auth = {
-	Query: {
-		user: (_, __, context) => (
-			{ isAuthorized: !!context.getUser() }
-		),
-	},
+const authResolvers = {
 	Mutation: {
 		signUp: (_, { username, password }, context) => (
 			context.User.findOne({ username })
@@ -37,4 +32,4 @@ const auth = {
 	},
 }
 
-module.exports = auth
+module.exports = authResolvers

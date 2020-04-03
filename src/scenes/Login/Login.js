@@ -53,7 +53,8 @@ export class Login extends PureComponent {
 	}
 
 	login() {
-		axios.post(this.context.apiServer,
+		axios.post(
+			this.context.apiServer,
 			{
 				query: getQuery(this.state.action),
 				variables: {
@@ -63,8 +64,8 @@ export class Login extends PureComponent {
 			},
 			{ withCredentials: true },
 		)
-			.then(res => {
-				if (!res.data.data[this.state.action].username)
+			.then(({ data: { data } }) => {
+				if (!data[this.state.action].username)
 					return this.state.action === 'login'
 						? addNotification(notifications.loginFailed)
 						: addNotification(notifications.error)
@@ -83,8 +84,8 @@ export class Login extends PureComponent {
 			{ query: 'mutation { logout { username } }' },
 			{ withCredentials: true },
 		)
-			.then(res => {
-				if (res.data.data.logout.username)
+			.then(({ data: { data } }) => {
+				if (data.logout.username)
 					return this.props.logout()
 
 				addNotification(notifications.error)

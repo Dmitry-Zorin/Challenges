@@ -1,5 +1,5 @@
 const lodash = require('lodash')
-const auth = require('./auth')
-const challenge = require('./challenge')
+const authResolvers = require('./auth')
+const challengeResolvers = require('./challenge')
 
-module.exports = lodash.merge({}, auth, challenge)
+module.exports = lodash.merge({}, authResolvers, challengeResolvers)

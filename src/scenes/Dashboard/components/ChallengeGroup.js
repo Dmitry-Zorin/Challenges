@@ -17,10 +17,7 @@ export const ChallengeGroup = ({ to, title, group }) => {
 
 	return (
 		<Link to={to}>
-			<Card
-				className='uk-transition-toggle'
-				style={{ height: '15em' }}
-			>
+			<Card className='uk-transition-toggle' style={{ height: '15em' }}>
 				<p className='font-size-large uk-text-center'>
 					{title}
 				</p>

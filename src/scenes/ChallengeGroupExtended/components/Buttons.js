@@ -7,7 +7,11 @@ import {
 	faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
-import { addNotification, handleError } from '../../../services/helper'
+import {
+	addNotification,
+	challengesQuery,
+	handleError,
+} from '../../../services/helper'
 import { notifications } from '../../../services/data/notifications'
 import { DataContext } from '../../../services/contexts/DataContext'
 
@@ -15,17 +19,20 @@ export const Buttons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)
 
 	const update = action => {
-		axios.post(context.apiServer,
+		axios.post(
+			context.apiServer,
 			{
 				query: `mutation($id: String!) {
-          challenge${action}(id: $id)
+          challenge${action}(id: $id) {
+            ${challengesQuery}
+          }
         }`,
 				variables: { id: challenge._id },
 			},
 			{ withCredentials: true },
 		)
-			.then(() => {
-				context.updateChallenges()
+			.then(({ data: { data } }) => {
+				context.update(data[`challenge${action}`].challenges)
 				addNotification({
 					...action === 'Start' ? notifications.challengeStarted
 						: action === 'Complete' ? notifications.challengeCompleted

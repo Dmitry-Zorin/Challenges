@@ -3,7 +3,11 @@ import axios from 'axios'
 import { store } from 'react-notifications-component'
 import { Form } from 'uikit-react'
 import { InnerLayout } from '../../components/InnerLayout'
-import { addNotification, handleError } from '../../services/helper'
+import {
+	addNotification,
+	challengesQuery,
+	handleError,
+} from '../../services/helper'
 import { DataContext } from '../../services/contexts/DataContext'
 import { notifications } from '../../services/data/notifications'
 import { DifficultyInput } from './components/DifficultyInput'
@@ -47,7 +51,7 @@ const getQuery = info => (
         endDate: $endDate
       }
     ) {
-      name
+      ${challengesQuery}
     }
   }`
 )
@@ -88,6 +92,7 @@ export class Challenge extends Component {
 	}
 
 	save(defaultName) {
+		const name = this.state.name || defaultName
 		const startDate = new Date().getTime() + (this.state.delay || 0)
 		const endDate = startDate + (this.state.duration || 0)
 
@@ -103,19 +108,20 @@ export class Challenge extends Component {
 				query: getQuery(this.info),
 				variables: {
 					id: this.state._id,
-					name: this.state.name || defaultName,
+					name,
 					difficulty: this.state.difficulty,
-					startDate, endDate,
+					startDate,
+					endDate,
 				},
 			},
 			{ withCredentials: true },
 		)
-			.then(res => {
+			.then(({ data: { data } }) => {
 				store.removeNotification('save')
-				this.context.updateChallenges()
+				this.context.update(data[this.info.api].challenges)
 				addNotification({
 					...notifications[this.info.notification],
-					message: res.data.data[this.info.api].name,
+					message: name,
 				})
 				this.info.navigate()
 			})

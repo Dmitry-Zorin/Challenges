@@ -8,15 +8,26 @@ export const toMs = {
 	MINUTE: 6e4,
 }
 
+export const challengesQuery = ` 
+	challenges { 
+		_id
+		name
+		difficulty
+		progress
+		startDate
+		endDate
+	}
+`
+
 export const getChallenges = apiServer => (
-	axios.post(apiServer,
-		{ query: '{ challenges { _id name difficulty progress startDate endDate } }' },
+	axios.post(
+		apiServer,
+		{ query: `{ challenges { ${challengesQuery} } }` },
 		{ withCredentials: true },
 	)
-		.then(res => {
-			const challenges = sortChallenges(res.data.data.challenges)
-			localStorage.setItem('challenges', JSON.stringify(challenges))
-			return updateTime(challenges, apiServer)
+		.then(({ data: { data } }) => {
+			const challenges = data.challenges.challenges
+			return challenges ? sortChallenges(challenges) : {}
 		})
 		.catch(err => {
 			handleError(err, 'Failed to get challenges')
@@ -24,7 +35,7 @@ export const getChallenges = apiServer => (
 		})
 )
 
-const sortChallenges = challenges => ({
+export const sortChallenges = challenges => ({
 	ongoing: challenges
 		.filter(c => c.progress === 'Ongoing')
 		.sort((a, b) => a.endDate - b.endDate),
@@ -38,15 +49,15 @@ const sortChallenges = challenges => ({
 		.sort((a, b) => b.endDate - a.endDate),
 })
 
-export const updateTime = async (state, apiServer) => {
+export const updateTime = (state, apiServer) => {
 	const now = new Date().getTime()
-	let needsUpdate = false
+	let stateNeedsUpdate = false
 
 	const updatedState = {
 		ongoing: state.ongoing?.map(c => {
 			const time = c.endDate - now
 			if (time < 0) {
-				needsUpdate = true
+				stateNeedsUpdate = true
 				addNotification({
 					title: 'Challenge completed!',
 					message: c.name,
@@ -59,7 +70,7 @@ export const updateTime = async (state, apiServer) => {
 		upcoming: state.upcoming?.map(c => {
 			const time = c.startDate - now
 			if (time < 0) {
-				needsUpdate = true
+				stateNeedsUpdate = true
 				addNotification({
 					title: 'Challenge started!',
 					message: c.name,
@@ -71,7 +82,7 @@ export const updateTime = async (state, apiServer) => {
 		completed: state.completed,
 	}
 
-	return needsUpdate
+	return stateNeedsUpdate
 		? getChallenges(apiServer)
 		: updatedState
 }

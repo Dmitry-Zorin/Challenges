@@ -1,8 +1,8 @@
-const getProgress = c => {
+const setProgress = challenge => {
 	const now = new Date().getTime()
-	return (
-		now < c.startDate ? 'Upcoming'
-			: now > c.endDate ? 'Completed'
+	challenge.progress = (
+		now < challenge.startDate ? 'Upcoming'
+			: now > challenge.endDate ? 'Completed'
 			: 'Ongoing'
 	)
 }
@@ -11,50 +11,37 @@ const findChallenge = (user, id) => (
 	user.challenges.find(c => c._id.toString() === id)
 )
 
-const challenge = {
+const challengeResolvers = {
 	Query: {
 		challenges: (_, __, context) => {
 			const user = context.getUser()
+			if (!user) return {}
 
-			if (
-				user.challenges.some(c => (
-					c.progress !== (c.progress = getProgress(c))
-				))
-			) user.save().catch(console.log)
-
-			return user.challenges
+			user.challenges.forEach(setProgress)
+			user.save().catch(console.log)
+			return { challenges: user.challenges }
 		},
 	},
 	Mutation: {
-		challengeAdd: (_, { challenge: c }, context) => {
+		challengeAdd: (_, { challenge }, context) => {
 			const user = context.getUser()
-			user.challenges.push({ ...c, progress: getProgress(c) })
-
-			return user.save()
-				.then(() => c)
-				.catch(console.log)
+			setProgress(challenge)
+			user.challenges.push(challenge)
+			user.save().catch(console.log)
+			return { challenges: user.challenges }
 		},
 		challengeEdit: (_, { id, challenge }, context) => {
 			const user = context.getUser()
-			const c = Object.assign(
-				findChallenge(user, id),
-				{
-					...challenge,
-					progress: getProgress(challenge),
-				},
-			)
-			return user.save()
-				.then(() => c)
-				.catch(console.log)
+			setProgress(challenge)
+			Object.assign(findChallenge(user, id), challenge)
+			user.save().catch(console.log)
+			return { challenges: user.challenges }
 		},
 		challengeDelete: (_, { id }, context) => {
 			const user = context.getUser()
-			user.challenges = user.challenges
-				.filter(c => c._id.toString() !== id)
-
-			return user.save()
-				.then(() => 'Deleted!')
-				.catch(console.log)
+			user.challenges = user.challenges.filter(c => c._id.toString() !== id)
+			user.save().catch(console.log)
+			return { challenges: user.challenges }
 		},
 		challengeStart: (_, { id }, context) => {
 			const user = context.getUser()
@@ -63,20 +50,22 @@ const challenge = {
 
 			c.endDate -= c.startDate - now
 			c.startDate = now
+			setProgress(c)
 
-			return user.save()
-				.then(() => 'Started!')
-				.catch(console.log)
+			user.save().catch(console.log)
+			return { challenges: user.challenges }
 		},
 		challengeComplete: (_, { id }, context) => {
 			const user = context.getUser()
-			findChallenge(user, id).endDate = new Date().getTime()
+			const c = findChallenge(user, id)
 
-			return user.save()
-				.then(() => 'Completed!')
-				.catch(console.log)
+			c.endDate = new Date().getTime()
+			setProgress(c)
+
+			user.save().catch(console.log)
+			return { challenges: user.challenges }
 		},
 	},
 }
 
-module.exports = challenge
+module.exports = challengeResolvers

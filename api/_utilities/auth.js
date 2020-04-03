@@ -13,7 +13,8 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser((id, done) => {
-	User.findOne({ _id: id }, done).catch(console.log)
+	User.findOne({ _id: id }, done)
+		.catch(console.log)
 })
 
 module.exports = passport
