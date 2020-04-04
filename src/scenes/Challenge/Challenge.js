@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { store } from 'react-notifications-component'
 import { Form } from 'uikit-react'
 import { InnerLayout } from '../../components/InnerLayout'
 import {
@@ -33,28 +32,6 @@ const info = {
 		save: 'Save',
 	},
 }
-
-const getQuery = info => (
-	`mutation(
-    ${info.id || ''}
-    $name: String!
-    $difficulty: Difficulty
-    $startDate: Float
-    $endDate: Float
-  ) {
-    ${info.api}(
-      ${info.id_var || ''}
-      challenge: {
-        name: $name
-        difficulty: $difficulty
-        startDate: $startDate
-        endDate: $endDate
-      }
-    ) {
-      ${challengesQuery}
-    }
-  }`
-)
 
 export class Challenge extends Component {
 	static contextType = DataContext
@@ -96,20 +73,36 @@ export class Challenge extends Component {
 		const startDate = new Date().getTime() + (this.state.delay || 0)
 		const endDate = startDate + (this.state.duration || 0)
 
-		axios.post(
-			this.context.apiServer,
-			{
-				query: getQuery(this.info),
-				variables: {
-					id: this.state._id,
-					name,
-					difficulty: this.state.difficulty,
-					startDate,
-					endDate,
-				},
+		const data = {
+			query: `mutation(
+		    ${this.info.id || ''}
+		    $name: String!
+		    $difficulty: Difficulty
+		    $startDate: Float
+		    $endDate: Float
+		  ) {
+		    ${this.info.api}(
+		      ${this.info.id_var || ''}
+		      challenge: {
+		        name: $name
+		        difficulty: $difficulty
+		        startDate: $startDate
+		        endDate: $endDate
+		      }
+		    ) {
+		      ${challengesQuery}
+		    }
+		  }`,
+			variables: {
+				id: this.state._id,
+				name,
+				difficulty: this.state.difficulty,
+				startDate,
+				endDate,
 			},
-			{ withCredentials: true },
-		)
+		}
+
+		axios.post(this.context.apiServer, data, { withCredentials: true })
 			.then(({ data: { data } }) => {
 				this.context.update(data[this.info.api].challenges)
 				addNotification({

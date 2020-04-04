@@ -12,13 +12,13 @@ export const NewChallengeButton = () => (
 			<p className='font-size-large uk-text-center'>
 				NEW CHALLENGE
 			</p>
-			<div className={
-				`${dashboardStyles.overlay}
+			<div className={`
+				${dashboardStyles.overlay}
 				uk-position-right
 				uk-overlay
 				uk-transition-slide-right
-				uk-hidden-touch`
-			}>
+				uk-hidden-touch
+			`}>
 				<p className='font-size-medium uk-position-center'>
 					Create
 				</p>

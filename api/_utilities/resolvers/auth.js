@@ -2,11 +2,16 @@ const authenticate = ({ username, password }, context) => (
 	context.authenticate('graphql-local', { username, password })
 		.then(async ({ user }) => {
 			await context.login(user)
-			return { username: user.username }
+			return { user }
 		})
 )
 
 const authResolvers = {
+	Query: {
+		user: (_, __, context) => (
+			{ user: context.getUser() }
+		),
+	},
 	Mutation: {
 		signUp: (_, { username, password }, context) => (
 			context.User.findOne({ username })
@@ -22,12 +27,12 @@ const authResolvers = {
 			authenticate({ username, password }, context)
 				.catch(err => {
 					console.log(err)
-					return { username: '' }
+					return { user: {} }
 				})
 		),
 		logout: (_, __, context) => {
 			context.logout()
-			return { username: 'out' }
+			return { user: {} }
 		},
 	},
 }

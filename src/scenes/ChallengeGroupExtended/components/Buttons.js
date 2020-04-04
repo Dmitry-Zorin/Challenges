@@ -19,18 +19,16 @@ export const Buttons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)
 
 	const update = action => {
-		axios.post(
-			context.apiServer,
-			{
-				query: `mutation($id: String!) {
-          challenge${action}(id: $id) {
-            ${challengesQuery}
-          }
-        }`,
-				variables: { id: challenge._id },
-			},
-			{ withCredentials: true },
-		)
+		const data = {
+			query: `mutation($id: String!) {
+        challenge${action}(id: $id) {
+          ${challengesQuery}
+        }
+      }`,
+			variables: { id: challenge._id },
+		}
+
+		axios.post(context.apiServer, data, { withCredentials: true })
 			.then(({ data: { data } }) => {
 				context.update(data[`challenge${action}`].challenges)
 				addNotification({

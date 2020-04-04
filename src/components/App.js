@@ -9,11 +9,13 @@ import { Dashboard } from '../scenes/Dashboard'
 import { Challenge } from '../scenes/Challenge'
 import { ChallengeGroupExtended } from '../scenes/ChallengeGroupExtended'
 import {
+	challengesQuery,
 	getChallenges,
 	handleError,
 	sortChallenges,
 	updateTime,
 } from '../services/helper'
+import axios from 'axios'
 
 export default class App extends PureComponent {
 	constructor(props) {
@@ -30,17 +32,25 @@ export default class App extends PureComponent {
 	}
 
 	componentDidMount() {
-		getChallenges(this.state.apiServer)
-			.then(challenges => {
-				Object.keys(challenges).length
-					? this.login(challenges) : this.logout()
-			})
-			.catch(err => {
-				handleError(err, 'Failed to check user authorization')
-			})
-		const challenges = JSON.parse(localStorage.getItem('challenges'))
+		const challenges = JSON.parse(
+			localStorage.getItem('challenges'),
+		)
 		if (challenges)
 			this.setState({ challenges, isAuthorized: true })
+
+		axios.post(
+			this.state.apiServer,
+			{ query: `{ user { user { ${challengesQuery} } } }` },
+			{ withCredentials: true },
+		)
+			.then(({ data: { data } }) => {
+				const user = data.user.user
+				Object.keys(user).length
+					? this.login(user) : this.logout()
+			})
+			.catch(err => {
+				handleError(err, 'Failed to update challenges')
+			})
 	}
 
 	componentWillUnmount() {
@@ -59,12 +69,9 @@ export default class App extends PureComponent {
 		this.setState({ challenges, isAuthorized })
 	}
 
-	login(challenges) {
+	login(user) {
 		this.interval = setInterval(this.updateChallenges, 15000)
-		this.setState(
-			{ challenges, isAuthorized: true },
-			this.updateChallenges,
-		)
+		this.updateChallenges(user.challenges, true)
 	}
 
 	logout() {

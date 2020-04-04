@@ -8,7 +8,7 @@ export const toMs = {
 	MINUTE: 6e4,
 }
 
-export const challengesQuery = ` 
+export const challengesQuery = `
 	challenges { 
 		_id
 		name
@@ -25,10 +25,7 @@ export const getChallenges = apiServer => (
 		{ query: `{ challenges { ${challengesQuery} } }` },
 		{ withCredentials: true },
 	)
-		.then(({ data: { data } }) => {
-			const challenges = data.challenges.challenges
-			return challenges ? sortChallenges(challenges) : {}
-		})
+		.then(({ data: { data } }) => data.challenges.challenges)
 		.catch(err => {
 			handleError(err, 'Failed to get challenges')
 			return {}
@@ -80,7 +77,7 @@ export const updateTime = async (state, apiServer) => {
 	localStorage.setItem('challenges', JSON.stringify(state))
 
 	return !stateNeedsUpdate ? state
-		: updateTime(await getChallenges(apiServer))
+		: updateTime(sortChallenges(await getChallenges(apiServer)))
 }
 
 const getTimeString = ms => {

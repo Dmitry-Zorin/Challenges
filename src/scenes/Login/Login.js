@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import axios from 'axios'
 import { Form } from 'uikit-react'
-import { InnerLayout } from '../../components/InnerLayout/InnerLayout'
+import { InnerLayout } from '../../components/InnerLayout'
 import { addNotification, handleError } from '../../services/helper'
 import { DataContext } from '../../services/contexts/DataContext'
 import { notifications } from '../../services/data/notifications'
@@ -18,19 +18,6 @@ const states = {
 		title: 'Sign Up',
 	},
 }
-
-const getQuery = action =>
-	`mutation(
-    $username: String!
-    $password: String!
-  ) {
-    ${action}(
-      username: $username
-      password: $password
-    ) {
-      username
-    }
-  }`
 
 export class Login extends PureComponent {
 	static contextType = DataContext
@@ -53,24 +40,36 @@ export class Login extends PureComponent {
 	}
 
 	login() {
-		axios.post(
-			this.context.apiServer,
-			{
-				query: getQuery(this.state.action),
-				variables: {
-					username: this.state.username,
-					password: this.state.password,
-				},
+		const data = {
+			query: `mutation(
+		    $username: String!
+		    $password: String!
+		  ) {
+		    ${this.state.action}(
+		      username: $username
+		      password: $password
+		    ) {
+		      user
+		    }
+		  }`,
+			variables: {
+				username: this.state.username,
+				password: this.state.password,
 			},
-			{ withCredentials: true },
-		)
-			.then(({ data: { data } }) => {
-				if (!data[this.state.action].username)
-					return this.state.action === 'login'
-						? addNotification(notifications.loginFailed)
-						: addNotification(notifications.error)
+		}
 
-				this.props.login()
+		axios.post(this.context.apiServer, data, { withCredentials: true })
+			.then(({ data: { data } }) => {
+				const user = data[this.state.action].user
+
+				if (!Object.keys(user).length)
+					return addNotification(
+						this.state.action === 'login'
+							? notifications.loginFailed
+							: notifications.error,
+					)
+
+				this.props.login(user)
 				this.props.navigate('/')
 			})
 			.catch(err => {
@@ -81,16 +80,10 @@ export class Login extends PureComponent {
 	logout() {
 		axios.post(
 			this.context.apiServer,
-			{ query: 'mutation { logout { username } }' },
+			{ query: 'mutation { logout }' },
 			{ withCredentials: true },
 		)
-			.then(({ data: { data } }) => {
-				if (data.logout.username)
-					return this.props.logout()
-
-				addNotification(notifications.error)
-				window.history.back()
-			})
+			.then(this.props.logout)
 			.catch(err => handleError(err, 'Failed to log out'))
 	}
 
@@ -99,7 +92,13 @@ export class Login extends PureComponent {
 			<p className='uk-h2 uk-text-center'>
 				{this.state.title}
 			</p>
-			<ul className='uk-subnav uk-subnav-pill uk-flex-center uk-child-width-1-2 uk-child-width-1-3@m'>
+			<ul className={`
+				uk-subnav
+				uk-subnav-pill
+				uk-flex-center
+				uk-child-width-1-2
+				uk-child-width-1-3@m
+			`}>
 				<SwitcherItem
 					value={states.login.title}
 					active={this.state.action === 'login'}
