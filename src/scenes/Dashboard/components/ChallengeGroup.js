@@ -20,12 +20,12 @@ export const ChallengeGroup = ({ to, title, group }) => (
 				<ChallengeGroupItem key={c._id} title={title} challenge={c}/>
 			))}
 			<div className={`
-					${dashboardStyles.overlay}
-					uk-position-right
-					uk-overlay
-					uk-transition-slide-right
-					uk-hidden-touch
-				`}>
+				${dashboardStyles.overlay}
+				uk-position-right
+				uk-overlay
+				uk-transition-slide-right
+				uk-hidden-touch
+			`}>
 				<p className='font-size-medium uk-position-center'>
 					See all
 				</p>
