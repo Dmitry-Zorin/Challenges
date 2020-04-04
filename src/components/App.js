@@ -45,8 +45,7 @@ export default class App extends PureComponent {
 		)
 			.then(({ data: { data } }) => {
 				const user = data.user.user
-				Object.keys(user).length
-					? this.login(user) : this.logout()
+				user ? this.login(user) : this.logout()
 			})
 			.catch(err => {
 				handleError(err, 'Failed to update challenges')

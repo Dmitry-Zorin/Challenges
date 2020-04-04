@@ -15,7 +15,7 @@ const challengeResolvers = {
 	Query: {
 		challenges: (_, __, context) => {
 			const user = context.getUser()
-			if (!user) return {}
+			if (!user) return { challenges: null }
 
 			user.challenges.forEach(setProgress)
 			user.save().catch(console.log)

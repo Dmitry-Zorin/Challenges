@@ -2,7 +2,11 @@ import React, { PureComponent } from 'react'
 import axios from 'axios'
 import { Form } from 'uikit-react'
 import { InnerLayout } from '../../components/InnerLayout'
-import { addNotification, handleError } from '../../services/helper'
+import {
+	addNotification,
+	challengesQuery,
+	handleError,
+} from '../../services/helper'
 import { DataContext } from '../../services/contexts/DataContext'
 import { notifications } from '../../services/data/notifications'
 import { SwitcherItem } from '../../components/SwitcherItem'
@@ -49,7 +53,9 @@ export class Login extends PureComponent {
 		      username: $username
 		      password: $password
 		    ) {
-		      user
+		      user { 
+		        ${challengesQuery} 
+		      } 
 		    }
 		  }`,
 			variables: {
@@ -62,7 +68,7 @@ export class Login extends PureComponent {
 			.then(({ data: { data } }) => {
 				const user = data[this.state.action].user
 
-				if (!Object.keys(user).length)
+				if (!user)
 					return addNotification(
 						this.state.action === 'login'
 							? notifications.loginFailed
@@ -80,7 +86,7 @@ export class Login extends PureComponent {
 	logout() {
 		axios.post(
 			this.context.apiServer,
-			{ query: 'mutation { logout }' },
+			{ query: 'mutation { logout { user { username } } }' },
 			{ withCredentials: true },
 		)
 			.then(this.props.logout)
