@@ -28,6 +28,7 @@ export const Buttons = ({ challenge, navigate, options }) => {
 			variables: { id: challenge._id },
 		}
 
+		context.showSpinner()
 		axios.post(context.apiServer, data, { withCredentials: true })
 			.then(({ data: { data } }) => {
 				context.update(data[`challenge${action}`].challenges)
@@ -41,6 +42,7 @@ export const Buttons = ({ challenge, navigate, options }) => {
 			.catch(err => {
 				handleError(err, `Failed to ${action.toLowerCase()} challenge`)
 			})
+			.finally(context.hideSpinner)
 	}
 
 	return (

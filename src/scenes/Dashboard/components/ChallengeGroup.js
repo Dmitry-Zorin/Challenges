@@ -1,10 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import dashboardStyles from '../Dashboard.module.scss'
 import { Card, Grid } from 'uikit-react'
 import { Link } from '@reach/router'
 import { getChallengeTime } from '../../../services/helper'
-import { DataContext } from '../../../services/contexts/DataContext'
-import { Loading } from '../../../components/Loading'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faArrowDown,
@@ -12,35 +10,29 @@ import {
 	faCheck,
 } from '@fortawesome/free-solid-svg-icons'
 
-export const ChallengeGroup = ({ to, title, group }) => {
-	const context = useContext(DataContext)
-
-	return (
-		<Link to={to}>
-			<Card className='uk-transition-toggle' style={{ height: '15em' }}>
-				<p className='font-size-large uk-text-center'>
-					{title}
-				</p>
-				{context.isAuthorized === undefined ? <Loading/>
-					: (group || []).slice(0, 4).map(c => (
-						<Item key={c._id} title={title} challenge={c}/>
-					))
-				}
-				<div className={`
+export const ChallengeGroup = ({ to, title, group }) => (
+	<Link to={to}>
+		<Card className='uk-transition-toggle' style={{ height: '15em' }}>
+			<p className='font-size-large uk-text-center'>
+				{title}
+			</p>
+			{(group || []).slice(0, 4).map(c => (
+				<Item key={c._id} title={title} challenge={c}/>
+			))}
+			<div className={`
 					${dashboardStyles.overlay}
 					uk-position-right
 					uk-overlay
 					uk-transition-slide-right
 					uk-hidden-touch
 				`}>
-					<p className='font-size-medium uk-position-center'>
-						See all
-					</p>
-				</div>
-			</Card>
-		</Link>
-	)
-}
+				<p className='font-size-medium uk-position-center'>
+					See all
+				</p>
+			</div>
+		</Card>
+	</Link>
+)
 
 const icons = {
 	'Ongoing': faArrowDown,

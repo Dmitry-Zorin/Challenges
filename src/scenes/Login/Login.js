@@ -64,6 +64,7 @@ export class Login extends PureComponent {
 			},
 		}
 
+		this.context.showSpinner()
 		axios.post(this.context.apiServer, data, { withCredentials: true })
 			.then(({ data: { data } }) => {
 				const user = data[this.state.action].user
@@ -81,9 +82,11 @@ export class Login extends PureComponent {
 			.catch(err => {
 				handleError(err, `Failed to ${this.state.title.toLowerCase()}`)
 			})
+			.finally(this.context.hideSpinner)
 	}
 
 	logout() {
+		this.context.showSpinner()
 		axios.post(
 			this.context.apiServer,
 			{ query: 'mutation { logout { user { username } } }' },
@@ -91,6 +94,7 @@ export class Login extends PureComponent {
 		)
 			.then(this.props.logout)
 			.catch(err => handleError(err, 'Failed to log out'))
+			.finally(this.context.hideSpinner)
 	}
 
 	render = () => (

@@ -13,13 +13,14 @@ import {
 	faChevronLeft,
 	faSignInAlt,
 	faSignOutAlt,
+	faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
 
 export const NavigationBar = ({ location }) => {
 	const context = useContext(DataContext)
 
 	return (
-		<NavbarSticky>
+		<NavbarSticky id='navbar'>
 			<NavbarContainer>
 				<Container>
 					<Navbar>
@@ -43,7 +44,11 @@ export const NavigationBar = ({ location }) => {
 						<NavItem className='uk-width-expand'/>
 
 						<NavItem>
-							{context.isAuthorized !== undefined && (
+							{context.spinnerIsShown ? (
+								<a>
+									<FontAwesomeIcon icon={faSpinner} transform='grow-10' spin/>
+								</a>
+							) : (
 								<Link to='/login'>
 									<FontAwesomeIcon
 										icon={context.isAuthorized ? faSignOutAlt : faSignInAlt}

@@ -1,5 +1,5 @@
 import './styles/global.scss'
-import './styles/uikit/uikit-theme.scss'
+import './styles/uikit/theme.scss'
 import '../node_modules/react-notifications-component/dist/theme.css'
 import '../node_modules/animate.css/animate.min.css'
 
@@ -8,11 +8,9 @@ import ReactDOM from 'react-dom'
 import '../node_modules/uikit/dist/js/uikit.min.js'
 import App from './components/App'
 import * as serviceWorker from './serviceWorker'
-import ReactNotification from 'react-notifications-component'
 
 ReactDOM.render(
 	<StrictMode>
-		<ReactNotification style={{ paddingTop: 'env(safe-area-inset-top)' }}/>
 		<App/>
 	</StrictMode>,
 	document.getElementById('root'),

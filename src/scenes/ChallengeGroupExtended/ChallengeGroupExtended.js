@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { InnerLayout } from '../../components/InnerLayout'
 import { DataContext } from '../../services/contexts/DataContext'
-import { Loading } from '../../components/Loading'
 import { Pagination } from './components/Pagination'
 import { ChallengeAccordion } from './components/ChallengeAccordion'
 import { Search } from './components/Search'
@@ -46,14 +45,12 @@ export class ChallengeGroupExtended extends PureComponent {
 					{this.groupName[0].toUpperCase() + this.groupName.slice(1)}
 				</p>
 				<Search onChange={this.search}/>
-				{this.context.isAuthorized === undefined ? <Loading/> : (
-					<ChallengeAccordion
-						challenges={challenges}
-						page={this.state.page}
-						groupName={this.groupName}
-						navigate={this.props.navigate}
-					/>)
-				}
+				<ChallengeAccordion
+					challenges={challenges}
+					page={this.state.page}
+					groupName={this.groupName}
+					navigate={this.props.navigate}
+				/>
 				{(this.context.challenges[this.groupName] || []).length > 10 && (
 					<Pagination
 						page={this.state.page}

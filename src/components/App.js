@@ -20,12 +20,16 @@ import axios from 'axios'
 export default class App extends PureComponent {
 	constructor(props) {
 		super(props)
+		this.toggleSpinner = this.toggleSpinner.bind(this)
 		this.updateChallenges = this.updateChallenges.bind(this)
 		this.login = this.login.bind(this)
 		this.logout = this.logout.bind(this)
 
 		this.state = {
 			...DataContext._currentValue,
+			spinnerIsShown: true,
+			showSpinner: () => this.toggleSpinner(true),
+			hideSpinner: () => this.toggleSpinner(false),
 			challenges: {},
 			update: this.updateChallenges,
 		}
@@ -50,10 +54,15 @@ export default class App extends PureComponent {
 			.catch(err => {
 				handleError(err, 'Failed to update challenges')
 			})
+			.finally(this.state.hideSpinner)
 	}
 
 	componentWillUnmount() {
 		clearInterval(this.interval)
+	}
+
+	toggleSpinner(spinnerIsShown) {
+		this.setState({ spinnerIsShown })
 	}
 
 	async updateChallenges(challenges, isAuthorized = true) {

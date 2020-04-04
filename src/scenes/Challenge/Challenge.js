@@ -102,6 +102,7 @@ export class Challenge extends Component {
 			},
 		}
 
+		this.context.showSpinner()
 		axios.post(this.context.apiServer, data, { withCredentials: true })
 			.then(({ data: { data } }) => {
 				this.context.update(data[this.info.api].challenges)
@@ -114,6 +115,7 @@ export class Challenge extends Component {
 			.catch(err => {
 				handleError(err, `Failed to ${this.info.action} challenge`)
 			})
+			.finally(this.context.hideSpinner)
 	}
 
 	render = () => {
