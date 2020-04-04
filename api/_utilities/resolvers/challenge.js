@@ -2,7 +2,7 @@ const setProgress = challenge => {
 	const now = new Date().getTime()
 	challenge.progress = (
 		now < challenge.startDate ? 'Upcoming'
-			: now > challenge.endDate ? 'Completed'
+			: now >= challenge.endDate ? 'Completed'
 			: 'Ongoing'
 	)
 }

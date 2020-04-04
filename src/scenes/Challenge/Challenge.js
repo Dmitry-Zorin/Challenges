@@ -96,12 +96,6 @@ export class Challenge extends Component {
 		const startDate = new Date().getTime() + (this.state.delay || 0)
 		const endDate = startDate + (this.state.duration || 0)
 
-		addNotification({
-			id: 'save',
-			message: 'Saving...',
-			dismiss: { duration: 0 },
-		})
-
 		axios.post(
 			this.context.apiServer,
 			{
@@ -117,7 +111,6 @@ export class Challenge extends Component {
 			{ withCredentials: true },
 		)
 			.then(({ data: { data } }) => {
-				store.removeNotification('save')
 				this.context.update(data[this.info.api].challenges)
 				addNotification({
 					...notifications[this.info.notification],

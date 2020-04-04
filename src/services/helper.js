@@ -49,42 +49,38 @@ export const sortChallenges = challenges => ({
 		.sort((a, b) => b.endDate - a.endDate),
 })
 
-export const updateTime = (state, apiServer) => {
+export const updateTime = async (state, apiServer) => {
 	const now = new Date().getTime()
 	let stateNeedsUpdate = false
 
-	const updatedState = {
-		ongoing: state.ongoing?.map(c => {
-			const time = c.endDate - now
-			if (time < 0) {
-				stateNeedsUpdate = true
-				addNotification({
-					title: 'Challenge completed!',
-					message: c.name,
-					type: 'success',
-				})
-			}
-			c.timeLeft = getTimeString(time)
-			return c
-		}),
-		upcoming: state.upcoming?.map(c => {
-			const time = c.startDate - now
-			if (time < 0) {
-				stateNeedsUpdate = true
-				addNotification({
-					title: 'Challenge started!',
-					message: c.name,
-				})
-			}
-			c.startsIn = getTimeString(time)
-			return c
-		}),
-		completed: state.completed,
+	for (const c of state.ongoing) {
+		const time = c.endDate - now
+		if (time < 0) {
+			stateNeedsUpdate = true
+			addNotification({
+				...notifications.challengeCompleted,
+				message: c.name,
+			})
+		}
+		c.timeLeft = getTimeString(time)
 	}
 
-	return stateNeedsUpdate
-		? getChallenges(apiServer)
-		: updatedState
+	for (const c of state.upcoming) {
+		const time = c.startDate - now
+		if (time < 0) {
+			stateNeedsUpdate = true
+			addNotification({
+				...notifications.challengeStarted,
+				message: c.name,
+			})
+		}
+		c.startsIn = getTimeString(time)
+	}
+
+	localStorage.setItem('challenges', JSON.stringify(state))
+
+	return !stateNeedsUpdate ? state
+		: updateTime(await getChallenges(apiServer))
 }
 
 const getTimeString = ms => {

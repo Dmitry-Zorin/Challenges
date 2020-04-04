@@ -27,17 +27,20 @@ export default class App extends PureComponent {
 			challenges: {},
 			update: this.updateChallenges,
 		}
-		this.challengesPromise = getChallenges(this.state.apiServer)
 	}
 
 	componentDidMount() {
-		this.challengesPromise
-			.then(({ ongoing }) => {
-				ongoing ? this.login() : this.logout()
+		getChallenges(this.state.apiServer)
+			.then(challenges => {
+				Object.keys(challenges).length
+					? this.login(challenges) : this.logout()
 			})
 			.catch(err => {
 				handleError(err, 'Failed to check user authorization')
 			})
+		const challenges = JSON.parse(localStorage.getItem('challenges'))
+		if (challenges)
+			this.setState({ challenges, isAuthorized: true })
 	}
 
 	componentWillUnmount() {
@@ -48,7 +51,7 @@ export default class App extends PureComponent {
 		challenges = await updateTime(
 			challenges
 				? sortChallenges(challenges)
-				: this.state.challenges.ongoing
+				: Object.keys(this.state.challenges).length
 				? this.state.challenges
 				: await getChallenges(this.state.apiServer),
 			this.state.apiServer,
@@ -56,9 +59,12 @@ export default class App extends PureComponent {
 		this.setState({ challenges, isAuthorized })
 	}
 
-	login() {
+	login(challenges) {
 		this.interval = setInterval(this.updateChallenges, 15000)
-		this.updateChallenges()
+		this.setState(
+			{ challenges, isAuthorized: true },
+			this.updateChallenges,
+		)
 	}
 
 	logout() {
