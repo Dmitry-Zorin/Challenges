@@ -10,7 +10,6 @@ import { Challenge } from '../scenes/Challenge'
 import { ChallengeGroupExtended } from '../scenes/ChallengeGroupExtended'
 import {
 	challengesQuery,
-	getChallenges,
 	handleError,
 	sortChallenges,
 	updateTime,
@@ -69,9 +68,7 @@ export default class App extends PureComponent {
 		challenges = await updateTime(
 			challenges
 				? sortChallenges(challenges)
-				: Object.keys(this.state.challenges).length
-				? this.state.challenges
-				: await getChallenges(this.state.apiServer),
+				: this.state.challenges,
 			this.state.apiServer,
 		)
 		this.setState({ challenges, isAuthorized })

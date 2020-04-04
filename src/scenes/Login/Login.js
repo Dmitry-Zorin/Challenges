@@ -92,7 +92,10 @@ export class Login extends PureComponent {
 			{ query: 'mutation { logout { user { username } } }' },
 			{ withCredentials: true },
 		)
-			.then(this.props.logout)
+			.then(() => {
+				localStorage.clear()
+				this.props.logout()
+			})
 			.catch(err => handleError(err, 'Failed to log out'))
 			.finally(this.context.hideSpinner)
 	}

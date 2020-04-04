@@ -28,7 +28,7 @@ export const getChallenges = apiServer => (
 		.then(({ data: { data } }) => data.challenges.challenges)
 		.catch(err => {
 			handleError(err, 'Failed to get challenges')
-			return {}
+			return []
 		})
 )
 
@@ -50,33 +50,37 @@ export const updateTime = async (state, apiServer) => {
 	const now = new Date().getTime()
 	let stateNeedsUpdate = false
 
-	for (const c of state.ongoing) {
-		const time = c.endDate - now
-		if (time < 0) {
-			stateNeedsUpdate = true
-			addNotification({
-				...notifications.challengeCompleted,
-				message: c.name,
-			})
-		}
-		c.timeLeft = getTimeString(time)
+	const newState = {
+		ongoing: state.ongoing.map(c => {
+			const time = c.endDate - now
+			if (time < 0) {
+				stateNeedsUpdate = true
+				addNotification({
+					...notifications.challengeCompleted,
+					message: c.name,
+				})
+			}
+			c.timeLeft = getTimeString(time)
+			return c
+		}),
+		upcoming: state.upcoming.map(c => {
+			const time = c.startDate - now
+			if (time < 0) {
+				stateNeedsUpdate = true
+				addNotification({
+					...notifications.challengeStarted,
+					message: c.name,
+				})
+			}
+			c.startsIn = getTimeString(time)
+			return c
+		}),
+		completed: [...state.completed],
 	}
 
-	for (const c of state.upcoming) {
-		const time = c.startDate - now
-		if (time < 0) {
-			stateNeedsUpdate = true
-			addNotification({
-				...notifications.challengeStarted,
-				message: c.name,
-			})
-		}
-		c.startsIn = getTimeString(time)
-	}
+	localStorage.setItem('challenges', JSON.stringify(newState))
 
-	localStorage.setItem('challenges', JSON.stringify(state))
-
-	return !stateNeedsUpdate ? state
+	return !stateNeedsUpdate ? newState
 		: updateTime(sortChallenges(await getChallenges(apiServer)))
 }
 

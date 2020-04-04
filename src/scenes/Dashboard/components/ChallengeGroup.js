@@ -17,7 +17,7 @@ export const ChallengeGroup = ({ to, title, group }) => (
 				{title}
 			</p>
 			{(group || []).slice(0, 4).map(c => (
-				<Item key={c._id} title={title} challenge={c}/>
+				<ChallengeGroupItem key={c._id} title={title} challenge={c}/>
 			))}
 			<div className={`
 					${dashboardStyles.overlay}
@@ -40,7 +40,7 @@ const icons = {
 	'Completed': faCheck,
 }
 
-const Item = ({ title, challenge }) => (
+const ChallengeGroupItem = ({ title, challenge }) => (
 	<Grid className='uk-margin-small' key={challenge._id}>
 		<div className='wrap font-size-medium uk-width-expand'>
 			{challenge.name}

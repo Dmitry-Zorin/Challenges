@@ -20,7 +20,7 @@ export const NavigationBar = ({ location }) => {
 	const context = useContext(DataContext)
 
 	return (
-		<NavbarSticky id='navbar'>
+		<NavbarSticky>
 			<NavbarContainer>
 				<Container>
 					<Navbar>
@@ -45,7 +45,7 @@ export const NavigationBar = ({ location }) => {
 
 						<NavItem>
 							{context.spinnerIsShown ? (
-								<a>
+								<a href='/#' onClick={e => e.preventDefault()}>
 									<FontAwesomeIcon icon={faSpinner} transform='grow-10' spin/>
 								</a>
 							) : (
