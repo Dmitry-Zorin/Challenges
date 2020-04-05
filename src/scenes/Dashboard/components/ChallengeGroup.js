@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faArrowDown,
 	faArrowUp,
-	faCalendarTimes,
+	faBan,
+	faBars,
 	faCheck,
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -23,9 +24,9 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 					style={{ marginTop: '4em' }}
 				>
 					<FontAwesomeIcon
-						icon={faCalendarTimes}
+						icon={faBan}
 						className='icon-left'
-						transform='shrink-4'
+						transform='shrink-4 down-0.5'
 					/>
 					No challenges...
 				</p>
@@ -40,6 +41,11 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 				uk-hidden-touch
 			`}>
 				<p className='font-size-medium uk-position-center'>
+					<FontAwesomeIcon
+						icon={faBars}
+						className='icon-left'
+						transform='shrink-3 down-0.6'
+					/>
 					See all
 				</p>
 			</div>

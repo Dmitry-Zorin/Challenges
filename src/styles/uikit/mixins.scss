@@ -37,16 +37,6 @@
 		@extend .uk-animation-fade;
 	}
 
-	svg {
-		color: $muted-color;
-	}
-
-	button, .uk-active {
-		svg {
-			color: $secondary-color;
-		}
-	}
-
 	@media (min-width: $breakpoint-small) {
 		margin: 1em 1em 2em;
 		padding: 1.5em 2em;
@@ -91,10 +81,4 @@
 	@include round-border;
 	height: 1.85em;
 	padding-top: 0.65em;
-
-	&:hover {
-		svg {
-			color: $secondary-color;
-		}
-	}
 }

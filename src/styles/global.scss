@@ -25,16 +25,14 @@ button {
 	}
 }
 
-p, p:not(.uk-text-muted) > svg {
-	a:hover & {
-		@media (hover: hover) {
-			color: $primary-color;
-		}
-	}
-
-	a:active & {
+a:hover p {
+	@media (hover: hover) {
 		color: $primary-color;
 	}
+}
+
+a:active p {
+	color: $primary-color;
 }
 
 .font-size-medium {

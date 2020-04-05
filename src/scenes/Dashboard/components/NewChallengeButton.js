@@ -3,7 +3,7 @@ import dashboardStyles from '../Dashboard.module.scss'
 import { Card } from 'uikit-react'
 import { Link } from '@reach/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons'
+import { faBolt, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export const NewChallengeButton = () => (
 	<Link to='/create' className='uk-margin-remove uk-padding-remove'>
@@ -13,7 +13,7 @@ export const NewChallengeButton = () => (
 		>
 			<p className='font-size-large uk-text-center'>
 				<FontAwesomeIcon
-					icon={faCalendarPlus}
+					icon={faBolt}
 					className='icon-left'
 					transform='shrink-4'
 				/>
@@ -27,6 +27,11 @@ export const NewChallengeButton = () => (
 				uk-hidden-touch
 			`}>
 				<p className='font-size-medium uk-position-center'>
+					<FontAwesomeIcon
+						icon={faPlus}
+						className='icon-left'
+						transform='shrink-3 down-0.2'
+					/>
 					Create
 				</p>
 			</div>

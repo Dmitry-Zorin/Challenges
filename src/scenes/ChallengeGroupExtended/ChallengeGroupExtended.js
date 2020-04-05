@@ -4,7 +4,7 @@ import { DataContext } from '../../services/contexts/DataContext'
 import { Pagination } from './components/Pagination'
 import { ChallengeAccordion } from './components/ChallengeAccordion'
 import { Search } from './components/Search'
-import { faCalendarTimes } from '@fortawesome/free-solid-svg-icons'
+import { faBan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export class ChallengeGroupExtended extends PureComponent {
@@ -50,9 +50,9 @@ export class ChallengeGroupExtended extends PureComponent {
 						style={{ marginTop: '3em' }}
 					>
 						<FontAwesomeIcon
-							icon={faCalendarTimes}
+							icon={faBan}
 							className='icon-left'
-							transform='shrink-4'
+							transform='shrink-4 down-0.5'
 						/>
 						No challenges...
 					</p>
