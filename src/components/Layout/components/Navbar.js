@@ -33,7 +33,7 @@ export const NavigationBar = ({ location }) => {
 								<Link to='/'>
 									<FontAwesomeIcon
 										icon={faChevronLeft}
-										className='icon'
+										className='icon-left'
 										transform='shrink-2 down-0.65'
 									/>
 									Dashboard
@@ -44,7 +44,7 @@ export const NavigationBar = ({ location }) => {
 						<NavItem className='uk-width-expand'/>
 
 						<NavItem>
-							{context.spinnerIsShown ? (
+							{context.spinnerIsVisible ? (
 								<a href='/#' onClick={e => e.preventDefault()}>
 									<FontAwesomeIcon icon={faSpinner} transform='grow-10' spin/>
 								</a>
@@ -52,7 +52,7 @@ export const NavigationBar = ({ location }) => {
 								<Link to='/login'>
 									<FontAwesomeIcon
 										icon={context.isAuthorized ? faSignOutAlt : faSignInAlt}
-										className='icon'
+										className='icon-left'
 										transform='down-0.65'
 									/>
 									{context.isAuthorized ? 'Log out' : 'Log in'}

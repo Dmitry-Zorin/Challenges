@@ -8,53 +8,40 @@ export const toMs = {
 	MINUTE: 6e4,
 }
 
-export const challengesQuery = `
-	challenges { 
-		_id
-		name
-		difficulty
-		progress
-		startDate
-		endDate
+const challengeQuery = `{
+	_id name difficulty startDate endDate
+}`
+
+export const challengesQuery = `{
+	challenges {
+		ongoing ${challengeQuery}
+		upcoming ${challengeQuery}
+		completed ${challengeQuery}
 	}
-`
+}`
 
 export const getChallenges = apiServer => (
 	axios.post(
 		apiServer,
-		{ query: `{ challenges { ${challengesQuery} } }` },
+		{ query: `{ challenges ${challengesQuery} }` },
 		{ withCredentials: true },
 	)
 		.then(({ data: { data } }) => data.challenges.challenges)
 		.catch(err => {
 			handleError(err, 'Failed to get challenges')
-			return []
+			return null
 		})
 )
 
-export const sortChallenges = challenges => ({
-	ongoing: challenges
-		.filter(c => c.progress === 'Ongoing')
-		.sort((a, b) => a.endDate - b.endDate),
-
-	upcoming: challenges
-		.filter(c => c.progress === 'Upcoming')
-		.sort((a, b) => a.startDate - b.startDate),
-
-	completed: challenges
-		.filter(c => c.progress === 'Completed')
-		.sort((a, b) => b.endDate - a.endDate),
-})
-
-export const updateTime = async (state, apiServer) => {
+export const updateTime = async (challenges, apiServer) => {
 	const now = new Date().getTime()
-	let stateNeedsUpdate = false
+	let challengesNeedUpdate = false
 
-	const newState = {
-		ongoing: state.ongoing.map(c => {
+	const updatedChallenges = {
+		ongoing: challenges.ongoing.map(c => {
 			const time = c.endDate - now
 			if (time < 0) {
-				stateNeedsUpdate = true
+				challengesNeedUpdate = true
 				addNotification({
 					...notifications.challengeCompleted,
 					message: c.name,
@@ -63,10 +50,10 @@ export const updateTime = async (state, apiServer) => {
 			c.timeLeft = getTimeString(time)
 			return c
 		}),
-		upcoming: state.upcoming.map(c => {
+		upcoming: challenges.upcoming.map(c => {
 			const time = c.startDate - now
 			if (time < 0) {
-				stateNeedsUpdate = true
+				challengesNeedUpdate = true
 				addNotification({
 					...notifications.challengeStarted,
 					message: c.name,
@@ -75,13 +62,13 @@ export const updateTime = async (state, apiServer) => {
 			c.startsIn = getTimeString(time)
 			return c
 		}),
-		completed: [...state.completed],
+		completed: challenges.completed,
 	}
 
-	localStorage.setItem('challenges', JSON.stringify(newState))
+	localStorage.setItem('challenges', JSON.stringify(updatedChallenges))
 
-	return !stateNeedsUpdate ? newState
-		: updateTime(sortChallenges(await getChallenges(apiServer)))
+	return !challengesNeedUpdate ? updatedChallenges
+		: updateTime(await getChallenges(apiServer), apiServer)
 }
 
 const getTimeString = ms => {
@@ -100,11 +87,12 @@ export const getTimeObj = ms => ({
 	minutes: Math.ceil(ms % toMs.HOUR / toMs.MINUTE),
 })
 
-export const getChallengeTime = c => {
+export const getChallengeTime = (progress, c) => {
 	const space = '\xa0'
+	progress = progress.toLowerCase()
 	return (
-		c.progress === 'Upcoming' ? space + c.startsIn
-			: c.progress === 'Ongoing' ? space + c.timeLeft
+		progress === 'upcoming' ? space + c.startsIn
+			: progress === 'ongoing' ? space + c.timeLeft
 			: ''
 	)
 }

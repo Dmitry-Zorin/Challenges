@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import axios from 'axios'
 import { Router } from '@reach/router'
 import { Layout } from './Layout'
 import { Login } from '../scenes/Login'
@@ -8,13 +9,7 @@ import { DataContext } from '../services/contexts/DataContext'
 import { Dashboard } from '../scenes/Dashboard'
 import { Challenge } from '../scenes/Challenge'
 import { ChallengeGroupExtended } from '../scenes/ChallengeGroupExtended'
-import {
-	challengesQuery,
-	handleError,
-	sortChallenges,
-	updateTime,
-} from '../services/helper'
-import axios from 'axios'
+import { challengesQuery, handleError, updateTime } from '../services/helper'
 
 export default class App extends PureComponent {
 	constructor(props) {
@@ -26,24 +21,18 @@ export default class App extends PureComponent {
 
 		this.state = {
 			...DataContext._currentValue,
-			spinnerIsShown: true,
+			spinnerIsVisible: true,
 			showSpinner: () => this.toggleSpinner(true),
 			hideSpinner: () => this.toggleSpinner(false),
-			challenges: {},
+			challenges: JSON.parse(window.localStorage.getItem('challenges')) || {},
 			update: this.updateChallenges,
 		}
 	}
 
 	componentDidMount() {
-		const challenges = JSON.parse(
-			localStorage.getItem('challenges'),
-		)
-		if (challenges)
-			this.setState({ challenges, isAuthorized: true })
-
 		axios.post(
 			this.state.apiServer,
-			{ query: `{ user { user { ${challengesQuery} } } }` },
+			{ query: `{ user { user ${challengesQuery} } }` },
 			{ withCredentials: true },
 		)
 			.then(({ data: { data } }) => {
@@ -60,15 +49,13 @@ export default class App extends PureComponent {
 		clearInterval(this.interval)
 	}
 
-	toggleSpinner(spinnerIsShown) {
-		this.setState({ spinnerIsShown })
+	toggleSpinner(spinnerIsVisible) {
+		this.setState({ spinnerIsVisible })
 	}
 
 	async updateChallenges(challenges, isAuthorized = true) {
 		challenges = await updateTime(
-			challenges
-				? sortChallenges(challenges)
-				: this.state.challenges,
+			challenges || this.state.challenges,
 			this.state.apiServer,
 		)
 		this.setState({ challenges, isAuthorized })

@@ -1,8 +1,16 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export const TextInput = ({ label, value, handleChange, defaultValue, isPassword }) => (
+export const TextInput = ({ icon, label, value, handleChange, defaultValue, isPassword }) => (
 	<div className='uk-margin-medium'>
 		<label>
+			{icon && (
+				<FontAwesomeIcon
+					icon={icon}
+					className='icon-left'
+					transform='shrink-2'
+				/>
+			)}
 			{label}
 			<input
 				type={isPassword ? 'password' : 'text'}

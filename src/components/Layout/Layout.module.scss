@@ -32,6 +32,12 @@
 	}
 }
 
+.icon {
+	@media (max-width: $breakpoint-small) {
+		display: none;
+	}
+}
+
 .title {
 	color: $primary-color;
 	font-size: 3em;

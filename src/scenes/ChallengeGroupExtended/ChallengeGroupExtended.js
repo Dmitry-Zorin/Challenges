@@ -4,6 +4,8 @@ import { DataContext } from '../../services/contexts/DataContext'
 import { Pagination } from './components/Pagination'
 import { ChallengeAccordion } from './components/ChallengeAccordion'
 import { Search } from './components/Search'
+import { faCalendarTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export class ChallengeGroupExtended extends PureComponent {
 	static contextType = DataContext
@@ -45,13 +47,27 @@ export class ChallengeGroupExtended extends PureComponent {
 					{this.groupName[0].toUpperCase() + this.groupName.slice(1)}
 				</p>
 				<Search onChange={this.search}/>
-				<ChallengeAccordion
-					challenges={challenges}
-					page={this.state.page}
-					groupName={this.groupName}
-					navigate={this.props.navigate}
-				/>
-				{(this.context.challenges[this.groupName] || []).length > 10 && (
+				{!challenges.length ? (
+					<p
+						className='uk-text-center uk-text-muted'
+						style={{ marginTop: '3em' }}
+					>
+						<FontAwesomeIcon
+							icon={faCalendarTimes}
+							className='icon-left'
+							transform='shrink-4'
+						/>
+						No challenges...
+					</p>
+				) : (
+					<ChallengeAccordion
+						challenges={challenges}
+						page={this.state.page}
+						groupName={this.groupName}
+						navigate={this.props.navigate}
+					/>
+				)}
+				{challenges.length > 10 && (
 					<Pagination
 						page={this.state.page}
 						maxPage={this.maxPage}

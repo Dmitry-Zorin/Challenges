@@ -7,16 +7,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faArrowDown,
 	faArrowUp,
+	faCalendarTimes,
 	faCheck,
 } from '@fortawesome/free-solid-svg-icons'
 
-export const ChallengeGroup = ({ to, title, group }) => (
+export const ChallengeGroup = ({ to, title, group = [] }) => (
 	<Link to={to}>
 		<Card className='uk-transition-toggle' style={{ height: '15em' }}>
 			<p className='font-size-large uk-text-center'>
 				{title}
 			</p>
-			{(group || []).slice(0, 4).map(c => (
+			{!group.length ? (
+				<p
+					className='uk-text-center uk-text-muted'
+					style={{ marginTop: '4em' }}
+				>
+					<FontAwesomeIcon
+						icon={faCalendarTimes}
+						className='icon-left'
+						transform='shrink-4'
+					/>
+					No challenges...
+				</p>
+			) : group.slice(0, 4).map(c => (
 				<ChallengeGroupItem key={c._id} title={title} challenge={c}/>
 			))}
 			<div className={`
@@ -50,7 +63,7 @@ const ChallengeGroupItem = ({ title, challenge }) => (
 			style={{ marginTop: '0.3em' }}
 		>
 			<FontAwesomeIcon icon={icons[title]} transform='shrink-2'/>
-			{getChallengeTime(challenge)}
+			{getChallengeTime(title, challenge)}
 		</div>
 	</Grid>
 )

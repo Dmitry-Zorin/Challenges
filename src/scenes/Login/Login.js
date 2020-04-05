@@ -11,15 +11,25 @@ import { DataContext } from '../../services/contexts/DataContext'
 import { notifications } from '../../services/data/notifications'
 import { SwitcherItem } from '../../components/SwitcherItem'
 import { TextInput } from '../../components/TextInput'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+	faLock,
+	faPaperPlane,
+	faSignInAlt,
+	faUser,
+	faUserPlus,
+} from '@fortawesome/free-solid-svg-icons'
 
 const states = {
 	login: {
 		action: 'login',
 		title: 'Log In',
+		icon: faSignInAlt,
 	},
 	signUp: {
 		action: 'signUp',
 		title: 'Sign Up',
+		icon: faUserPlus,
 	},
 }
 
@@ -53,9 +63,7 @@ export class Login extends PureComponent {
 		      username: $username
 		      password: $password
 		    ) {
-		      user { 
-		        ${challengesQuery} 
-		      } 
+		      user ${challengesQuery} 
 		    }
 		  }`,
 			variables: {
@@ -68,14 +76,13 @@ export class Login extends PureComponent {
 		axios.post(this.context.apiServer, data, { withCredentials: true })
 			.then(({ data: { data } }) => {
 				const user = data[this.state.action].user
-
-				if (!user)
+				if (!user) {
 					return addNotification(
 						this.state.action === 'login'
 							? notifications.loginFailed
 							: notifications.error,
 					)
-
+				}
 				this.props.login(user)
 				this.props.navigate('/')
 			})
@@ -103,6 +110,11 @@ export class Login extends PureComponent {
 	render = () => (
 		<InnerLayout>
 			<p className='uk-h2 uk-text-center'>
+				<FontAwesomeIcon
+					icon={this.state.icon}
+					className='icon-left'
+					transform='shrink-2'
+				/>
 				{this.state.title}
 			</p>
 			<ul className={`
@@ -113,11 +125,13 @@ export class Login extends PureComponent {
 				uk-child-width-1-3@m
 			`}>
 				<SwitcherItem
+					icon={states.login.icon}
 					value={states.login.title}
 					active={this.state.action === 'login'}
 					onClick={() => this.setState(states.login)}
 				/>
 				<SwitcherItem
+					icon={states.signUp.icon}
 					value={states.signUp.title}
 					active={this.state.action === 'signUp'}
 					onClick={() => this.setState(states.signUp)}
@@ -125,11 +139,13 @@ export class Login extends PureComponent {
 			</ul>
 			<Form>
 				<TextInput
+					icon={faUser}
 					label='Username'
 					value={this.state.username}
 					handleChange={this.handleChange}
 				/>
 				<TextInput
+					icon={faLock}
 					label='Password'
 					value={this.state.password}
 					handleChange={this.handleChange}
@@ -139,7 +155,12 @@ export class Login extends PureComponent {
 					className='uk-button uk-align-center uk-width-1-3@m uk-width-1-2@s'
 					onClick={this.login}
 				>
-					{this.state.title}
+					<FontAwesomeIcon
+						icon={faPaperPlane}
+						className='icon-left-2'
+						transform='shrink-2'
+					/>
+					Submit
 				</button>
 			</Form>
 		</InnerLayout>

@@ -13,6 +13,8 @@ import { DifficultyInput } from './components/DifficultyInput'
 import { TimeInput } from './components/TimeInput'
 import { Buttons } from './components/Buttons'
 import { TextInput } from '../../components/TextInput'
+import { faCalendarPlus, faPen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const info = {
 	create: {
@@ -20,7 +22,7 @@ const info = {
 		notification: 'challengeCreated',
 		action: 'Create',
 		title: 'New Challenge',
-		save: 'Create Challenge',
+		save: 'Create',
 	},
 	edit: {
 		id: '$id: String!',
@@ -89,9 +91,7 @@ export class Challenge extends Component {
 		        startDate: $startDate
 		        endDate: $endDate
 		      }
-		    ) {
-		      ${challengesQuery}
-		    }
+		    ) ${challengesQuery}
 		  }`,
 			variables: {
 				id: this.state._id,
@@ -125,6 +125,19 @@ export class Challenge extends Component {
 		return (
 			<InnerLayout>
 				<p className='uk-h2 uk-text-center'>
+					{!this.state._id ? (
+						<FontAwesomeIcon
+							icon={faCalendarPlus}
+							className='icon-left'
+							transform='shrink-4'
+						/>
+					) : (
+						<FontAwesomeIcon
+							icon={faPen}
+							className='icon-left'
+							transform='shrink-4'
+						/>
+					)}
 					{this.info.title}
 				</p>
 				<Form>
@@ -151,7 +164,7 @@ export class Challenge extends Component {
 					<Buttons
 						save={() => this.save(defaultName)}
 						saveValue={this.info.save}
-						showCancel={!!this.state._id}
+						withCancel={!!this.state._id}
 					/>
 				</Form>
 			</InnerLayout>

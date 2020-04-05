@@ -43,12 +43,16 @@ nav div {
 	font-size: $font-size-large;
 }
 
-.icon {
-	margin-right: 0.4em;
+.icon-left {
+	margin-right: $icon-margin;
 }
 
-.icon-inverse {
-	margin-left: 0.4em;
+.icon-left-2 {
+	margin-right: $icon-margin * 2;
+}
+
+.icon-right {
+	margin-left: $icon-margin;
 }
 
 .wrap {

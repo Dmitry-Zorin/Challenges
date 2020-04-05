@@ -47,7 +47,7 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
 								icon={challengeInfo[groupName].icon}
 								transform='shrink-2'
 							/>
-							{getChallengeTime(c)}
+							{getChallengeTime(groupName, c)}
 						</div>
 					</Grid>
 				}

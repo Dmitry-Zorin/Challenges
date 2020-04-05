@@ -4,7 +4,7 @@ const authTypeDefs = gql`
   extend type Query {
     user: AuthPayload!
   }
-  
+
   extend type Mutation {
     signUp(username: String!, password: String!): AuthPayload!
     login(username: String!, password: String!): AuthPayload!
@@ -14,11 +14,11 @@ const authTypeDefs = gql`
   type AuthPayload {
     user: User
   }
-  
+
   type User {
-    username: String
-    password: String
-    challenges: [Challenge!]
+    username: String!
+    password: String!
+    challenges: SortedChallenges!
   }
 `
 

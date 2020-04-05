@@ -1,21 +1,14 @@
-const authenticate = ({ username, password }, context) => (
-	context.authenticate('graphql-local', { username, password })
-		.then(async ({ user }) => {
-			if (user) await context.login(user)
-			return { user: user || null }
-		})
-)
-
 const authResolvers = {
 	Query: {
 		user: (_, __, context) => (
-			{ user: context.getUser() || null }
+			getUser(context)
 		),
 	},
 	Mutation: {
 		signUp: (_, { username, password }, context) => (
 			context.User.findOne({ username })
 				.then(async user => {
+					// User already exists
 					if (user) return { user: null }
 
 					await new context.User({ username, password }).save()
@@ -29,9 +22,21 @@ const authResolvers = {
 		),
 		logout: (_, __, context) => {
 			context.logout()
-			return { user: null }
+			return getUser(context)
 		},
 	},
 }
+
+const getUser = context => ({
+	user: context.getUserInfo(context.getUser())
+})
+
+const authenticate = ({ username, password }, context) => (
+	context.authenticate('graphql-local', { username, password })
+		.then(async ({ user }) => {
+			if (user) await context.login(user)
+			return getUser(context)
+		})
+)
 
 module.exports = authResolvers

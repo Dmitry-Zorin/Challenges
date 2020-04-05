@@ -11,7 +11,7 @@ export const Pagination = ({ page, maxPage, changePage }) => (
 			<a href='/#' onClick={e => changePage(e, -1)}>
 				<FontAwesomeIcon
 					icon={faChevronLeft}
-					className='icon'
+					className='icon-left'
 					transform='shrink-3 down-0.5'
 				/>
 				Previous
@@ -25,7 +25,7 @@ export const Pagination = ({ page, maxPage, changePage }) => (
 				Next
 				<FontAwesomeIcon
 					icon={faChevronRight}
-					className='icon-inverse'
+					className='icon-right'
 					transform='shrink-3 down-0.5'
 				/>
 			</a>

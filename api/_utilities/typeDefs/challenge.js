@@ -17,13 +17,18 @@ const challengeTypeDefs = gql`
     _id: String!
     name: String!
     difficulty: Difficulty!
-    progress: Progress!
     startDate: Float!
     endDate: Float!
   }
 
   type Challenges {
-    challenges: [Challenge!]
+    challenges: SortedChallenges
+  }
+  
+  type SortedChallenges {
+    ongoing: [Challenge!]!
+    upcoming: [Challenge!]!
+    completed: [Challenge!]!
   }
 
   input ChallengeInput {

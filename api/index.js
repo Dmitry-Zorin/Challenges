@@ -8,6 +8,7 @@ const { buildContext } = require('graphql-passport')
 const typeDefs = require('./_utilities/typeDefs/all')
 const resolvers = require('./_utilities/resolvers/all')
 const User = require('./_utilities/models/user.model')
+const getUserInfo = require('./_utilities/user')
 
 require('dotenv').config({
 	path: __dirname + '/.env',
@@ -43,7 +44,7 @@ new ApolloServer({
 	typeDefs,
 	resolvers,
 	context: ({ req, res }) => (
-		buildContext({ req, res, User })
+		buildContext({ req, res, User, getUserInfo })
 	),
 }).applyMiddleware({ app, path: '/api', cors: false })
 

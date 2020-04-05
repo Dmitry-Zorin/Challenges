@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faCheck,
-	faEdit,
+	faPen,
 	faPlay,
 	faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons'
@@ -21,9 +21,8 @@ export const Buttons = ({ challenge, navigate, options }) => {
 	const update = action => {
 		const data = {
 			query: `mutation($id: String!) {
-        challenge${action}(id: $id) {
+        challenge${action}(id: $id) 
           ${challengesQuery}
-        }
       }`,
 			variables: { id: challenge._id },
 		}
@@ -47,12 +46,6 @@ export const Buttons = ({ challenge, navigate, options }) => {
 
 	return (
 		<div className='uk-width-expand uk-text-right'>
-			<Button
-				icon={faEdit}
-				tooltip='Edit'
-				onClick={() => navigate('/edit', { state: { challenge } })}
-			/>
-
 			{options.includes('start') && (
 				<Button
 					icon={faPlay}
@@ -68,6 +61,12 @@ export const Buttons = ({ challenge, navigate, options }) => {
 					onClick={() => update('Complete')}
 				/>
 			)}
+
+			<Button
+				icon={faPen}
+				tooltip='Edit'
+				onClick={() => navigate('/edit', { state: { challenge } })}
+			/>
 
 			{options.includes('delete') && (
 				<Button
