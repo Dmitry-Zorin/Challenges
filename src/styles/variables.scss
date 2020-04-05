@@ -4,11 +4,13 @@ $secondary-bg-color: #34373D;
 $tertiary-bg-color: #20232A;
 
 $primary-color: #767CFF;
-$secondary-color: #EEEEEE;
+$secondary-color: #EEE;
 $tertiary-color: $secondary-bg-color;
+$muted-color: #999;
 
 $secondary-bg-color-lightened: lighten($secondary-bg-color, 2.5);
 $primary-color-darkened: darken($primary-color, 4);
+$primary-color-opacity-lowered: rgba($primary-color, 0.25);
 
 // Dimensions
 $font-size-medium: 1.15em;

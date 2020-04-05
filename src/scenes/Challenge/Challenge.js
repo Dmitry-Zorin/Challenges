@@ -13,15 +13,13 @@ import { DifficultyInput } from './components/DifficultyInput'
 import { TimeInput } from './components/TimeInput'
 import { Buttons } from './components/Buttons'
 import { TextInput } from '../../components/TextInput'
-import { faCalendarPlus, faPen } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const info = {
 	create: {
 		api: 'challengeAdd',
 		notification: 'challengeCreated',
 		action: 'Create',
-		title: 'New Challenge',
+		title: 'New challenge',
 		save: 'Create',
 	},
 	edit: {
@@ -30,7 +28,7 @@ const info = {
 		api: 'challengeEdit',
 		notification: 'challengeEdited',
 		action: 'Update',
-		title: 'Edit Challenge',
+		title: 'Edit challenge',
 		save: 'Save',
 	},
 }
@@ -125,19 +123,6 @@ export class Challenge extends Component {
 		return (
 			<InnerLayout>
 				<p className='uk-h2 uk-text-center'>
-					{!this.state._id ? (
-						<FontAwesomeIcon
-							icon={faCalendarPlus}
-							className='icon-left'
-							transform='shrink-4'
-						/>
-					) : (
-						<FontAwesomeIcon
-							icon={faPen}
-							className='icon-left'
-							transform='shrink-4'
-						/>
-					)}
 					{this.info.title}
 				</p>
 				<Form>

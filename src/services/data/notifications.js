@@ -25,8 +25,13 @@ export const notifications = {
 		type: 'danger',
 	},
 	loginFailed: {
-		title: 'Login fail',
+		title: 'Login failed',
 		message: 'Wrong username or password',
 		type: 'danger',
 	},
+	signUpFailed: {
+		title: 'Sign Up failed',
+		message: 'User already exists',
+		type: 'danger',
+	}
 }

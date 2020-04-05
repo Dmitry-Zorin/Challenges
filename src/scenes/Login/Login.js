@@ -23,12 +23,12 @@ import {
 const states = {
 	login: {
 		action: 'login',
-		title: 'Log In',
+		title: 'Log in',
 		icon: faSignInAlt,
 	},
 	signUp: {
 		action: 'signUp',
-		title: 'Sign Up',
+		title: 'Sign up',
 		icon: faUserPlus,
 	},
 }
@@ -80,7 +80,7 @@ export class Login extends PureComponent {
 					return addNotification(
 						this.state.action === 'login'
 							? notifications.loginFailed
-							: notifications.error,
+							: notifications.signUpFailed,
 					)
 				}
 				this.props.login(user)
@@ -110,11 +110,6 @@ export class Login extends PureComponent {
 	render = () => (
 		<InnerLayout>
 			<p className='uk-h2 uk-text-center'>
-				<FontAwesomeIcon
-					icon={this.state.icon}
-					className='icon-left'
-					transform='shrink-2'
-				/>
 				{this.state.title}
 			</p>
 			<ul className={`

@@ -13,14 +13,8 @@ body {
 	-webkit-touch-callout: none;
 }
 
-a:hover p {
-	@media (hover: hover) {
-		color: $primary-color;
-	}
-}
-
-a:active p {
-	color: $primary-color;
+nav div {
+	width: 100%;
 }
 
 button {
@@ -31,8 +25,16 @@ button {
 	}
 }
 
-nav div {
-	width: 100%;
+p, p:not(.uk-text-muted) > svg {
+	a:hover & {
+		@media (hover: hover) {
+			color: $primary-color;
+		}
+	}
+
+	a:active & {
+		color: $primary-color;
+	}
 }
 
 .font-size-medium {

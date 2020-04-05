@@ -35,5 +35,5 @@ $search-default-background: $secondary-color;
 
 // Subnav
 $subnav-item-color: $secondary-color;
-$subnav-pill-item-hover-background: $primary-color;
-$subnav-pill-item-active-background: $primary-color-darkened;
+$subnav-pill-item-hover-background: $primary-color-opacity-lowered;
+$subnav-pill-item-active-background: $primary-color;

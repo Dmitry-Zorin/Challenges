@@ -33,8 +33,18 @@
 	overflow: hidden;
 	-webkit-mask-image: -webkit-radial-gradient(white, black);
 
-	& > div {
+	> div {
 		@extend .uk-animation-fade;
+	}
+
+	svg {
+		color: $muted-color;
+	}
+
+	button, .uk-active {
+		svg {
+			color: $secondary-color;
+		}
 	}
 
 	@media (min-width: $breakpoint-small) {
@@ -63,9 +73,7 @@
 	}
 
 	@media (max-width: $breakpoint-small) {
-		& {
-			padding: 0 1em;
-		}
+		padding: 0 1em;
 	}
 }
 
@@ -83,4 +91,10 @@
 	@include round-border;
 	height: 1.85em;
 	padding-top: 0.65em;
+
+	&:hover {
+		svg {
+			color: $secondary-color;
+		}
+	}
 }
