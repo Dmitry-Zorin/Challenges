@@ -20,7 +20,7 @@ const info = {
 		notification: 'challengeCreated',
 		action: 'Create',
 		title: 'New challenge',
-		save: 'Create',
+		save: 'Create challenge',
 	},
 	edit: {
 		id: '$id: String!',
@@ -121,10 +121,7 @@ export class Challenge extends Component {
 			.split(' ').slice(1, 5).join(' ').slice(0, -3)
 
 		return (
-			<InnerLayout>
-				<p className='uk-h2 uk-text-center'>
-					{this.info.title}
-				</p>
+			<InnerLayout title={this.info.title}>
 				<Form>
 					<TextInput
 						label='Name'

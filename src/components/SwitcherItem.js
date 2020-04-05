@@ -7,11 +7,13 @@ export const SwitcherItem = ({ icon, value, active, onClick }) => (
 			e.preventDefault()
 			onClick()
 		}}>
-			<FontAwesomeIcon
-				icon={icon}
-				className='icon-left-2'
-				transform='shrink-2'
-			/>
+			{icon && (
+				<FontAwesomeIcon
+					icon={icon}
+					className='icon-left-2'
+					transform='shrink-2'
+				/>
+			)}
 			{value}
 		</a>
 	</li>

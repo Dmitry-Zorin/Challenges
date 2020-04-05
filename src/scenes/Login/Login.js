@@ -109,10 +109,7 @@ export class Login extends PureComponent {
 
 	render = () => (
 		<InnerLayout>
-			<p className='uk-h2 uk-text-center'>
-				{this.state.title}
-			</p>
-			<ul className={`
+			<ul style={{ marginTop: '1.5em' }} className={`
 				uk-subnav
 				uk-subnav-pill
 				uk-flex-center
@@ -132,7 +129,7 @@ export class Login extends PureComponent {
 					onClick={() => this.setState(states.signUp)}
 				/>
 			</ul>
-			<Form>
+			<Form className='uk-margin-medium-top'>
 				<TextInput
 					icon={faUser}
 					label='Username'
@@ -148,6 +145,7 @@ export class Login extends PureComponent {
 				/>
 				<button
 					className='uk-button uk-align-center uk-width-1-3@m uk-width-1-2@s'
+					style={{ marginTop: '4em' }}
 					onClick={this.login}
 				>
 					<FontAwesomeIcon

@@ -21,7 +21,7 @@ button {
 	background-color: $primary-color;
 
 	&:hover {
-		background-color: $primary-color-darkened;
+		background-color: $primary-color-dark;
 	}
 }
 
@@ -43,6 +43,10 @@ p, p:not(.uk-text-muted) > svg {
 
 .font-size-large {
 	font-size: $font-size-large;
+}
+
+.font-size-xlarge {
+	font-size: $font-size-xlarge;
 }
 
 .icon-left {

@@ -8,17 +8,20 @@ $secondary-color: #EEE;
 $tertiary-color: $secondary-bg-color;
 $muted-color: #999;
 
-$secondary-bg-color-lightened: lighten($secondary-bg-color, 2.5);
-$primary-color-darkened: darken($primary-color, 4);
-$primary-color-opacity-lowered: rgba($primary-color, 0.25);
+$secondary-bg-color-light: lighten($secondary-bg-color, 2.5);
+$primary-color-dark: darken($primary-color, 4);
+$primary-color-opacity-low: rgba($primary-color, 0.15);
+$primary-color-opacity-medium: rgba($primary-color, 0.3);
 
 // Dimensions
-$font-size-medium: 1.15em;
-$font-size-large: 1.4em;
 $primary-border-radius: 1em;
 $secondary-border-radius: 0.5em;
 $navbar-item-padding: 3em;
 $icon-margin: 0.2em;
+
+$font-size-medium: 1.15em;
+$font-size-large: 1.4em;
+$font-size-xlarge: 1.6em;
 
 $breakpoint-small: 640px;
 $breakpoint-medium: 960px;

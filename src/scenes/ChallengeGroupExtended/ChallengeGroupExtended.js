@@ -42,14 +42,11 @@ export class ChallengeGroupExtended extends PureComponent {
 		this.maxPage = Math.ceil(challenges.length / 10)
 
 		return (
-			<InnerLayout>
-				<p className='uk-h2 uk-text-center'>
-					{this.groupName[0].toUpperCase() + this.groupName.slice(1)}
-				</p>
+			<InnerLayout title={this.groupName}>
 				<Search onChange={this.search}/>
 				{!challenges.length ? (
 					<p
-						className='uk-text-center uk-text-muted'
+						className='font-size-medium uk-text-center uk-text-muted'
 						style={{ marginTop: '3em' }}
 					>
 						<FontAwesomeIcon

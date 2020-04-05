@@ -1,10 +1,6 @@
 import React from 'react'
 import { Grid } from 'uikit-react'
-import {
-	faCheck,
-	faPlusCircle,
-	faTimes,
-} from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const Buttons = ({ save, saveValue, withCancel }) => (
@@ -21,7 +17,7 @@ export const Buttons = ({ save, saveValue, withCancel }) => (
 		)}
 		<Button
 			value={saveValue}
-			icon={withCancel ? faCheck : faPlusCircle}
+			icon={withCancel ? faCheck : faPlus}
 			onClick={save}
 		/>
 	</Grid>
