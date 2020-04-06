@@ -1,6 +1,6 @@
 const passport = require('passport')
 const { GraphQLLocalStrategy } = require('graphql-passport')
-const User = require('./models/user.model')
+const User = require('../models/user')
 
 passport.use(new GraphQLLocalStrategy((username, password, done) => (
 	User.findOne({ username: username })

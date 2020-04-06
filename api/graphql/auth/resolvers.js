@@ -1,4 +1,4 @@
-const authResolvers = {
+const resolvers = {
 	Query: {
 		user: (_, __, context) => (
 			getUser(context)
@@ -39,4 +39,4 @@ const authenticate = ({ username, password }, context) => (
 		})
 )
 
-module.exports = authResolvers
+module.exports = resolvers

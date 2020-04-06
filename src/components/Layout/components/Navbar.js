@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { DataContext } from '../../../services/contexts/DataContext'
+import { DataContext } from '../../../contexts/DataContext'
 import {
 	Container,
 	Navbar,

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { InnerLayout } from '../../components/InnerLayout'
-import { DataContext } from '../../services/contexts/DataContext'
+import { DataContext } from '../../contexts/DataContext'
 import { Pagination } from './components/Pagination'
 import { ChallengeAccordion } from './components/ChallengeAccordion'
 import { Search } from './components/Search'

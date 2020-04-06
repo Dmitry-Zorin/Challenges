@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express')
 
-const authTypeDefs = gql`
+const schema = gql`
   extend type Query {
     user: AuthPayload!
   }
@@ -22,4 +22,4 @@ const authTypeDefs = gql`
   }
 `
 
-module.exports = authTypeDefs
+module.exports = schema

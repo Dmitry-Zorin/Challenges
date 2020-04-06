@@ -1,4 +1,4 @@
-const challengeResolvers = {
+const resolvers = {
 	Query: {
 		challenges: (...args) => (
 			getUpdatedChallenges(args)
@@ -57,4 +57,4 @@ const findChallenge = (user, id) => (
 	user.challenges.find(c => c._id.toString() === id)
 )
 
-module.exports = challengeResolvers
+module.exports = resolvers

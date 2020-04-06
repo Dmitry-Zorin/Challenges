@@ -1,51 +1,22 @@
-const express = require('express')
-const session = require('express-session')
-const cors = require('cors')
-const MongoDBStore = require('connect-mongodb-session')(session)
-const passport = require('./_utilities/auth')
-const { ApolloServer } = require('apollo-server-express')
+const { connect: connectToDb } = require('mongoose')
 const { buildContext } = require('graphql-passport')
-const typeDefs = require('./_utilities/typeDefs/all')
-const resolvers = require('./_utilities/resolvers/all')
-const User = require('./_utilities/models/user.model')
-const getUserInfo = require('./_utilities/user')
+const { ApolloServer } = require('apollo-server-express')
+const typeDefs = require('./graphql/schema')
+const resolvers = require('./graphql/resolvers')
+const User = require('./models/user')
+const getUserInfo = require('./src/user-info')
+const app = require('./src/app')
 
-require('dotenv').config({
-	path: __dirname + '/.env',
-})
-require('./_utilities/db')
+connectToDb(process.env.ATLAS_URI, {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useUnifiedTopology: true,
+}).catch(console.log)
 
-const app = express()
-const isProductionEnv = process.env.NODE_ENV === 'production'
-
-app.use(cors({
-	origin: !isProductionEnv,
-	credentials: true,
-}))
-
-app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true,
-	store: new MongoDBStore({
-		uri: process.env.ATLAS_URI,
-		collection: 'sessions',
-	}),
-	cookie: {
-		maxAge: 1000 * 60 * 60 * 24 * 7,
-		//secure: isProductionEnv,
-	},
-}))
-
-app.use(passport.initialize())
-app.use(passport.session())
-
-new ApolloServer({
-	typeDefs,
-	resolvers,
-	context: ({ req, res }) => (
-		buildContext({ req, res, User, getUserInfo })
-	),
-}).applyMiddleware({ app, path: '/api', cors: false })
+const context = ({ req, res }) => (
+	buildContext({ req, res, User, getUserInfo })
+)
+new ApolloServer({ typeDefs, resolvers, context })
+	.applyMiddleware({ app, path: '/api', cors: false })
 
 app.listen(process.env.PORT)

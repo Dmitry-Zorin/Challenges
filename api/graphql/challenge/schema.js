@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express')
 
-const challengeTypeDefs = gql`
+const schema = gql`
   extend type Query {
     challenges: Challenges!
   }
@@ -51,4 +51,4 @@ const challengeTypeDefs = gql`
   }
 `
 
-module.exports = challengeTypeDefs
+module.exports = schema

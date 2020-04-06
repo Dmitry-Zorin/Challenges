@@ -12,8 +12,8 @@ import {
 	challengesQuery,
 	handleError,
 } from '../../../services'
-import { notifications } from '../../../services/data/notifications'
-import { DataContext } from '../../../services/contexts/DataContext'
+import { notifications } from '../../../data/notifications'
+import { DataContext } from '../../../contexts/DataContext'
 
 export const Buttons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)
