@@ -25,10 +25,6 @@ a:active p {
 	color: $primary-color;
 }
 
-.env-sides {
-	padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
-}
-
 .font-size-medium {
 	font-size: $font-size-medium;
 }

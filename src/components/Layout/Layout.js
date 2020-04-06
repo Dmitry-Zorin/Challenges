@@ -12,7 +12,7 @@ export const Layout = ({ children, location }) => (
 		<ScrollToTop location={location}/>
 		<NavigationBar location={location}/>
 		<ReactNotification/>
-		<div className='env-sides'>
+		<div className={styles.env}>
 			<Container className={styles.layout}>
 				<div className={styles.header + ' uk-text-center'}>
 					<p className={styles.title}>

@@ -1,5 +1,9 @@
 @import '../../styles/variables';
 
+.env {
+	padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+}
+
 .layout {
 	padding: 0 0 1em;
 	
