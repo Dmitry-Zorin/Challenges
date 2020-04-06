@@ -24,7 +24,7 @@ const challengeTypeDefs = gql`
   type Challenges {
     challenges: SortedChallenges
   }
-  
+
   type SortedChallenges {
     ongoing: [Challenge!]!
     upcoming: [Challenge!]!

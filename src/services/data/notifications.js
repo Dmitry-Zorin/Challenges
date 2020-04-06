@@ -33,5 +33,5 @@ export const notifications = {
 		title: 'Sign up failed',
 		message: 'User already exists',
 		type: 'danger',
-	}
+	},
 }

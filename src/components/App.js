@@ -21,10 +21,10 @@ export default class App extends PureComponent {
 
 		this.state = {
 			...DataContext._currentValue,
-			spinnerIsVisible: true,
+			challenges: {},
+			spinnerIsVisible: false,
 			showSpinner: () => this.toggleSpinner(true),
 			hideSpinner: () => this.toggleSpinner(false),
-			challenges: JSON.parse(window.localStorage.getItem('challenges')) || {},
 			update: this.updateChallenges,
 		}
 	}
@@ -43,6 +43,16 @@ export default class App extends PureComponent {
 				handleError(err, 'Failed to update challenges')
 			})
 			.finally(this.state.hideSpinner)
+
+		// Timeout for the mobile devices
+		setTimeout(() => {
+			this.setState({
+				spinnerIsVisible: true,
+				challenges: JSON.parse(
+					localStorage.getItem('challenges'),
+				) || {},
+			})
+		}, 0)
 	}
 
 	componentWillUnmount() {

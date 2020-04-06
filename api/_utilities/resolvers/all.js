@@ -5,7 +5,7 @@ const challengeResolvers = require('./challenge')
 const resolvers = lodash.merge(
 	{},
 	authResolvers,
-	challengeResolvers
+	challengeResolvers,
 )
 
 module.exports = resolvers
