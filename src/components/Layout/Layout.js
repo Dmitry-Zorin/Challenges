@@ -11,19 +11,21 @@ export const Layout = ({ children, location }) => (
 	<div>
 		<ScrollToTop location={location}/>
 		<NavigationBar location={location}/>
-		<ReactNotification style={{ paddingTop: 'env(safe-area-inset-top)' }}/>
-		<Container className={styles.layout}>
-			<div className={styles.header + ' uk-text-center'}>
-				<p className={styles.title}>
-					<FontAwesomeIcon
-						icon={faTasks}
-						className={styles.icon + ' icon-left'}
-						transform='shrink-2 down-0.5'
-					/>
-					Challenges
-				</p>
-			</div>
-			{children}
-		</Container>
+		<ReactNotification/>
+		<div className='env-sides'>
+			<Container className={styles.layout}>
+				<div className={styles.header + ' uk-text-center'}>
+					<p className={styles.title}>
+						<FontAwesomeIcon
+							icon={faTasks}
+							className={styles.icon + ' icon-left'}
+							transform='shrink-2 down-0.5'
+						/>
+						Challenges
+					</p>
+				</div>
+				{children}
+			</Container>
+		</div>
 	</div>
 )

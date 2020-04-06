@@ -49,7 +49,6 @@
 
 @mixin hook-navbar-nav-item() {
 	height: 50px;
-	margin-top: env(safe-area-inset-top);
 	text-transform: $navbar-nav-item-text-transform;
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color;

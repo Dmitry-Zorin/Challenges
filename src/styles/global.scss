@@ -1,20 +1,10 @@
 @import 'variables';
 
-html {
-	height: 100%;
-	overflow-x: hidden;
-	overflow-y: scroll;
-}
-
 body {
-	min-height: 100%;
+	overflow-y: scroll;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
-}
-
-nav div {
-	width: 100%;
 }
 
 button {
@@ -33,6 +23,10 @@ a:hover p {
 
 a:active p {
 	color: $primary-color;
+}
+
+.env-sides {
+	padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
 }
 
 .font-size-medium {

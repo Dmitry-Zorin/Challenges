@@ -27,9 +27,7 @@ $navbar-nav-item-height: 40px;
 $navbar-background: $tertiary-bg-color;
 $navbar-nav-item-color: $secondary-color;
 $navbar-nav-item-onclick-color: $primary-color;
-$navbar-nav-item-padding-horizontal: calc(
-	0.5em + max(env(safe-area-inset-left), env(safe-area-inset-right))
-);
+$navbar-nav-item-padding-horizontal: 0.5em;
 
 // Search
 $search-color: $tertiary-color;

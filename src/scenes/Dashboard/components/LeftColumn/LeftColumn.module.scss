@@ -6,7 +6,7 @@
 	}
 }
 
-.height {
+.container {
 	height: calc(100% - 2em);
 	
 	@media (min-width: $breakpoint-large) {
