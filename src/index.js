@@ -1,14 +1,14 @@
-import React, { StrictMode } from 'react'
-import ReactDOM from 'react-dom'
-import '../node_modules/uikit/dist/js/uikit.min.js'
-import App from './components/App'
-import * as serviceWorker from './serviceWorker'
-
 // Styles
 import './styles/global.scss'
 import './styles/uikit/theme.scss'
 import '../node_modules/react-notifications-component/dist/theme.css'
 import '../node_modules/animate.css/animate.min.css'
+import '../node_modules/uikit/dist/js/uikit.min.js'
+
+import React, { StrictMode } from 'react'
+import ReactDOM from 'react-dom'
+import App from './components/App'
+import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(
 	<StrictMode>
