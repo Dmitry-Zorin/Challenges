@@ -8,9 +8,9 @@ html {
 
 body {
 	min-height: 100%;
-	-webkit-user-select: none;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
+	-webkit-user-select: none;
 }
 
 nav div {
@@ -60,7 +60,7 @@ a:active p {
 }
 
 .wrap {
-	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
