@@ -4,7 +4,7 @@ import { Card } from 'uikit-react'
 
 export const LeftColumn = () => (
 	<div className={styles.leftColumn + ' uk-width-1-3 uk-padding-remove-left'}>
-		<div style={{ height: 'calc(100% - 3em)' }}>
+		<div className={styles.height}>
 			<Card className='uk-height-1-1'>
 				<p className='font-size-large uk-text-center uk-margin-remove-bottom'>
 					Info

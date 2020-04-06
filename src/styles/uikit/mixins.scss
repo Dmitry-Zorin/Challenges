@@ -37,7 +37,7 @@
 		@extend .uk-animation-fade;
 	}
 
-	@media (min-width: $breakpoint-small) {
+	@media (min-width: $breakpoint-large) {
 		margin: 1em 1em 2em;
 		padding: 1.5em 2em;
 	}
@@ -54,16 +54,16 @@
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color;
 
+	@media (min-width: $breakpoint-large) {
+		padding: 0 3em;
+	}
+
 	@media (min-height: $height-breakpoint-medium) {
 		height: 60px;
 	}
 
 	@media (min-height: $height-breakpoint-large) {
 		height: 70px;
-	}
-
-	@media (max-width: $breakpoint-small) {
-		padding: 0 1em;
 	}
 }
 

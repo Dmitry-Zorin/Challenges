@@ -1,15 +1,12 @@
 export const notifications = {
 	challengeCreated: {
 		title: 'New challenge!',
-		type: 'info',
 	},
 	challengeEdited: {
 		title: 'Challenge updated!',
-		type: 'info',
 	},
 	challengeStarted: {
 		title: 'Challenge started!',
-		type: 'info',
 	},
 	challengeCompleted: {
 		title: 'Challenge completed!',
