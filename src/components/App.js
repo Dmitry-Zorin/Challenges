@@ -9,7 +9,7 @@ import { DataContext } from '../services/contexts/DataContext'
 import { Dashboard } from '../scenes/Dashboard'
 import { Challenge } from '../scenes/Challenge'
 import { ChallengeGroupExtended } from '../scenes/ChallengeGroupExtended'
-import { challengesQuery, handleError, updateTime } from '../services/helper'
+import { challengesQuery, handleError, updateTime } from '../services'
 
 export default class App extends PureComponent {
 	constructor(props) {

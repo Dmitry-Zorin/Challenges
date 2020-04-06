@@ -1,7 +1,7 @@
 import React from 'react'
 import { Accordion, AccordionItem, Grid } from 'uikit-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { getChallengeTime } from '../../../services/helper'
+import { getChallengeTime } from '../../../services'
 import { Buttons } from './Buttons'
 import {
 	faArrowDown,

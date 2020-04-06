@@ -11,7 +11,7 @@ import {
 	addNotification,
 	challengesQuery,
 	handleError,
-} from '../../../services/helper'
+} from '../../../services'
 import { notifications } from '../../../services/data/notifications'
 import { DataContext } from '../../../services/contexts/DataContext'
 

@@ -2,7 +2,7 @@ import React from 'react'
 import dashboardStyles from '../Dashboard.module.scss'
 import { Card, Grid } from 'uikit-react'
 import { Link } from '@reach/router'
-import { getChallengeTime } from '../../../services/helper'
+import { getChallengeTime } from '../../../services'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faArrowDown,

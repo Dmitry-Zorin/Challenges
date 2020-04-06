@@ -2,11 +2,7 @@ import React, { PureComponent } from 'react'
 import axios from 'axios'
 import { Form } from 'uikit-react'
 import { InnerLayout } from '../../components/InnerLayout'
-import {
-	addNotification,
-	challengesQuery,
-	handleError,
-} from '../../services/helper'
+import { addNotification, challengesQuery, handleError } from '../../services'
 import { DataContext } from '../../services/contexts/DataContext'
 import { notifications } from '../../services/data/notifications'
 import { SwitcherItem } from '../../components/SwitcherItem'
