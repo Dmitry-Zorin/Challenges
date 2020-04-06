@@ -7,13 +7,9 @@ import {
 	faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
-import {
-	addNotification,
-	challengesQuery,
-	handleError,
-} from '../../../services'
-import { notifications } from '../../../data/notifications'
-import { DataContext } from '../../../contexts/DataContext'
+import { addNotification, challengesQuery, handleError } from 'services'
+import notifications from 'data/notifications'
+import { DataContext } from 'contexts/DataContext'
 
 export const Buttons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)

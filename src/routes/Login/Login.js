@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react'
 import axios from 'axios'
 import { Form } from 'uikit-react'
-import { InnerLayout } from '../../components/InnerLayout'
-import { addNotification, challengesQuery, handleError } from '../../services'
-import { DataContext } from '../../contexts/DataContext'
-import { notifications } from '../../data/notifications'
-import { SwitcherItem } from '../../components/SwitcherItem'
-import { TextInput } from '../../components/TextInput'
+import { InnerLayout } from 'components/InnerLayout'
+import { addNotification, challengesQuery, handleError } from 'services'
+import { DataContext } from 'contexts/DataContext'
+import notifications from 'data/notifications'
+import { SwitcherItem } from 'components/SwitcherItem'
+import { TextInput } from 'components/TextInput'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faLock,

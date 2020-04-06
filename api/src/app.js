@@ -22,10 +22,8 @@ app.use(session({
 	saveUninitialized: true,
 	store: new MongoDBStore({
 		uri: process.env.ATLAS_URI,
-		collection: 'sessions',
 	}),
 	cookie: {
-		maxAge: 1000 * 60 * 60 * 24 * 7,
 		//secure: envIsProduction,
 	},
 }))

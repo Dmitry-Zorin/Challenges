@@ -1,7 +1,7 @@
 import React from 'react'
 import { Accordion, AccordionItem, Grid } from 'uikit-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { getChallengeTime } from '../../../services'
+import { getChallengeTime } from 'services'
 import { Buttons } from './Buttons'
 import {
 	faArrowDown,
@@ -38,7 +38,7 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
 				className='uk-margin-remove'
 				title={
 					<Grid>
-						<p className='wrap uk-width-expand'>{c.name}</p>
+						<p className='uk-width-expand'>{c.name}</p>
 						<div
 							className='uk-text-meta uk-padding-remove uk-text-right'
 							style={{ marginTop: '0.35em' }}

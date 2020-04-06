@@ -1,3 +1,5 @@
+// TODO: Check input data
+
 const resolvers = {
 	Query: {
 		challenges: (...args) => (
@@ -7,6 +9,7 @@ const resolvers = {
 	Mutation: {
 		challengeAdd: (...args) => (
 			getUpdatedChallenges(args, (user, { challenge }) => {
+				challenge.name = challenge.name.slice(0, 250)
 				user.challenges.push(challenge)
 			})
 		),
