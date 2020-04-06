@@ -18,7 +18,7 @@ export default class App extends PureComponent {
 		this.updateChallenges = this.updateChallenges.bind(this)
 		this.login = this.login.bind(this)
 		this.logout = this.logout.bind(this)
-
+		
 		this.state = {
 			...DataContext._currentValue,
 			challenges: {},
@@ -28,7 +28,7 @@ export default class App extends PureComponent {
 			update: this.updateChallenges,
 		}
 	}
-
+	
 	componentDidMount() {
 		axios.post(
 			this.state.apiServer,
@@ -43,7 +43,7 @@ export default class App extends PureComponent {
 				handleError(err, 'Failed to update challenges')
 			})
 			.finally(this.state.hideSpinner)
-
+		
 		// Timeout for the mobile devices
 		setTimeout(() => {
 			this.setState({
@@ -54,15 +54,15 @@ export default class App extends PureComponent {
 			})
 		}, 0)
 	}
-
+	
 	componentWillUnmount() {
 		clearInterval(this.interval)
 	}
-
+	
 	toggleSpinner(spinnerIsVisible) {
 		this.setState({ spinnerIsVisible })
 	}
-
+	
 	async updateChallenges(challenges, isAuthorized = true) {
 		challenges = await updateTime(
 			challenges || this.state.challenges,
@@ -70,12 +70,12 @@ export default class App extends PureComponent {
 		)
 		this.setState({ challenges, isAuthorized })
 	}
-
+	
 	login(user) {
 		this.interval = setInterval(this.updateChallenges, 15000)
 		this.updateChallenges(user.challenges, true)
 	}
-
+	
 	logout() {
 		clearInterval(this.interval)
 		this.setState({
@@ -83,7 +83,7 @@ export default class App extends PureComponent {
 			isAuthorized: false,
 		})
 	}
-
+	
 	render = () => (
 		<DataContext.Provider value={this.state}>
 			<Router primary={false}>

@@ -24,7 +24,7 @@ const challengeResolvers = {
 			getUpdatedChallenges(args, (user, { id }) => {
 				const c = findChallenge(user, id)
 				const now = new Date().getTime()
-
+				
 				c.endDate -= c.startDate - now
 				c.startDate = now
 			})
@@ -42,7 +42,7 @@ const challengeResolvers = {
 const getUpdatedChallenges = ([obj, args, context], update) => {
 	const user = context.getUser()
 	let challenges = null
-
+	
 	if (user) {
 		if (update) {
 			update(user, args)

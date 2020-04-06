@@ -31,7 +31,7 @@ const states = {
 
 export class Login extends PureComponent {
 	static contextType = DataContext
-
+	
 	constructor(props) {
 		super(props)
 		this.handleChange = this.handleChange.bind(this)
@@ -39,16 +39,16 @@ export class Login extends PureComponent {
 		this.logout = this.logout.bind(this)
 		this.state = states.login
 	}
-
+	
 	componentDidMount() {
 		if (this.context.isAuthorized)
 			this.logout()
 	}
-
+	
 	handleChange(name, value) {
 		this.setState({ [name]: value })
 	}
-
+	
 	login() {
 		const data = {
 			query: `mutation(
@@ -67,7 +67,7 @@ export class Login extends PureComponent {
 				password: this.state.password,
 			},
 		}
-
+		
 		this.context.showSpinner()
 		axios.post(this.context.apiServer, data, { withCredentials: true })
 			.then(({ data: { data } }) => {
@@ -87,7 +87,7 @@ export class Login extends PureComponent {
 			})
 			.finally(this.context.hideSpinner)
 	}
-
+	
 	logout() {
 		this.context.showSpinner()
 		axios.post(
@@ -102,7 +102,7 @@ export class Login extends PureComponent {
 			.catch(err => handleError(err, 'Failed to log out'))
 			.finally(this.context.hideSpinner)
 	}
-
+	
 	render = () => (
 		<InnerLayout>
 			<ul style={{ marginTop: '1.5em' }} className={`

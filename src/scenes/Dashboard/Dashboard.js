@@ -8,7 +8,7 @@ import { DataContext } from '../../services/contexts/DataContext'
 export const Dashboard = () => {
 	const context = useContext(DataContext)
 	const challenges = context.challenges
-
+	
 	return (
 		<Flex>
 			<LeftColumn/>

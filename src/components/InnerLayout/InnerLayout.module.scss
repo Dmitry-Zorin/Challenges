@@ -3,7 +3,7 @@
 .innerLayout {
 	padding: 2em 1em;
 	min-height: calc(100% - 2em);
-
+	
 	@media (min-width: $breakpoint-small) {
 		padding: 2em 2em;
 	}

@@ -17,7 +17,7 @@ import { DataContext } from '../../../services/contexts/DataContext'
 
 export const Buttons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)
-
+	
 	const update = action => {
 		const data = {
 			query: `mutation($id: String!) {
@@ -26,7 +26,7 @@ export const Buttons = ({ challenge, navigate, options }) => {
       }`,
 			variables: { id: challenge._id },
 		}
-
+		
 		context.showSpinner()
 		axios.post(context.apiServer, data, { withCredentials: true })
 			.then(({ data: { data } }) => {
@@ -43,7 +43,7 @@ export const Buttons = ({ challenge, navigate, options }) => {
 			})
 			.finally(context.hideSpinner)
 	}
-
+	
 	return (
 		<div className='uk-width-expand uk-text-right'>
 			{options.includes('start') && (
@@ -53,7 +53,7 @@ export const Buttons = ({ challenge, navigate, options }) => {
 					onClick={() => update('Start')}
 				/>
 			)}
-
+			
 			{options.includes('complete') && (
 				<Button
 					icon={faCheck}
@@ -61,13 +61,13 @@ export const Buttons = ({ challenge, navigate, options }) => {
 					onClick={() => update('Complete')}
 				/>
 			)}
-
+			
 			<Button
 				icon={faPen}
 				tooltip='Edit'
 				onClick={() => navigate('/edit', { state: { challenge } })}
 			/>
-
+			
 			{options.includes('delete') && (
 				<Button
 					icon={faTrashAlt}

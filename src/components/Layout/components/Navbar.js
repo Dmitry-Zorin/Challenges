@@ -18,7 +18,7 @@ import {
 
 export const NavigationBar = ({ location }) => {
 	const context = useContext(DataContext)
-
+	
 	return (
 		<NavbarSticky>
 			<NavbarContainer>
@@ -40,9 +40,9 @@ export const NavigationBar = ({ location }) => {
 								</Link>
 							)}
 						</NavItem>
-
+						
 						<NavItem className='uk-width-expand'/>
-
+						
 						<NavItem>
 							{context.spinnerIsVisible ? (
 								<a href='/#' onClick={e => e.preventDefault()}>

@@ -4,7 +4,7 @@ import { Grid } from 'uikit-react'
 
 export const TimeInput = props => {
 	const time = getTimeObj(props.ms)
-
+	
 	return (
 		<div className='uk-margin-medium'>
 			{props.name}

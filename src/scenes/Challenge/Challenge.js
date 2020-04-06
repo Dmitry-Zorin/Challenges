@@ -31,13 +31,13 @@ const info = {
 
 export class Challenge extends Component {
 	static contextType = DataContext
-
+	
 	constructor(props) {
 		super(props)
 		this.getChallenge = this.getChallenge.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 		this.save = this.save.bind(this)
-
+		
 		this.state = {
 			...this.getChallenge(),
 		}
@@ -49,26 +49,26 @@ export class Challenge extends Component {
 			navigate: () => window.history.back(),
 		}
 	}
-
+	
 	getChallenge() {
 		const c = (this.props.location.state || {}).challenge
 		if (!c) return
-
+		
 		const now = new Date().getTime()
 		c.duration = Math.max(0, c.endDate - Math.max(c.startDate, now))
 		c.delay = Math.max(0, c.startDate - now)
 		return c
 	}
-
+	
 	handleChange(name, value) {
 		this.setState({ [name]: value })
 	}
-
+	
 	save(defaultName) {
 		const name = this.state.name || defaultName
 		const startDate = new Date().getTime() + (this.state.delay || 0)
 		const endDate = startDate + (this.state.duration || 0)
-
+		
 		const data = {
 			query: `mutation(
 		    ${this.info.id || ''}
@@ -95,7 +95,7 @@ export class Challenge extends Component {
 				endDate,
 			},
 		}
-
+		
 		this.context.showSpinner()
 		axios.post(this.context.apiServer, data, { withCredentials: true })
 			.then(({ data: { data } }) => {
@@ -111,11 +111,11 @@ export class Challenge extends Component {
 			})
 			.finally(this.context.hideSpinner)
 	}
-
+	
 	render = () => {
 		const defaultName = 'Challenge from ' + new Date().toString()
 			.split(' ').slice(1, 5).join(' ').slice(0, -3)
-
+		
 		return (
 			<InnerLayout title={this.info.title}>
 				<Form>

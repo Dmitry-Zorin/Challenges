@@ -1,14 +1,14 @@
 @import '../variables';
 @import '../mixins';
 @import './variables';
-@import "node_modules/uikit/src/scss/variables-theme";
+@import 'node_modules/uikit/src/scss/variables-theme';
 
 @mixin hook-accordion-title() {
 	height: auto;
 	min-height: 2em;
 	padding-top: 1em;
 	overflow: hidden;
-
+	
 	.uk-open & p {
 		color: $primary-color;
 	}
@@ -32,11 +32,11 @@
 	padding: 1.5em 1em;
 	overflow: hidden;
 	-webkit-mask-image: -webkit-radial-gradient(white, black);
-
+	
 	> div {
 		@extend .uk-animation-fade;
 	}
-
+	
 	@media (min-width: $breakpoint-large) {
 		margin: 1em 1em 2em;
 		padding: 1.5em 2em;
@@ -53,15 +53,15 @@
 	text-transform: $navbar-nav-item-text-transform;
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color;
-
+	
 	@media (min-width: $breakpoint-large) {
 		padding: 0 3em;
 	}
-
+	
 	@media (min-height: $height-breakpoint-medium) {
 		height: 60px;
 	}
-
+	
 	@media (min-height: $height-breakpoint-large) {
 		height: 70px;
 	}

@@ -2,11 +2,13 @@
 
 .layout {
 	padding: 0 0 1em;
-
+	margin-left: env(safe-area-inset-left);
+	margin-right: env(safe-area-inset-right);
+	
 	@media (min-height: $height-breakpoint-medium) {
 		padding-bottom: 2em;
 	}
-
+	
 	@media (min-height: $height-breakpoint-large) {
 		padding-bottom: 3em;
 	}
@@ -15,12 +17,12 @@
 .header {
 	height: 4.5em;
 	margin-top: 1em;
-
+	
 	@media (min-height: $height-breakpoint-medium) {
 		height: 5.25em;
 		margin-top: 1.75em;
 	}
-
+	
 	@media (min-height: $height-breakpoint-large) {
 		height: 6em;
 		margin-top: 2.5em;

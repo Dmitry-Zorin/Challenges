@@ -36,7 +36,7 @@ export const getChallenges = apiServer => (
 export const updateTime = async (challenges, apiServer) => {
 	const now = new Date().getTime()
 	let challengesNeedUpdate = false
-
+	
 	const updatedChallenges = {
 		ongoing: challenges.ongoing.map(c => {
 			const time = c.endDate - now
@@ -64,9 +64,9 @@ export const updateTime = async (challenges, apiServer) => {
 		}),
 		completed: challenges.completed,
 	}
-
+	
 	localStorage.setItem('challenges', JSON.stringify(updatedChallenges))
-
+	
 	return !challengesNeedUpdate ? updatedChallenges
 		: updateTime(await getChallenges(apiServer), apiServer)
 }

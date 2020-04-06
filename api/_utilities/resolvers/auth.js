@@ -10,7 +10,7 @@ const authResolvers = {
 				.then(async user => {
 					// User already exists
 					if (user) return { user: null }
-
+					
 					await new context.User({ username, password }).save()
 					return authenticate({ username, password }, context)
 				})

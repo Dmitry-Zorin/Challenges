@@ -9,38 +9,38 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export class ChallengeGroupExtended extends PureComponent {
 	static contextType = DataContext
-
+	
 	constructor(props) {
 		super(props)
 		this.search = this.search.bind(this)
 		this.changePage = this.changePage.bind(this)
-
+		
 		this.state = {
 			pattern: /.*/,
 			page: 0,
 		}
 		this.groupName = window.location.pathname.slice(1)
 	}
-
+	
 	search({ target }) {
 		this.setState({
 			pattern: new RegExp(target.value.split(' ').join('.*'), 'i'),
 		})
 	}
-
+	
 	changePage(e, diff) {
 		e.preventDefault()
 		const newPage = this.state.page + diff
 		if (newPage >= 0 && newPage < this.maxPage)
 			this.setState({ page: newPage })
 	}
-
+	
 	render = () => {
 		const challenges = (this.context.challenges[this.groupName] || [])
 			.filter(c => this.state.pattern.test(c.name))
-
+		
 		this.maxPage = Math.ceil(challenges.length / 10)
-
+		
 		return (
 			<InnerLayout title={this.groupName}>
 				<Search onChange={this.search}/>

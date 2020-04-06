@@ -8,7 +8,7 @@
 
 .height {
 	height: calc(100% - 2em);
-
+	
 	@media (min-width: $breakpoint-large) {
 		height: calc(100% - 3em);
 	}
