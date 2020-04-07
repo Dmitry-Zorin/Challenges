@@ -12,9 +12,10 @@
 		"start": "npm-run-all --parallel serve start_server",
 		"start_server": "npm run --prefix server start",
 		"serve": "react-scripts start",
-		"build": "react-scripts build; cp -r ./server ./build/server",
+		"build": "react-scripts build; cp -r server api; npm run rename",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"rename": "cd api; for f in */ ; do mv \"$f\" \"_$f\" ; done"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^1.2.27",

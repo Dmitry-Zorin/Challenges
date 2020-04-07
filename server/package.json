@@ -10,21 +10,21 @@
 		"directory": "server"
 	},
 	"scripts": {
-		"start": "nodemon app.js"
+		"start": "nodemon index.js"
 	},
 	"dependencies": {
-		"apollo-server-express": "^2.11.0",
+		"apollo-server-express": "^2.12.0",
 		"connect-mongodb-session": "^2.3.1",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"express-session": "^1.17.0",
+		"glob": "^7.1.6",
 		"graphql": "^14.6.0",
 		"graphql-passport": "^0.6.3",
 		"lodash": "^4.17.15",
 		"mongoose": "^5.9.7",
-		"passport": "^0.4.1",
-		"glob": "^7.1.6"
+		"passport": "^0.4.1"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.2"

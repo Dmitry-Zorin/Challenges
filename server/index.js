@@ -12,7 +12,7 @@ const resolvers = require('./graphql/resolvers')
 const User = require('./models/user')
 const getUserInfo = require('./helpers/user-info')
 
-configEnv({ path: __dirname + '/.env' })
+configEnv()
 
 connectToDb(process.env.ATLAS_URI, {
 	useNewUrlParser: true,
@@ -41,6 +41,6 @@ app.use(passport.session())
 const context = ({ req, res }) => buildContext({ req, res, User, getUserInfo })
 
 new ApolloServer({ typeDefs, resolvers, context })
-	.applyMiddleware({ app, path: '/api', cors: false })
+	.applyMiddleware({ app: app, path: '/api', cors: false })
 
 app.listen(process.env.PORT)
