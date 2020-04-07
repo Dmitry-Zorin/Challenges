@@ -5,12 +5,12 @@
 		"type": "danger"
 	},
 	"login": {
-		"title": "Failed to log in",
+		"title": "Log in error",
 		"message": "Wrong username or password",
 		"type": "danger"
 	},
 	"signUp": {
-		"title": "Failed to sign up",
+		"title": "Sign up error",
 		"message": "User already exists",
 		"type": "danger"
 	}

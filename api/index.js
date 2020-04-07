@@ -1,1 +1,1 @@
-require('../server/app')
+require('../build/server/app')
