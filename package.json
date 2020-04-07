@@ -10,7 +10,7 @@
 	},
 	"scripts": {
 		"start": "npm-run-all --parallel serve start_server",
-		"start_server": "npm run --prefix api start",
+		"start_server": "npm run --prefix server start",
 		"serve": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",

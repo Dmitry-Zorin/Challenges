@@ -1,16 +1,16 @@
 {
-	"name": "api",
-	"description": "API for Challenges",
+	"name": "server",
+	"description": "API server for Challenges",
 	"version": "0.1.0",
 	"license": "UNLICENSED",
 	"private": true,
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Dmitry-Zorin/Challenges.git",
-		"directory": "api"
+		"directory": "server"
 	},
 	"scripts": {
-		"start": "nodemon index.js"
+		"start": "nodemon app.js"
 	},
 	"dependencies": {
 		"apollo-server-express": "^2.11.0",

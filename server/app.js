@@ -1,11 +1,24 @@
 const { config: configEnv } = require('dotenv')
+const { connect: connectToDb } = require('mongoose')
 const express = require('express')
 const cors = require('cors')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 const passport = require('./middleware/passport')
+const { buildContext } = require('graphql-passport')
+const { ApolloServer } = require('apollo-server-express')
+const typeDefs = require('./graphql/schema')
+const resolvers = require('./graphql/resolvers')
+const User = require('./models/user')
+const getUserInfo = require('./helpers/user-info')
 
 configEnv({ path: __dirname + '/.env' })
+
+connectToDb(process.env.ATLAS_URI, {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useUnifiedTopology: true,
+}).catch(console.log)
 
 const app = express()
 const envIsProduction = process.env.NODE_ENV === 'production'
@@ -25,4 +38,9 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-module.exports = app
+const context = ({ req, res }) => buildContext({ req, res, User, getUserInfo })
+
+new ApolloServer({ typeDefs, resolvers, context })
+	.applyMiddleware({ app, path: '/api', cors: false })
+
+app.listen(process.env.PORT)
