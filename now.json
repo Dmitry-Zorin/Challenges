@@ -1,9 +1,7 @@
 {
 	"functions": {
-		"api": {
-			"excludeFiles": "!(index.js)"
-		},
 		"api/index.js": {
+			"excludeFiles": "!(api/index.js)",
 			"memory": 256
 		}
 	},
