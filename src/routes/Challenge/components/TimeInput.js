@@ -1,8 +1,8 @@
 import React from 'react'
-import { getTimeObj, toMs } from 'services'
+import { getTimeObj, toMs } from 'scripts/time'
 import { Grid } from 'uikit-react'
 
-export const TimeInput = props => {
+export const TimeInput = (props) => {
 	const time = getTimeObj(props.ms)
 	
 	return (

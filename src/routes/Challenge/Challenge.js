@@ -1,33 +1,14 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { Form } from 'uikit-react'
 import { InnerLayout } from 'components/InnerLayout'
-import { addNotification, challengesQuery, handleError } from 'services'
+import { addNotification } from 'scripts/utils'
 import { DataContext } from 'contexts/DataContext'
-import notifications from 'data/notifications'
+import challenge from 'data/notifications/challenge'
 import { DifficultyInput } from './components/DifficultyInput'
 import { TimeInput } from './components/TimeInput'
 import { Buttons } from './components/Buttons'
 import { TextInput } from 'components/TextInput'
-
-const info = {
-	create: {
-		api: 'challengeAdd',
-		notification: 'challengeCreated',
-		action: 'Create',
-		title: 'New challenge',
-		save: 'Create challenge',
-	},
-	edit: {
-		id: '$id: String!',
-		id_var: 'id: $id',
-		api: 'challengeEdit',
-		notification: 'challengeEdited',
-		action: 'Update',
-		title: 'Edit challenge',
-		save: 'Save',
-	},
-}
+import { saveChallenge } from 'scripts/services'
 
 export class Challenge extends Component {
 	static contextType = DataContext
@@ -39,13 +20,21 @@ export class Challenge extends Component {
 		this.save = this.save.bind(this)
 		
 		this.state = {
+			difficulty: 'Easy',
+			duration: 0,
+			delay: 0,
 			...this.getChallenge(),
 		}
+		
 		this.info = !this.state._id ? {
-			...info.create,
+			action: 'create',
+			title: 'New challenge',
+			save: 'Create challenge',
 			navigate: () => props.navigate('..'),
 		} : {
-			...info.edit,
+			action: 'edit',
+			title: 'Edit challenge',
+			save: 'Save',
 			navigate: () => window.history.back(),
 		}
 	}
@@ -65,51 +54,22 @@ export class Challenge extends Component {
 	}
 	
 	save(defaultName) {
-		const name = this.state.name || defaultName
-		const startDate = new Date().getTime() + (this.state.delay || 0)
-		const endDate = startDate + (this.state.duration || 0)
-		
-		const data = {
-			query: `mutation(
-		    ${this.info.id || ''}
-		    $name: String!
-		    $difficulty: Difficulty
-		    $startDate: Float
-		    $endDate: Float
-		  ) {
-		    ${this.info.api}(
-		      ${this.info.id_var || ''}
-		      challenge: {
-		        name: $name
-		        difficulty: $difficulty
-		        startDate: $startDate
-		        endDate: $endDate
-		      }
-		    ) ${challengesQuery}
-		  }`,
-			variables: {
-				id: this.state._id,
-				name,
-				difficulty: this.state.difficulty,
-				startDate,
-				endDate,
-			},
+		const variables = {
+			id: this.state._id,
+			name: this.state.name || defaultName,
+			difficulty: this.state.difficulty,
+			startDate: new Date().getTime() + this.state.delay,
 		}
+		variables.endDate = variables.startDate + this.state.duration
 		
-		this.context.showSpinner()
-		axios.post(this.context.apiServer, data, { withCredentials: true })
-			.then(({ data: { data } }) => {
-				this.context.update(data[this.info.api].challenges)
-				addNotification({
-					...notifications[this.info.notification],
-					message: name,
-				})
-				this.info.navigate()
+		saveChallenge(this.context, this.info.action, variables).then(res => {
+			this.context.update(res.challenges)
+			addNotification({
+				...challenge[`${this.info.action}ed`.replace('ee', 'e')],
+				message: variables.name,
 			})
-			.catch(err => {
-				handleError(err, `Failed to ${this.info.action} challenge`)
-			})
-			.finally(this.context.hideSpinner)
+			this.info.navigate()
+		})
 	}
 	
 	render = () => {
@@ -126,17 +86,17 @@ export class Challenge extends Component {
 						handleChange={this.handleChange}
 					/>
 					<DifficultyInput
-						difficulty={this.state.difficulty || 'Easy'}
+						difficulty={this.state.difficulty}
 						handleChange={this.handleChange}
 					/>
 					<TimeInput
 						name='Duration'
-						ms={this.state.duration || 0}
+						ms={this.state.duration}
 						handleChange={this.handleChange}
 					/>
 					<TimeInput
 						name='Delay'
-						ms={this.state.delay || 0}
+						ms={this.state.delay}
 						handleChange={this.handleChange}
 					/>
 					<Buttons

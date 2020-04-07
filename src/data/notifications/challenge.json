@@ -1,0 +1,20 @@
+{
+	"created": {
+		"title": "New challenge!",
+		"type": "default"
+	},
+	"edited": {
+		"title": "Challenge updated!"
+	},
+	"started": {
+		"title": "Challenge started!"
+	},
+	"completed": {
+		"title": "Challenge completed!",
+		"type": "success"
+	},
+	"deleted": {
+		"title": "Challenge deleted",
+		"type": "danger"
+	}
+}

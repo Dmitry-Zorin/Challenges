@@ -2,9 +2,7 @@
 
 const resolvers = {
 	Query: {
-		challenges: (...args) => (
-			getUpdatedChallenges(args)
-		),
+		challenges: (...args) => getUpdatedChallenges(args),
 	},
 	Mutation: {
 		challengeAdd: (...args) => (
@@ -36,7 +34,6 @@ const resolvers = {
 			getUpdatedChallenges(args, (user, { id }) => {
 				const c = findChallenge(user, id)
 				c.endDate = new Date().getTime()
-				user.save().catch(console.log)
 			})
 		),
 	},
@@ -46,12 +43,15 @@ const getUpdatedChallenges = ([obj, args, context], update) => {
 	const user = context.getUser()
 	let challenges = null
 	
-	if (user) {
-		if (update) {
+	if (user && update) {
+		try {
 			update(user, args)
-			user.save().catch(console.log)
+			challenges = context.getUserInfo(user).challenges
+			user.save()
 		}
-		challenges = context.getUserInfo(user).challenges
+		catch (err) {
+			console.log(err)
+		}
 	}
 	return { challenges }
 }

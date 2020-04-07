@@ -6,82 +6,47 @@ import {
 	faPlay,
 	faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
-import { addNotification, challengesQuery, handleError } from 'services'
-import notifications from 'data/notifications'
+import { addNotification } from 'scripts/utils'
+import challengeNotif from 'data/notifications/challenge'
 import { DataContext } from 'contexts/DataContext'
+import { updateChallenge } from 'scripts/services'
+
+const icons = {
+	start: faPlay,
+	complete: faCheck,
+	edit: faPen,
+	delete: faTrashAlt,
+}
 
 export const Buttons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)
 	
-	const update = action => {
-		const data = {
-			query: `mutation($id: String!) {
-        challenge${action}(id: $id) 
-          ${challengesQuery}
-      }`,
-			variables: { id: challenge._id },
-		}
+	const update = (action) => {
+		if (action === 'Edit') return navigate('/edit', { state: { challenge } })
 		
-		context.showSpinner()
-		axios.post(context.apiServer, data, { withCredentials: true })
-			.then(({ data: { data } }) => {
-				context.update(data[`challenge${action}`].challenges)
+		updateChallenge(context, action, { id: challenge._id })
+			.then(res => {
+				context.update(res.challenges)
 				addNotification({
-					...action === 'Start' ? notifications.challengeStarted
-						: action === 'Complete' ? notifications.challengeCompleted
-							: notifications.challengeDeleted,
+					...challengeNotif[`${action.toLowerCase()}ed`.replace('ee', 'e')],
 					message: challenge.name,
 				})
 			})
-			.catch(err => {
-				handleError(err, `Failed to ${action.toLowerCase()} challenge`)
-			})
-			.finally(context.hideSpinner)
 	}
 	
 	return (
 		<div className='uk-width-expand uk-text-right'>
-			{options.includes('start') && (
-				<Button
-					icon={faPlay}
-					tooltip='Start'
-					onClick={() => update('Start')}
-				/>
-			)}
-			
-			{options.includes('complete') && (
-				<Button
-					icon={faCheck}
-					tooltip='Complete'
-					onClick={() => update('Complete')}
-				/>
-			)}
-			
-			<Button
-				icon={faPen}
-				tooltip='Edit'
-				onClick={() => navigate('/edit', { state: { challenge } })}
-			/>
-			
-			{options.includes('delete') && (
-				<Button
-					icon={faTrashAlt}
-					tooltip='Delete'
-					onClick={() => update('Delete')}
-				/>
-			)}
+			{[...options || [], 'Edit', 'Delete'].map(o => (
+				<button
+					key={o}
+					className='uk-button uk-padding-remove'
+					style={{ width: '3em', marginLeft: '0.5em' }}
+					data-uk-tooltip={o}
+					onClick={() => update(o)}
+				>
+					<FontAwesomeIcon icon={icons[o.toLowerCase()]} transform='grow-3'/>
+				</button>
+			))}
 		</div>
 	)
 }
-
-const Button = ({ icon, tooltip, onClick }) => (
-	<button
-		className='uk-button uk-padding-remove'
-		style={{ width: '3em', marginLeft: '0.5em' }}
-		data-uk-tooltip={tooltip}
-		onClick={onClick}
-	>
-		<FontAwesomeIcon icon={icon} transform='grow-3'/>
-	</button>
-)

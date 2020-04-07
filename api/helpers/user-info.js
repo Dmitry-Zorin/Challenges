@@ -1,13 +1,12 @@
-const getUserInfo = user => {
+const getUserInfo = (user) => {
 	if (!user) return null
-	
-	const now = new Date().getTime()
 	
 	const sortedChallenges = {
 		ongoing: [],
 		upcoming: [],
 		completed: [],
 	}
+	const now = new Date().getTime()
 	
 	for (const c of user.challenges) {
 		const progress = (

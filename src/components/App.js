@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import axios from 'axios'
 import { Router } from '@reach/router'
 import { Layout } from './Layout'
 import { Login } from 'routes/Login'
@@ -9,9 +8,10 @@ import { DataContext } from 'contexts/DataContext'
 import { Dashboard } from 'routes/Dashboard'
 import { Challenge } from 'routes/Challenge'
 import { ChallengeGroupExtended } from 'routes/ChallengeGroupExtended'
-import { challengesQuery, handleError, updateTime } from 'services'
+import { updateTime } from 'scripts/time'
+import { getUserInfo } from 'scripts/services'
 
-export default class App extends PureComponent {
+export class App extends PureComponent {
 	constructor(props) {
 		super(props)
 		this.toggleSpinner = this.toggleSpinner.bind(this)
@@ -30,27 +30,14 @@ export default class App extends PureComponent {
 	}
 	
 	componentDidMount() {
-		axios.post(
-			this.state.apiServer,
-			{ query: `{ user { user ${challengesQuery} } }` },
-			{ withCredentials: true },
-		)
-			.then(({ data: { data } }) => {
-				const user = data.user.user
-				user ? this.login(user) : this.logout()
-			})
-			.catch(err => {
-				handleError(err, 'Failed to update challenges')
-			})
-			.finally(this.state.hideSpinner)
+		getUserInfo(this.state).then(res => (
+			res.user ? this.login(res.user) : this.logout()
+		))
 		
 		// Timeout for the mobile devices
 		setTimeout(() => {
 			this.setState({
-				spinnerIsVisible: true,
-				challenges: JSON.parse(
-					localStorage.getItem('challenges'),
-				) || {},
+				challenges: JSON.parse(localStorage.getItem('challenges')) || {},
 			})
 		}, 0)
 	}
@@ -63,24 +50,25 @@ export default class App extends PureComponent {
 		this.setState({ spinnerIsVisible })
 	}
 	
-	async updateChallenges(challenges, isAuthorized = true) {
+	async updateChallenges(challenges) {
 		challenges = await updateTime(
 			challenges || this.state.challenges,
 			this.state.apiServer,
 		)
-		this.setState({ challenges, isAuthorized })
+		this.setState({ challenges })
 	}
 	
 	login(user) {
+		this.setState({ userIsAuthorized: true })
+		this.updateChallenges(user.challenges)
 		this.interval = setInterval(this.updateChallenges, 15000)
-		this.updateChallenges(user.challenges, true)
 	}
 	
 	logout() {
 		clearInterval(this.interval)
 		this.setState({
 			challenges: {},
-			isAuthorized: false,
+			userIsAuthorized: false,
 		})
 	}
 	

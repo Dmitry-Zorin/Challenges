@@ -1,0 +1,17 @@
+{
+	"error": {
+		"title": "Error",
+		"message": "Something went wrong",
+		"type": "danger"
+	},
+	"login": {
+		"title": "Failed to log in",
+		"message": "Wrong username or password",
+		"type": "danger"
+	},
+	"signUp": {
+		"title": "Failed to sign up",
+		"message": "User already exists",
+		"type": "danger"
+	}
+}

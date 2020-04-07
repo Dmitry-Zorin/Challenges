@@ -7,8 +7,8 @@ import '../node_modules/uikit/dist/js/uikit.min.js'
 
 import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
-import App from 'components/App'
-import * as serviceWorker from 'services/serviceWorker'
+import { App } from 'components/App'
+import * as serviceWorker from 'scripts/serviceWorker'
 
 ReactDOM.render(
 	<StrictMode>

@@ -26,9 +26,7 @@ export const NavigationBar = ({ location }) => {
 					<Navbar>
 						<NavItem>
 							{location.pathname === '/' ? (
-								<Link to='/' className='primary'>
-									Challenges
-								</Link>
+								<Link to='/' className='primary'>Challenges</Link>
 							) : (
 								<Link to='/'>
 									<FontAwesomeIcon
@@ -51,11 +49,11 @@ export const NavigationBar = ({ location }) => {
 							) : (
 								<Link to='/login'>
 									<FontAwesomeIcon
-										icon={context.isAuthorized ? faSignOutAlt : faSignInAlt}
+										icon={context.userIsAuthorized ? faSignOutAlt : faSignInAlt}
 										className='icon-left'
 										transform='down-0.65'
 									/>
-									{context.isAuthorized ? 'Log out' : 'Log in'}
+									{context.userIsAuthorized ? 'Log out' : 'Log in'}
 								</Link>
 							)}
 						</NavItem>

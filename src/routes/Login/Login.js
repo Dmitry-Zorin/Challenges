@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react'
-import axios from 'axios'
 import { Form } from 'uikit-react'
 import { InnerLayout } from 'components/InnerLayout'
-import { addNotification, challengesQuery, handleError } from 'services'
+import { addNotification } from 'scripts/utils'
 import { DataContext } from 'contexts/DataContext'
-import notifications from 'data/notifications'
+import error from 'data/notifications/error'
 import { SwitcherItem } from 'components/SwitcherItem'
 import { TextInput } from 'components/TextInput'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,6 +14,7 @@ import {
 	faUser,
 	faUserPlus,
 } from '@fortawesome/free-solid-svg-icons'
+import { authorize, logout } from 'scripts/services'
 
 const states = {
 	login: {
@@ -35,72 +35,35 @@ export class Login extends PureComponent {
 	constructor(props) {
 		super(props)
 		this.handleChange = this.handleChange.bind(this)
-		this.login = this.login.bind(this)
+		this.authorize = this.authorize.bind(this)
 		this.logout = this.logout.bind(this)
 		this.state = states.login
 	}
 	
 	componentDidMount() {
-		if (this.context.isAuthorized)
-			this.logout()
+		if (this.context.userIsAuthorized) this.logout()
 	}
 	
 	handleChange(name, value) {
 		this.setState({ [name]: value })
 	}
 	
-	login() {
-		const data = {
-			query: `mutation(
-		    $username: String!
-		    $password: String!
-		  ) {
-		    ${this.state.action}(
-		      username: $username
-		      password: $password
-		    ) {
-		      user ${challengesQuery} 
-		    }
-		  }`,
-			variables: {
-				username: this.state.username,
-				password: this.state.password,
-			},
-		}
-		
-		this.context.showSpinner()
-		axios.post(this.context.apiServer, data, { withCredentials: true })
-			.then(({ data: { data } }) => {
-				const user = data[this.state.action].user
-				if (!user) {
-					return addNotification(
-						this.state.action === 'login'
-							? notifications.loginFailed
-							: notifications.signUpFailed,
-					)
-				}
+	authorize() {
+		const { action, username, password } = this.state
+		authorize(this.context, action, { username, password })
+			.then(({ user }) => {
+				if (!user) return addNotification(error[action])
+				
 				this.props.login(user)
 				this.props.navigate('/')
 			})
-			.catch(err => {
-				handleError(err, `Failed to ${this.state.title.toLowerCase()}`)
-			})
-			.finally(this.context.hideSpinner)
 	}
 	
 	logout() {
-		this.context.showSpinner()
-		axios.post(
-			this.context.apiServer,
-			{ query: 'mutation { logout { user { username } } }' },
-			{ withCredentials: true },
-		)
-			.then(() => {
-				localStorage.clear()
-				this.props.logout()
-			})
-			.catch(err => handleError(err, 'Failed to log out'))
-			.finally(this.context.hideSpinner)
+		logout(this.context).then(() => {
+			localStorage.clear()
+			this.props.logout()
+		})
 	}
 	
 	render = () => (
@@ -112,18 +75,15 @@ export class Login extends PureComponent {
 				uk-child-width-1-2
 				uk-child-width-1-3@m
 			`}>
-				<SwitcherItem
-					icon={states.login.icon}
-					value={states.login.title}
-					active={this.state.action === 'login'}
-					onClick={() => this.setState(states.login)}
-				/>
-				<SwitcherItem
-					icon={states.signUp.icon}
-					value={states.signUp.title}
-					active={this.state.action === 'signUp'}
-					onClick={() => this.setState(states.signUp)}
-				/>
+				{['login', 'signUp'].map(a => (
+					<SwitcherItem
+						key={a}
+						icon={states[a].icon}
+						value={states[a].title}
+						active={this.state.action === a}
+						onClick={() => this.setState(states[a])}
+					/>
+				))}
 			</ul>
 			<Form className='uk-margin-medium-top'>
 				<TextInput
@@ -142,7 +102,7 @@ export class Login extends PureComponent {
 				<button
 					className='uk-button uk-align-center uk-width-1-3@m uk-width-1-2@s'
 					style={{ marginTop: '4em' }}
-					onClick={this.login}
+					onClick={this.authorize}
 				>
 					<FontAwesomeIcon
 						icon={faPaperPlane}

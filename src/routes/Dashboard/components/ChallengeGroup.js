@@ -2,7 +2,7 @@ import React from 'react'
 import dashboardStyles from '../Dashboard.module.scss'
 import { Card, Grid } from 'uikit-react'
 import { Link } from '@reach/router'
-import { getChallengeTime } from 'services'
+import { getChallengeTime } from 'scripts/time'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faArrowDown,
@@ -15,9 +15,7 @@ import {
 export const ChallengeGroup = ({ to, title, group = [] }) => (
 	<Link to={to}>
 		<Card className='uk-transition-toggle' style={{ height: '15em' }}>
-			<p className='font-size-large uk-text-center'>
-				{title}
-			</p>
+			<p className='font-size-large uk-text-center'>{title}</p>
 			{!group.length ? (
 				<p
 					className='uk-text-center uk-text-muted'
@@ -69,7 +67,7 @@ const ChallengeGroupItem = ({ title, challenge }) => (
 			style={{ marginTop: '0.3em' }}
 		>
 			<FontAwesomeIcon icon={icons[title]} transform='shrink-2'/>
-			{getChallengeTime(title, challenge)}
+			{getChallengeTime(challenge)}
 		</div>
 	</Grid>
 )
