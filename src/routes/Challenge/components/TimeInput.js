@@ -1,13 +1,14 @@
 import React from 'react'
 import { getTimeObj, toMs } from 'scripts/time'
 import { Grid } from 'uikit-react'
+import { capitalize } from 'lodash'
 
 export const TimeInput = (props) => {
 	const time = getTimeObj(props.ms)
 	
 	return (
 		<div className='uk-margin-medium'>
-			{props.name}
+			{capitalize(props.name)}
 			<Grid>
 				<NumberInput
 					label='days'

@@ -30,9 +30,8 @@ export class ChallengeGroupExtended extends PureComponent {
 	
 	changePage(e, diff) {
 		e.preventDefault()
-		const newPage = this.state.page + diff
-		if (newPage >= 0 && newPage < this.maxPage)
-			this.setState({ page: newPage })
+		const page = this.state.page + diff
+		if (page >= 0 && page < this.maxPage) this.setState({ page })
 	}
 	
 	render = () => {

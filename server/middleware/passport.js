@@ -4,7 +4,7 @@ const User = require('../models/user')
 
 passport.use(new GraphQLLocalStrategy((username, password, done) => {
 	User.findOne({ username }, (err, user) => {
-		done(err, user.password === password && user)
+		done(err, user && user.password === password && user)
 	})
 }))
 

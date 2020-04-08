@@ -11,11 +11,12 @@ import {
 	faBars,
 	faCheck,
 } from '@fortawesome/free-solid-svg-icons'
+import { capitalize } from 'lodash'
 
 export const ChallengeGroup = ({ to, title, group = [] }) => (
 	<Link to={to}>
 		<Card className='uk-transition-toggle' style={{ height: '15em' }}>
-			<p className='font-size-large uk-text-center'>{title}</p>
+			<p className='font-size-large uk-text-center'>{capitalize(title)}</p>
 			{!group.length ? (
 				<p
 					className='uk-text-center uk-text-muted'
@@ -52,9 +53,9 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 )
 
 const icons = {
-	'Ongoing': faArrowDown,
-	'Upcoming': faArrowUp,
-	'Completed': faCheck,
+	'ongoing': faArrowDown,
+	'upcoming': faArrowUp,
+	'completed': faCheck,
 }
 
 const ChallengeGroupItem = ({ title, challenge }) => (

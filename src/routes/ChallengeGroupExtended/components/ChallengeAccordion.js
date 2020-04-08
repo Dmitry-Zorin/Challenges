@@ -10,8 +10,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 const challengeInfo = {
-	ongoing: { icon: faArrowDown, options: ['Complete'] },
-	upcoming: { icon: faArrowUp, options: ['Start'] },
+	ongoing: { icon: faArrowDown, options: ['complete'] },
+	upcoming: { icon: faArrowUp, options: ['start'] },
 	completed: { icon: faCheck },
 }
 const labelTypes = { Easy: 'success', Medium: 'warning', Hard: 'danger' }

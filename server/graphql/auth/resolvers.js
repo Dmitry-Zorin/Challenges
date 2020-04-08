@@ -4,15 +4,16 @@ const resolvers = {
 	},
 	Mutation: {
 		signUp: (_, { username, password }, context) => (
-			context.User.findOne({ username })
-				.then(async user => {
-					// User already exists
-					if (user) return { user: null }
-					
-					await new context.User({ username, password }).save()
-					return authenticate({ username, password }, context)
-				})
-				.catch(console.log)
+			!username || !password ? { user: null }
+				: context.User.findOne({ username })
+					.then(async user => {
+						// User already exists
+						if (user) return { user: null }
+						
+						await new context.User({ username, password }).save()
+						return authenticate({ username, password }, context)
+					})
+					.catch(console.log)
 		),
 		login: (_, { username, password }, context) => (
 			authenticate({ username, password }, context).catch(console.log)

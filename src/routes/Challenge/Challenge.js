@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { Form } from 'uikit-react'
 import { InnerLayout } from 'components/InnerLayout'
-import { addNotification } from 'scripts/utils'
 import { DataContext } from 'contexts/DataContext'
-import challenge from 'data/notifications/challenge'
 import { DifficultyInput } from './components/DifficultyInput'
 import { TimeInput } from './components/TimeInput'
 import { Buttons } from './components/Buttons'
 import { TextInput } from 'components/TextInput'
-import { saveChallenge } from 'scripts/services'
+import { saveChallenge } from 'scripts/requests'
+import { capitalize } from 'lodash'
 
 export class Challenge extends Component {
 	static contextType = DataContext
@@ -28,13 +27,13 @@ export class Challenge extends Component {
 		
 		this.info = !this.state._id ? {
 			action: 'create',
-			title: 'New challenge',
-			save: 'Create challenge',
+			title: 'new challenge',
+			save: 'create challenge',
 			navigate: () => props.navigate('..'),
 		} : {
 			action: 'edit',
-			title: 'Edit challenge',
-			save: 'Save',
+			title: 'edit challenge',
+			save: 'save',
 			navigate: () => window.history.back(),
 		}
 	}
@@ -62,14 +61,12 @@ export class Challenge extends Component {
 		}
 		variables.endDate = variables.startDate + this.state.duration
 		
-		saveChallenge(this.context, this.info.action, variables).then(res => {
-			this.context.update(res.challenges)
-			addNotification({
-				...challenge[`${this.info.action}ed`.replace('ee', 'e')],
-				message: variables.name,
+		saveChallenge(this.context, this.info.action, variables)
+			.then(challenges => {
+				this.context.update(challenges)
+				this.info.navigate()
 			})
-			this.info.navigate()
-		})
+			.catch()
 	}
 	
 	render = () => {
@@ -80,7 +77,7 @@ export class Challenge extends Component {
 			<InnerLayout title={this.info.title}>
 				<Form>
 					<TextInput
-						label='Name'
+						label='name'
 						value={this.state.name}
 						defaultValue={defaultName}
 						handleChange={this.handleChange}
@@ -90,12 +87,12 @@ export class Challenge extends Component {
 						handleChange={this.handleChange}
 					/>
 					<TimeInput
-						name='Duration'
+						name='duration'
 						ms={this.state.duration}
 						handleChange={this.handleChange}
 					/>
 					<TimeInput
-						name='Delay'
+						name='delay'
 						ms={this.state.delay}
 						handleChange={this.handleChange}
 					/>

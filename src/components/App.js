@@ -9,7 +9,7 @@ import { Dashboard } from 'routes/Dashboard'
 import { Challenge } from 'routes/Challenge'
 import { ChallengeGroupExtended } from 'routes/ChallengeGroupExtended'
 import { updateTime } from 'scripts/time'
-import { getUserInfo } from 'scripts/services'
+import { getUserInfo } from 'scripts/requests'
 
 export class App extends PureComponent {
 	constructor(props) {
@@ -30,9 +30,7 @@ export class App extends PureComponent {
 	}
 	
 	componentDidMount() {
-		getUserInfo(this.state).then(res => (
-			res.user ? this.login(res.user) : this.logout()
-		))
+		getUserInfo(this.state).then(this.login).catch(this.logout)
 		
 		// Timeout for the mobile devices
 		setTimeout(() => {

@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Form } from 'uikit-react'
 import { InnerLayout } from 'components/InnerLayout'
-import { addNotification } from 'scripts/utils'
 import { DataContext } from 'contexts/DataContext'
-import error from 'data/notifications/error'
 import { SwitcherItem } from 'components/SwitcherItem'
 import { TextInput } from 'components/TextInput'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,17 +12,19 @@ import {
 	faUser,
 	faUserPlus,
 } from '@fortawesome/free-solid-svg-icons'
-import { authorize, logout } from 'scripts/services'
+import { authorize, logout } from 'scripts/requests'
+import { addNotification } from 'scripts/utils'
+import errors from 'data/notifications/errors.json'
 
 const states = {
 	login: {
 		action: 'login',
-		title: 'Log in',
+		title: 'log in',
 		icon: faSignInAlt,
 	},
 	signUp: {
 		action: 'signUp',
-		title: 'Sign up',
+		title: 'sign up',
 		icon: faUserPlus,
 	},
 }
@@ -50,20 +50,23 @@ export class Login extends PureComponent {
 	
 	authorize() {
 		const { action, username, password } = this.state
-		authorize(this.context, action, { username, password })
-			.then(({ user }) => {
-				if (!user) return addNotification(error[action])
-				
-				this.props.login(user)
-				this.props.navigate('/')
-			})
+		!username || !password ? addNotification(errors.invalid)
+			: authorize(this.context, action, { username, password })
+				.then(user => {
+					if (!user) return
+					this.props.login(user)
+					this.props.navigate('/')
+				})
+				.catch()
 	}
 	
 	logout() {
-		logout(this.context).then(() => {
-			localStorage.clear()
-			this.props.logout()
-		})
+		logout(this.context)
+			.then(() => {
+				localStorage.clear()
+				this.props.logout()
+			})
+			.catch()
 	}
 	
 	render = () => (
@@ -88,13 +91,13 @@ export class Login extends PureComponent {
 			<Form className='uk-margin-medium-top'>
 				<TextInput
 					icon={faUser}
-					label='Username'
+					label='username'
 					value={this.state.username}
 					handleChange={this.handleChange}
 				/>
 				<TextInput
 					icon={faLock}
-					label='Password'
+					label='password'
 					value={this.state.password}
 					handleChange={this.handleChange}
 					isPassword={true}

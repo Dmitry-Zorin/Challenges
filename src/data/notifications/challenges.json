@@ -1,16 +1,16 @@
 {
 	"created": {
-		"title": "New challenge!",
+		"title": "New challenge",
 		"type": "default"
 	},
 	"edited": {
-		"title": "Challenge updated!"
+		"title": "Challenge updated"
 	},
 	"started": {
-		"title": "Challenge started!"
+		"title": "Challenge started"
 	},
 	"completed": {
-		"title": "Challenge completed!",
+		"title": "Challenge completed",
 		"type": "success"
 	},
 	"deleted": {

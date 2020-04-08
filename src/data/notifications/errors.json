@@ -1,0 +1,32 @@
+{
+	"unknown": {
+		"title": "Error",
+		"message": "Something went wrong...",
+		"type": "danger"
+	},
+	"response": {
+		"title": "Error",
+		"message": "Unexpected response",
+		"type": "danger"
+	},
+	"invalid": {
+		"title": "Error",
+		"message": "Invalid input",
+		"type": "danger"
+	},
+	"signUp": {
+		"title": "Sign up error",
+		"message": "User already exists",
+		"type": "danger"
+	},
+	"login": {
+		"title": "Log in error",
+		"message": "Wrong username or password",
+		"type": "danger"
+	},
+	"logout": {
+		"title": "Log out error",
+		"message": "?",
+		"type": "danger"
+	}
+}

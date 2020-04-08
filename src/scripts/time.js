@@ -1,10 +1,10 @@
-import { getChallenges } from './services'
+import { getChallenges } from 'scripts/requests'
 import { addNotification } from './utils'
-import challenge from 'data/notifications/challenge'
+import challengeNotifications from 'data/notifications/challenges.json'
 
 export const toMs = { DAY: 864e5, HOUR: 36e5, MINUTE: 6e4 }
 
-export const updateTime = async (challenges, context) => {
+export const updateTime = (challenges, context) => {
 	const now = new Date().getTime()
 	let challengesNeedUpdate = false
 	
@@ -19,12 +19,12 @@ export const updateTime = async (challenges, context) => {
 	const updatedChallenges = {
 		ongoing: challenges.ongoing.map(c => {
 			const ms = c.endDate - now
-			c.timeLeft = getTime(c, ms, challenge.completed)
+			c.timeLeft = getTime(c, ms, challengeNotifications.completed)
 			return c
 		}),
 		upcoming: challenges.upcoming.map(c => {
 			const ms = c.startDate - now
-			c.startsIn = getTime(c, ms, challenge.started)
+			c.startsIn = getTime(c, ms, challengeNotifications.started)
 			return c
 		}),
 		completed: challenges.completed,
@@ -32,8 +32,9 @@ export const updateTime = async (challenges, context) => {
 	
 	localStorage.setItem('challenges', JSON.stringify(updatedChallenges))
 	
-	return !challengesNeedUpdate ? updatedChallenges
-		: updateTime(await getChallenges(context), context)
+	return !challengesNeedUpdate ? updatedChallenges : getChallenges(context)
+		.then(challenges => updateTime(challenges, context))
+		.catch(() => updatedChallenges)
 }
 
 const getTimeString = (c, ms) => {

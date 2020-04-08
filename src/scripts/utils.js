@@ -1,7 +1,6 @@
-import error from 'data/notifications/error'
 import { store } from 'react-notifications-component'
 
-export const addNotification = settings => (
+export const addNotification = settings => {
 	store.addNotification({
 		type: 'info',
 		insert: 'top',
@@ -11,12 +10,10 @@ export const addNotification = settings => (
 		dismiss: { duration: 3000 },
 		...settings,
 	})
-)
+}
 
-export const handleError = (err, message) => {
-	console.log(err.toJSON ? err.toJSON() : err)
-	addNotification({
-		...error.error,
-		message: message || err.message,
-	})
+export const handleError = (err, message = 'Error') => {
+	const errors = err.response?.data?.errors
+	if (errors) console.log('Errors', errors.map(e => e.message))
+	addNotification({ title: 'Error', message, type: 'danger' })
 }

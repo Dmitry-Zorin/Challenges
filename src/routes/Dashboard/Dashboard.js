@@ -14,21 +14,9 @@ export const Dashboard = () => {
 			<LeftColumn/>
 			<div className='uk-width-expand uk-padding-remove-left'>
 				<NewChallengeButton/>
-				<ChallengeGroup
-					to='/ongoing'
-					title='Ongoing'
-					group={challenges.ongoing}
-				/>
-				<ChallengeGroup
-					to='/upcoming'
-					title='Upcoming'
-					group={challenges.upcoming}
-				/>
-				<ChallengeGroup
-					to='/completed'
-					title='Completed'
-					group={challenges.completed}
-				/>
+				{['ongoing', 'upcoming', 'completed'].map(g => (
+					<ChallengeGroup key={g} to={`/${g}`} title={g} group={challenges[g]}/>
+				))}
 			</div>
 		</Flex>
 	)

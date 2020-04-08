@@ -6,10 +6,8 @@ import {
 	faPlay,
 	faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons'
-import { addNotification } from 'scripts/utils'
-import challengeNotif from 'data/notifications/challenge'
 import { DataContext } from 'contexts/DataContext'
-import { updateChallenge } from 'scripts/services'
+import { updateChallenge } from 'scripts/requests'
 
 const icons = {
 	start: faPlay,
@@ -22,21 +20,15 @@ export const Buttons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)
 	
 	const update = (action) => {
-		if (action === 'Edit') return navigate('/edit', { state: { challenge } })
+		if (action === 'edit') return navigate('/edit', { state: { challenge } })
 		
-		updateChallenge(context, action, { id: challenge._id })
-			.then(res => {
-				context.update(res.challenges)
-				addNotification({
-					...challengeNotif[`${action.toLowerCase()}ed`.replace('ee', 'e')],
-					message: challenge.name,
-				})
-			})
+		updateChallenge(context, action, { id: challenge._id }, challenge.name)
+			.then(context.update).catch()
 	}
 	
 	return (
 		<div className='uk-width-expand uk-text-right'>
-			{[...options || [], 'Edit', 'Delete'].map(o => (
+			{[...options || [], 'edit', 'delete'].map(o => (
 				<button
 					key={o}
 					className='uk-button uk-padding-remove'
