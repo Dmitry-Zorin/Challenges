@@ -23,7 +23,7 @@ export const Buttons = ({ challenge, navigate, options }) => {
 		if (action === 'edit') return navigate('/edit', { state: { challenge } })
 		
 		updateChallenge(context, action, { id: challenge._id }, challenge.name)
-			.then(context.update).catch()
+			.then(context.update).catch(() => {})
 	}
 	
 	return (

@@ -7,7 +7,6 @@ import { TimeInput } from './components/TimeInput'
 import { Buttons } from './components/Buttons'
 import { TextInput } from 'components/TextInput'
 import { saveChallenge } from 'scripts/requests'
-import { capitalize } from 'lodash'
 
 export class Challenge extends Component {
 	static contextType = DataContext
@@ -66,7 +65,7 @@ export class Challenge extends Component {
 				this.context.update(challenges)
 				this.info.navigate()
 			})
-			.catch()
+			.catch(() => {})
 	}
 	
 	render = () => {

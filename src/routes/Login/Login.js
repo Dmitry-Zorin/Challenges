@@ -57,7 +57,7 @@ export class Login extends PureComponent {
 					this.props.login(user)
 					this.props.navigate('/')
 				})
-				.catch()
+				.catch(() => {})
 	}
 	
 	logout() {
@@ -66,7 +66,7 @@ export class Login extends PureComponent {
 				localStorage.clear()
 				this.props.logout()
 			})
-			.catch()
+			.catch(() => {})
 	}
 	
 	render = () => (

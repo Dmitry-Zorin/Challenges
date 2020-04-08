@@ -6,7 +6,9 @@ const defaultSchema = gql`
   type Mutation { _: Boolean }
 `
 
-const schemaFiles = glob.sync(__dirname + '/*/schema.js')
-const schema = [defaultSchema, ...schemaFiles.map(require)]
+const schemas = glob.sync(__dirname + '/*/schema.js')
+  .map(f => require(`.${f.match(/\/[^/]+\/[^/]+$/)}`))
+
+const schema = [defaultSchema, ...schemas]
 
 module.exports = schema
