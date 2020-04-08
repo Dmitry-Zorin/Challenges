@@ -12,7 +12,7 @@ const resolvers = require('./graphql/resolvers')
 const User = require('./models/user')
 const getUserInfo = require('./helpers/user-info')
 
-configEnv()
+configEnv({ path: `${__dirname}/.env` })
 
 connectToDb(process.env.ATLAS_URI, {
 	useNewUrlParser: true,

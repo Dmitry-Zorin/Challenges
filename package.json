@@ -10,7 +10,7 @@
 	},
 	"scripts": {
 		"start": "npm-run-all --parallel serve start_server",
-		"start_server": "npm run --prefix server start",
+		"start_server": "nodemon server/app.js",
 		"serve": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
@@ -31,13 +31,26 @@
 		"react-scripts": "^3.4.1",
 		"typescript": "^3.8.3",
 		"uikit": "^3.3.2",
-		"uikit-react": "^3.0.20"
+		"uikit-react": "^3.0.20",
+		"apollo-server-express": "^2.12.0",
+		"connect-mongodb-session": "^2.3.1",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-session": "^1.17.0",
+		"glob": "^7.1.6",
+		"graphql": "^14.6.0",
+		"graphql-passport": "^0.6.3",
+		"lodash": "^4.17.15",
+		"mongoose": "^5.9.7",
+		"passport": "^0.4.1"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
-		"npm-run-all": "^4.1.5"
+		"npm-run-all": "^4.1.5",
+		"nodemon": "^2.0.2"
 	},
 	"eslintConfig": {
 		"extends": "react-app"

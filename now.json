@@ -1,9 +1,8 @@
 {
-	"builds": [
-		{ "src": "server/index.js", "use": "@now/node" }
-	],
 	"functions": {
-		"api/*.js": { "memory": 256 }
+		"api/*.js": {
+			"memory": 256
+		}
 	},
 	"build": {
 		"env": {
