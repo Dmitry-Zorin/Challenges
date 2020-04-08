@@ -18,8 +18,7 @@ connectToDb(process.env.ATLAS_URI, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true,
-})
-	.catch(console.log)
+}).catch(console.log)
 
 const app = express()
 const envIsProduction = process.env.NODE_ENV === 'production'
