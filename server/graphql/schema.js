@@ -7,8 +7,8 @@ const defaultSchema = gql`
 `
 
 const schemas = glob.sync(__dirname + '/*/schema.js')
-  .map(f => require(`.${f.match(/\/[^/]+\/[^/]+$/)}`))
+  .map(f => require(`.${f.match(/\/[^/]+\/[^/.]+(?=.js)/)}`))
 
-const schema = [defaultSchema, ...schemas]
+const schema = [defaultSchema, require('./auth/schema'), ...schemas]
 
 module.exports = schema
