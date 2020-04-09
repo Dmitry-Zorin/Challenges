@@ -3,6 +3,10 @@
 .button {
 	background-color: $primary-color-opacity-very-low;
 	
+	&, &:hover, &:active {
+		border: 1px solid $secondary-bg-color;
+	}
+	
 	&:hover {
 		background-color: $primary-color-opacity-low;
 	}

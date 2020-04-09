@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from 'uikit-react'
+import { Button, Grid } from 'uikit-react'
 import { faCheck, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -9,13 +9,13 @@ export const Buttons = ({ save, saveValue, withCancel }) => (
 		style={{ marginTop: '4em' }}
 	>
 		{withCancel && (
-			<Button
+			<ActionButton
 				value='Cancel'
 				icon={faTimes}
 				onClick={() => window.history.back()}
 			/>
 		)}
-		<Button
+		<ActionButton
 			value={saveValue}
 			icon={withCancel ? faCheck : faPlus}
 			onClick={save}
@@ -23,18 +23,15 @@ export const Buttons = ({ save, saveValue, withCancel }) => (
 	</Grid>
 )
 
-const Button = ({ value, icon, onClick }) => (
+const ActionButton = ({ value, icon, onClick }) => (
 	<div>
-		<button
-			className='round-border uk-button uk-width-expand'
-			onClick={onClick}
-		>
+		<Button className='round-border uk-width-expand' onClick={onClick}>
 			<FontAwesomeIcon
 				icon={icon}
 				className='icon-left-2'
 				transform='shrink-2'
 			/>
 			{value}
-		</button>
+		</Button>
 	</div>
 )

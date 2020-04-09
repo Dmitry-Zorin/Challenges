@@ -13,6 +13,15 @@ $accordion-content-margin-top: 0;
 // Animation
 $animation-fade-duration: 0.25s;
 
+// Button
+$button-border-width: 0;
+$button-default-background: $primary-color;
+$button-default-hover-background: $primary-color-dark;
+$button-default-active-background: $primary-color-dark;
+$button-default-color: $secondary-color;
+$button-default-hover-color: $secondary-color;
+$button-default-active-color: $secondary-color;
+
 // Card
 $card-default-background: $secondary-bg-color;
 

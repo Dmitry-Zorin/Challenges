@@ -23,7 +23,7 @@ export const Pagination = ({ page, maxPage, changePage }) => (
 			${page > maxPage - 2 ? 'uk-disabled' : ''}
 			uk-margin-auto-left
 		`}>
-			<a href='/#' onClick={e => changePage(e, 1)}>
+			<a href='/#' onClick={e => changePage(e, +1)}>
 				Next
 				<FontAwesomeIcon
 					icon={faChevronRight}

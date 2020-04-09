@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Form } from 'uikit-react'
+import { Button, Form } from 'uikit-react'
 import { InnerLayout } from 'components/InnerLayout'
 import { DataContext } from 'contexts/DataContext'
 import { SwitcherItem } from 'components/SwitcherItem'
@@ -102,8 +102,8 @@ export class Login extends PureComponent {
 					handleChange={this.handleChange}
 					isPassword={true}
 				/>
-				<button
-					className='uk-button uk-align-center uk-width-1-3@m uk-width-1-2@s'
+				<Button
+					className='uk-align-center uk-width-1-3@m uk-width-1-2@s'
 					style={{ marginTop: '4em' }}
 					onClick={this.authorize}
 				>
@@ -113,7 +113,7 @@ export class Login extends PureComponent {
 						transform='shrink-2'
 					/>
 					Submit
-				</button>
+				</Button>
 			</Form>
 		</InnerLayout>
 	)

@@ -7,14 +7,6 @@ body {
 	-webkit-user-select: none;
 }
 
-button {
-	background-color: $primary-color;
-	
-	&:hover {
-		background-color: $primary-color-dark;
-	}
-}
-
 a:hover p {
 	@media (hover: hover) {
 		color: $primary-color;
