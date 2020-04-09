@@ -1,9 +1,9 @@
 import React from 'react'
-import dashboardStyles from '../Dashboard.module.scss'
 import { Card } from 'uikit-react'
 import { Link } from '@reach/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBolt, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { Overlay } from './Overlay'
 
 export const NewChallengeButton = () => (
 	<Link to='/create' className='uk-margin-remove uk-padding-remove'>
@@ -19,22 +19,7 @@ export const NewChallengeButton = () => (
 				/>
 				NEW CHALLENGE
 			</p>
-			<div className={`
-				${dashboardStyles.overlay}
-				uk-position-right
-				uk-overlay
-				uk-transition-slide-right
-				uk-hidden-touch
-			`}>
-				<p className='font-size-medium uk-position-center'>
-					<FontAwesomeIcon
-						icon={faPlus}
-						className='icon-left'
-						transform='shrink-3 down-0.2'
-					/>
-					Create
-				</p>
-			</div>
+			<Overlay text='create' icon={faPlus}/>
 		</Card>
 	</Link>
 )

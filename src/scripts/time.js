@@ -4,7 +4,7 @@ import challengeNotifications from 'data/notifications/challenges.json'
 
 export const toMs = { DAY: 864e5, HOUR: 36e5, MINUTE: 6e4 }
 
-export const updateTime = (challenges, context) => {
+export const updateTime = (context, challenges = context.challenges) => {
 	const now = new Date().getTime()
 	let challengesNeedUpdate = false
 	
@@ -33,7 +33,7 @@ export const updateTime = (challenges, context) => {
 	localStorage.setItem('challenges', JSON.stringify(updatedChallenges))
 	
 	return !challengesNeedUpdate ? updatedChallenges : getChallenges(context)
-		.then(challenges => updateTime(challenges, context))
+		.then(challenges => updateTime(context, challenges))
 		.catch(() => updatedChallenges)
 }
 

@@ -10,9 +10,7 @@ const getUserInfo = (user) => {
 	
 	for (const c of user.challenges) {
 		const progress = (
-			now < c.startDate ? 'upcoming'
-				: now < c.endDate ? 'ongoing'
-				: 'completed'
+			now < c.startDate ? 'upcoming' : now < c.endDate ? 'ongoing' : 'completed'
 		)
 		sortedChallenges[progress].push(c)
 	}

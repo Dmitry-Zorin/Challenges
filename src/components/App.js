@@ -49,17 +49,13 @@ export class App extends PureComponent {
 	}
 	
 	async updateChallenges(challenges) {
-		challenges = await updateTime(
-			challenges || this.state.challenges,
-			this.state.apiServer,
-		)
-		this.setState({ challenges })
+		this.setState({ challenges: await updateTime(this.state, challenges) })
 	}
 	
 	login(user) {
 		this.setState({ userIsAuthorized: true })
 		this.updateChallenges(user.challenges)
-		this.interval = setInterval(this.updateChallenges, 15000)
+		this.interval = setInterval(this.updateChallenges, 5000)
 	}
 	
 	logout() {

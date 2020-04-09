@@ -10,8 +10,9 @@ $muted-color: #999;
 
 $secondary-bg-color-light: lighten($secondary-bg-color, 2.5);
 $primary-color-dark: darken($primary-color, 4);
-$primary-color-opacity-low: rgba($primary-color, 0.15);
-$primary-color-opacity-medium: rgba($primary-color, 0.3);
+$primary-color-opacity-very-low: rgba($primary-color, 0.15);
+$primary-color-opacity-low: rgba($primary-color, 0.3);
+$primary-color-opacity-medium: rgba($primary-color, 0.45);
 
 // Dimensions
 $primary-border-radius: 1em;

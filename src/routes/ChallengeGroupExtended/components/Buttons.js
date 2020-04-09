@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { DataContext } from 'contexts/DataContext'
 import { updateChallenge } from 'scripts/requests'
+import { capitalize } from 'lodash'
 
 const icons = {
 	start: faPlay,
@@ -33,7 +34,7 @@ export const Buttons = ({ challenge, navigate, options }) => {
 					key={o}
 					className='uk-button uk-padding-remove'
 					style={{ width: '3em', marginLeft: '0.5em' }}
-					data-uk-tooltip={o}
+					data-uk-tooltip={capitalize(o)}
 					onClick={() => update(o)}
 				>
 					<FontAwesomeIcon icon={icons[o.toLowerCase()]} transform='grow-3'/>

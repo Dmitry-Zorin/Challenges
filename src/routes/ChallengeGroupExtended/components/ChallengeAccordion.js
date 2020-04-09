@@ -11,7 +11,7 @@ import {
 
 const challengeInfo = {
 	ongoing: { icon: faArrowDown, options: ['complete'] },
-	upcoming: { icon: faArrowUp, options: ['start'] },
+	upcoming: { icon: faArrowUp, options: ['start', 'complete'] },
 	completed: { icon: faCheck },
 }
 const labelTypes = { Easy: 'success', Medium: 'warning', Hard: 'danger' }

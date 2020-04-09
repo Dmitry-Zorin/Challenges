@@ -33,7 +33,7 @@ const resolvers = {
 		challengeComplete: (...args) => (
 			getUpdatedChallenges(args, (user, { id }) => {
 				const c = findChallenge(user, id)
-				c.endDate = new Date().getTime()
+				c.startDate = c.endDate = new Date().getTime()
 			})
 		),
 	},
@@ -43,15 +43,17 @@ const getUpdatedChallenges = ([obj, args, context], update) => {
 	const user = context.getUser()
 	let challenges = null
 	
-	if (user && update) {
-		try {
-			update(user, args)
-			challenges = context.getUserInfo(user).challenges
-			user.save()
+	if (user) {
+		if (update) {
+			try {
+				update(user, args)
+				user.save()
+			}
+			catch (err) {
+				console.log(err)
+			}
 		}
-		catch (err) {
-			console.log(err)
-		}
+		challenges = context.getUserInfo(user).challenges
 	}
 	return { challenges }
 }

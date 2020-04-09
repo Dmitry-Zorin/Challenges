@@ -1,5 +1,4 @@
 import React from 'react'
-import dashboardStyles from '../Dashboard.module.scss'
 import { Card, Grid } from 'uikit-react'
 import { Link } from '@reach/router'
 import { getChallengeTime } from 'scripts/time'
@@ -12,6 +11,7 @@ import {
 	faCheck,
 } from '@fortawesome/free-solid-svg-icons'
 import { capitalize } from 'lodash'
+import { Overlay } from './Overlay'
 
 export const ChallengeGroup = ({ to, title, group = [] }) => (
 	<Link to={to}>
@@ -32,22 +32,7 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 			) : group.slice(0, 4).map(c => (
 				<ChallengeGroupItem key={c._id} title={title} challenge={c}/>
 			))}
-			<div className={`
-				${dashboardStyles.overlay}
-				uk-position-right
-				uk-overlay
-				uk-transition-slide-right
-				uk-hidden-touch
-			`}>
-				<p className='font-size-medium uk-position-center'>
-					<FontAwesomeIcon
-						icon={faBars}
-						className='icon-left'
-						transform='shrink-3 down-0.6'
-					/>
-					See all
-				</p>
-			</div>
+			<Overlay text='see all' icon={faBars}/>
 		</Card>
 	</Link>
 )
