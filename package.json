@@ -32,7 +32,6 @@
 		"glob": "^7.1.6",
 		"graphql": "^14.6.0",
 		"graphql-passport": "^0.6.3",
-		"jest": "^25.3.0",
 		"lodash": "^4.17.15",
 		"mongoose": "^5.9.7",
 		"node-sass": "^4.13.1",
@@ -42,11 +41,9 @@
 		"react-dom": "^16.13.1",
 		"react-notifications-component": "^2.3.0",
 		"react-scripts": "^3.4.1",
-		"ts-jest": "^25.3.1",
 		"typescript": "^3.8.3",
 		"uikit": "^3.3.2",
-		"uikit-react": "^3.0.20",
-		"ws": "^7.2.3"
+		"uikit-react": "^3.0.20"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "^4.2.4",
