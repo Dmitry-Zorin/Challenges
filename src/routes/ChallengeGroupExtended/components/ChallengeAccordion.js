@@ -8,6 +8,7 @@ import {
 	faArrowUp,
 	faCheck,
 } from '@fortawesome/free-solid-svg-icons'
+import { itemsPerPage } from 'data/settings.json'
 
 const challengeInfo = {
 	ongoing: { icon: faArrowDown, options: ['complete'] },
@@ -18,7 +19,7 @@ const labelTypes = { Easy: 'success', Medium: 'warning', Hard: 'danger' }
 
 export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) => (
 	<Accordion>
-		{challenges.slice(page * 10, (page + 1) * 10).map(c => (
+		{challenges.slice(page * itemsPerPage, (page + 1) * itemsPerPage).map(c => (
 			<AccordionItem key={c._id} className='uk-margin-remove' title={
 				<Grid>
 					<p className='uk-width-expand'>{c.name}</p>

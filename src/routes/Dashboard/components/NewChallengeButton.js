@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from 'uikit-react'
 import { Link } from '@reach/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBolt, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faBolt } from '@fortawesome/free-solid-svg-icons'
 import { Overlay } from './Overlay'
 
 export const NewChallengeButton = () => (
@@ -19,7 +19,7 @@ export const NewChallengeButton = () => (
 				/>
 				NEW CHALLENGE
 			</p>
-			<Overlay text='create' icon={faPlus}/>
+			<Overlay text='create'/>
 		</Card>
 	</Link>
 )

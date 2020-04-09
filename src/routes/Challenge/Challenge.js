@@ -52,6 +52,8 @@ export class Challenge extends Component {
 	}
 	
 	save(defaultName) {
+		this.info.navigate()
+		
 		const variables = {
 			id: this.state._id,
 			name: this.state.name || defaultName,
@@ -61,10 +63,7 @@ export class Challenge extends Component {
 		variables.endDate = variables.startDate + this.state.duration
 		
 		saveChallenge(this.context, this.info.action, variables)
-			.then(challenges => {
-				this.context.update(challenges)
-				this.info.navigate()
-			})
+			.then(this.context.update)
 			.catch(() => {})
 	}
 	

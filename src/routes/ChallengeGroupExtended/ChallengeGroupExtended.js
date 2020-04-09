@@ -6,6 +6,7 @@ import { ChallengeAccordion } from './components/ChallengeAccordion'
 import { Search } from './components/Search'
 import { faBan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { itemsPerPage } from 'data/settings.json'
 
 export class ChallengeGroupExtended extends PureComponent {
 	static contextType = DataContext
@@ -38,7 +39,7 @@ export class ChallengeGroupExtended extends PureComponent {
 		const challenges = (this.context.challenges[this.groupName] || [])
 			.filter(c => this.state.pattern.test(c.name))
 		
-		this.maxPage = Math.ceil(challenges.length / 10)
+		this.maxPage = Math.ceil(challenges.length / itemsPerPage)
 		
 		return (
 			<InnerLayout title={this.groupName}>
@@ -63,7 +64,7 @@ export class ChallengeGroupExtended extends PureComponent {
 						navigate={this.props.navigate}
 					/>
 				)}
-				{challenges.length > 10 && (
+				{challenges.length > itemsPerPage && (
 					<Pagination
 						page={this.state.page}
 						maxPage={this.maxPage}

@@ -7,7 +7,6 @@ import {
 	faArrowDown,
 	faArrowUp,
 	faBan,
-	faBars,
 	faCheck,
 } from '@fortawesome/free-solid-svg-icons'
 import { capitalize } from 'lodash'
@@ -32,7 +31,7 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 			) : group.slice(0, 4).map(c => (
 				<ChallengeGroupItem key={c._id} title={title} challenge={c}/>
 			))}
-			<Overlay text='see all' icon={faBars}/>
+			<Overlay text='see all'/>
 		</Card>
 	</Link>
 )

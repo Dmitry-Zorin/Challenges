@@ -10,6 +10,7 @@ import { Challenge } from 'routes/Challenge'
 import { ChallengeGroupExtended } from 'routes/ChallengeGroupExtended'
 import { updateTime } from 'scripts/time'
 import { getUserInfo } from 'scripts/requests'
+import { timeout } from 'data/settings.json'
 
 export class App extends PureComponent {
 	constructor(props) {
@@ -55,7 +56,7 @@ export class App extends PureComponent {
 	login(user) {
 		this.setState({ userIsAuthorized: true })
 		this.updateChallenges(user.challenges)
-		this.interval = setInterval(this.updateChallenges, 5000)
+		this.interval = setInterval(this.updateChallenges, timeout)
 	}
 	
 	logout() {
