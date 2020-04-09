@@ -7,7 +7,7 @@ const defaultSchema = gql`
 `
 
 const schemas = glob.sync(__dirname + '/*/schema.js')
-	.map(f => require(`../graphql/${f.match(/\/[^/]+\/[^/.]+(?=.js)/)}`))
+	.map(f => require(`./${f.match(/[^/]+\/[^/]+$/)}`))
 
 const schema = [defaultSchema, ...schemas]
 
