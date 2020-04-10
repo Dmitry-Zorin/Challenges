@@ -16,6 +16,8 @@ $overlay-color: adjust-color($card-background-color, 4, 4, 4);
 $primary-hover-color: darken($primary-color, 5);
 $primary-active-color: darken($primary-color, 10);
 
+$button-color: $card-background-light-color;
+
 // Dimensions
 $primary-border-radius: 1em;
 $secondary-border-radius: 0.5em;

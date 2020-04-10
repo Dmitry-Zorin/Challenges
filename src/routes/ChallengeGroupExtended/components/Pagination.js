@@ -5,7 +5,7 @@ import {
 	faChevronRight,
 } from '@fortawesome/free-solid-svg-icons'
 
-const transform = 'shrink-3 down-0.5'
+const transform = 'shrink-5 down-1.2'
 
 export const Pagination = ({ page, maxPage, changePage }) => (
 	<ul className='uk-pagination uk-margin-medium-top'>
@@ -19,10 +19,9 @@ export const Pagination = ({ page, maxPage, changePage }) => (
 				Previous
 			</a>
 		</li>
-		<li className={`
-			${page > maxPage - 2 ? 'uk-disabled' : ''}
-			uk-margin-auto-left
-		`}>
+		<li className={`uk-margin-auto-left ${
+			page > maxPage - 2 ? 'uk-disabled' : ''
+		}`}>
 			<a href='/#' onClick={e => changePage(e, +1)}>
 				Next
 				<FontAwesomeIcon

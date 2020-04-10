@@ -1,14 +1,14 @@
 @import '../variables';
 
 $global-color: $base-color;
-$global-link-color: $base-color;
+$global-link-color: $global-color;
 $global-link-hover-color: $primary-color;
 $base-body-background: $background-color;
-$base-heading-color: $base-color;
+$base-heading-color: $global-color;
 $base-link-hover-text-decoration: none;
 
 // Accordion
-$accordion-title-color: $base-color;
+$accordion-title-color: $global-color;
 $accordion-content-margin-top: 0;
 
 // Animation
@@ -19,18 +19,18 @@ $button-border-width: 0;
 $button-default-background: $primary-color;
 $button-default-hover-background: $primary-hover-color;
 $button-default-active-background: $primary-active-color;
-$button-default-color: $background-color;
-$button-default-hover-color: $background-color;
-$button-default-active-color: $background-color;
+$button-default-color: $button-color;
+$button-default-hover-color: $button-default-color;
+$button-default-active-color: $button-default-color;
 
 // Card
 $card-default-background: $card-background-color;
 
 // Form
-$form-background: $base-color;
-$form-focus-background: $base-color;
+$form-background: $global-color;
+$form-focus-background: $form-background;
 $form-color: $input-color;
-$form-focus-color: $input-color;
+$form-focus-color: $form-color;
 
 // Overlay
 $overlay-default-background: $overlay-color;
@@ -38,17 +38,17 @@ $overlay-default-background: $overlay-color;
 // Navbar
 $navbar-nav-item-height: 40px;
 $navbar-background: $navbar-color;
-$navbar-nav-item-color: $base-color;
-$navbar-nav-item-onclick-color: $primary-color;
+$navbar-nav-item-color: $global-color;
+$navbar-nav-item-onclick-color: $global-link-hover-color;
 $navbar-nav-item-padding-horizontal: 0.5em;
 
 // Search
-$search-color: $input-color;
-$search-default-background: $base-color;
+$search-color: $form-color;
+$search-default-background: $global-color;
 
 // Subnav
 $subnav-pill-item-background: $card-background-light-color;
 $subnav-pill-item-hover-background: $card-background-light-hover-color;
-$subnav-pill-item-active-background: $primary-color;
-$subnav-pill-item-color: $base-color;
-$subnav-pill-item-active-color: $background-color;
+$subnav-pill-item-active-background: $button-default-background;
+$subnav-pill-item-color: $global-color;
+$subnav-pill-item-active-color: $button-default-color;

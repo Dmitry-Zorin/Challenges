@@ -29,7 +29,6 @@
 	transition-property: color, background-color, border-color;
 }
 
-
 // Card
 @mixin hook-card() {
 	@include round-border($primary-border-radius);
@@ -38,7 +37,7 @@
 	overflow: hidden;
 	-webkit-mask-image: -webkit-radial-gradient(white, black);
 	
-	> div {
+	& > div {
 		@extend .uk-animation-fade;
 	}
 	
@@ -81,6 +80,11 @@
 	@media (hover: hover) {
 		color: $primary-color;
 	}
+}
+
+// Pagination
+@mixin hook-pagination-item-hover() {
+	color: $primary-color
 }
 
 // Search
