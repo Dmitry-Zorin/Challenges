@@ -10,11 +10,13 @@ import {
 import { Link } from '@reach/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-	faChevronLeft,
+	faChevronLeft, faPlus,
 	faSignInAlt,
 	faSignOutAlt,
 	faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
+
+const transform = 'shrink-2 down-0.65'
 
 export const NavigationBar = ({ location }) => {
 	const context = useContext(DataContext)
@@ -32,7 +34,7 @@ export const NavigationBar = ({ location }) => {
 									<FontAwesomeIcon
 										icon={faChevronLeft}
 										className='icon-left'
-										transform='shrink-2 down-0.65'
+										transform={transform}
 									/>
 									Dashboard
 								</Link>
@@ -46,14 +48,23 @@ export const NavigationBar = ({ location }) => {
 								<a href='/#' onClick={e => e.preventDefault()}>
 									<FontAwesomeIcon icon={faSpinner} transform='grow-10' spin/>
 								</a>
-							) : (
+							) : location.pathname.match(/\/($|create|edit)/) ? (
 								<Link to='/login'>
 									<FontAwesomeIcon
 										icon={context.userIsAuthorized ? faSignOutAlt : faSignInAlt}
 										className='icon-left'
-										transform='down-0.65'
+										transform={transform}
 									/>
-									{context.userIsAuthorized ? 'Log out' : 'Log in'}
+									{!context.userIsAuthorized ? 'log in' : 'log out'}
+								</Link>
+							) : (
+								<Link to='/create'>
+									<FontAwesomeIcon
+										icon={faPlus}
+										className='icon-left'
+										transform={transform}
+									/>
+									Create
 								</Link>
 							)}
 						</NavItem>
