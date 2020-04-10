@@ -12,6 +12,8 @@ import { updateTime } from 'scripts/time'
 import { getUserInfo } from 'scripts/requests'
 import { timeout } from 'data/settings.json'
 
+const groups = ['ongoing', 'upcoming', 'completed']
+
 export class App extends PureComponent {
 	constructor(props) {
 		super(props)
@@ -76,9 +78,14 @@ export class App extends PureComponent {
 					<Login path='login' login={this.login} logout={this.logout}/>
 					<Auth path='create' Component={Challenge}/>
 					<Auth path='edit' Component={Challenge}/>
-					<ChallengeGroupExtended path='ongoing'/>
-					<ChallengeGroupExtended path='upcoming'/>
-					<ChallengeGroupExtended path='completed'/>
+					{groups.map((g, i) => (
+						<ChallengeGroupExtended
+							key={i}
+							path={`/${g}`}
+							right={`/${groups[++i % 3]}`}
+							left={`/${groups[++i % 3]}`}
+						/>
+					))}
 				</Layout>
 			</Router>
 		</DataContext.Provider>

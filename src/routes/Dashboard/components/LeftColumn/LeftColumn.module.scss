@@ -7,9 +7,5 @@
 }
 
 .container {
-	height: calc(100% - 2em);
-	
-	@media (min-width: $breakpoint-large) {
-		height: calc(100% - 3em);
-	}
+	height: calc(100% - 2.5em);
 }

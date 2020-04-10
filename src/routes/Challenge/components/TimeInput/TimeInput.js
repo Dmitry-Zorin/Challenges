@@ -28,8 +28,8 @@ const NumberInput = ({ label, time, name, ms, handleChange }) => (
 	<label className='uk-text-right'>
 		{label}
 		<input
-			pattern="[0-9]*"
 			className='uk-input'
+			pattern="[0-9]*"
 			value={time || ''}
 			placeholder={time ? undefined : 0}
 			onChange={e => {
@@ -53,6 +53,6 @@ const NumberButton = ({ sign, icon, timeToMs, name, ms, handleChange, step = 1 }
 		className={`${styles.button} uk-padding-remove`}
 		onClick={() => handleChange(name, ms + sign * step * timeToMs)}
 	>
-		<FontAwesomeIcon icon={icon} transform='grow-3'/>
+		<FontAwesomeIcon icon={icon}/>
 	</Button>
 )

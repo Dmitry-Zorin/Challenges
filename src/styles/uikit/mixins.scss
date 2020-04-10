@@ -3,6 +3,12 @@
 @import './variables';
 @import 'node_modules/uikit/src/scss/variables-theme';
 
+@mixin hook-base-hr() {
+	border-width: 0.01em;
+	opacity: 0.3;
+}
+
+// Accordion
 @mixin hook-accordion-title() {
 	height: auto;
 	min-height: 2em;
@@ -14,21 +20,20 @@
 	}
 }
 
-@mixin hook-base-hr() {
-	border-width: 0.01em;
-	opacity: 0.3;
-}
-
+// Button
 @mixin hook-button() {
 	@include round-border;
+	font-weight: $button-font-weight;
 	text-transform: $button-text-transform;
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color, border-color;
 }
 
+
+// Card
 @mixin hook-card() {
 	@include round-border($primary-border-radius);
-	margin: 1em 0.5em;
+	margin: 1em 0;
 	padding: 1.5em 1em;
 	overflow: hidden;
 	-webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -37,16 +42,18 @@
 		@extend .uk-animation-fade;
 	}
 	
-	@media (min-width: $breakpoint-large) {
-		margin: 1em 1em 2em;
+	@media (min-width: $breakpoint-small) {
+		margin: 1em 0.75em 1.5em;
 		padding: 1.5em 2em;
 	}
 }
 
+// Form
 @mixin hook-form() {
 	@include round-border;
 }
 
+// Navbar
 @mixin hook-navbar() {
 	padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
 }
@@ -76,12 +83,15 @@
 	}
 }
 
+// Search
 @mixin hook-search-input() {
 	@include round-border;
 }
 
+// Subnav
 @mixin hook-subnav-pill-item() {
 	@include round-border;
 	height: 1.85em;
 	padding-top: 0.65em;
+	font-weight: $button-font-weight;
 }

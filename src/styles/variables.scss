@@ -1,23 +1,26 @@
 // Colors
-$primary-bg-color: #292C33;
-$secondary-bg-color: #34373D;
-$tertiary-bg-color: #20232A;
-
-$primary-color: #767CFF;
-$secondary-color: #EEE;
-$tertiary-color: $secondary-bg-color;
+$background-color: rgb(39, 44, 53);
+$primary-color: rgb(255, 198, 92);
+$base-color: #EEE;
+$input-color: #000;
 $muted-color: #999;
 
-$secondary-bg-color-light: lighten($secondary-bg-color, 2.5);
-$primary-color-dark: darken($primary-color, 4);
-$primary-color-opacity-very-low: rgba($primary-color, 0.15);
-$primary-color-opacity-low: rgba($primary-color, 0.3);
-$primary-color-opacity-medium: rgba($primary-color, 0.45);
+$navbar-color: adjust-color($background-color, -9, -10, -9);
+$title-color: darken($primary-color, 4);
+$card-background-color: adjust-color($background-color, 10, 9, 10);
+$card-background-light-color: lighten($card-background-color, 5);
+$card-background-light-hover-color: lighten($card-background-color, 10);
+$card-background-light-active-color: lighten($card-background-color, 15);
+$overlay-color: adjust-color($card-background-color, 4, 4, 4);
+
+$primary-hover-color: darken($primary-color, 5);
+$primary-active-color: darken($primary-color, 10);
 
 // Dimensions
 $primary-border-radius: 1em;
 $secondary-border-radius: 0.5em;
 $icon-margin: 0.2em;
+$button-font-weight: 450;
 
 $font-size-medium: 1.15em;
 $font-size-large: 1.4em;

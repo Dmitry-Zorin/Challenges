@@ -68,7 +68,7 @@ export class Challenge extends Component {
 	}
 	
 	render = () => {
-		const defaultName = 'Challenge from ' + new Date().toString()
+		const defaultName = 'challenge from ' + new Date().toString()
 			.split(' ').slice(1, 5).join(' ').slice(0, -3)
 		
 		return (
@@ -79,6 +79,7 @@ export class Challenge extends Component {
 						value={this.state.name}
 						defaultValue={defaultName}
 						handleChange={this.handleChange}
+						capital={true}
 					/>
 					<DifficultyInput
 						difficulty={this.state.difficulty}

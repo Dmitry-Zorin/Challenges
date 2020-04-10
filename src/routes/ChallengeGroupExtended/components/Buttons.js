@@ -24,6 +24,11 @@ export const Buttons = ({ challenge, navigate, options }) => {
 	const update = (action) => {
 		if (action === 'edit') return navigate('/edit', { state: { challenge } })
 		
+		for (const [name, group] of Object.entries(context.challenges))
+			context.challenges[name] = group.filter(c => c._id !== challenge._id)
+		
+		context.update(context.challenges)
+		
 		updateChallenge(context, action, { id: challenge._id }, challenge.name)
 			.then(context.update).catch(() => {})
 	}

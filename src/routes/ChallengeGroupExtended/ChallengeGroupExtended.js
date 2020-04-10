@@ -42,7 +42,7 @@ export class ChallengeGroupExtended extends PureComponent {
 		this.maxPage = Math.ceil(challenges.length / itemsPerPage)
 		
 		return (
-			<InnerLayout title={this.groupName}>
+			<InnerLayout title={this.groupName} left={this.props.left} right={this.props.right}>
 				<Search onChange={this.search}/>
 				{!challenges.length ? (
 					<p

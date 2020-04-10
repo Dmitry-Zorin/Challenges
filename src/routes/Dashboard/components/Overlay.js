@@ -1,12 +1,11 @@
 import React from 'react'
-import styles from './Overlay.module.scss'
 import { capitalize } from 'lodash'
 
 export const Overlay = ({ text }) => (
-	<div className={`
-		${styles.overlay}
-		uk-position-right
+	<div style={{ width: '5.5em' }} className={`
 		uk-overlay
+		uk-overlay-default
+		uk-position-right
 		uk-transition-slide-right
 		uk-hidden-touch
 	`}>
