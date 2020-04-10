@@ -68,7 +68,7 @@ export class Challenge extends Component {
 	}
 	
 	render = () => {
-		const defaultName = 'challenge from ' + new Date().toString()
+		const defaultName = 'Challenge from ' + new Date().toString()
 			.split(' ').slice(1, 5).join(' ').slice(0, -3)
 		
 		return (

@@ -20,6 +20,11 @@
 	}
 }
 
+@mixin hook-accordion-content() {
+	// Fix for mount stutter
+	display: none;
+}
+
 // Button
 @mixin hook-button() {
 	@include round-border;

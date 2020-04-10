@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Accordion, AccordionItem, Grid } from 'uikit-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getChallengeTime } from 'scripts/time'
@@ -17,41 +17,50 @@ const challengeInfo = {
 }
 const labelTypes = { Easy: 'success', Medium: 'warning', Hard: 'danger' }
 
-export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) => (
-	<Accordion>
-		{challenges.slice(page * itemsPerPage, (page + 1) * itemsPerPage).map(c => (
-			<AccordionItem key={c._id} className='uk-margin-remove' title={
-				<Grid>
-					<p className='uk-width-expand'>{c.name}</p>
-					<div
-						className='uk-text-meta uk-padding-remove uk-text-right'
-						style={{ marginTop: '0.35em' }}
-					>
-						<FontAwesomeIcon
-							icon={challengeInfo[groupName].icon}
-							transform='shrink-2'
-						/>
-						{getChallengeTime(c)}
-					</div>
-				</Grid>
-			} content={
-				<div>
-					<Grid className='uk-margin-remove'>
-						<div
-							className={'uk-label uk-label-' + labelTypes[c.difficulty]}
-							style={{ height: '1.5em', marginTop: '0.6em' }}
-						>
-							{c.difficulty}
+export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) => {
+	useEffect(() => {
+		// Fix for mount stutter
+		for (const content of document.querySelectorAll('.uk-accordion-content'))
+			content.style.display = 'block'
+	})
+	
+	return (
+		<Accordion>
+			{challenges.slice(page * itemsPerPage, (page + 1) * itemsPerPage)
+				.map(c => (
+					<AccordionItem key={c._id} className='uk-margin-remove' title={
+						<Grid>
+							<p className='uk-width-expand'>{c.name}</p>
+							<div
+								className='uk-text-meta uk-padding-remove uk-text-right'
+								style={{ marginTop: '0.35em' }}
+							>
+								<FontAwesomeIcon
+									icon={challengeInfo[groupName].icon}
+									transform='shrink-2'
+								/>
+								{getChallengeTime(c)}
+							</div>
+						</Grid>
+					} content={
+						<div>
+							<Grid className='uk-margin-remove'>
+								<div
+									className={'uk-label uk-label-' + labelTypes[c.difficulty]}
+									style={{ height: '1.5em', marginTop: '0.6em' }}
+								>
+									{c.difficulty}
+								</div>
+								<Buttons
+									challenge={c}
+									navigate={navigate}
+									options={challengeInfo[groupName].options}
+								/>
+							</Grid>
+							<hr/>
 						</div>
-						<Buttons
-							challenge={c}
-							navigate={navigate}
-							options={challengeInfo[groupName].options}
-						/>
-					</Grid>
-					<hr/>
-				</div>
-			}/>
-		))}
-	</Accordion>
-)
+					}/>
+				))}
+		</Accordion>
+	)
+}

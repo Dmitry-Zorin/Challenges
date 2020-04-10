@@ -14,12 +14,10 @@ const transform = 'shrink-5 down-1.2'
 export const InnerLayout = ({ title, children, left, right }) => (
 	<Card className={styles.innerLayout}>
 		<div className='uk-align-center' style={{ maxWidth: '800px' }}>
-			<Grid className='uk-margin-bottom uk-margin-auto'>
+			<Grid className='uk-margin-bottom uk-margin-remove-left'>
+				<Title title={title} className='uk-hidden@s uk-width-1-1'/>
 				{left && (
-					<Link
-						to={left}
-						className={`${styles.sideLink} uk-padding-small`}
-					>
+					<Link to={left} className={styles.sideLink}>
 						<FontAwesomeIcon
 							icon={faChevronLeft}
 							className='icon-left'
@@ -28,16 +26,9 @@ export const InnerLayout = ({ title, children, left, right }) => (
 						{capitalize(left.slice(1))}
 					</Link>
 				)}
-				{title && (
-					<p className='uk-h2 uk-width-expand uk-text-center'>
-						{capitalize(title)}
-					</p>
-				)}
+				<Title title={title} className='uk-visible@s uk-width-expand'/>
 				{right && (
-					<Link
-						to={right}
-						className={`${styles.sideLink} uk-padding-small uk-text-right`}
-					>
+					<Link to={right} className={`${styles.sideLink} uk-text-right`}>
 						{capitalize(right.slice(1))}
 						<FontAwesomeIcon
 							icon={faChevronRight}
@@ -50,4 +41,10 @@ export const InnerLayout = ({ title, children, left, right }) => (
 			{children}
 		</div>
 	</Card>
+)
+
+const Title = ({ title, className }) => title && (
+	<p className={`${className} font-size-xlarge uk-padding-remove-left uk-text-center`}>
+		{capitalize(title)}
+	</p>
 )

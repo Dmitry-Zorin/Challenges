@@ -11,5 +11,12 @@
 
 .sideLink {
 	color: $muted-color;
-	width: 6em;
+	width: 6.5em;
+	padding-top: 0.9em;
+	padding-left: 0;
+	
+	@media (max-width: $breakpoint-small) {
+		width: 50%;
+		padding-top: 0;
+	}
 }
