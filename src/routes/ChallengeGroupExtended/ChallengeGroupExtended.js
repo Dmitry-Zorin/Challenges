@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { useContext, useState } from 'react'
 import { InnerLayout } from 'components/InnerLayout'
 import { DataContext } from 'contexts/DataContext'
 import { Pagination } from './components/Pagination'
@@ -8,70 +8,54 @@ import { faBan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { itemsPerPage } from 'data/settings.json'
 
-export class ChallengeGroupExtended extends PureComponent {
-	static contextType = DataContext
+export const ChallengeGroupExtended = ({ left, right, navigate }) => {
+	const context = useContext(DataContext)
+	const [pattern, setPattern] = useState(/.*/)
+	const [page, setPage] = useState(0)
 	
-	constructor(props) {
-		super(props)
-		this.search = this.search.bind(this)
-		this.changePage = this.changePage.bind(this)
-		
-		this.state = {
-			pattern: /.*/,
-			page: 0,
-		}
-		this.groupName = window.location.pathname.slice(1)
+	const search = e => {
+		const value = e.target.value || ' '
+		setPattern(new RegExp(value.split(' ').join('.*'), 'i'))
+		setPage(0)
 	}
 	
-	search({ target }) {
-		this.setState({
-			pattern: new RegExp(target.value.split(' ').join('.*'), 'i'),
-		})
-	}
-	
-	changePage(e, diff) {
+	const changePage = (e, diff) => {
 		e.preventDefault()
-		const page = this.state.page + diff
-		if (page >= 0 && page < this.maxPage) this.setState({ page })
+		const newPage = page + diff
+		if (newPage >= 0 && newPage < maxPage) setPage(newPage)
 	}
 	
-	render = () => {
-		const challenges = (this.context.challenges[this.groupName] || [])
-			.filter(c => this.state.pattern.test(c.name))
-		
-		this.maxPage = Math.ceil(challenges.length / itemsPerPage)
-		
-		return (
-			<InnerLayout title={this.groupName} left={this.props.left} right={this.props.right}>
-				<Search onChange={this.search}/>
-				{!challenges.length ? (
-					<p
-						className='font-size-medium uk-text-center uk-text-muted'
-						style={{ marginTop: '3em' }}
-					>
-						<FontAwesomeIcon
-							icon={faBan}
-							className='icon-left'
-							transform='shrink-4 down-0.5'
-						/>
-						No challenges...
-					</p>
-				) : (
-					<ChallengeAccordion
-						challenges={challenges}
-						page={this.state.page}
-						groupName={this.groupName}
-						navigate={this.props.navigate}
+	const groupName = window.location.pathname.slice(1)
+	const group = context.challenges?.[groupName] || []
+	const challenges = group.filter(c => pattern.test(c.name))
+	const maxPage = Math.ceil(challenges.length / itemsPerPage)
+	
+	return (
+		<InnerLayout title={groupName} left={left} right={right}>
+			<Search onChange={search}/>
+			{challenges.length ? (
+				<ChallengeAccordion
+					challenges={challenges}
+					page={page}
+					groupName={groupName}
+					navigate={navigate}
+				/>
+			) : (
+				<p
+					className='font-size-medium uk-text-center uk-text-muted'
+					style={{ marginTop: '3em' }}
+				>
+					<FontAwesomeIcon
+						icon={faBan}
+						className='icon-left'
+						transform='shrink-4 down-0.5'
 					/>
-				)}
-				{challenges.length > itemsPerPage && (
-					<Pagination
-						page={this.state.page}
-						maxPage={this.maxPage}
-						changePage={this.changePage}
-					/>
-				)}
-			</InnerLayout>
-		)
-	}
+					No challenges...
+				</p>
+			)}
+			{challenges.length > itemsPerPage && (
+				<Pagination page={page} maxPage={maxPage} changePage={changePage}/>
+			)}
+		</InnerLayout>
+	)
 }

@@ -1,4 +1,10 @@
-import React, { PureComponent } from 'react'
+import React, {
+	useCallback,
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+} from 'react'
 import { Button, Form } from 'uikit-react'
 import { InnerLayout } from 'components/InnerLayout'
 import { DataContext } from 'contexts/DataContext'
@@ -14,9 +20,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { authorize, logout } from 'scripts/requests'
 import { addNotification } from 'scripts/utils'
-import errors from 'data/notifications/errors.json'
+import { invalid } from 'data/notifications/errors.json'
 
-const states = {
+const authOptions = {
 	login: {
 		action: 'login',
 		title: 'log in',
@@ -29,47 +35,38 @@ const states = {
 	},
 }
 
-export class Login extends PureComponent {
-	static contextType = DataContext
+export const Login = (props) => {
+	const context = useContext(DataContext)
+	const isFirstRenderRef = useRef(true)
+	const [authOption, setAuthOption] = useState(authOptions.login)
+	const [username, setUsername] = useState()
+	const [password, setPassword] = useState()
 	
-	constructor(props) {
-		super(props)
-		this.handleChange = this.handleChange.bind(this)
-		this.authorize = this.authorize.bind(this)
-		this.logout = this.logout.bind(this)
-		this.state = states.login
-	}
-	
-	componentDidMount() {
-		if (this.context.userIsAuthorized) this.logout()
-	}
-	
-	handleChange(name, value) {
-		this.setState({ [name]: value })
-	}
-	
-	authorize() {
-		const { action, username, password } = this.state
-		!username || !password ? addNotification(errors.invalid)
-			: authorize(this.context, action, { username, password })
-				.then(user => {
-					if (!user) return
-					this.props.login(user)
-					this.props.navigate('/')
-				})
-				.catch(() => {})
-	}
-	
-	logout() {
-		logout(this.context)
+	useEffect(() => {
+		if (!isFirstRenderRef.current) return
+		isFirstRenderRef.current = false
+		
+		if (!context.userIsAuthorized) return
+		logout(context)
 			.then(() => {
 				localStorage.clear()
-				this.props.logout()
+				props.logout()
 			})
 			.catch(() => {})
-	}
+	}, [context, props])
 	
-	render = () => (
+	const _authorize = useCallback(() => {
+		!username || !password ? addNotification(invalid)
+			: authorize(context, authOption.action, { username, password })
+				.then(user => {
+					if (!user) return
+					props.login(user)
+					props.navigate('/')
+				})
+				.catch(() => {})
+	}, [authOption.action, context, username, password, props])
+	
+	return (
 		<InnerLayout>
 			<ul style={{ marginTop: '1.5em' }} className={`
 				uk-subnav
@@ -78,13 +75,13 @@ export class Login extends PureComponent {
 				uk-child-width-1-2
 				uk-child-width-1-3@m
 			`}>
-				{['login', 'signUp'].map(a => (
+				{Object.values(authOptions).map(o => (
 					<SwitcherItem
-						key={a}
-						icon={states[a].icon}
-						value={states[a].title}
-						active={this.state.action === a}
-						onClick={() => this.setState(states[a])}
+						key={o.action}
+						icon={o.icon}
+						value={o.title}
+						active={o.action === authOption.action}
+						onClick={() => setAuthOption(o)}
 					/>
 				))}
 			</ul>
@@ -92,20 +89,20 @@ export class Login extends PureComponent {
 				<TextInput
 					icon={faUser}
 					label='username'
-					value={this.state.username}
-					handleChange={this.handleChange}
+					value={username}
+					setState={setUsername}
 				/>
 				<TextInput
 					icon={faLock}
 					label='password'
-					value={this.state.password}
-					handleChange={this.handleChange}
+					value={password}
+					setState={setPassword}
 					isPassword={true}
 				/>
 				<Button
 					className='uk-align-center uk-width-1-3@m uk-width-1-2@s'
 					style={{ marginTop: '4em' }}
-					onClick={this.authorize}
+					onClick={_authorize}
 				>
 					<FontAwesomeIcon
 						icon={faPaperPlane}

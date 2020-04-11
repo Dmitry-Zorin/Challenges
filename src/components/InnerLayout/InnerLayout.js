@@ -43,8 +43,8 @@ export const InnerLayout = ({ title, children, left, right }) => (
 	</Card>
 )
 
-const Title = ({ title, className }) => title && (
+const Title = ({ title, className }) => (
 	<p className={`${className} font-size-xlarge uk-padding-remove-left uk-text-center`}>
-		{capitalize(title)}
+		{title && capitalize(title)}
 	</p>
 )

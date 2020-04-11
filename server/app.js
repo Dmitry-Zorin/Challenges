@@ -21,9 +21,12 @@ connectToDb(process.env.ATLAS_URI, {
 }).catch(console.log)
 
 const app = express()
-const envIsProduction = process.env.NODE_ENV === 'production'
+const isProductionEnv = process.env.NODE_ENV === 'production'
 
-app.use(cors({ origin: !envIsProduction, credentials: true }))
+app.use(cors({
+	origin: !isProductionEnv,
+	credentials: true
+}))
 
 const maxAge = 14 * 864e5  // 14 days
 
@@ -31,15 +34,19 @@ app.use(session({
 	secret: 'secret',
 	resave: true,
 	saveUninitialized: true,
-	store: new MongoDBStore({ uri: process.env.ATLAS_URI, maxAge }),
-	cookie: { maxAge /*secure: envIsProduction*/ },
+	store: new MongoDBStore({
+		uri: process.env.ATLAS_URI,
+		maxAge
+	}),
+	cookie: { maxAge /*secure: isProductionEnv*/ },
 }))
 
 app.use(passport.initialize())
 app.use(passport.session())
 
-const context = ({ req, res }) => buildContext({ req, res, User, getUserInfo })
-
+const context = ({ req, res }) => (
+	buildContext({ req, res, User, getUserInfo })
+)
 new ApolloServer({ typeDefs, resolvers, context })
 	.applyMiddleware({ app: app, path: '/api', cors: false })
 

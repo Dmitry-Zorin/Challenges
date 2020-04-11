@@ -2,8 +2,8 @@
 	"short_name": "Challenges",
 	"start_url": ".",
 	"display": "standalone",
-	"theme_color": "#20232A",
-	"background_color": "#20232A",
+	"theme_color": "rgb(39, 44, 53)",
+	"background_color": "rgb(39, 44, 53)",
 	"icons": [
 		{
 			"src": "favicon.ico",

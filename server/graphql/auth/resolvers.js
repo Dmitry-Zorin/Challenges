@@ -16,7 +16,8 @@ const resolvers = {
 					.catch(console.log)
 		),
 		login: (_, { username, password }, context) => (
-			authenticate({ username, password }, context).catch(console.log)
+			authenticate({ username, password }, context)
+				.catch(console.log)
 		),
 		logout: (_, __, context) => {
 			context.logout()
@@ -25,7 +26,9 @@ const resolvers = {
 	},
 }
 
-const getUser = (context) => ({ user: context.getUserInfo(context.getUser()) })
+const getUser = (context) => ({
+	user: context.getUserInfo(context.getUser())
+})
 
 const authenticate = ({ username, password }, context) => (
 	context.authenticate('graphql-local', { username, password })

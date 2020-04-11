@@ -4,6 +4,11 @@ import errors from 'data/notifications/errors.json'
 import challenges from 'data/notifications/challenges.json'
 import { capitalize } from 'lodash'
 
+const server = process.env.NODE_ENV === 'production' ? ''
+	: `http://${window.location.hostname}:${process.env.REACT_APP_API_PORT}`
+
+const apiServer = server + '/api'
+
 const challengeQuery = `{
 	_id name difficulty startDate endDate
 }`
@@ -156,12 +161,8 @@ const postQuery = (context, query, action, variables) => {
 	const api = query.match(/{\s*([^({ ]+)\s*[({]/)[1]
 	context.showSpinner()
 	
-	return axios.post(
-		context.apiServer,
-		{ query, variables },
-		{ withCredentials: true },
-	)
+	return axios.post(apiServer, { query, variables }, { withCredentials: true })
 		.then(res => resolve(res.data.data[api]))
 		.catch(err => reject(handleError(err, `Failed to ${action}`)))
-		.finally(context.hideSpinner)
+		.finally(() => context.showSpinner(false))
 }

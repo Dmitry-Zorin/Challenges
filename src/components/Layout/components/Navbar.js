@@ -56,7 +56,7 @@ export const NavigationBar = ({ location }) => {
 										className='icon-left'
 										transform={transform}
 									/>
-									{!context.userIsAuthorized ? 'log in' : 'log out'}
+									{context.userIsAuthorized ? 'log out' : 'log in'}
 								</Link>
 							) : (
 								<Link to='/create'>

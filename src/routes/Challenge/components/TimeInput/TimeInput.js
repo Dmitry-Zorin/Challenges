@@ -24,7 +24,7 @@ export const TimeInput = (props) => (
 	</div>
 )
 
-const NumberInput = ({ label, time, name, ms, handleChange }) => (
+const NumberInput = ({ label, time, ms, setState }) => (
 	<label className='uk-text-right'>
 		{label}
 		<input
@@ -35,7 +35,7 @@ const NumberInput = ({ label, time, name, ms, handleChange }) => (
 			onChange={e => {
 				if (isNaN(e.target.value)) return
 				const timeToMs = toMs[label.slice(0, -1).toUpperCase()]
-				handleChange(name, ms + (e.target.value - time) * timeToMs)
+				setState(ms + (e.target.value - time) * timeToMs)
 			}}
 		/>
 	</label>
@@ -48,10 +48,10 @@ const NumberButtons = (props) => (
 	</div>
 )
 
-const NumberButton = ({ sign, icon, timeToMs, name, ms, handleChange, step = 1 }) => (
+const NumberButton = ({ sign, icon, timeToMs, ms, setState, step = 1 }) => (
 	<Button
 		className={`${styles.button} uk-padding-remove`}
-		onClick={() => handleChange(name, ms + sign * step * timeToMs)}
+		onClick={() => setState(ms + sign * step * timeToMs)}
 	>
 		<FontAwesomeIcon icon={icon}/>
 	</Button>

@@ -1,4 +1,4 @@
-// TODO: Check input data
+// TODO: Validate input
 
 const resolvers = {
 	Query: {
@@ -18,7 +18,8 @@ const resolvers = {
 		),
 		challengeDelete: (...args) => (
 			getUpdatedChallenges(args, (user, { id }) => {
-				user.challenges = user.challenges.filter(c => c._id.toString() !== id)
+				user.challenges = user.challenges
+					.filter(c => c._id.toString() !== id)
 			})
 		),
 		challengeStart: (...args) => (

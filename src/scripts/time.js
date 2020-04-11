@@ -32,14 +32,19 @@ export const updateTime = (context, challenges = context.challenges) => {
 	
 	localStorage.setItem('challenges', JSON.stringify(updatedChallenges))
 	
-	return !challengesNeedUpdate ? updatedChallenges : getChallenges(context)
-		.then(challenges => updateTime(context, challenges))
-		.catch(() => updatedChallenges)
+	return !challengesNeedUpdate ? updatedChallenges
+		: getChallenges(context)
+			.then(challenges => updateTime(context, challenges))
+			.catch(() => updatedChallenges)
 }
 
 const getTimeString = (c, ms) => {
 	const time = getTimeObj(ms)
-	const timeStrings = [time.days + 'd', time.hours + 'h', time.minutes + 'm']
+	const timeStrings = [
+		time.days + 'd',
+		time.hours + 'h',
+		time.minutes + 'm',
+	]
 	return timeStrings.filter(e => +e[0]).join(' ')
 }
 

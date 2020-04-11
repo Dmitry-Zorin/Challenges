@@ -16,7 +16,9 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 	<Link to={to}>
 		<Card className='uk-transition-toggle' style={{ height: '15em' }}>
 			<p className='font-size-large uk-text-center'>{capitalize(title)}</p>
-			{!group.length ? (
+			{group.length ? group.slice(0, 4).map(c => (
+				<ChallengeGroupItem key={c._id} title={title} challenge={c}/>
+			)) : (
 				<p
 					className='uk-text-center uk-text-muted'
 					style={{ marginTop: '4em' }}
@@ -28,9 +30,7 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 					/>
 					No challenges...
 				</p>
-			) : group.slice(0, 4).map(c => (
-				<ChallengeGroupItem key={c._id} title={title} challenge={c}/>
-			))}
+			)}
 			<Overlay text='see all'/>
 		</Card>
 	</Link>
