@@ -78,7 +78,7 @@ export const logout = (context) => (
 			if (res?.user === undefined)
 				return reject(addNotification(errors.response))
 			
-			addNotification(user.logout)
+			addNotification({ ...user.logout, message: context.userInfo.username })
 		})
 		.catch(reject)
 )

@@ -46,7 +46,7 @@ export const Login = (props) => {
 		if (!isFirstRenderRef.current) return
 		isFirstRenderRef.current = false
 		
-		if (!context.userIsAuthorized) return
+		if (!context.userInfo?.username) return
 		logout(context)
 			.then(() => {
 				localStorage.clear()

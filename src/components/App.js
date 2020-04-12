@@ -31,8 +31,8 @@ export const App = () => {
 		setContext({ ...contextRef.current })
 	}, [])
 	
-	const login = useCallback(({ challenges }) => {
-		updateContext({ userIsAuthorized: true })
+	const login = useCallback(({ username, challenges }) => {
+		updateContext({ userInfo: { username } })
 		context.updateChallenges(challenges)
 		intervalRef.current = setInterval(context.updateChallenges, updateTimeout)
 		setContext({ ...contextRef.current })
@@ -40,7 +40,7 @@ export const App = () => {
 	
 	const logout = useCallback(() => {
 		clearInterval(intervalRef.current)
-		updateContext({ challenges: {}, userIsAuthorized: false })
+		updateContext({ challenges: {}, userInfo: {} })
 	}, [updateContext])
 	
 	useEffect(() => clearInterval(intervalRef.current), [])

@@ -51,11 +51,13 @@ export const NavigationBar = ({ location }) => {
 							) : location.pathname.match(/\/($|create|edit)/) ? (
 								<Link to='/login'>
 									<FontAwesomeIcon
-										icon={context.userIsAuthorized ? faSignOutAlt : faSignInAlt}
+										icon={
+											context.userInfo?.username ? faSignOutAlt : faSignInAlt
+										}
 										className='icon-left'
 										transform={transform}
 									/>
-									{context.userIsAuthorized ? 'log out' : 'log in'}
+									{context.userInfo?.username ? 'log out' : 'log in'}
 								</Link>
 							) : (
 								<Link to='/create'>
