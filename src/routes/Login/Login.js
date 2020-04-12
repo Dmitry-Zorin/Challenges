@@ -5,7 +5,7 @@ import React, {
 	useRef,
 	useState,
 } from 'react'
-import { Button, Form } from 'uikit-react'
+import { Button } from 'uikit-react'
 import { InnerLayout } from 'components/InnerLayout'
 import { DataContext } from 'contexts/DataContext'
 import { SwitcherItem } from 'components/SwitcherItem'
@@ -55,7 +55,8 @@ export const Login = (props) => {
 			.catch(() => {})
 	}, [context, props])
 	
-	const _authorize = useCallback(() => {
+	const _authorize = useCallback(e => {
+		e.preventDefault()
 		!username || !password ? addNotification(invalid)
 			: authorize(context, authOption.action, { username, password })
 				.then(user => {
@@ -85,7 +86,7 @@ export const Login = (props) => {
 					/>
 				))}
 			</ul>
-			<Form className='uk-margin-medium-top'>
+			<form className='uk-form uk-margin-medium-top' onSubmit={_authorize}>
 				<TextInput
 					icon={faUser}
 					label='username'
@@ -102,7 +103,6 @@ export const Login = (props) => {
 				<Button
 					className='uk-align-center uk-width-1-3@m uk-width-1-2@s'
 					style={{ marginTop: '4em' }}
-					onClick={_authorize}
 				>
 					<FontAwesomeIcon
 						icon={faPaperPlane}
@@ -111,7 +111,7 @@ export const Login = (props) => {
 					/>
 					Submit
 				</Button>
-			</Form>
+			</form>
 		</InnerLayout>
 	)
 }

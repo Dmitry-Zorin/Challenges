@@ -1,6 +1,6 @@
 import React from 'react'
 import { getTimeObj, toMs } from 'scripts/time'
-import { Button, Grid } from 'uikit-react'
+import { Grid } from 'uikit-react'
 import { capitalize } from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -49,10 +49,11 @@ const NumberButtons = (props) => (
 )
 
 const NumberButton = ({ sign, icon, timeToMs, ms, setState, step = 1 }) => (
-	<Button
-		className={`${styles.button} uk-padding-remove`}
+	<button
+		type='button'
+		className={`${styles.button} uk-button uk-button-default uk-padding-remove`}
 		onClick={() => setState(ms + sign * step * timeToMs)}
 	>
 		<FontAwesomeIcon icon={icon}/>
-	</Button>
+	</button>
 )

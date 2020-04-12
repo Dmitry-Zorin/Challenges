@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { Form } from 'uikit-react'
 import { InnerLayout } from 'components/InnerLayout'
 import { DataContext } from 'contexts/DataContext'
 import { DifficultyInput } from './components/DifficultyInput'
@@ -44,7 +43,8 @@ export const Challenge = ({ navigate, location }) => {
 		navigate: () => navigate('..'),
 	}
 	
-	const save = (defaultName) => {
+	const save = (e, defaultName) => {
+		e.preventDefault()
 		info.navigate()
 		
 		const variables = {
@@ -65,7 +65,7 @@ export const Challenge = ({ navigate, location }) => {
 	
 	return (
 		<InnerLayout title={info.title}>
-			<Form>
+			<form className='uk-form' onSubmit={e => save(e, defaultName)}>
 				<TextInput
 					label='name'
 					value={name}
@@ -88,11 +88,10 @@ export const Challenge = ({ navigate, location }) => {
 					setState={setDelay}
 				/>
 				<Buttons
-					save={() => save(defaultName)}
 					saveValue={info.save}
 					withCancel={!!c?._id}
 				/>
-			</Form>
+			</form>
 		</InnerLayout>
 	)
 }

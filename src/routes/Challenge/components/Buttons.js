@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid } from 'uikit-react'
+import { Grid } from 'uikit-react'
 import {
 	faCheckCircle,
 	faPlusCircle,
@@ -7,31 +7,36 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export const Buttons = ({ save, saveValue, withCancel }) => (
+export const Buttons = ({ saveValue, withCancel }) => (
 	<Grid
 		className='uk-flex-center uk-child-width-1-3@m uk-child-width-1-2@s'
 		style={{ marginTop: '4em' }}
 	>
 		{withCancel && (
 			<ActionButton
+				type='button'
 				value='Cancel'
 				icon={faTimesCircle}
 				onClick={() => window.history.back()}
 			/>
 		)}
 		<ActionButton
+			type='submit'
 			value={saveValue}
 			icon={withCancel ? faCheckCircle : faPlusCircle}
-			onClick={save}
 		/>
 	</Grid>
 )
 
-const ActionButton = ({ value, icon, onClick }) => (
+const ActionButton = ({ type, value, icon, onClick }) => (
 	<div>
-		<Button className='round-border uk-width-expand' onClick={onClick}>
+		<button
+			type={type}
+			className='uk-button uk-button-default uk-width-expand'
+			onClick={onClick}
+		>
 			<FontAwesomeIcon icon={icon} className='icon-left-2'/>
 			{value}
-		</Button>
+		</button>
 	</div>
 )

@@ -9,7 +9,6 @@ import {
 import { DataContext } from 'contexts/DataContext'
 import { updateChallenge } from 'scripts/requests'
 import { capitalize } from 'lodash'
-import { Button } from 'uikit-react'
 
 const icons = {
 	start: faPlay,
@@ -36,15 +35,15 @@ export const Buttons = ({ challenge, navigate, options }) => {
 	return (
 		<div className='uk-width-expand uk-text-right'>
 			{[...options || [], 'edit', 'delete'].map(o => (
-				<Button
+				<button
 					key={o}
-					className='uk-padding-remove'
+					className='uk-button uk-button-default uk-padding-remove'
 					style={{ width: '3em', marginLeft: '0.5em' }}
-					data-uk-tooltip={capitalize(o)}
+					data-uk-tooltip={`title: ${capitalize(o)}; delay: 100`}
 					onClick={() => update(o)}
 				>
 					<FontAwesomeIcon icon={icons[o.toLowerCase()]} transform='grow-3'/>
-				</Button>
+				</button>
 			))}
 		</div>
 	)
