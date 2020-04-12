@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { capitalize } from 'lodash'
 
-export const TextInput = ({ icon, label, value, setState, defaultValue, isPassword, capital }) => (
+export const TextInput = ({ icon, label, value = '', setState, defaultValue = label, isPassword, capital }) => (
 	<div className='uk-margin-medium'>
 		<label>
 			{icon && (
@@ -17,8 +17,8 @@ export const TextInput = ({ icon, label, value, setState, defaultValue, isPasswo
 				type={isPassword ? 'password' : 'text'}
 				className='uk-input'
 				maxLength='250'
-				value={value || ''}
-				placeholder={value ? undefined : defaultValue || label}
+				value={value}
+				placeholder={value ? undefined : defaultValue}
 				onChange={e => {
 					const value = e.target.value
 					return setState(capital ? capitalize(value) : value)

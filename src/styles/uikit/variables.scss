@@ -18,7 +18,7 @@ $animation-fade-duration: 0.25s;
 $button-border-width: 0;
 $button-default-background: $primary-color;
 $button-default-hover-background: $primary-hover-color;
-$button-default-active-background: $primary-active-color;
+$button-default-active-background: $button-default-hover-background;
 $button-default-color: $button-color;
 $button-default-hover-color: $button-default-color;
 $button-default-active-color: $button-default-color;

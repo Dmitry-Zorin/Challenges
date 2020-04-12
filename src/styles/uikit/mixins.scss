@@ -28,7 +28,6 @@
 // Button
 @mixin hook-button() {
 	@include round-border;
-	font-weight: $button-font-weight;
 	text-transform: $button-text-transform;
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color, border-color;
@@ -102,5 +101,4 @@
 	@include round-border;
 	height: 1.85em;
 	padding-top: 0.65em;
-	font-weight: $button-font-weight;
 }

@@ -13,20 +13,18 @@ $card-background-light-hover-color: lighten($card-background-color, 10);
 $card-background-light-active-color: lighten($card-background-color, 15);
 $overlay-color: adjust-color($card-background-color, 4, 4, 4);
 
-$primary-hover-color: darken($primary-color, 5);
-$primary-active-color: darken($primary-color, 10);
+$primary-hover-color: darken($primary-color, 7);
 
-$button-color: $card-background-light-color;
+$button-color: $card-background-color;
 
 // Dimensions
 $primary-border-radius: 1em;
 $secondary-border-radius: 0.5em;
 $icon-margin: 0.2em;
-$button-font-weight: 450;
 
 $font-size-medium: 1.15em;
 $font-size-large: 1.4em;
-$font-size-xlarge: 1.8em;
+$font-size-xlarge: 2em;
 
 $breakpoint-small: 640px;
 $breakpoint-medium: 960px;

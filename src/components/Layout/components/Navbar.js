@@ -14,7 +14,6 @@ import {
 	faPlus,
 	faSignInAlt,
 	faSignOutAlt,
-	faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
 
 const transform = 'shrink-2 down-0.65'
@@ -47,7 +46,7 @@ export const NavigationBar = ({ location }) => {
 						<NavItem>
 							{context.spinnerIsVisible ? (
 								<a href='/#' onClick={e => e.preventDefault()}>
-									<FontAwesomeIcon icon={faSpinner} transform='grow-10' spin/>
+									<div data-uk-spinner='ratio: 0.8'/>
 								</a>
 							) : location.pathname.match(/\/($|create|edit)/) ? (
 								<Link to='/login'>
