@@ -35,6 +35,15 @@ $form-focus-color: $form-color;
 // Overlay
 $overlay-default-background: $overlay-color;
 
+// Label
+$label-color: $global-color;
+$label-success-background: $green;
+$label-warning-background: $yellow;
+$label-danger-background: $red;
+$label-success-color: $label-color;
+$label-warning-color: $label-color;
+$label-danger-color: $label-color;
+
 // Navbar
 $navbar-nav-item-height: 40px;
 $navbar-background: $navbar-color;

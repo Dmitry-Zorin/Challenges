@@ -21,8 +21,8 @@
 }
 
 @mixin hook-accordion-content() {
-	// Fix for mount stutter
-	display: none;
+	display: none; // Fix for mount stutter
+	padding-top: 0.5em;
 }
 
 // Button
@@ -35,7 +35,7 @@
 
 // Card
 @mixin hook-card() {
-	@include round-border($primary-border-radius);
+	@include round-border($card-border-radius);
 	margin: 1em 0;
 	padding: 1.5em 1em;
 	overflow: hidden;

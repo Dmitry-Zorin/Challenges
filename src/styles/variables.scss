@@ -5,6 +5,10 @@ $base-color: #EEE;
 $input-color: #000;
 $muted-color: #999;
 
+$green: #43AA5F;
+$yellow: #9E8930;
+$red: #AB3F3F;
+
 $navbar-color: adjust-color($background-color, -9, -10, -9);
 $title-color: darken($primary-color, 4);
 $card-background-color: adjust-color($background-color, 10, 9, 10);
@@ -18,8 +22,8 @@ $primary-hover-color: darken($primary-color, 7);
 $button-color: $card-background-color;
 
 // Dimensions
-$primary-border-radius: 1em;
-$secondary-border-radius: 0.5em;
+$card-border-radius: 1em;
+$button-border-radius: 0.5em;
 $icon-margin: 0.2em;
 
 $font-size-medium: 1.15em;

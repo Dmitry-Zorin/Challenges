@@ -1,5 +1,5 @@
 @import 'variables';
 
-@mixin round-border($radius: $secondary-border-radius) {
+@mixin round-border($radius: $button-border-radius) {
 	border-radius: $radius;
 }

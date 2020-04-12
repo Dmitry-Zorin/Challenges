@@ -1,7 +1,6 @@
 {
 	"created": {
-		"title": "New challenge",
-		"type": "default"
+		"title": "New challenge!"
 	},
 	"edited": {
 		"title": "Challenge updated"
@@ -10,7 +9,7 @@
 		"title": "Challenge started"
 	},
 	"completed": {
-		"title": "Challenge completed",
+		"title": "Challenge completed!",
 		"type": "success"
 	},
 	"deleted": {

@@ -1,0 +1,18 @@
+@import './variables';
+@import '../../node_modules/react-notifications-component/dist/scss/_types.scss';
+@import '../../node_modules/react-notifications-component/dist/scss/notification.scss';
+
+@mixin custom-notification-style($background-color, $color: white) {
+	width: 100%;
+	background: $background-color;
+	border-left: 8px solid darken($background-color, 10);
+	
+	.notification-title, .notification-message {
+		color: $color;
+	}
+}
+
+.notification-custom {
+	@extend .notification-default;
+	@include custom-notification-style(#2E86C1);
+}

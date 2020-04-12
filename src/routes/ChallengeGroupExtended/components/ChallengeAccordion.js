@@ -57,7 +57,7 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
 									options={challengeInfo[groupName].options}
 								/>
 							</Grid>
-							<hr/>
+							<hr className='uk-margin-remove-bottom'/>
 						</div>
 					}/>
 				))}
