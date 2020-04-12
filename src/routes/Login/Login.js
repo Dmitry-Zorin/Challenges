@@ -107,7 +107,7 @@ export const Login = (props) => {
 					<FontAwesomeIcon
 						icon={faPaperPlane}
 						className='icon-left-2'
-						transform='shrink-2'
+						transform='shrink-3'
 					/>
 					Submit
 				</Button>

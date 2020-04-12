@@ -37,7 +37,7 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
 							>
 								<FontAwesomeIcon
 									icon={challengeInfo[groupName].icon}
-									transform='shrink-2'
+									transform='shrink-3'
 								/>
 								{getChallengeTime(c)}
 							</div>

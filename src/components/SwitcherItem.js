@@ -11,7 +11,7 @@ export const SwitcherItem = ({ icon, value, active, onClick }) => (
 				<FontAwesomeIcon
 					icon={icon}
 					className='icon-left-2'
-					transform='shrink-2'
+					transform='shrink-3'
 				/>
 			)}
 			{value}

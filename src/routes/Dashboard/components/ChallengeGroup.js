@@ -26,7 +26,7 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 					<FontAwesomeIcon
 						icon={faBan}
 						className='icon-left'
-						transform='shrink-4 down-0.5'
+						transform='shrink-4 down-0.4'
 					/>
 					No challenges...
 				</p>
@@ -51,7 +51,7 @@ const ChallengeGroupItem = ({ title, challenge }) => (
 			className='uk-text-meta uk-padding-remove'
 			style={{ marginTop: '0.3em' }}
 		>
-			<FontAwesomeIcon icon={icons[title]} transform='shrink-2'/>
+			<FontAwesomeIcon icon={icons[title]} transform='shrink-3'/>
 			{getChallengeTime(challenge)}
 		</div>
 	</Grid>

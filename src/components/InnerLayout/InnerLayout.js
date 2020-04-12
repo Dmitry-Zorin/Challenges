@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const transform = 'shrink-5 down-1.2'
+const transform = 'shrink-3 down-0.5'
 
 export const InnerLayout = ({ title, children, left, right }) => (
 	<Card className={styles.innerLayout}>

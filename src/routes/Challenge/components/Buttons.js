@@ -35,7 +35,11 @@ const ActionButton = ({ type, value, icon, onClick }) => (
 			className='uk-button uk-button-default uk-width-expand'
 			onClick={onClick}
 		>
-			<FontAwesomeIcon icon={icon} className='icon-left-2'/>
+			<FontAwesomeIcon
+				icon={icon}
+				className='icon-left-2'
+				transform='shrink-1'
+			/>
 			{value}
 		</button>
 	</div>

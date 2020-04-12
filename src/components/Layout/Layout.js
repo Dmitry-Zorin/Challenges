@@ -19,7 +19,7 @@ export const Layout = ({ children, location }) => (
 						<FontAwesomeIcon
 							icon={faTasks}
 							className={styles.icon + ' icon-left'}
-							transform='shrink-2 down-0.5'
+							transform='shrink-2 down-0.4'
 						/>
 						Challenges
 					</p>

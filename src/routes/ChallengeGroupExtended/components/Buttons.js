@@ -42,7 +42,7 @@ export const Buttons = ({ challenge, navigate, options }) => {
 					data-uk-tooltip={`title: ${capitalize(o)}; delay: 100`}
 					onClick={() => update(o)}
 				>
-					<FontAwesomeIcon icon={icons[o.toLowerCase()]} transform='grow-3'/>
+					<FontAwesomeIcon icon={icons[o.toLowerCase()]} transform='grow-2'/>
 				</button>
 			))}
 		</div>

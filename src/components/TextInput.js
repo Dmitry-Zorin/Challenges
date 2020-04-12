@@ -9,7 +9,7 @@ export const TextInput = ({ icon, label, value = '', setState, defaultValue = la
 				<FontAwesomeIcon
 					icon={icon}
 					className='icon-left'
-					transform='shrink-2'
+					transform='shrink-4'
 				/>
 			)}
 			{capitalize(label)}

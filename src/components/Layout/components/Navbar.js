@@ -16,7 +16,7 @@ import {
 	faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons'
 
-const transform = 'shrink-2 down-0.65'
+const transform = 'shrink-3 down-0.5'
 
 export const NavigationBar = ({ location }) => {
 	const context = useContext(DataContext)
