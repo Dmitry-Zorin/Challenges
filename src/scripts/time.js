@@ -1,5 +1,5 @@
 import { getChallenges } from 'scripts/requests'
-import { addNotification } from './utils'
+import { addNotification } from './notifications'
 import challengeNotifications from 'data/notifications/challenges.json'
 
 export const toMs = { DAY: 864e5, HOUR: 36e5, MINUTE: 6e4 }

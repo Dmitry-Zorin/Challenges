@@ -19,7 +19,7 @@ import {
 	faUserPlus,
 } from '@fortawesome/free-solid-svg-icons'
 import { authorize, logout } from 'scripts/requests'
-import { addNotification } from 'scripts/utils'
+import { addNotification } from 'scripts/notifications'
 import { invalid } from 'data/notifications/errors.json'
 
 const authOptions = {

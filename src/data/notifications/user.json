@@ -1,0 +1,17 @@
+{
+	"signUp": {
+		"title": "Welcome!",
+		"animationIn": "tada",
+		"animationOut": "bounceOutUp"
+	},
+	"login": {
+		"title": "Welcome back!",
+		"animationIn": "tada",
+		"animationOut": "bounceOutUp"
+	},
+	"logout": {
+		"title": "Goodbye!",
+		"animationIn": "swing",
+		"animationOut": "fadeOutUp"
+	}
+}

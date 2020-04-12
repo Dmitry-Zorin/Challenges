@@ -14,5 +14,5 @@
 
 .notification-custom {
 	@extend .notification-default;
-	@include custom-notification-style(#2E86C1);
+	@include custom-notification-style($blue);
 }

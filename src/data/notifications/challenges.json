@@ -1,19 +1,22 @@
 {
-	"created": {
-		"title": "New challenge!"
+	"create": {
+		"title": "New challenge!",
+		"animationIn": "bounceInRight",
+		"animationOut": "bounceOutRight"
 	},
-	"edited": {
+	"edit": {
 		"title": "Challenge updated"
 	},
-	"started": {
+	"start": {
 		"title": "Challenge started"
 	},
-	"completed": {
+	"complete": {
 		"title": "Challenge completed!",
-		"type": "success"
+		"type": "success",
+		"animationIn": "bounceInRight",
+		"animationOut": "bounceOutRight"
 	},
-	"deleted": {
-		"title": "Challenge deleted",
-		"type": "danger"
+	"delete": {
+		"title": "Challenge deleted"
 	}
 }

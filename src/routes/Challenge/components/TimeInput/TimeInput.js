@@ -24,13 +24,14 @@ export const TimeInput = (props) => (
 	</div>
 )
 
-const NumberInput = ({ label, time = '', ms, setState }) => (
+const NumberInput = ({ label, time, ms, setState }) => (
 	<label className='uk-text-right'>
 		{label}
 		<input
-			className='uk-input'
+			type='text'
 			pattern="[0-9]*"
-			value={time}
+			className='uk-input'
+			value={time || ''}
 			placeholder={time ? undefined : 0}
 			onChange={e => {
 				if (isNaN(e.target.value)) return
