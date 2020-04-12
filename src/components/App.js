@@ -14,49 +14,46 @@ import { getUserInfo } from 'scripts/requests'
 
 export const App = () => {
 	const [context, setContext] = useState({
-		showSpinner: (isVisible = true) => {
-			contextRef.current.spinnerIsVisible = isVisible
-			setContext({ ...contextRef.current })
+		showSpinner: (spinnerIsVisible = true) => {
+			updateContext({ spinnerIsVisible })
 		},
-		update: async (challenges) => {
-			contextRef.current.challenges =
-				await updateTime(contextRef.current, challenges)
-			setContext({ ...contextRef.current })
+		updateChallenges: async (challenges) => {
+			updateContext({
+				challenges: await updateTime(contextRef.current, challenges),
+			})
 		},
 	})
 	const contextRef = useRef(context)
 	const intervalRef = useRef()
 	
+	const updateContext = useCallback(context => {
+		Object.assign(contextRef.current, context)
+		setContext({ ...contextRef.current })
+	}, [])
+	
 	const login = useCallback(({ challenges }) => {
-		contextRef.current.userIsAuthorized = true
-		context.update(challenges)
-		intervalRef.current = setInterval(context.update, updateTimeout)
+		updateContext({ userIsAuthorized: true })
+		context.updateChallenges(challenges)
+		intervalRef.current = setInterval(context.updateChallenges, updateTimeout)
 		setContext({ ...contextRef.current })
 	}, [context])
 	
 	const logout = useCallback(() => {
 		clearInterval(intervalRef.current)
-		contextRef.current = {
-			...contextRef.current,
-			challenges: {},
-			userIsAuthorized: false,
-		}
-		setContext({ ...contextRef.current })
+		updateContext({ challenges: {}, userIsAuthorized: false })
 	}, [])
 	
 	useEffect(() => clearInterval(intervalRef.current), [])
 	
 	useEffect(() => {
 		if (context.challenges === undefined) {
-			contextRef.current.challenges =
-				JSON.parse(localStorage.getItem('challenges')) || {}
+			const challenges = JSON.parse(localStorage.getItem('challenges')) || {}
+			updateContext({ challenges })
 		}
 		else if (context.spinnerIsVisible === undefined) {
 			getUserInfo(context).then(login).catch(logout)
+			updateContext()
 		}
-		else return
-		
-		setContext({ ...contextRef.current })
 	}, [context, login, logout])
 	
 	return (

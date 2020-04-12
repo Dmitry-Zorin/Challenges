@@ -55,7 +55,7 @@ export const Login = (props) => {
 			.catch(() => {})
 	}, [context, props])
 	
-	const _authorize = useCallback(e => {
+	const submit = useCallback(e => {
 		e.preventDefault()
 		!username || !password ? addNotification(invalid)
 			: authorize(context, authOption.action, { username, password })
@@ -86,7 +86,7 @@ export const Login = (props) => {
 					/>
 				))}
 			</ul>
-			<form className='uk-form uk-margin-medium-top' onSubmit={_authorize}>
+			<form className='uk-form uk-margin-medium-top' onSubmit={submit}>
 				<TextInput
 					icon={faUser}
 					label='username'

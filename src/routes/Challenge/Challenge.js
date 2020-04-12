@@ -56,7 +56,7 @@ export const Challenge = ({ navigate, location }) => {
 		variables.endDate = variables.startDate + duration
 		
 		saveChallenge(context, info.action, variables)
-			.then(context.update)
+			.then(context.updateChallenges)
 			.catch(() => {})
 	}
 	

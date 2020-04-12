@@ -26,10 +26,10 @@ export const Buttons = ({ challenge, navigate, options }) => {
 		for (const [name, group] of Object.entries(context.challenges))
 			context.challenges[name] = group.filter(c => c._id !== challenge._id)
 		
-		context.update(context.challenges)
+		context.updateChallenges(context.challenges)
 		
 		updateChallenge(context, action, { id: challenge._id }, challenge.name)
-			.then(context.update).catch(() => {})
+			.then(context.updateChallenges).catch(() => {})
 	}
 	
 	return (
