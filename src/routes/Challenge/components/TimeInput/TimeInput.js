@@ -29,7 +29,7 @@ const NumberInput = ({ label, time, ms, setState }) => (
 		{label}
 		<input
 			type='text'
-			pattern="[0-9]*"
+			pattern='[0-9]*'
 			className='uk-input'
 			value={time || ''}
 			placeholder={time ? undefined : 0}

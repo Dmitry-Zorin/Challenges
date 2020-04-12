@@ -4,8 +4,8 @@
 	background: $card-background-light-color;
 	
 	&, &:hover, &:active {
-		color: $base-color;
 		border: 1px solid $card-background-color;
+		color: $base-color;
 	}
 	
 	&:hover {

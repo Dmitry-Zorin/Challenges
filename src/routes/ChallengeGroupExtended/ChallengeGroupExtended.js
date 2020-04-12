@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { itemsPerPage } from 'data/settings.json'
 
 export const ChallengeGroupExtended = ({ left, right, navigate }) => {
-	const context = useContext(DataContext)
+	const { challenges } = useContext(DataContext)
 	const [pattern, setPattern] = useState(/.*/)
 	const [page, setPage] = useState(0)
 	
@@ -26,16 +26,16 @@ export const ChallengeGroupExtended = ({ left, right, navigate }) => {
 	}
 	
 	const groupName = window.location.pathname.slice(1)
-	const group = context.challenges?.[groupName] || []
-	const challenges = group.filter(c => pattern.test(c.name))
-	const maxPage = Math.ceil(challenges.length / itemsPerPage)
+	const group = challenges?.[groupName] || []
+	const filteredChallenges = group.filter(c => pattern.test(c.name))
+	const maxPage = Math.ceil(filteredChallenges.length / itemsPerPage)
 	
 	return (
 		<InnerLayout title={groupName} left={left} right={right}>
 			<Search onChange={search}/>
-			{challenges.length ? (
+			{filteredChallenges.length ? (
 				<ChallengeAccordion
-					challenges={challenges}
+					challenges={filteredChallenges}
 					page={page}
 					groupName={groupName}
 					navigate={navigate}
@@ -53,7 +53,7 @@ export const ChallengeGroupExtended = ({ left, right, navigate }) => {
 					No challenges...
 				</p>
 			)}
-			{challenges.length > itemsPerPage && (
+			{filteredChallenges.length > itemsPerPage && (
 				<Pagination page={page} maxPage={maxPage} changePage={changePage}/>
 			)}
 		</InnerLayout>

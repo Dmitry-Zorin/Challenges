@@ -25,7 +25,7 @@ const isProductionEnv = process.env.NODE_ENV === 'production'
 
 app.use(cors({
 	origin: !isProductionEnv,
-	credentials: true
+	credentials: true,
 }))
 
 const maxAge = 14 * 864e5  // 14 days
@@ -36,7 +36,7 @@ app.use(session({
 	saveUninitialized: true,
 	store: new MongoDBStore({
 		uri: process.env.ATLAS_URI,
-		maxAge
+		maxAge,
 	}),
 	cookie: { maxAge /*secure: isProductionEnv*/ },
 }))

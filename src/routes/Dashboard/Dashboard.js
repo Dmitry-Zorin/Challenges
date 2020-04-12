@@ -7,8 +7,7 @@ import { DataContext } from 'contexts/DataContext'
 import { challengeGroups } from 'data/settings.json'
 
 export const Dashboard = () => {
-	const context = useContext(DataContext)
-	
+	const { challenges } = useContext(DataContext)
 	return (
 		<Flex>
 			<LeftColumn/>
@@ -19,7 +18,7 @@ export const Dashboard = () => {
 						key={g}
 						title={g}
 						to={`/${g}`}
-						group={context.challenges?.[g]}
+						group={challenges?.[g]}
 					/>
 				))}
 			</div>

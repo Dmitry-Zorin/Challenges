@@ -27,7 +27,7 @@ const resolvers = {
 }
 
 const getUser = (context) => ({
-	user: context.getUserInfo(context.getUser())
+	user: context.getUserInfo(context.getUser()),
 })
 
 const authenticate = ({ username, password }, context) => (

@@ -10,6 +10,7 @@ import {
 import { Link } from '@reach/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+	faBars,
 	faChevronLeft,
 	faPlus,
 	faSignInAlt,
@@ -19,8 +20,8 @@ import {
 const transform = 'shrink-3 down-0.5'
 
 export const NavigationBar = ({ location }) => {
-	const context = useContext(DataContext)
-	
+	const { userInfo, spinnerIsVisible } = useContext(DataContext)
+	const text = 'Challenges'
 	return (
 		<NavbarSticky>
 			<NavbarContainer>
@@ -28,7 +29,17 @@ export const NavigationBar = ({ location }) => {
 					<Navbar>
 						<NavItem>
 							{location.pathname === '/' ? (
-								<Link to='/' className='primary'>Challenges</Link>
+								<Link to='/' className='primary'>
+									<div className='uk-hidden@m' data-uk-toggle='target: #info'>
+										<FontAwesomeIcon
+											icon={faBars}
+											className='icon-left'
+											transform={transform}
+										/>
+										{text}
+									</div>
+									<div className='uk-visible@m'>{text}</div>
+								</Link>
 							) : (
 								<Link to='/'>
 									<FontAwesomeIcon
@@ -44,7 +55,7 @@ export const NavigationBar = ({ location }) => {
 						<NavItem className='uk-width-expand'/>
 						
 						<NavItem>
-							{context.spinnerIsVisible ? (
+							{spinnerIsVisible ? (
 								<a href='/#' onClick={e => e.preventDefault()}>
 									<div data-uk-spinner='ratio: 0.8'/>
 								</a>
@@ -52,12 +63,12 @@ export const NavigationBar = ({ location }) => {
 								<Link to='/login'>
 									<FontAwesomeIcon
 										icon={
-											context.userInfo?.username ? faSignOutAlt : faSignInAlt
+											userInfo?.username ? faSignOutAlt : faSignInAlt
 										}
 										className='icon-left'
 										transform={transform}
 									/>
-									{context.userInfo?.username ? 'log out' : 'log in'}
+									{userInfo?.username ? 'log out' : 'log in'}
 								</Link>
 							) : (
 								<Link to='/create'>

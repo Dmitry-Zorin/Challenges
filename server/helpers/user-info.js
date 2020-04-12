@@ -18,13 +18,13 @@ const getUserInfo = (user) => {
 	}
 	
 	sortedChallenges.ongoing.sort(
-		(a, b) => a.endDate - b.endDate
+		(a, b) => a.endDate - b.endDate,
 	)
 	sortedChallenges.upcoming.sort(
-		(a, b) => a.startDate - b.startDate
+		(a, b) => a.startDate - b.startDate,
 	)
 	sortedChallenges.completed.sort(
-		(a, b) => b.endDate - a.endDate
+		(a, b) => b.endDate - a.endDate,
 	)
 	
 	return {
