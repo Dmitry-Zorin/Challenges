@@ -36,12 +36,12 @@ export const App = () => {
 		context.updateChallenges(challenges)
 		intervalRef.current = setInterval(context.updateChallenges, updateTimeout)
 		setContext({ ...contextRef.current })
-	}, [context])
+	}, [context, updateContext])
 	
 	const logout = useCallback(() => {
 		clearInterval(intervalRef.current)
 		updateContext({ challenges: {}, userIsAuthorized: false })
-	}, [])
+	}, [updateContext])
 	
 	useEffect(() => clearInterval(intervalRef.current), [])
 	
@@ -54,7 +54,7 @@ export const App = () => {
 			getUserInfo(context).then(login).catch(logout)
 			updateContext()
 		}
-	}, [context, login, logout])
+	}, [context, updateContext, login, logout])
 	
 	return (
 		<DataContext.Provider value={context}>
