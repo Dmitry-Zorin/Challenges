@@ -37,6 +37,7 @@ $overlay-default-background: $overlay-color;
 
 // Offcanvas
 $offcanvas-bar-background: $navbar-color;
+$offcanvas-bar-padding-horizontal: calc(20px + env(safe-area-inset-left));
 
 // Label
 $label-color: $global-color;
