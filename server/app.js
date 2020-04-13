@@ -10,7 +10,7 @@ const { ApolloServer } = require('apollo-server-express')
 const typeDefs = require('./graphql/schema')
 const resolvers = require('./graphql/resolvers')
 const User = require('./models/user')
-const getUserInfo = require('./helpers/user-info')
+const getUserInfo = require('./helpers/userInfo')
 
 configEnv({ path: `${__dirname}/.env` })
 
