@@ -8,6 +8,7 @@ import {
 	faArrowUp,
 	faBan,
 	faCheck,
+	faQuestion,
 } from '@fortawesome/free-solid-svg-icons'
 import { capitalize } from 'lodash'
 import { Overlay } from './Overlay'
@@ -17,7 +18,7 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 		<Card className='uk-transition-toggle' style={{ height: '15em' }}>
 			<p className='font-size-large uk-text-center'>{capitalize(title)}</p>
 			{group.length ? group.slice(0, 4).map(c => (
-				<ChallengeGroupItem key={c._id} title={title} challenge={c}/>
+				<ChallengeGroupItem key={c._id} group={title} challenge={c}/>
 			)) : (
 				<p
 					className='uk-text-center uk-text-muted'
@@ -42,17 +43,25 @@ const icons = {
 	'completed': faCheck,
 }
 
-const ChallengeGroupItem = ({ title, challenge }) => (
-	<Grid className='uk-margin-small' key={challenge._id}>
-		<div className='wrap font-size-medium uk-width-expand'>
-			{challenge.name}
-		</div>
-		<div
-			className='uk-text-meta uk-padding-remove'
-			style={{ marginTop: '0.3em' }}
-		>
-			<FontAwesomeIcon icon={icons[title]} transform='shrink-3'/>
-			{getChallengeTime(challenge)}
-		</div>
-	</Grid>
-)
+const ChallengeGroupItem = ({ group, challenge }) => {
+	const time = getChallengeTime(challenge)
+	return (
+		<Grid className='uk-margin-small' key={challenge._id}>
+			<div className='wrap font-size-medium uk-width-expand'>
+				{challenge.name}
+			</div>
+			<div
+				className='uk-text-meta uk-padding-remove'
+				style={{ marginTop: '0.3em' }}
+			>
+				<FontAwesomeIcon
+					icon={
+						time || group === 'completed' ? icons[group] : faQuestion
+					}
+					transform='shrink-3'
+				/>
+				{time}
+			</div>
+		</Grid>
+	)
+}

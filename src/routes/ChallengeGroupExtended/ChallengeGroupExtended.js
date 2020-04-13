@@ -25,19 +25,19 @@ export const ChallengeGroupExtended = ({ left, right, navigate }) => {
 		if (newPage >= 0 && newPage < maxPage) setPage(newPage)
 	}
 	
-	const groupName = window.location.pathname.slice(1)
-	const group = challenges?.[groupName] || []
-	const filteredChallenges = group.filter(c => pattern.test(c.name))
+	const group = window.location.pathname.slice(1)
+	const challengeGroup = challenges?.[group] || []
+	const filteredChallenges = challengeGroup.filter(c => pattern.test(c.name))
 	const maxPage = Math.ceil(filteredChallenges.length / itemsPerPage)
 	
 	return (
-		<InnerLayout title={groupName} left={left} right={right}>
+		<InnerLayout title={group} left={left} right={right}>
 			<Search onChange={search}/>
 			{filteredChallenges.length ? (
 				<ChallengeAccordion
 					challenges={filteredChallenges}
 					page={page}
-					groupName={groupName}
+					group={group}
 					navigate={navigate}
 				/>
 			) : (

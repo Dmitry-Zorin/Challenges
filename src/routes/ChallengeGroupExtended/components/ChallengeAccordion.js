@@ -7,6 +7,7 @@ import {
 	faArrowDown,
 	faArrowUp,
 	faCheck,
+	faQuestion,
 } from '@fortawesome/free-solid-svg-icons'
 import { itemsPerPage } from 'data/settings.json'
 
@@ -15,13 +16,20 @@ const challengeInfo = {
 	upcoming: { icon: faArrowUp, options: ['start', 'complete'] },
 	completed: { icon: faCheck },
 }
-const labelTypes = { Easy: 'success', Medium: 'warning', Hard: 'danger' }
+const labelTypes = {
+	Easy: 'success',
+	Medium: 'warning',
+	Hard: 'danger',
+}
 
-export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) => {
+export const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
+	let time
+	
 	useEffect(() => {
 		// Fix for mount stutter
-		for (const content of document.querySelectorAll('.uk-accordion-content'))
+		for (const content of document.querySelectorAll('.uk-accordion-content')) {
 			content.style.display = 'block'
+		}
 	})
 	
 	return (
@@ -36,10 +44,13 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
 								style={{ marginTop: '0.35em' }}
 							>
 								<FontAwesomeIcon
-									icon={challengeInfo[groupName].icon}
+									icon={
+										(time = getChallengeTime(c)) || group === 'completed'
+											? challengeInfo[group].icon : faQuestion
+									}
 									transform='shrink-3'
 								/>
-								{getChallengeTime(c)}
+								{time}
 							</div>
 						</Grid>
 					} content={
@@ -54,7 +65,7 @@ export const ChallengeAccordion = ({ challenges, page, groupName, navigate }) =>
 								<Buttons
 									challenge={c}
 									navigate={navigate}
-									options={challengeInfo[groupName].options}
+									options={challengeInfo[group].options}
 								/>
 							</Grid>
 							<hr className='uk-margin-remove-bottom'/>

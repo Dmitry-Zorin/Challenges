@@ -17,10 +17,9 @@ export const App = () => {
 		showSpinner: (spinnerIsVisible = true) => {
 			updateContext({ spinnerIsVisible })
 		},
-		updateChallenges: async (challenges) => {
-			updateContext({
-				challenges: await updateTime(contextRef.current, challenges),
-			})
+		updateChallenges: (challenges) => {
+			challenges = updateTime(contextRef.current, challenges)
+			updateContext({ challenges })
 		},
 	})
 	const contextRef = useRef(context)

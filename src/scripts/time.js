@@ -1,60 +1,57 @@
-import { getChallenges } from 'scripts/requests'
 import { addNotification } from './notifications'
 import challengeNotifications from 'data/notifications/challenges.json'
+import { updateTimeout } from 'data/settings.json'
 
 export const toMs = { DAY: 864e5, HOUR: 36e5, MINUTE: 6e4 }
 
 export const updateTime = (context, challenges = context.challenges) => {
+	const { ongoing, upcoming, completed } = challenges
 	const now = new Date().getTime()
-	let challengesNeedUpdate = false
 	
-	const getTime = (c, ms, notification) => {
-		if (ms < 0) {
-			challengesNeedUpdate = true
-			addNotification({ ...notification, message: c.name })
+	for (const c of ongoing) {
+		const ms = c.endDate - now
+		if (ms < 0 && ms >= updateTimeout) {
+			addNotification({
+				...challengeNotifications.completed,
+				message: c.name
+			})
 		}
-		return getTimeString(c, ms)
+		c.timeLeft = getTimeString(c, ms)
 	}
 	
-	const updatedChallenges = {
-		ongoing: challenges.ongoing.map(c => {
-			const ms = c.endDate - now
-			c.timeLeft = getTime(c, ms, challengeNotifications.completed)
-			return c
-		}),
-		upcoming: challenges.upcoming.map(c => {
-			const ms = c.startDate - now
-			c.startsIn = getTime(c, ms, challengeNotifications.started)
-			return c
-		}),
-		completed: challenges.completed,
+	for (const c of upcoming) {
+		const ms = c.startDate - now
+		if (ms < 0 && ms >= updateTimeout) {
+			addNotification({
+				...challengeNotifications.started,
+				message: c.name
+			})
+		}
+		c.startsIn = getTimeString(c, ms)
 	}
 	
+	const updatedChallenges = { ongoing, upcoming, completed }
 	localStorage.setItem('challenges', JSON.stringify(updatedChallenges))
 	
-	return !challengesNeedUpdate ? updatedChallenges
-		: getChallenges(context)
-			.then(challenges => updateTime(context, challenges))
-			.catch(() => updatedChallenges)
+	return updatedChallenges
 }
 
 const getTimeString = (c, ms) => {
-	const time = getTimeObj(ms)
-	const timeStrings = [
-		time.days + 'd',
-		time.hours + 'h',
-		time.minutes + 'm',
-	]
+	const { days, hours, minutes } = getTimeObj(ms)
+	const timeStrings = [days + 'd', hours + 'h', minutes + 'm']
 	return timeStrings.filter(e => +e[0]).join(' ')
 }
 
-export const getTimeObj = (ms) => ({
-	days: ms / toMs.DAY | 0,
-	hours: ms % toMs.DAY / toMs.HOUR | 0,
-	minutes: Math.ceil(ms % toMs.HOUR / toMs.MINUTE),
-})
+export const getTimeObj = (ms) => {
+	const { DAY, HOUR, MINUTE } = toMs
+	return {
+		days: ms / DAY | 0,
+		hours: ms % DAY / HOUR | 0,
+		minutes: Math.ceil(ms % HOUR / MINUTE),
+	}
+}
 
-export const getChallengeTime = (c) => {
-	const time = c.startsIn || c.timeLeft || ''
+export const getChallengeTime = ({ startsIn, timeLeft }) => {
+	const time = startsIn || timeLeft || ''
 	return time && '\xa0' + time
 }

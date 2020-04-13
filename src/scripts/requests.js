@@ -12,7 +12,7 @@ const server = process.env.NODE_ENV === 'production' ? ''
 const apiServer = server + '/api'
 
 const challengeQuery = `{
-	_id name difficulty startDate endDate
+	_id name difficulty duration startDate endDate
 }`
 
 const challengesQuery = `challenges {
@@ -53,12 +53,12 @@ export const authorize = (context, action, variables) => {
 	
 	return postQuery(context, query, actionName, variables)
 		.then(res => {
-			if (res?.user === null)
+			if (res?.user === null) {
 				return reject(addNotification(errors[action]))
-			
-			if (res?.user === undefined)
+			}
+			if (res?.user === undefined) {
 				return reject(addNotification(errors.response))
-			
+			}
 			addNotification({ ...user[action], message: res.user.username })
 			return resolve(res.user)
 		})
@@ -72,12 +72,12 @@ export const logout = (context) => (
 		'log out',
 	)
 		.then(res => {
-			if (res?.user)
+			if (res?.user) {
 				return reject(addNotification(errors.logout))
-			
-			if (res?.user === undefined)
+			}
+			if (res?.user === undefined) {
 				return reject(addNotification(errors.response))
-			
+			}
 			addNotification({ ...user.logout, message: context.userInfo.username })
 		})
 		.catch(reject)
@@ -116,16 +116,16 @@ export const saveChallenge = (context, action, variables) => {
     ${info.id}
     $name: String!
     $difficulty: Difficulty
-    $startDate: Float
-    $endDate: Float
+    $duration: Float
+    $delay: Float
   ) {
     ${info.api}(
       ${info.idVar}
       challenge: {
         name: $name
         difficulty: $difficulty
-        startDate: $startDate
-        endDate: $endDate
+        duration: $duration
+        delay: $delay
       }
     ) {
       ${challengesQuery}

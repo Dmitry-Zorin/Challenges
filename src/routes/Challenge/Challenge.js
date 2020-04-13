@@ -24,16 +24,13 @@ export const Challenge = ({ navigate, location }) => {
 	const context = useContext(DataContext)
 	
 	const c = location.state?.challenge
-	if (c) {
-		const now = new Date().getTime()
-		c.duration = Math.max(0, c.endDate - Math.max(c.startDate, now))
-		c.delay = Math.max(0, c.startDate - now)
-	}
-	
+	const now = new Date().getTime()
 	const [name, setName] = useState(c?.name)
 	const [difficulty, setDifficulty] = useState(c?.difficulty || 'Easy')
-	const [duration, setDuration] = useState(c?.duration || 0)
-	const [delay, setDelay] = useState(c?.delay || 0)
+	const [duration, setDuration] = useState(
+		c?.duration || Math.max(0, (c?.endDate || 0) - now),
+	)
+	const [delay, setDelay] = useState(Math.max(0, (c?.startDate || 0) - now))
 	
 	const info = c?._id ? {
 		...actionOptions.edit,
@@ -50,11 +47,8 @@ export const Challenge = ({ navigate, location }) => {
 		const variables = {
 			id: c?._id,
 			name: name || defaultName,
-			difficulty,
-			startDate: new Date().getTime() + delay,
+			difficulty, duration, delay,
 		}
-		variables.endDate = variables.startDate + duration
-		
 		saveChallenge(context, info.action, variables)
 			.then(context.updateChallenges)
 			.catch(() => {})

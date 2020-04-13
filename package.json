@@ -1,7 +1,7 @@
 {
 	"name": "challenges",
 	"description": "Create and keep track of the challenges you create in your life!",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"license": "UNLICENSED",
 	"private": true,
 	"repository": {
@@ -42,7 +42,7 @@
 		"react-notifications-component": "^2.3.0",
 		"react-scripts": "^3.4.1",
 		"typescript": "^3.8.3",
-		"uikit": "^3.3.2",
+		"uikit": "^3.4.0",
 		"uikit-react": "^3.0.20"
 	},
 	"devDependencies": {

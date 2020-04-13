@@ -37,7 +37,7 @@ const Info = () => {
 			</p>
 			<List>
 				{challengeGroups.map(g => (
-					<ListItem>
+					<ListItem key={g}>
 						<Link to={`/${g}`}>
 							{`${capitalize(g)}: ${challenges[g].length}`}
 						</Link>

@@ -17,8 +17,9 @@ const schema = gql`
     _id: String!
     name: String!
     difficulty: Difficulty!
-    startDate: Float!
-    endDate: Float!
+    duration: Float
+    startDate: Float
+    endDate: Float
   }
 
   type Challenges {
@@ -32,10 +33,10 @@ const schema = gql`
   }
 
   input ChallengeInput {
-    name: String!
+    name: String = "Unnamed challenge"
     difficulty: Difficulty = Easy
-    startDate: Float = 0
-    endDate: Float = 0
+    duration: Float
+    delay: Float
   }
 
   enum Difficulty {
