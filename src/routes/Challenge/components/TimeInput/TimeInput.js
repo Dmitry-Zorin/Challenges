@@ -53,7 +53,7 @@ const NumberButton = ({ sign, icon, timeToMs, ms, setState, step = 1 }) => (
 	<button
 		type='button'
 		className={`${styles.button} uk-button uk-button-default uk-padding-remove`}
-		onClick={() => setState(ms + sign * step * timeToMs)}
+		onClick={() => setState(Math.max(0, ms + sign * step * timeToMs))}
 	>
 		<FontAwesomeIcon icon={icon} transform='shrink-1'/>
 	</button>

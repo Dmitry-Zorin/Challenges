@@ -1,22 +1,35 @@
 {
 	"create": {
 		"title": "New challenge!",
+		"icon": "plus",
 		"animationIn": "bounceInRight",
 		"animationOut": "bounceOutRight"
 	},
 	"edit": {
-		"title": "Challenge updated"
+		"title": "Challenge updated",
+		"icon": "save"
 	},
 	"start": {
-		"title": "Challenge started"
+		"title": "Challenge started!",
+		"icon": "play"
+	},
+	"startReady": {
+		"title": "Challenge is ready to start",
+		"icon": "clock"
 	},
 	"complete": {
 		"title": "Challenge completed!",
 		"type": "success",
+		"icon": "check",
 		"animationIn": "bounceInRight",
 		"animationOut": "bounceOutRight"
 	},
+	"completeReady": {
+		"title": "Challenge is ready to complete",
+		"icon": "clock"
+	},
 	"delete": {
-		"title": "Challenge deleted"
+		"title": "Challenge deleted",
+		"icon": "trash"
 	}
 }

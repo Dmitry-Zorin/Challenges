@@ -1,31 +1,26 @@
 import { addNotification } from './notifications'
-import challengeNotifications from 'data/notifications/challenges.json'
+import { completeReady, startReady } from 'data/notifications/challenges.json'
 import { updateTimeout } from 'data/settings.json'
 
 export const toMs = { DAY: 864e5, HOUR: 36e5, MINUTE: 6e4 }
 
-export const updateTime = (context, challenges = context.challenges) => {
-	const { ongoing, upcoming, completed } = challenges
+export const updateTime = (context, challenges) => {
+	const isAutoUpdate = !challenges
+	const { ongoing, upcoming, completed } = challenges || context.challenges
 	const now = new Date().getTime()
 	
 	for (const c of ongoing) {
 		const ms = c.endDate - now
-		if (ms < 0 && ms >= updateTimeout) {
-			addNotification({
-				...challengeNotifications.completed,
-				message: c.name
-			})
+		if (ms < 0 && ms >= -updateTimeout && isAutoUpdate) {
+			addNotification({ ...completeReady, message: c.name })
 		}
 		c.timeLeft = getTimeString(c, ms)
 	}
 	
 	for (const c of upcoming) {
 		const ms = c.startDate - now
-		if (ms < 0 && ms >= updateTimeout) {
-			addNotification({
-				...challengeNotifications.started,
-				message: c.name
-			})
+		if (ms < 0 && ms >= -updateTimeout && isAutoUpdate) {
+			addNotification({ ...startReady, message: c.name })
 		}
 		c.startsIn = getTimeString(c, ms)
 	}

@@ -8,7 +8,7 @@ import {
 	faArrowUp,
 	faBan,
 	faCheck,
-	faQuestion,
+	faExclamation,
 } from '@fortawesome/free-solid-svg-icons'
 import { capitalize } from 'lodash'
 import { Overlay } from './Overlay'
@@ -56,7 +56,7 @@ const ChallengeGroupItem = ({ group, challenge }) => {
 			>
 				<FontAwesomeIcon
 					icon={
-						time || group === 'completed' ? icons[group] : faQuestion
+						time || group === 'completed' ? icons[group] : faExclamation
 					}
 					transform='shrink-3'
 				/>

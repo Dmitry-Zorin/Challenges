@@ -7,7 +7,7 @@ import {
 	faArrowDown,
 	faArrowUp,
 	faCheck,
-	faQuestion,
+	faExclamation,
 } from '@fortawesome/free-solid-svg-icons'
 import { itemsPerPage } from 'data/settings.json'
 
@@ -46,7 +46,7 @@ export const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 								<FontAwesomeIcon
 									icon={
 										(time = getChallengeTime(c)) || group === 'completed'
-											? challengeInfo[group].icon : faQuestion
+											? challengeInfo[group].icon : faExclamation
 									}
 									transform='shrink-3'
 								/>
