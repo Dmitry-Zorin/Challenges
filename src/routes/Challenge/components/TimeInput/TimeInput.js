@@ -3,7 +3,7 @@ import { getTimeObj, toMs } from 'scripts/time'
 import { Grid } from 'uikit-react'
 import { capitalize } from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import styles from 'routes/Challenge/components/TimeInput/TimeInput.module.scss'
+import { button } from 'routes/Challenge/components/TimeInput/TimeInput.module.scss'
 
 export const TimeInput = (props) => (
 	<div className='uk-margin-medium'>
@@ -51,7 +51,7 @@ const NumberButtons = (props) => (
 const NumberButton = ({ sign, icon, timeToMs, ms, setState, step = 1 }) => (
 	<button
 		type='button'
-		className={`${styles.button} uk-button uk-button-default uk-padding-remove`}
+		className={`${button} uk-button uk-button-default uk-padding-remove`}
 		onClick={() => setState(Math.max(0, ms + sign * step * timeToMs))}
 	>
 		<FontAwesomeIcon icon={icon} transform='shrink-1'/>

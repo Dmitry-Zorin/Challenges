@@ -36,7 +36,7 @@
 // Card
 @mixin hook-card() {
 	@include round-border($card-border-radius);
-	margin: 1em 0;
+	margin: 0.75em 0.5em;
 	padding: 1.5em 1em;
 	overflow: hidden;
 	-webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -46,8 +46,18 @@
 	}
 	
 	@media (min-width: $breakpoint-small) {
-		margin: 1em 0.75em 1.5em;
-		padding: 1.5em 2em;
+		margin: 1em 0.75em;
+		padding: 1.5em 1.25em;
+	}
+	
+	@media (min-width: $breakpoint-medium) {
+		margin: 1em 0.5em;
+		padding: 1.5em 1.5em;
+	}
+	
+	@media (min-width: $breakpoint-large) {
+		margin: 1.5em 0.75em;
+		padding: 1.5em 1.75em;
 	}
 }
 
@@ -67,16 +77,13 @@
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color;
 	
-	@media (min-width: $breakpoint-large) {
-		padding: 0 3em;
-	}
-	
-	@media (min-height: $height-breakpoint-medium) {
+	@media (min-width: $breakpoint-small) {
 		height: 60px;
 	}
 	
-	@media (min-height: $height-breakpoint-large) {
+	@media (min-width: $breakpoint-large) {
 		height: 70px;
+		padding: 0 3em;
 	}
 }
 

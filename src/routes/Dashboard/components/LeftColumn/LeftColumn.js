@@ -5,10 +5,11 @@ import { Link } from '@reach/router'
 import { challengeGroups } from 'data/settings.json'
 import { capitalize } from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { container } from './LeftColumn.module.scss'
 
 export const LeftColumn = () => (
 	<div className='uk-width-auto uk-width-1-3@m uk-padding-remove-left'>
-		<div className='uk-visible@m' style={{ height: 'calc(100% - 2.5em)' }}>
+		<div className={`${container} uk-visible@m`}>
 			<Card className='uk-height-1-1'>
 				<Info/>
 			</Card>

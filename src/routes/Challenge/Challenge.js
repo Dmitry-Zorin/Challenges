@@ -7,7 +7,7 @@ import { Buttons } from './components/Buttons'
 import { TextInput } from 'components/TextInput'
 import { saveChallenge } from 'scripts/requests'
 
-const actionOptions = {
+const actions = {
 	create: {
 		action: 'create',
 		title: 'new challenge',
@@ -36,10 +36,10 @@ export const Challenge = ({ navigate, location }) => {
 	)
 	
 	const info = c?._id ? {
-		...actionOptions.edit,
+		...actions.edit,
 		navigate: () => window.history.back(),
 	} : {
-		...actionOptions.create,
+		...actions.create,
 		navigate: () => navigate('..'),
 	}
 	

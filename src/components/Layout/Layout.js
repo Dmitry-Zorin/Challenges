@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Layout.module.scss'
+import { env, layout, header, title, icon } from './Layout.module.scss'
 import { Container } from 'uikit-react'
 import { NavigationBar } from './components/Navbar'
 import { ScrollToTop } from './components/ScrollToTop'
@@ -11,13 +11,13 @@ export const Layout = ({ children, location }) => (
 		<ScrollToTop location={location}/>
 		<NavigationBar location={location}/>
 		<ReactNotification/>
-		<div className={styles.env}>
-			<Container className={styles.layout}>
-				<div className={styles.header + ' uk-text-center'}>
-					<p className={styles.title}>
+		<div className={env}>
+			<Container className={layout}>
+				<div className={header + ' uk-text-center'}>
+					<p className={title}>
 						<FontAwesomeIcon
 							icon='tasks'
-							className={styles.icon + ' icon-left'}
+							className={icon + ' icon-left'}
 							transform='shrink-2 down-0.4'
 						/>
 						Challenges
