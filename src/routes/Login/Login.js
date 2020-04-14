@@ -11,13 +11,6 @@ import { DataContext } from 'contexts/DataContext'
 import { SwitcherItem } from 'components/SwitcherItem'
 import { TextInput } from 'components/TextInput'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-	faLock,
-	faPaperPlane,
-	faSignInAlt,
-	faUser,
-	faUserPlus,
-} from '@fortawesome/free-solid-svg-icons'
 import { authorize, logout } from 'scripts/requests'
 import { addNotification } from 'scripts/notifications'
 import { invalid } from 'data/notifications/errors.json'
@@ -26,12 +19,12 @@ const authOptions = {
 	login: {
 		action: 'login',
 		title: 'log in',
-		icon: faSignInAlt,
+		icon: 'sign-in-alt',
 	},
 	signUp: {
 		action: 'signUp',
 		title: 'sign up',
-		icon: faUserPlus,
+		icon: 'user-plus',
 	},
 }
 
@@ -88,13 +81,13 @@ export const Login = (props) => {
 			</ul>
 			<form className='uk-form uk-margin-medium-top' onSubmit={submit}>
 				<TextInput
-					icon={faUser}
+					icon='user'
 					label='username'
 					value={username}
 					setState={setUsername}
 				/>
 				<TextInput
-					icon={faLock}
+					icon='lock'
 					label='password'
 					value={password}
 					setState={setPassword}
@@ -105,7 +98,7 @@ export const Login = (props) => {
 					style={{ marginTop: '4em' }}
 				>
 					<FontAwesomeIcon
-						icon={faPaperPlane}
+						icon='paper-plane'
 						className='icon-left-2'
 						transform='shrink-3'
 					/>

@@ -12,7 +12,7 @@ const server = process.env.NODE_ENV === 'production' ? ''
 const apiServer = server + '/api'
 
 const challengeQuery = `{
-	_id name difficulty duration startDate endDate
+	_id name difficulty startDate endDate
 }`
 
 const challengesQuery = `challenges {

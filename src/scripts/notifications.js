@@ -2,23 +2,11 @@ import React from 'react'
 import { store } from 'react-notifications-component'
 import 'styles/notifications.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-	faCheckCircle,
-	faClock,
-	faExclamationCircle,
-	faInfoCircle,
-	faPlayCircle,
-	faPlusCircle,
-	faSadTear,
-	faSave,
-	faSmile,
-	faTrashAlt,
-} from '@fortawesome/free-solid-svg-icons'
 
 export const addNotification = ({
 	title, message,
 	type = 'custom',
-	icon = type === 'danger' ? 'exclamation' : 'info',
+	icon = type === 'danger' ? 'exclamation-circle' : 'info-circle',
 	animationIn = type === 'danger' ? 'bounceIn' : 'fadeIn',
 	animationOut = type === 'danger' ? 'bounceOut' : 'fadeOut',
 	...settings
@@ -34,7 +22,7 @@ export const addNotification = ({
 				<div className='notification-content'>
 					<div className='uk-grid'>
 						<div className='uk-height-1-1 uk-margin-auto-vertical'>
-							<FontAwesomeIcon icon={icons[icon]} transform='grow-15 right-13'/>
+							<FontAwesomeIcon icon={icon} transform='grow-15 right-13'/>
 						</div>
 						<div className='uk-width-expand' style={{ marginRight: '20px' }}>
 							<p className='notification-title'>{title}</p>
@@ -46,17 +34,4 @@ export const addNotification = ({
 		),
 		...settings,
 	})
-}
-
-const icons = {
-	'smile': faSmile,
-	'sad': faSadTear,
-	'info': faInfoCircle,
-	'exclamation': faExclamationCircle,
-	'plus': faPlusCircle,
-	'check': faCheckCircle,
-	'play': faPlayCircle,
-	'save': faSave,
-	'trash': faTrashAlt,
-	'clock': faClock,
 }

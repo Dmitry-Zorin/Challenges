@@ -9,13 +9,6 @@ import {
 } from 'uikit-react'
 import { Link } from '@reach/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-	faBars,
-	faChevronLeft,
-	faPlus,
-	faSignInAlt,
-	faSignOutAlt,
-} from '@fortawesome/free-solid-svg-icons'
 
 const transform = 'shrink-3 down-0.5'
 
@@ -32,7 +25,7 @@ export const NavigationBar = ({ location }) => {
 								<Link to='/' className='primary'>
 									<div className='uk-hidden@m' data-uk-toggle='target: #info'>
 										<FontAwesomeIcon
-											icon={faBars}
+											icon='bars'
 											className='icon-left'
 											transform={transform}
 										/>
@@ -43,7 +36,7 @@ export const NavigationBar = ({ location }) => {
 							) : (
 								<Link to='/'>
 									<FontAwesomeIcon
-										icon={faChevronLeft}
+										icon='chevron-left'
 										className='icon-left'
 										transform={transform}
 									/>
@@ -62,9 +55,7 @@ export const NavigationBar = ({ location }) => {
 							) : location.pathname.match(/\/($|create|edit)/) ? (
 								<Link to='/login'>
 									<FontAwesomeIcon
-										icon={
-											userInfo?.username ? faSignOutAlt : faSignInAlt
-										}
+										icon={userInfo?.username ? 'sign-out-alt' : 'sign-in-alt'}
 										className='icon-left'
 										transform={transform}
 									/>
@@ -73,7 +64,7 @@ export const NavigationBar = ({ location }) => {
 							) : (
 								<Link to='/create'>
 									<FontAwesomeIcon
-										icon={faPlus}
+										icon='plus'
 										className='icon-left'
 										transform={transform}
 									/>

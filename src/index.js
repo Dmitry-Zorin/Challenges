@@ -1,4 +1,4 @@
-// Styles
+import 'scripts/icons'
 import 'styles/global.scss'
 import 'styles/uikit/theme.scss'
 import '../node_modules/react-notifications-component/dist/theme.css'

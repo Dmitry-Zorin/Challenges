@@ -3,10 +3,6 @@ import { Card, Grid } from 'uikit-react'
 import styles from './InnerLayout.module.scss'
 import { Link } from '@reach/router'
 import { capitalize } from 'lodash'
-import {
-	faChevronLeft,
-	faChevronRight,
-} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const transform = 'shrink-3 down-0.5'
@@ -19,7 +15,7 @@ export const InnerLayout = ({ title, children, left, right }) => (
 				{left && (
 					<Link to={left} className={styles.sideLink}>
 						<FontAwesomeIcon
-							icon={faChevronLeft}
+							icon='chevron-left'
 							className='icon-left'
 							transform={transform}
 						/>
@@ -31,7 +27,7 @@ export const InnerLayout = ({ title, children, left, right }) => (
 					<Link to={right} className={`${styles.sideLink} uk-text-right`}>
 						{capitalize(right.slice(1))}
 						<FontAwesomeIcon
-							icon={faChevronRight}
+							icon='chevron-right'
 							className='icon-right'
 							transform={transform}
 						/>

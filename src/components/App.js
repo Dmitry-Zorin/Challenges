@@ -34,7 +34,6 @@ export const App = () => {
 		updateContext({ userInfo: { username } })
 		context.updateChallenges(challenges)
 		intervalRef.current = setInterval(context.updateChallenges, updateTimeout)
-		setContext({ ...contextRef.current })
 	}, [context, updateContext])
 	
 	const logout = useCallback(() => {
@@ -51,7 +50,6 @@ export const App = () => {
 		}
 		else if (context.spinnerIsVisible === undefined) {
 			getUserInfo(context).then(login).catch(logout)
-			updateContext()
 		}
 	}, [context, updateContext, login, logout])
 	

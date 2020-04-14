@@ -4,7 +4,6 @@ import { DataContext } from 'contexts/DataContext'
 import { Link } from '@reach/router'
 import { challengeGroups } from 'data/settings.json'
 import { capitalize } from 'lodash'
-import { faUser, faUserSlash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const LeftColumn = () => (
@@ -29,7 +28,7 @@ const Info = () => {
 		<div>
 			<p className='font-size-large uk-text-center uk-margin-remove-bottom'>
 				<FontAwesomeIcon
-					icon={faUser}
+					icon='user'
 					className='icon-left'
 					transform='shrink-4'
 				/>
@@ -48,7 +47,7 @@ const Info = () => {
 	) : (
 		<p className='font-size-large uk-text-center uk-text-muted'>
 			<FontAwesomeIcon
-				icon={faUserSlash}
+				icon='user-slash'
 				className='icon-left'
 				transform='shrink-4 down-0.4'
 			/>

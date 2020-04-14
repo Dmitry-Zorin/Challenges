@@ -24,13 +24,16 @@ export const Challenge = ({ navigate, location }) => {
 	const context = useContext(DataContext)
 	
 	const c = location.state?.challenge
-	const now = new Date().getTime()
 	const [name, setName] = useState(c?.name)
-	const [difficulty, setDifficulty] = useState(c?.difficulty || 'Easy')
-	const [duration, setDuration] = useState(
-		c?.duration || Math.max(0, (c?.endDate || 0) - now),
+	const [difficulty, setDifficulty] = useState(
+		c?.difficulty || 'Easy',
 	)
-	const [delay, setDelay] = useState(Math.max(0, (c?.startDate || 0) - now))
+	const [duration, setDuration] = useState(
+		Math.max(0, (c?.endDate || 0) - (c?.startDate || 0)),
+	)
+	const [delay, setDelay] = useState(
+		Math.max(0, (c?.startDate || 0) - new Date().getTime()),
+	)
 	
 	const info = c?._id ? {
 		...actionOptions.edit,
@@ -54,8 +57,10 @@ export const Challenge = ({ navigate, location }) => {
 			.catch(() => {})
 	}
 	
-	const defaultName = 'Challenge from ' + new Date().toString()
-		.split(' ').slice(1, 5).join(' ').slice(0, -3)
+	const defaultName = `Challenge #${
+		Object.values(context.challenges)
+			.reduce((n, g) => n + g.length, 1)
+	}`
 	
 	return (
 		<InnerLayout title={info.title}>

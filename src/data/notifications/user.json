@@ -15,7 +15,7 @@
 	},
 	"logout": {
 		"title": "Goodbye!",
-		"icon": "sad",
+		"icon": "sad-tear",
 		"animationIn": "swing",
 		"animationOut": "fadeOutUp"
 	}

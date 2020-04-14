@@ -17,7 +17,6 @@ const schema = gql`
     _id: String!
     name: String!
     difficulty: Difficulty!
-    duration: Float
     startDate: Float
     endDate: Float
   }

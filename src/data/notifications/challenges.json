@@ -1,17 +1,17 @@
 {
 	"create": {
 		"title": "New challenge!",
-		"icon": "plus",
+		"icon": "tasks",
 		"animationIn": "bounceInRight",
 		"animationOut": "bounceOutRight"
 	},
 	"edit": {
 		"title": "Challenge updated",
-		"icon": "save"
+		"icon": "sync-alt"
 	},
 	"start": {
 		"title": "Challenge started!",
-		"icon": "play"
+		"icon": "stopwatch"
 	},
 	"startReady": {
 		"title": "Challenge is ready to start",
@@ -20,7 +20,7 @@
 	"complete": {
 		"title": "Challenge completed!",
 		"type": "success",
-		"icon": "check",
+		"icon": "award",
 		"animationIn": "bounceInRight",
 		"animationOut": "bounceOutRight"
 	},
@@ -30,6 +30,6 @@
 	},
 	"delete": {
 		"title": "Challenge deleted",
-		"icon": "trash"
+		"icon": "trash-alt"
 	}
 }

@@ -3,7 +3,6 @@ const { Schema, model } = require('mongoose')
 const challengeSchema = new Schema({
 	name: { type: String, required: true },
 	difficulty: { type: String, required: true },
-	duration: Number,
 	startDate: Number,
 	endDate: Number,
 }, {

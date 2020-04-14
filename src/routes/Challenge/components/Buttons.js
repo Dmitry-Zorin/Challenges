@@ -1,10 +1,5 @@
 import React from 'react'
 import { Grid } from 'uikit-react'
-import {
-	faCheckCircle,
-	faPlusCircle,
-	faTimesCircle,
-} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const Buttons = ({ saveValue, withCancel }) => (
@@ -16,14 +11,14 @@ export const Buttons = ({ saveValue, withCancel }) => (
 			<ActionButton
 				type='button'
 				value='Cancel'
-				icon={faTimesCircle}
+				icon='times-circle'
 				onClick={() => window.history.back()}
 			/>
 		)}
 		<ActionButton
 			type='submit'
 			value={saveValue}
-			icon={withCancel ? faCheckCircle : faPlusCircle}
+			icon={withCancel ? 'check-circle' : 'plus-circle'}
 		/>
 	</Grid>
 )

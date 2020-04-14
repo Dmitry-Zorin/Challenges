@@ -16,14 +16,13 @@ const resolvers = {
 			getUpdatedChallenges(args, (user, { id }) => {
 				const { challenges } = user
 				const challenge = findChallenge(challenges.upcoming, id)
+				const now = new Date().getTime()
 				
 				deleteChallenge(user, id, ['upcoming'])
-				
 				challenges.ongoing.push(
 					Object.assign(challenge, {
-						endDate: new Date().getTime() + challenge.duration,
-						duration: undefined,
-						startDate: undefined,
+						endDate: now + challenge.endDate - challenge.startDate,
+						startDate: now,
 					}),
 				)
 			})
@@ -35,11 +34,9 @@ const resolvers = {
 				const challenge = ongoing || findChallenge(challenges.upcoming, id)
 				
 				deleteChallenge(user, id, [ongoing ? 'ongoing' : 'upcoming'])
-				
 				challenges.completed.push(
 					Object.assign(challenge, {
 						endDate: new Date().getTime(),
-						duration: undefined,
 					}),
 				)
 			})
@@ -64,18 +61,11 @@ const addChallenge = (user, challenge) => {
 	const now = new Date().getTime()
 	
 	name = name.slice(0, 250)
-	delay
-		? challenges.upcoming.push({
-			name,
-			difficulty,
-			duration,
-			startDate: now + delay,
-		})
-		: challenges.ongoing.push({
-			name,
-			difficulty,
-			endDate: now + duration,
-		})
+	challenges[delay ? 'upcoming' : 'ongoing'].push({
+		name, difficulty,
+		startDate: now + delay,
+		endDate: now + delay + duration,
+	})
 }
 
 const deleteChallenge = (user, id, groups = challengeGroups) => {

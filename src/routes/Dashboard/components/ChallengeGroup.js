@@ -3,13 +3,6 @@ import { Card, Grid } from 'uikit-react'
 import { Link } from '@reach/router'
 import { getChallengeTime } from 'scripts/time'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-	faArrowDown,
-	faArrowUp,
-	faBan,
-	faCheck,
-	faExclamation,
-} from '@fortawesome/free-solid-svg-icons'
 import { capitalize } from 'lodash'
 import { Overlay } from './Overlay'
 
@@ -25,7 +18,7 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 					style={{ marginTop: '4em' }}
 				>
 					<FontAwesomeIcon
-						icon={faBan}
+						icon='ban'
 						className='icon-left'
 						transform='shrink-4 down-0.4'
 					/>
@@ -38,9 +31,9 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 )
 
 const icons = {
-	'ongoing': faArrowDown,
-	'upcoming': faArrowUp,
-	'completed': faCheck,
+	ongoing: 'arrow-down',
+	upcoming: 'arrow-up',
+	completed: 'check',
 }
 
 const ChallengeGroupItem = ({ group, challenge }) => {
@@ -55,9 +48,7 @@ const ChallengeGroupItem = ({ group, challenge }) => {
 				style={{ marginTop: '0.3em' }}
 			>
 				<FontAwesomeIcon
-					icon={
-						time || group === 'completed' ? icons[group] : faExclamation
-					}
+					icon={time || group === 'completed' ? icons[group] : 'exclamation'}
 					transform='shrink-3'
 				/>
 				{time}

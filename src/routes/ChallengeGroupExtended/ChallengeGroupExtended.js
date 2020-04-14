@@ -4,7 +4,6 @@ import { DataContext } from 'contexts/DataContext'
 import { Pagination } from './components/Pagination'
 import { ChallengeAccordion } from './components/ChallengeAccordion'
 import { Search } from './components/Search'
-import { faBan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { itemsPerPage } from 'data/settings.json'
 
@@ -46,7 +45,7 @@ export const ChallengeGroupExtended = ({ left, right, navigate }) => {
 					style={{ marginTop: '3em' }}
 				>
 					<FontAwesomeIcon
-						icon={faBan}
+						icon='ban'
 						className='icon-left'
 						transform='shrink-4 down-0.5'
 					/>

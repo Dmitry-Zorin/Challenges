@@ -5,7 +5,6 @@ import { NavigationBar } from './components/Navbar'
 import { ScrollToTop } from './components/ScrollToTop'
 import ReactNotification from 'react-notifications-component'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks } from '@fortawesome/free-solid-svg-icons'
 
 export const Layout = ({ children, location }) => (
 	<div>
@@ -17,7 +16,7 @@ export const Layout = ({ children, location }) => (
 				<div className={styles.header + ' uk-text-center'}>
 					<p className={styles.title}>
 						<FontAwesomeIcon
-							icon={faTasks}
+							icon='tasks'
 							className={styles.icon + ' icon-left'}
 							transform='shrink-2 down-0.4'
 						/>

@@ -4,14 +4,13 @@ import { updateTimeout } from 'data/settings.json'
 
 export const toMs = { DAY: 864e5, HOUR: 36e5, MINUTE: 6e4 }
 
-export const updateTime = (context, challenges) => {
-	const isAutoUpdate = !challenges
-	const { ongoing, upcoming, completed } = challenges || context.challenges
+export const updateTime = (context, challenges = context.challenges) => {
+	const { ongoing, upcoming, completed } = challenges
 	const now = new Date().getTime()
 	
 	for (const c of ongoing) {
 		const ms = c.endDate - now
-		if (ms < 0 && ms >= -updateTimeout && isAutoUpdate) {
+		if (ms < 0 && ms >= -updateTimeout && (c.endDate - c.startDate)) {
 			addNotification({ ...completeReady, message: c.name })
 		}
 		c.timeLeft = getTimeString(c, ms)
@@ -19,7 +18,7 @@ export const updateTime = (context, challenges) => {
 	
 	for (const c of upcoming) {
 		const ms = c.startDate - now
-		if (ms < 0 && ms >= -updateTimeout && isAutoUpdate) {
+		if (ms < 0 && ms >= -updateTimeout) {
 			addNotification({ ...startReady, message: c.name })
 		}
 		c.startsIn = getTimeString(c, ms)

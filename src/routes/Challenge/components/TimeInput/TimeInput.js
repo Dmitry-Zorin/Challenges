@@ -3,7 +3,6 @@ import { getTimeObj, toMs } from 'scripts/time'
 import { Grid } from 'uikit-react'
 import { capitalize } from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import styles from 'routes/Challenge/components/TimeInput/TimeInput.module.scss'
 
 export const TimeInput = (props) => (
@@ -44,8 +43,8 @@ const NumberInput = ({ label, time, ms, setState }) => (
 
 const NumberButtons = (props) => (
 	<div className='uk-child-width-1-2'>
-		<NumberButton sign={-1} icon={faMinus} {...props}/>
-		<NumberButton sign={+1} icon={faPlus} {...props}/>
+		<NumberButton sign={-1} icon='minus' {...props}/>
+		<NumberButton sign={+1} icon='plus' {...props}/>
 	</div>
 )
 
