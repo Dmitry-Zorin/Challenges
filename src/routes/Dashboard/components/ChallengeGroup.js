@@ -39,7 +39,7 @@ const ChallengeGroupItem = ({ group, challenge }) => {
 	const time = getChallengeTime(challenge)
 	return (
 		<Grid className='uk-margin-small' key={challenge._id}>
-			<div className='wrap font-size-medium uk-width-expand'>
+			<div className='font-size-medium uk-width-expand uk-text-truncate'>
 				{challenge.name}
 			</div>
 			<div

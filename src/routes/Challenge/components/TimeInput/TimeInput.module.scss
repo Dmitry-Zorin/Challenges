@@ -5,6 +5,7 @@
 	
 	&, &:hover, &:active {
 		border: 1px solid $card-background-color;
+		border-top: 2px solid $card-background-color;
 		color: $base-color;
 	}
 	

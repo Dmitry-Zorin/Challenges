@@ -4,17 +4,19 @@ import { Grid } from 'uikit-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { button } from 'routes/Challenge/components/TimeInput/TimeInput.module.scss'
 
+const gridStyle = 'uk-grid-small uk-child-width-1-3'
+
 export const TimeInput = (props) => (
 	<div className='uk-margin-medium'>
 		<div className='uk-margin-remove-bottom uk-text-capitalize'>
 			{props.name}
-			<Grid className='uk-child-width-1-3' v style={{ marginTop: '-1em' }}>
+			<Grid className={gridStyle} style={{ marginTop: '-0.5em' }}>
 				{Object.entries(getTimeObj(props.ms)).map(([l, t]) => (
 					<NumberInput key={l} label={l} time={t} {...props}/>
 				))}
 			</Grid>
 		</div>
-		<Grid className='uk-child-width-1-3'>
+		<Grid className={gridStyle}>
 			<NumberButtons timeToMs={toMs.DAY} {...props}/>
 			<NumberButtons timeToMs={toMs.HOUR} {...props}/>
 			<NumberButtons timeToMs={toMs.MINUTE} step={10} {...props}/>
@@ -23,7 +25,7 @@ export const TimeInput = (props) => (
 )
 
 const NumberInput = ({ label, time, ms, setState }) => (
-	<label className='uk-text-right uk-text-muted uk-text-small'>
+	<label className='uk-text-right uk-text-muted uk-text-lowercase'>
 		{label}
 		<input
 			type='text'
