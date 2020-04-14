@@ -11,6 +11,7 @@ const typeDefs = require('./graphql/schema')
 const resolvers = require('./graphql/resolvers')
 const User = require('./models/user')
 const getUserInfo = require('./helpers/userInfo')
+const { day } = require('./settings.json')
 
 configEnv({ path: `${__dirname}/.env` })
 
@@ -28,7 +29,7 @@ app.use(cors({
 	credentials: true,
 }))
 
-const maxAge = 14 * 864e5  // 14 days
+const maxAge = 14 * day
 
 app.use(session({
 	secret: 'secret',

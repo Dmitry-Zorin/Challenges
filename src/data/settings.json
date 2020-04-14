@@ -1,5 +1,6 @@
 {
 	"updateTimeout": 1000,
 	"itemsPerPage": 10,
-	"challengeGroups": [ "ongoing", "upcoming", "completed" ]
+	"challengeGroups": [ "ongoing", "upcoming", "completed" ],
+	"infinity": "infinity"
 }

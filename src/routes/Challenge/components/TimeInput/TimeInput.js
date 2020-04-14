@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { button } from 'routes/Challenge/components/TimeInput/TimeInput.module.scss'
 
 const gridStyle = 'uk-grid-small uk-child-width-1-3'
+const { DAY, HOUR, MINUTE } = toMs
 
 export const TimeInput = (props) => (
 	<div className='uk-margin-medium'>
@@ -17,9 +18,9 @@ export const TimeInput = (props) => (
 			</Grid>
 		</div>
 		<Grid className={gridStyle}>
-			<NumberButtons timeToMs={toMs.DAY} {...props}/>
-			<NumberButtons timeToMs={toMs.HOUR} {...props}/>
-			<NumberButtons timeToMs={toMs.MINUTE} step={10} {...props}/>
+			<NumberButtons timeToMs={DAY} {...props}/>
+			<NumberButtons timeToMs={HOUR} {...props}/>
+			<NumberButtons timeToMs={MINUTE} step={10} {...props}/>
 		</Grid>
 	</div>
 )

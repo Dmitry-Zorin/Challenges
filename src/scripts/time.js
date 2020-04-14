@@ -1,8 +1,13 @@
 import { addNotification } from './notifications'
 import { completeReady, startReady } from 'data/notifications/challenges.json'
-import { updateTimeout } from 'data/settings.json'
+import { updateTimeout, infinity } from 'data/settings.json'
 
-export const toMs = { DAY: 864e5, HOUR: 36e5, MINUTE: 6e4 }
+export const toMs = {
+	TOO_MANY_YEARS: 3e12,
+	DAY: 864e5,
+	HOUR: 36e5,
+	MINUTE: 6e4
+}
 
 export const updateTime = (context, challenges = context.challenges) => {
 	const { ongoing, upcoming, completed } = challenges
@@ -31,6 +36,7 @@ export const updateTime = (context, challenges = context.challenges) => {
 }
 
 const getTimeString = (c, ms) => {
+	if (ms > toMs.TOO_MANY_YEARS) return infinity
 	const { days, hours, minutes } = getTimeObj(ms)
 	const timeStrings = [days + 'd', hours + 'h', minutes + 'm']
 	return timeStrings.filter(e => +e[0]).join(' ')
@@ -46,6 +52,6 @@ export const getTimeObj = (ms) => {
 }
 
 export const getChallengeTime = ({ startsIn, timeLeft }) => {
-	const time = startsIn || timeLeft || ''
-	return time && '\xa0' + time
+	const time = startsIn || timeLeft
+	return time && (time === infinity ? '' : '\xa0') + time
 }

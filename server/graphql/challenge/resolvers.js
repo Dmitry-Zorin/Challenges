@@ -1,4 +1,4 @@
-const { challengeGroups } = require('../../../src/data/settings.json')
+const { challengeGroups } = require('../../settings.json')
 
 // TODO: Validate input
 
@@ -8,8 +8,8 @@ const resolvers = {
 	},
 	Mutation: {
 		challengeAdd: (...args) => (
-			getUpdatedChallenges(args, (user, { challenge }) => {
-				addChallenge(user, challenge)
+			getUpdatedChallenges(args, ({ challenges }, { challenge }) => {
+				addChallenge(challenges, challenge)
 			})
 		),
 		challengeStart: (...args) => (
@@ -21,8 +21,8 @@ const resolvers = {
 				deleteChallenge(user, id, ['upcoming'])
 				challenges.ongoing.push(
 					Object.assign(challenge, {
-						endDate: now + challenge.endDate - challenge.startDate,
 						startDate: now,
+						endDate: now + challenge.endDate - challenge.startDate,
 					}),
 				)
 			})
@@ -32,11 +32,13 @@ const resolvers = {
 				const { challenges } = user
 				const ongoing = findChallenge(challenges.ongoing, id)
 				const challenge = ongoing || findChallenge(challenges.upcoming, id)
+				const now = new Date().getTime()
 				
 				deleteChallenge(user, id, [ongoing ? 'ongoing' : 'upcoming'])
 				challenges.completed.push(
 					Object.assign(challenge, {
-						endDate: new Date().getTime(),
+						startDate: Math.min(challenge.startDate, now),
+						endDate: now,
 					}),
 				)
 			})
@@ -49,20 +51,17 @@ const resolvers = {
 		challengeEdit: (...args) => (
 			getUpdatedChallenges(args, (user, { id, challenge }) => {
 				deleteChallenge(user, id)
-				addChallenge(user, challenge)
+				addChallenge(user.challenges, challenge)
 			})
 		),
 	},
 }
 
-const addChallenge = (user, challenge) => {
-	const { challenges } = user
-	let { name, difficulty, duration, delay } = challenge
+const addChallenge = (challenges, { name, difficulty, duration, delay }) => {
 	const now = new Date().getTime()
-	
-	name = name.slice(0, 250)
 	challenges[delay ? 'upcoming' : 'ongoing'].push({
-		name, difficulty,
+		difficulty,
+		name: name.slice(0, 250),
 		startDate: now + delay,
 		endDate: now + delay + duration,
 	})

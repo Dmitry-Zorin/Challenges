@@ -3,13 +3,14 @@ import { Accordion, AccordionItem, Grid } from 'uikit-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getChallengeTime } from 'scripts/time'
 import { Buttons } from './Buttons'
-import { itemsPerPage } from 'data/settings.json'
+import { infinity, itemsPerPage } from 'data/settings.json'
 
 const challengeInfo = {
 	ongoing: { icon: 'arrow-down', options: ['complete'] },
 	upcoming: { icon: 'arrow-up', options: ['start', 'complete'] },
 	completed: { icon: 'check' },
 }
+
 const labelTypes = {
 	Easy: 'success',
 	Medium: 'warning',
@@ -39,12 +40,13 @@ export const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 							>
 								<FontAwesomeIcon
 									icon={
-										(time = getChallengeTime(c)) || group === 'completed'
-											? challengeInfo[group].icon : 'exclamation'
+										(time = getChallengeTime(c)) && time !== infinity
+										|| group === 'completed' ? challengeInfo[group].icon
+											: time === infinity ? 'infinity' : 'exclamation'
 									}
 									transform='shrink-3'
 								/>
-								{time}
+								{time !== infinity && time}
 							</div>
 						</Grid>
 					} content={

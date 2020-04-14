@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const SwitcherItem = ({ icon, value, active, onClick }) => (
-	<li className={(active ? 'uk-active' : '') + ' uk-text-center'}>
+	<li className={`${active ? 'uk-active' : ''} uk-text-center`}>
 		<a href='/#' onClick={e => {
 			e.preventDefault()
 			onClick()

@@ -5,7 +5,7 @@ const transform = 'shrink-3 down-0.5'
 
 export const Pagination = ({ page, maxPage, changePage }) => (
 	<ul className='uk-pagination uk-margin-medium-top'>
-		<li className={page < 1 ? 'uk-disabled' : ''}>
+		<li className={page < 1 && 'uk-disabled'}>
 			<a href='/#' onClick={e => changePage(e, -1)}>
 				<FontAwesomeIcon
 					icon='chevron-left'
@@ -16,7 +16,7 @@ export const Pagination = ({ page, maxPage, changePage }) => (
 			</a>
 		</li>
 		<li className={`uk-margin-auto-left ${
-			page > maxPage - 2 ? 'uk-disabled' : ''
+			page > maxPage - 2 && 'uk-disabled'
 		}`}>
 			<a href='/#' onClick={e => changePage(e, +1)}>
 				Next
