@@ -12,7 +12,6 @@ import {
 	faClock,
 	faExclamation,
 	faExclamationCircle,
-	faInfinity,
 	faInfoCircle,
 	faLock,
 	faMinus,
@@ -21,6 +20,7 @@ import {
 	faPlay,
 	faPlus,
 	faPlusCircle,
+	faQuestion,
 	faSadTear,
 	faSignInAlt,
 	faSignOutAlt,
@@ -48,7 +48,6 @@ library.add(
 	faClock,
 	faExclamation,
 	faExclamationCircle,
-	faInfinity,
 	faInfoCircle,
 	faLock,
 	faMinus,
@@ -57,6 +56,7 @@ library.add(
 	faPlay,
 	faPlus,
 	faPlusCircle,
+	faQuestion,
 	faSadTear,
 	faSignInAlt,
 	faSignOutAlt,
@@ -69,4 +69,5 @@ library.add(
 	faUser,
 	faUserPlus,
 	faUserSlash,
+	
 )

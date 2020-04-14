@@ -91,7 +91,7 @@ export const Login = (props) => {
 					label='password'
 					value={password}
 					setState={setPassword}
-					isPassword={true}
+					isPassword
 				/>
 				<Button
 					className='uk-align-center uk-width-1-3@m uk-width-1-2@s'
