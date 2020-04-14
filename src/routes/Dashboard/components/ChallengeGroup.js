@@ -3,13 +3,12 @@ import { Card, Grid } from 'uikit-react'
 import { Link } from '@reach/router'
 import { getChallengeTime } from 'scripts/time'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { capitalize } from 'lodash'
 import { Overlay } from './Overlay'
 
 export const ChallengeGroup = ({ to, title, group = [] }) => (
 	<Link to={to}>
 		<Card className='uk-transition-toggle' style={{ height: '15em' }}>
-			<p className='font-size-large uk-text-center'>{capitalize(title)}</p>
+			<p className='font-size-large uk-text-center uk-text-capitalize'>{title}</p>
 			{group.length ? group.slice(0, 4).map(c => (
 				<ChallengeGroupItem key={c._id} group={title} challenge={c}/>
 			)) : (

@@ -16,7 +16,7 @@ export const addNotification = ({
 		container: 'top-right',
 		animationIn: ['animated', animationIn],
 		animationOut: ['animated', animationOut],
-		dismiss: { duration: 4000 },
+		dismiss: { duration: 3000 },
 		content: (
 			<div className={`notification-${type} uk-width-1-1`}>
 				<div className='notification-content'>

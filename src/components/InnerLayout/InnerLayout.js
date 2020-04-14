@@ -2,7 +2,6 @@ import React from 'react'
 import { Card, Grid } from 'uikit-react'
 import { innerLayout, sideLink } from './InnerLayout.module.scss'
 import { Link } from '@reach/router'
-import { capitalize } from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const transform = 'shrink-3 down-0.5'
@@ -13,19 +12,22 @@ export const InnerLayout = ({ title, children, left, right }) => (
 			<Grid className='uk-margin-bottom uk-margin-remove-left'>
 				<Title title={title} className='uk-hidden@s uk-width-1-1'/>
 				{left && (
-					<Link to={left} className={sideLink}>
+					<Link to={left} className={`${sideLink} uk-text-capitalize`}>
 						<FontAwesomeIcon
 							icon='chevron-left'
 							className='icon-left'
 							transform={transform}
 						/>
-						{capitalize(left.slice(1))}
+						{left.slice(1)}
 					</Link>
 				)}
 				<Title title={title} className='uk-visible@s uk-width-expand'/>
 				{right && (
-					<Link to={right} className={`${sideLink} uk-text-right`}>
-						{capitalize(right.slice(1))}
+					<Link
+						to={right}
+						className={`${sideLink} uk-text-capitalize uk-text-right`}
+					>
+						{right.slice(1)}
 						<FontAwesomeIcon
 							icon='chevron-right'
 							className='icon-right'
@@ -40,7 +42,13 @@ export const InnerLayout = ({ title, children, left, right }) => (
 )
 
 const Title = ({ title, className }) => (
-	<p className={`${className} font-size-xlarge uk-padding-remove-left uk-text-center`}>
-		{title && capitalize(title)}
+	<p className={`
+		${className}
+		font-size-xlarge
+		uk-padding-remove-left
+		uk-text-center
+		uk-text-capitalize
+	`}>
+		{title}
 	</p>
 )

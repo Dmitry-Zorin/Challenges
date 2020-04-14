@@ -1,5 +1,5 @@
 import React from 'react'
-import { env, layout, header, title, icon } from './Layout.module.scss'
+import { env, header, icon, layout, title } from './Layout.module.scss'
 import { Container } from 'uikit-react'
 import { NavigationBar } from './components/Navbar'
 import { ScrollToTop } from './components/ScrollToTop'
@@ -13,11 +13,11 @@ export const Layout = ({ children, location }) => (
 		<ReactNotification/>
 		<div className={env}>
 			<Container className={layout}>
-				<div className={header + ' uk-text-center'}>
+				<div className={header}>
 					<p className={title}>
 						<FontAwesomeIcon
 							icon='tasks'
-							className={icon + ' icon-left'}
+							className={`${icon} icon-left`}
 							transform='shrink-2 down-0.4'
 						/>
 						Challenges

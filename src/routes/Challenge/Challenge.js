@@ -71,6 +71,7 @@ export const Challenge = ({ navigate, location }) => {
 					defaultValue={defaultName}
 					setState={setName}
 					capital={true}
+					br={true}
 				/>
 				<DifficultyInput
 					difficulty={difficulty}

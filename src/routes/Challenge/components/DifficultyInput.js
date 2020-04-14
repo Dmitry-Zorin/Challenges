@@ -4,7 +4,10 @@ import { SwitcherItem } from 'components/SwitcherItem'
 export const DifficultyInput = ({ difficulty, setState }) => (
 	<div className='uk-margin-medium'>
 		Difficulty
-		<ul className='uk-subnav uk-subnav-pill uk-child-width-1-3'>
+		<ul
+			className='uk-subnav uk-subnav-pill uk-child-width-1-3'
+			style={{ marginTop: '0.5em' }}
+		>
 			{['Easy', 'Medium', 'Hard'].map(d => (
 				<SwitcherItem
 					key={d}
