@@ -1,6 +1,6 @@
 import React from 'react'
-import { env, header, icon, layout, title } from './Layout.module.scss'
-import { Container } from 'uikit-react'
+import { env, header, layout, title } from './Layout.module.scss'
+import { Container, Flex } from 'uikit-react'
 import { NavigationBar } from './components/Navbar'
 import { ScrollToTop } from './components/ScrollToTop'
 import ReactNotification from 'react-notifications-component'
@@ -13,16 +13,16 @@ export const Layout = ({ children, location }) => (
 		<ReactNotification/>
 		<div className={env}>
 			<Container className={layout}>
-				<div className={header}>
+				<Flex className={header}>
 					<p className={title}>
 						<FontAwesomeIcon
 							icon='tasks'
-							className={`${icon} icon-left`}
+							className='uk-visible@s'
 							transform='shrink-2 down-0.4'
 						/>
 						Challenges
 					</p>
-				</div>
+				</Flex>
 				{children}
 			</Container>
 		</div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { getChallengeTime } from 'scripts/time'
 import { infinity } from 'data/settings.json'
-import { Grid } from 'uikit-react'
+import { Flex, Grid } from 'uikit-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const icons = {
@@ -16,22 +16,21 @@ export const GroupItem = ({ group, challenge, extended = false }) => {
 	
 	const icon = isInfiniteTime ? 'question'
 		: time || group === 'completed'
-		? icons[group] : 'exclamation'
+			? icons[group] : 'exclamation'
 	
 	return (
-		<Grid className={!extended && 'uk-margin-small'}>
+		<Grid className={extended ? '' : 'uk-margin-small'}>
 			<div className={`
 				${extended ? '' : 'font-size-medium uk-text-truncate'} uk-width-expand
 			`}>
 				{challenge.name}
 			</div>
-			<div
-				className='uk-text-meta uk-padding-remove'
-				style={{ marginTop: `0.3${extended ? 5 : 0}em` }}
-			>
-				<FontAwesomeIcon icon={icon} transform='shrink-3'/>
-				{!isInfiniteTime && time}
-			</div>
+			<Flex>
+				<div className='uk-text-meta'>
+					<FontAwesomeIcon icon={icon} transform='shrink-3'/>
+					{!isInfiniteTime && time}
+				</div>
+			</Flex>
 		</Grid>
 	)
 }

@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { container } from './LeftColumn.module.scss'
 
 export const LeftColumn = () => (
-	<div className='uk-width-auto uk-width-1-3@m uk-padding-remove-left'>
+	<div className='uk-width-auto uk-width-1-3@m uk-margin-remove'>
 		<div className={`${container} uk-visible@m`}>
 			<Card className='uk-height-1-1'>
 				<Info/>
@@ -28,11 +28,7 @@ const Info = () => {
 	return userInfo === undefined ? null : userInfo.username ? (
 		<div>
 			<p className='font-size-large uk-text-center uk-margin-remove-bottom'>
-				<FontAwesomeIcon
-					icon='user'
-					className='icon-left'
-					transform='shrink-4'
-				/>
+				<FontAwesomeIcon icon='user' transform='shrink-4'/>
 				{userInfo.username}
 			</p>
 			<List>
@@ -47,11 +43,7 @@ const Info = () => {
 		</div>
 	) : (
 		<p className='font-size-large uk-text-center uk-text-muted'>
-			<FontAwesomeIcon
-				icon='user-slash'
-				className='icon-left'
-				transform='shrink-4 down-0.4'
-			/>
+			<FontAwesomeIcon icon='user-slash' transform='shrink-4 down-0.4'/>
 			No info...
 		</p>
 	)

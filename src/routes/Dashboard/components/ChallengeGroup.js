@@ -1,9 +1,9 @@
 import React from 'react'
 import { Card } from 'uikit-react'
 import { Link } from '@reach/router'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Overlay } from './Overlay'
-import { GroupItem } from 'components/ChallengeGroupItem'
+import { GroupItem } from 'components/GroupItem'
+import { NoChallenges } from 'components/NoChallenges'
 
 export const ChallengeGroup = ({ to, title, group = [] }) => (
 	<Link to={to}>
@@ -11,21 +11,12 @@ export const ChallengeGroup = ({ to, title, group = [] }) => (
 			<p className='font-size-large uk-text-center uk-text-capitalize'>
 				{title}
 			</p>
-			{group.length ? group.slice(0, 4).map(c => (
-				<GroupItem key={c._id} group={title} challenge={c}/>
-			)) : (
-				<p
-					className='uk-text-center uk-text-muted'
-					style={{ marginTop: '4em' }}
-				>
-					<FontAwesomeIcon
-						icon='ban'
-						className='icon-left'
-						transform='shrink-4 down-0.4'
-					/>
-					No challenges...
-				</p>
-			)}
+			{group.length
+				? group.slice(0, 4).map(c => (
+					<GroupItem key={c._id} group={title} challenge={c}/>
+				))
+				: <NoChallenges/>
+			}
 			<Overlay text='see all'/>
 		</Card>
 	</Link>

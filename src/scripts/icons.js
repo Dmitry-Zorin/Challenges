@@ -29,6 +29,7 @@ import {
 	faSyncAlt,
 	faTasks,
 	faTimesCircle,
+	faToggleOn,
 	faTrashAlt,
 	faUser,
 	faUserPlus,
@@ -65,9 +66,9 @@ library.add(
 	faSyncAlt,
 	faTasks,
 	faTimesCircle,
+	faToggleOn,
 	faTrashAlt,
 	faUser,
 	faUserPlus,
 	faUserSlash,
-	
 )

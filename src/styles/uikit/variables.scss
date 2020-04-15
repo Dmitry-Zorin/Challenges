@@ -1,14 +1,17 @@
 @import '../variables';
 
 $global-color: $base-color;
+$global-inverse-color: $inverse-color;
 $global-link-color: $global-color;
 $global-link-hover-color: $primary-color;
 $base-body-background: $background-color;
 $base-heading-color: $global-color;
 $base-link-hover-text-decoration: none;
+$text-primary-color: $primary-color;
 
 // Accordion
 $accordion-title-color: $global-color;
+$accordion-title-hover-color: $primary-color;
 $accordion-content-margin-top: 0;
 
 // Animation
@@ -19,7 +22,7 @@ $button-border-width: 0;
 $button-default-background: $primary-color;
 $button-default-hover-background: $primary-hover-color;
 $button-default-active-background: $button-default-hover-background;
-$button-default-color: $button-color;
+$button-default-color: $global-inverse-color;
 $button-default-hover-color: $button-default-color;
 $button-default-active-color: $button-default-color;
 
@@ -51,6 +54,7 @@ $label-danger-background: $red;
 $label-success-color: $label-color;
 $label-warning-color: $label-color;
 $label-danger-color: $label-color;
+$label-border-radius: $misc-border-radius;
 
 // Navbar
 $navbar-nav-item-height: 40px;

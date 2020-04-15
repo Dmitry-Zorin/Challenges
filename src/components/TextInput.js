@@ -4,11 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export const TextInput = ({ icon, label, value = '', setState, defaultValue = label, isPassword }) => (
 	<div className='uk-margin-medium uk-text-capitalize'>
 		{icon && (
-			<FontAwesomeIcon
-				icon={icon}
-				className='icon-left'
-				transform='shrink-4'
-			/>
+			<FontAwesomeIcon icon={icon} transform='shrink-4'/>
 		)}
 		{label}
 		<input

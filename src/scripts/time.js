@@ -1,12 +1,12 @@
 import { addNotification } from './notifications'
 import { completeReady, startReady } from 'data/notifications/challenges.json'
-import { updateTimeout, infinity } from 'data/settings.json'
+import { infinity, updateTimeout } from 'data/settings.json'
 
 export const toMs = {
 	TOO_MANY_YEARS: 3e12,
 	DAY: 864e5,
 	HOUR: 36e5,
-	MINUTE: 6e4
+	MINUTE: 6e4,
 }
 
 export const updateTime = (context, challenges = context.challenges) => {

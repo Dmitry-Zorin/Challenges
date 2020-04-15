@@ -9,68 +9,62 @@ import {
 } from 'uikit-react'
 import { Link } from '@reach/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 const transform = 'shrink-3 down-0.5'
 
 export const NavigationBar = ({ location }) => {
 	const { userInfo, spinnerIsVisible } = useContext(DataContext)
 	const text = 'Challenges'
+	const inOrOut = userInfo?.username ? 'out' : 'in'
+	
 	return (
 		<NavbarSticky>
 			<NavbarContainer>
 				<Container style={{ width: '100%' }}>
 					<Navbar>
-						<NavItem>
+						<NavItem className='uk-navbar-left'>
 							{location.pathname === '/' ? (
-								<Link to='/' className='primary'>
+								<Link to='/'>
 									<div className='uk-hidden@m' data-uk-toggle='target: #info'>
-										<FontAwesomeIcon
-											icon='bars'
-											className='icon-left'
-											transform={transform}
-										/>
+										<FontAwesomeIcon icon='bars' transform={transform}/>
 										{text}
 									</div>
 									<div className='uk-visible@m'>{text}</div>
 								</Link>
 							) : (
 								<Link to='/'>
-									<FontAwesomeIcon
-										icon='chevron-left'
-										className='icon-left'
-										transform={transform}
-									/>
+									<FontAwesomeIcon icon='chevron-left' transform={transform}/>
 									Dashboard
 								</Link>
 							)}
 						</NavItem>
 						
-						<NavItem className='uk-width-expand'/>
-						
-						<NavItem>
-							{spinnerIsVisible ? (
+						<NavItem className='uk-navbar-center'>
+							{spinnerIsVisible && (
 								<a href='/#' onClick={e => e.preventDefault()}>
-									<div data-uk-spinner='ratio: 0.8'/>
+									<FontAwesomeIcon icon={faSpinner} transform='grow-10' spin/>
 								</a>
-							) : location.pathname.match(/\/($|create|edit)/) ? (
-								<Link to='/login'>
-									<FontAwesomeIcon
-										icon={userInfo?.username ? 'sign-out-alt' : 'sign-in-alt'}
-										className='icon-left'
-										transform={transform}
-									/>
-									{userInfo?.username ? 'log out' : 'log in'}
-								</Link>
-							) : (
-								<Link to='/create'>
-									<FontAwesomeIcon
-										icon='plus'
-										className='icon-left'
-										transform={transform}
-									/>
-									Create
-								</Link>
 							)}
+						</NavItem>
+						
+						<NavItem className='uk-navbar-right'>
+							{userInfo === undefined ? null
+								: location.pathname.match(/\/($|create|edit)/) ? (
+									<Link to='/login'>
+										<FontAwesomeIcon
+											icon={`sign-${inOrOut}-alt`}
+											transform={transform}
+										/>
+										{`log ${inOrOut}`}
+									</Link>
+								) : (
+									<Link to='/create'>
+										<FontAwesomeIcon icon='plus' transform={transform}/>
+										Create
+									</Link>
+								)
+							}
 						</NavItem>
 					</Navbar>
 				</Container>

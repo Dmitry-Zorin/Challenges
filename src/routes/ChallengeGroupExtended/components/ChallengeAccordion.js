@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Accordion, AccordionItem, Grid } from 'uikit-react'
 import { Buttons } from './Buttons'
 import { itemsPerPage } from 'data/settings.json'
-import { GroupItem } from 'components/ChallengeGroupItem'
+import { GroupItem } from 'components/GroupItem'
 
 const options = {
 	ongoing: ['complete'],
@@ -31,7 +31,9 @@ export const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 					<AccordionItem
 						key={c._id}
 						className='uk-margin-remove'
-						title={<GroupItem group={group} challenge={c} extended/>}
+						title={
+							<GroupItem group={group} challenge={c} extended/>
+						}
 						content={
 							<div>
 								<Grid className='uk-margin-remove'>

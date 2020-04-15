@@ -4,11 +4,11 @@ import { DataContext } from 'contexts/DataContext'
 import { Pagination } from './components/Pagination'
 import { ChallengeAccordion } from './components/ChallengeAccordion'
 import { Search } from './components/Search'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { itemsPerPage } from 'data/settings.json'
+import { NoChallenges } from 'components/NoChallenges'
 
 export const ChallengeGroupExtended = ({ left, right, navigate }) => {
-	const { challenges } = useContext(DataContext)
+	const context = useContext(DataContext)
 	const [pattern, setPattern] = useState(/.*/)
 	const [page, setPage] = useState(0)
 	
@@ -25,35 +25,19 @@ export const ChallengeGroupExtended = ({ left, right, navigate }) => {
 	}
 	
 	const group = window.location.pathname.slice(1)
-	const challengeGroup = challenges?.[group] || []
-	const filteredChallenges = challengeGroup.filter(c => pattern.test(c.name))
-	const maxPage = Math.ceil(filteredChallenges.length / itemsPerPage)
+	const challengeGroup = context.challenges?.[group] || []
+	const challenges = challengeGroup.filter(c => pattern.test(c.name))
+	const maxPage = Math.ceil(challenges.length / itemsPerPage)
 	
 	return (
 		<InnerLayout title={group} left={left} right={right}>
 			<Search onChange={search}/>
-			{filteredChallenges.length ? (
-				<ChallengeAccordion
-					challenges={filteredChallenges}
-					page={page}
-					group={group}
-					navigate={navigate}
-				/>
-			) : (
-				<p
-					className='font-size-medium uk-text-center uk-text-muted'
-					style={{ marginTop: '3em' }}
-				>
-					<FontAwesomeIcon
-						icon='ban'
-						className='icon-left'
-						transform='shrink-4 down-0.5'
-					/>
-					No challenges...
-				</p>
-			)}
-			{filteredChallenges.length > itemsPerPage && (
-				<Pagination page={page} maxPage={maxPage} changePage={changePage}/>
+			{challenges.length
+				? <ChallengeAccordion {...{ challenges, group, page, navigate }}/>
+				: <NoChallenges extended/>
+			}
+			{challenges.length > itemsPerPage && (
+				<Pagination {...{ page, maxPage, changePage }}/>
 			)}
 		</InnerLayout>
 	)

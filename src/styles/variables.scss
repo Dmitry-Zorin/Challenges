@@ -19,12 +19,12 @@ $card-background-light-active-color: lighten($card-background-color, 15);
 $overlay-color: adjust-color($card-background-color, 4, 4, 4);
 
 $primary-hover-color: darken($primary-color, 7);
-
-$button-color: $card-background-color;
+$inverse-color: $card-background-color;
 
 // Dimensions
 $card-border-radius: 1em;
-$button-border-radius: 0.5em;
+$input-border-radius: $card-border-radius / 2;
+$misc-border-radius: $input-border-radius / 2;
 $icon-margin: 0.2em;
 
 $font-size-medium: 1.15em;

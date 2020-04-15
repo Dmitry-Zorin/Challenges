@@ -17,6 +17,10 @@ a:active p {
 	color: $primary-color;
 }
 
+svg {
+	@extend .icon-left;
+}
+
 .font-size-medium {
 	font-size: $font-size-medium;
 }

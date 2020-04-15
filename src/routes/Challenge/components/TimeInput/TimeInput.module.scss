@@ -1,10 +1,14 @@
 @import '../../../../styles/variables';
 
+.toggle {
+	cursor: pointer;
+	padding-left: 0.5em;
+}
+
 .button {
 	background: $card-background-light-color;
 	
 	&, &:hover, &:active {
-		border: 1px solid $card-background-color;
 		border-top: 2px solid $card-background-color;
 		color: $base-color;
 	}
@@ -16,4 +20,32 @@
 	&:active {
 		background: $card-background-light-active-color;
 	}
+}
+
+.leftButton {
+	@extend .button;
+	
+	&, &:hover, &:active {
+		border-right: 1px solid $card-background-color;
+	}
+}
+
+.rightButton {
+	@extend .button;
+	
+	&, &:hover, &:active {
+		border-left: 1px solid $card-background-color;
+	}
+}
+
+.container {
+	height: 6.7em;
+	overflow: hidden;
+}
+
+.unknown {
+	background: $card-background-light-color;
+	border-radius: $input-border-radius;
+	height: calc(100% - 1.5em - 1px);
+	margin-top: 1.5em;
 }
