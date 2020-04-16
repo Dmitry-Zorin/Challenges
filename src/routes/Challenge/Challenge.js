@@ -66,7 +66,7 @@ export const Challenge = ({ navigate, location }) => {
 	const pattern = new RegExp(`${prefix}(\\d+)`)
 	const defaultName = prefix + (1 + Math.max(
 		...Object.values(context.challenges).flat()
-			.map(c => c.name.match(pattern)[1]),
+			.map(c => c.name.match(pattern)?.[1] || 0),
 	))
 	
 	return (

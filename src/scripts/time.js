@@ -3,7 +3,8 @@ import { infinity, updateTimeout } from 'data/settings.json'
 import { addNotification } from './notifications'
 
 export const toMs = {
-	TOO_MANY_YEARS: 3e12,
+	TOO_MANY_YEARS: 6e12,
+	MANY_YEARS: 3e12,
 	DAY: 864e5,
 	HOUR: 36e5,
 	MINUTE: 6e4,
@@ -36,7 +37,7 @@ export const updateTime = (context, challenges = context.challenges) => {
 }
 
 const getTimeString = (c, ms) => {
-	if (ms > toMs.TOO_MANY_YEARS) return infinity
+	if (ms > toMs.MANY_YEARS) return infinity
 	const { days, hours, minutes } = getTimeObj(ms)
 	const timeStrings = [days + 'd', hours + 'h', minutes + 'm']
 	return timeStrings.filter(e => +e[0]).join(' ')
