@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
 import { DataContext } from 'contexts/DataContext'
+import React, { useContext } from 'react'
 
 export const Auth = ({ Component, ...props }) => {
 	const { userInfo } = useContext(DataContext)

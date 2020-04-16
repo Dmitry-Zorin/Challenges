@@ -1,5 +1,5 @@
-import React from 'react'
 import { SwitcherItem } from 'components/SwitcherItem'
+import React from 'react'
 
 export const DifficultyInput = ({ difficulty, setState }) => (
 	<div className='uk-margin-medium'>

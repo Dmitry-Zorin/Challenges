@@ -1,10 +1,10 @@
-import React from 'react'
-import { Grid } from 'uikit-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import { Flex } from 'uikit-react'
 
 export const Buttons = ({ saveValue, withCancel }) => (
-	<Grid
-		className='uk-flex-center uk-child-width-1-3@m uk-child-width-1-2@s'
+	<Flex
+		className='uk-flex-center uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m'
 		style={{ marginTop: '4em' }}
 	>
 		{withCancel && (
@@ -20,20 +20,19 @@ export const Buttons = ({ saveValue, withCancel }) => (
 			value={saveValue}
 			icon={withCancel ? 'check-circle' : 'plus-circle'}
 		/>
-	</Grid>
+	</Flex>
 )
 
-const ActionButton = ({ type, value, icon, onClick }) => (
-	<div>
+const ActionButton = ({ value, icon, ...props }) => (
+	<div className='uk-margin-remove'>
 		<button
-			type={type}
-			className='uk-button uk-button-default uk-width-expand'
-			onClick={onClick}
+			className='uk-button uk-button-default uk-width-1-1'
+			{...props}
 		>
 			<FontAwesomeIcon
-				icon={icon}
 				className='icon-left-2'
 				transform='shrink-1'
+				{...{ icon }}
 			/>
 			{value}
 		</button>

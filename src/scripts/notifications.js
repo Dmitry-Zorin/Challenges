@@ -1,7 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { store } from 'react-notifications-component'
 import 'styles/notifications.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const addNotification = ({
 	title, message,

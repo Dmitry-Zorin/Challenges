@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react'
 import { InnerLayout } from 'components/InnerLayout'
-import { DataContext } from 'contexts/DataContext'
-import { Pagination } from './components/Pagination'
-import { ChallengeAccordion } from './components/ChallengeAccordion'
-import { Search } from './components/Search'
-import { itemsPerPage } from 'data/settings.json'
 import { NoChallenges } from 'components/NoChallenges'
+import { DataContext } from 'contexts/DataContext'
+import { itemsPerPage } from 'data/settings.json'
+import React, { useContext, useState } from 'react'
+import { ChallengeAccordion } from './components/ChallengeAccordion'
+import { Pagination } from './components/Pagination'
+import { Search } from './components/Search'
 
 export const ChallengeGroupExtended = ({ left, right, navigate }) => {
 	const context = useContext(DataContext)
@@ -30,7 +30,7 @@ export const ChallengeGroupExtended = ({ left, right, navigate }) => {
 	const maxPage = Math.ceil(challenges.length / itemsPerPage)
 	
 	return (
-		<InnerLayout title={group} left={left} right={right}>
+		<InnerLayout title={group} {...{left, right}}>
 			<Search onChange={search}/>
 			{challenges.length
 				? <ChallengeAccordion {...{ challenges, group, page, navigate }}/>

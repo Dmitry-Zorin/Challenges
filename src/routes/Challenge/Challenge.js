@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react'
 import { InnerLayout } from 'components/InnerLayout'
-import { DataContext } from 'contexts/DataContext'
-import { DifficultyInput } from './components/DifficultyInput'
-import { TimeInput } from 'routes/Challenge/components/TimeInput/TimeInput'
-import { Buttons } from './components/Buttons'
 import { TextInput } from 'components/TextInput'
+import { DataContext } from 'contexts/DataContext'
+import React, { useContext, useState } from 'react'
 import { saveChallenge } from 'scripts/requests'
+import { Buttons } from './components/Buttons'
+import { DifficultyInput } from './components/DifficultyInput'
+import { TimeInput } from './components/TimeInput'
 
 const actions = {
 	create: {
@@ -79,8 +79,8 @@ export const Challenge = ({ navigate, location }) => {
 					setState={setName}
 				/>
 				<DifficultyInput
-					difficulty={difficulty}
 					setState={setDifficulty}
+					{...{ difficulty }}
 				/>
 				<TimeInput
 					name='duration'

@@ -1,8 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { infinity } from 'data/settings.json'
 import React from 'react'
 import { getChallengeTime } from 'scripts/time'
-import { infinity } from 'data/settings.json'
-import { Flex, Grid } from 'uikit-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Flex } from 'uikit-react'
 
 const icons = {
 	ongoing: 'arrow-down',
@@ -10,7 +10,7 @@ const icons = {
 	completed: 'check',
 }
 
-export const GroupItem = ({ group, challenge, extended = false }) => {
+export const GroupItem = ({ group, challenge, extended }) => {
 	const time = getChallengeTime(challenge)
 	const isInfiniteTime = time === infinity
 	
@@ -19,10 +19,13 @@ export const GroupItem = ({ group, challenge, extended = false }) => {
 			? icons[group] : 'exclamation'
 	
 	return (
-		<Grid className={extended ? '' : 'uk-margin-small'}>
-			<div className={`
-				${extended ? '' : 'font-size-medium uk-text-truncate'} uk-width-expand
-			`}>
+		<Flex className='uk-margin-small'>
+			<div
+				className={`
+				${extended ? '' : 'font-size-medium uk-text-truncate'}
+				uk-width-expand
+			`}
+			>
 				{challenge.name}
 			</div>
 			<Flex>
@@ -31,6 +34,6 @@ export const GroupItem = ({ group, challenge, extended = false }) => {
 					{!isInfiniteTime && time}
 				</div>
 			</Flex>
-		</Grid>
+		</Flex>
 	)
 }

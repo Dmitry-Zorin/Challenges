@@ -1,6 +1,6 @@
-import { addNotification } from './notifications'
 import { completeReady, startReady } from 'data/notifications/challenges.json'
 import { infinity, updateTimeout } from 'data/settings.json'
+import { addNotification } from './notifications'
 
 export const toMs = {
 	TOO_MANY_YEARS: 3e12,

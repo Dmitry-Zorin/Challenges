@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { handleError } from 'scripts/utils'
-import errors from 'data/notifications/errors.json'
 import challenges from 'data/notifications/challenges.json'
+import errors from 'data/notifications/errors.json'
 import user from 'data/notifications/user.json'
 import { capitalize } from 'lodash'
 import { addNotification } from 'scripts/notifications'
+import { handleError } from 'scripts/utils'
 
 const server = process.env.NODE_ENV === 'production' ? ''
 	: `http://${window.location.hostname}:${process.env.REACT_APP_API_PORT}`

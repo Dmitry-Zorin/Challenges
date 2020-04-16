@@ -1,5 +1,5 @@
-import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
 import { Flex } from 'uikit-react'
 
 export const NoChallenges = ({ extended }) => (

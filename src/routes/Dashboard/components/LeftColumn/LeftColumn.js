@@ -1,10 +1,6 @@
-import React, { useContext } from 'react'
-import { Card, List, ListItem } from 'uikit-react'
-import { DataContext } from 'contexts/DataContext'
-import { Link } from '@reach/router'
-import { challengeGroups } from 'data/settings.json'
-import { capitalize } from 'lodash'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import { Card } from 'uikit-react'
+import { Info } from './components/Info'
 import { container } from './LeftColumn.module.scss'
 
 export const LeftColumn = () => (
@@ -21,30 +17,3 @@ export const LeftColumn = () => (
 		</div>
 	</div>
 )
-
-const Info = () => {
-	const { userInfo, challenges } = useContext(DataContext)
-	
-	return userInfo === undefined ? null : userInfo.username ? (
-		<div>
-			<p className='font-size-large uk-text-center uk-margin-remove-bottom'>
-				<FontAwesomeIcon icon='user' transform='shrink-4'/>
-				{userInfo.username}
-			</p>
-			<List>
-				{challengeGroups.map(g => (
-					<ListItem key={g}>
-						<Link to={`/${g}`}>
-							{`${capitalize(g)}: ${challenges[g].length}`}
-						</Link>
-					</ListItem>
-				))}
-			</List>
-		</div>
-	) : (
-		<p className='font-size-large uk-text-center uk-text-muted'>
-			<FontAwesomeIcon icon='user-slash' transform='shrink-4 down-0.4'/>
-			No info...
-		</p>
-	)
-}

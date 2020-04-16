@@ -1,16 +1,15 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Router } from '@reach/router'
-import { Layout } from './Layout'
-import { Login } from 'routes/Login'
-import { Auth } from './Auth'
-import { NotFoundPage } from 'routes/404'
 import { DataContext } from 'contexts/DataContext'
-import { Dashboard } from 'routes/Dashboard'
+import { challengeGroups, updateTimeout } from 'data/settings.json'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Challenge } from 'routes/Challenge'
 import { ChallengeGroupExtended } from 'routes/ChallengeGroupExtended'
-import { updateTime } from 'scripts/time'
-import { challengeGroups, updateTimeout } from 'data/settings.json'
+import { Dashboard } from 'routes/Dashboard'
+import { Login } from 'routes/Login'
 import { getUserInfo } from 'scripts/requests'
+import { updateTime } from 'scripts/time'
+import { Auth } from './Auth'
+import { Layout } from './Layout'
 
 export const App = () => {
 	const [context, setContext] = useState({
@@ -57,9 +56,8 @@ export const App = () => {
 		<DataContext.Provider value={context}>
 			<Router primary={false}>
 				<Layout path='/'>
-					<NotFoundPage default/>
-					<Dashboard path='/'/>
-					<Login path='login' login={login} logout={logout}/>
+					<Dashboard default/>
+					<Login path='login' {...{ login, logout }}/>
 					<Auth path='create' Component={Challenge}/>
 					<Auth path='edit' Component={Challenge}/>
 					{challengeGroups.map((g, i) => (

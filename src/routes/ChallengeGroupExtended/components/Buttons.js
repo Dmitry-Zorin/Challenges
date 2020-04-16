@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { DataContext } from 'contexts/DataContext'
-import { updateChallenge } from 'scripts/requests'
 import { capitalize } from 'lodash'
+import React, { useContext } from 'react'
+import { updateChallenge } from 'scripts/requests'
 
 const icons = {
 	start: 'play',
@@ -15,15 +15,19 @@ export const Buttons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)
 	
 	const update = (action) => {
-		if (action === 'edit') return navigate('/edit', { state: { challenge } })
+		if (action === 'edit') {
+			return navigate('/edit', { state: { challenge } })
+		}
+		const { challenges, updateChallenges } = context
+		const { _id: id, name } = challenge
 		
-		for (const [name, group] of Object.entries(context.challenges))
-			context.challenges[name] = group.filter(c => c._id !== challenge._id)
+		for (const [name, group] of Object.entries(challenges))
+			challenges[name] = group.filter(c => c._id !== id)
 		
-		context.updateChallenges(context.challenges)
+		updateChallenges(challenges)
 		
-		updateChallenge(context, action, { id: challenge._id }, challenge.name)
-			.then(context.updateChallenges).catch(() => {})
+		updateChallenge(context, action, { id }, name)
+			.then(updateChallenges).catch(() => {})
 	}
 	
 	return (
@@ -36,7 +40,11 @@ export const Buttons = ({ challenge, navigate, options }) => {
 					data-uk-tooltip={`title: ${capitalize(o)}; delay: 100`}
 					onClick={() => update(o)}
 				>
-					<FontAwesomeIcon icon={icons[o.toLowerCase()]} transform='grow-2'/>
+					<FontAwesomeIcon
+						icon={icons[o.toLowerCase()]}
+						className='icon-center'
+						transform='grow-2'
+					/>
 				</button>
 			))}
 		</div>
