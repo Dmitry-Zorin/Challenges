@@ -22,9 +22,9 @@ export const GroupItem = ({ group, challenge, extended }) => {
 		<Flex className='uk-margin-small'>
 			<div
 				className={`
-				${extended ? '' : 'font-size-medium uk-text-truncate'}
-				uk-width-expand
-			`}
+					${extended ? '' : 'font-size-medium uk-text-truncate'}
+					uk-width-expand
+				`}
 			>
 				{challenge.name}
 			</div>

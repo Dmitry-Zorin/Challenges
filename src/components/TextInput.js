@@ -3,7 +3,7 @@ import React from 'react'
 
 export const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = label, setState }) => (
 	<div className='uk-margin-medium uk-text-capitalize'>
-		<FontAwesomeIcon transform='shrink-4' {...{ icon }}/>
+		{icon && <FontAwesomeIcon transform='shrink-4' {...{ icon }}/>}
 		{label}
 		<input
 			maxLength='250'
