@@ -5,39 +5,6 @@
 	padding-left: 0.5em;
 }
 
-.button {
-	background: $card-background-light-color;
-	
-	&, &:hover, &:active {
-		border-top: 2px solid $card-background-color;
-		color: $base-color;
-	}
-	
-	&:hover {
-		background: $card-background-light-hover-color;
-	}
-	
-	&:active {
-		background: $card-background-light-active-color;
-	}
-}
-
-.leftButton {
-	@extend .button;
-	
-	&, &:hover, &:active {
-		border-right: 1px solid $card-background-color;
-	}
-}
-
-.rightButton {
-	@extend .button;
-	
-	&, &:hover, &:active {
-		border-left: 1px solid $card-background-color;
-	}
-}
-
 .container {
 	height: 6.7em;
 	overflow: hidden;

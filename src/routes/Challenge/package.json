@@ -1,4 +1,4 @@
 {
 	"name": "challenge",
-	"main": "Challenge.js"
+	"main": "./Challenge.js"
 }

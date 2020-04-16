@@ -2,15 +2,15 @@
 
 $global-color: $base-color;
 $global-inverse-color: $inverse-color;
-$global-link-color: $global-color;
+$global-link-color: $base-color;
 $global-link-hover-color: $primary-color;
 $base-body-background: $background-color;
-$base-heading-color: $global-color;
+$base-heading-color: $base-color;
 $base-link-hover-text-decoration: none;
 $text-primary-color: $primary-color;
 
 // Accordion
-$accordion-title-color: $global-color;
+$accordion-title-color: $base-color;
 $accordion-title-hover-color: $primary-color;
 $accordion-content-margin-top: 0;
 
@@ -19,12 +19,19 @@ $animation-fade-duration: 0.25s;
 
 // Button
 $button-border-width: 0;
-$button-default-background: $primary-color;
-$button-default-hover-background: $primary-hover-color;
-$button-default-active-background: $button-default-hover-background;
-$button-default-color: $global-inverse-color;
-$button-default-hover-color: $button-default-color;
-$button-default-active-color: $button-default-color;
+$button-default-background: $card-background-light-color;
+$button-default-hover-background: $card-background-light-hover-color;
+$button-default-active-background: $card-background-light-active-color;
+$button-default-color: $base-color;
+$button-default-hover-color: $base-color;
+$button-default-active-color: $base-color;
+
+$button-primary-background: $primary-color;
+$button-primary-hover-background: $primary-hover-color;
+$button-primary-active-background: $primary-hover-color;
+$button-primary-color: $inverse-color;
+$button-primary-hover-color: $inverse-color;
+$button-primary-active-color: $inverse-color;
 
 // Card
 $card-default-background: $card-background-color;
@@ -33,7 +40,7 @@ $card-default-background: $card-background-color;
 $global-small-gutter: 20px;
 
 // Form
-$form-background: $global-color;
+$form-background: $base-color;
 $form-focus-background: $form-background;
 $form-color: $input-color;
 $form-focus-color: $form-color;
@@ -43,33 +50,36 @@ $overlay-default-background: $overlay-color;
 
 // Offcanvas
 $offcanvas-bar-background: $navbar-color;
-$offcanvas-bar-color-mode: $global-color;
+$offcanvas-bar-color-mode: $base-color;
 $offcanvas-bar-padding-horizontal: calc(20px + env(safe-area-inset-left));
 
 // Label
-$label-color: $global-color;
-$label-success-background: $green;
-$label-warning-background: $yellow;
-$label-danger-background: $red;
-$label-success-color: $label-color;
-$label-warning-color: $label-color;
-$label-danger-color: $label-color;
 $label-border-radius: $misc-border-radius;
+$label-success-background: $green;
+$label-warning-background: $primary-color;
+$label-danger-background: $red;
+$label-success-color: $base-color;
+$label-warning-color: $inverse-color;
+$label-danger-color: $base-color;
 
 // Navbar
 $navbar-nav-item-height: 40px;
 $navbar-background: $navbar-color;
-$navbar-nav-item-color: $global-color;
-$navbar-nav-item-onclick-color: $global-link-hover-color;
+$navbar-nav-item-color: $base-color;
+$navbar-nav-item-onclick-color: $primary-color;
 $navbar-nav-item-padding-horizontal: 0.5em;
 
 // Search
 $search-color: $form-color;
-$search-default-background: $global-color;
+$search-default-background: $base-color;
 
 // Subnav
 $subnav-pill-item-background: $card-background-light-color;
 $subnav-pill-item-hover-background: $card-background-light-hover-color;
-$subnav-pill-item-active-background: $button-default-background;
-$subnav-pill-item-color: $global-color;
-$subnav-pill-item-active-color: $button-default-color;
+$subnav-pill-item-active-background: $primary-color;
+$subnav-pill-item-color: $base-color;
+$subnav-pill-item-active-color: $inverse-color;
+
+// Tooltip
+$tooltip-background: $card-background-light-hover-color;
+$tooltip-color: $base-color;

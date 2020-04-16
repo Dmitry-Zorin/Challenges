@@ -30,7 +30,7 @@ export const ChallengeGroupExtended = ({ left, right, navigate }) => {
 	const maxPage = Math.ceil(challenges.length / itemsPerPage)
 	
 	return (
-		<InnerLayout title={group} {...{left, right}}>
+		<InnerLayout title={group} {...{ left, right }}>
 			<Search onChange={search}/>
 			{challenges.length
 				? <ChallengeAccordion {...{ challenges, group, page, navigate }}/>

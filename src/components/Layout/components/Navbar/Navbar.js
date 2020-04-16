@@ -1,6 +1,3 @@
-import { NavItemCenter } from 'components/Layout/components/Navbar/NavItemCenter'
-import { NavItemLeft } from 'components/Layout/components/Navbar/NavItemLeft'
-import { NavItemRight } from 'components/Layout/components/Navbar/NavItemRight'
 import React from 'react'
 import {
 	Container,
@@ -9,6 +6,9 @@ import {
 	NavbarSticky,
 	NavItem,
 } from 'uikit-react'
+import { NavItemCenter } from './NavItemCenter'
+import { NavItemLeft } from './NavItemLeft'
+import { NavItemRight } from './NavItemRight'
 
 const transform = 'shrink-3 down-0.5'
 

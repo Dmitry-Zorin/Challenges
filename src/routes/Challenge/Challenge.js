@@ -3,7 +3,7 @@ import { TextInput } from 'components/TextInput'
 import { DataContext } from 'contexts/DataContext'
 import React, { useContext, useState } from 'react'
 import { saveChallenge } from 'scripts/requests'
-import { Buttons } from './components/Buttons'
+import { ActionButtons } from './components/ActionButtons'
 import { DifficultyInput } from './components/DifficultyInput'
 import { TimeInput } from './components/TimeInput'
 
@@ -77,6 +77,7 @@ export const Challenge = ({ navigate, location }) => {
 					value={name}
 					defaultValue={defaultName}
 					setState={setName}
+					capital
 				/>
 				<DifficultyInput
 					setState={setDifficulty}
@@ -92,7 +93,7 @@ export const Challenge = ({ navigate, location }) => {
 					ms={delay}
 					setState={setDelay}
 				/>
-				<Buttons
+				<ActionButtons
 					saveValue={info.save}
 					withCancel={!!c?._id}
 				/>

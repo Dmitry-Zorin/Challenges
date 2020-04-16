@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Flex } from 'uikit-react'
 
-export const Buttons = ({ saveValue, withCancel }) => (
+export const ActionButtons = ({ saveValue, withCancel }) => (
 	<Flex
 		className='uk-flex-center uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m'
 		style={{ marginTop: '4em' }}
@@ -26,7 +26,7 @@ export const Buttons = ({ saveValue, withCancel }) => (
 const ActionButton = ({ value, icon, ...props }) => (
 	<div className='uk-margin-remove'>
 		<button
-			className='uk-button uk-button-default uk-width-1-1'
+			className='uk-button uk-button-primary uk-width-1-1'
 			{...props}
 		>
 			<FontAwesomeIcon

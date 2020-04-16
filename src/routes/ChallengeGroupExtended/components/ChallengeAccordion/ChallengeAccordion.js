@@ -2,7 +2,7 @@ import { GroupItem } from 'components/GroupItem'
 import { itemsPerPage } from 'data/settings.json'
 import React, { useEffect } from 'react'
 import { Accordion, AccordionItem, Flex } from 'uikit-react'
-import { Buttons } from './Buttons'
+import { UpdateButtons } from './components/UpdateButtons'
 
 const options = {
 	ongoing: ['complete'],
@@ -31,16 +31,14 @@ export const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 					<AccordionItem
 						key={c._id}
 						className='uk-margin-remove'
-						title={
-							<GroupItem challenge={c} {...{ group }} extended/>
-						}
+						title={<GroupItem challenge={c} {...{ group }} extended/>}
 						content={
 							<div>
 								<Flex>
 									<div className={`uk-label uk-label-${labelTypes[c.difficulty.toLowerCase()]}`}>
 										{c.difficulty}
 									</div>
-									<Buttons
+									<UpdateButtons
 										challenge={c}
 										options={options[group]}
 										{...{ navigate }}

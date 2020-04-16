@@ -11,7 +11,9 @@
 	},
 	"start": {
 		"title": "Challenge started!",
-		"icon": "stopwatch"
+		"icon": "stopwatch",
+		"animationIn": "zoomIn",
+		"animationOut": "zoomOut"
 	},
 	"startReady": {
 		"title": "Challenge is ready to start",
@@ -30,6 +32,9 @@
 	},
 	"delete": {
 		"title": "Challenge deleted",
-		"icon": "trash-alt"
+		"icon": "trash-alt",
+		"type": "danger",
+		"animationIn": "zoomIn",
+		"animationOut": "zoomOut"
 	}
 }

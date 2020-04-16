@@ -1,24 +1,25 @@
+$amount: 7;
+
 // Colors
-$background-color: rgb(39, 44, 53);
-$primary-color: rgb(255, 198, 92);
+$background-color: rgb(40, 45, 55);
+$primary-color: rgb(255, 190, 85);
 $base-color: #EEE;
 $input-color: #000;
 $muted-color: #999;
 
 $blue: #3498DB;
 $green: #3BB15B;
-$yellow: #D68D2A;
 $red: #C14040;
 
 $navbar-color: adjust-color($background-color, -9, -10, -9);
-$title-color: darken($primary-color, 4);
 $card-background-color: adjust-color($background-color, 10, 9, 10);
-$card-background-light-color: lighten($card-background-color, 6);
-$card-background-light-hover-color: lighten($card-background-color, 11);
-$card-background-light-active-color: lighten($card-background-color, 15);
+$card-background-light-color: lighten($card-background-color, $amount);
+$card-background-light-hover-color: lighten($card-background-color, 2 * $amount);
+$card-background-light-active-color: lighten($card-background-color, 3 * $amount);
 $overlay-color: adjust-color($card-background-color, 4, 4, 4);
 
-$primary-hover-color: darken($primary-color, 7);
+$background-dark-color: darken($background-color, 3);
+$primary-hover-color: darken($primary-color, $amount);
 $inverse-color: $card-background-color;
 
 // Dimensions

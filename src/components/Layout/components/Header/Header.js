@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { header, title } from 'components/Layout/Layout.module.scss'
 import React from 'react'
 import { Flex } from 'uikit-react'
+import { header, title } from './Header.module.scss'
 
 export const Header = () => (
 	<Flex className={header}>

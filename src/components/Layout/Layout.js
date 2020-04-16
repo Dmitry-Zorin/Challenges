@@ -1,8 +1,8 @@
-import { NavigationBar } from 'components/Layout/components/Navbar/Navbar'
 import React from 'react'
 import ReactNotification from 'react-notifications-component'
 import { Container } from 'uikit-react'
 import { Header } from './components/Header'
+import { NavigationBar } from './components/Navbar'
 import { ScrollToTop } from './components/ScrollToTop'
 import { env, layout } from './Layout.module.scss'
 

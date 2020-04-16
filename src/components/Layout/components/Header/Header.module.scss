@@ -16,7 +16,7 @@
 }
 
 .title {
-	color: $title-color;
+	color: darken($primary-color, 2);
 	font-size: 3em;
 	font-weight: bold;
 }

@@ -15,13 +15,15 @@ export const TimeInput = (props) => {
 					<p className='uk-width-expand uk-text-capitalize'>
 						{props.name}
 					</p>
-					<div className={toggle} onClick={() => {
+					<div
+						className={toggle} onClick={() => {
 						props.setState(disabled ? 0 : toMs.TOO_MANY_YEARS)
 						setDisabled(!disabled)
-					}}>
+					}}
+					>
 						<FontAwesomeIcon
 							icon='toggle-on'
-							className={disabled ? '' : 'uk-text-primary'}
+							className={`uk-text-${disabled ? 'muted' : 'primary'}`}
 							transform='grow-16 left-9 down-0.5'
 							flip={disabled ? 'horizontal' : undefined}
 						/>

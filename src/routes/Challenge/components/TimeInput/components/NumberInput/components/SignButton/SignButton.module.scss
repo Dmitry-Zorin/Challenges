@@ -1,0 +1,23 @@
+@import '../../../../../../../../styles/variables';
+
+.button {
+	&, &:hover, &:active {
+		border-top: 2px solid $card-background-color;
+	}
+}
+
+.leftButton {
+	@extend .button;
+	
+	&, &:hover, &:active {
+		border-right: 1px solid $card-background-color;
+	}
+}
+
+.rightButton {
+	@extend .button;
+	
+	&, &:hover, &:active {
+		border-left: 1px solid $card-background-color;
+	}
+}
