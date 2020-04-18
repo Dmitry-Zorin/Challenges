@@ -10,7 +10,7 @@ const icons = {
 	completed: 'check',
 }
 
-export const GroupItem = ({ group, challenge, extended }) => {
+const GroupItem = ({ group, challenge, extended }) => {
 	const time = getChallengeTime(challenge)
 	const isInfiniteTime = time === infinity
 	
@@ -18,22 +18,21 @@ export const GroupItem = ({ group, challenge, extended }) => {
 		: time || group === 'completed'
 			? icons[group] : 'exclamation'
 	
+	const style = extended ? '' : 'font-size-medium uk-text-truncate'
+	
 	return (
 		<Flex className='uk-margin-small'>
-			<div
-				className={`
-					${extended ? '' : 'font-size-medium uk-text-truncate'}
-					uk-width-expand
-				`}
-			>
+			<div className={`${style} uk-width-expand`}>
 				{challenge.name}
 			</div>
 			<Flex>
 				<div className='uk-text-meta'>
-					<FontAwesomeIcon icon={icon} transform='shrink-3'/>
+					<FontAwesomeIcon icon={icon} className='icon-right' transform='shrink-3'/>
 					{!isInfiniteTime && time}
 				</div>
 			</Flex>
 		</Flex>
 	)
 }
+
+export default GroupItem

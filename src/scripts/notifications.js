@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { store } from 'react-notifications-component'
 import 'styles/notifications.scss'
+import { Margin } from 'uikit-react'
 
 export const addNotification = ({
 	title, message,
@@ -21,9 +22,9 @@ export const addNotification = ({
 			<div className={`notification-${type} uk-width-1-1`}>
 				<div className='notification-content'>
 					<div className='uk-grid'>
-						<div className='uk-height-1-1 uk-margin-auto-vertical'>
+						<Margin type='auto-vertical' className='uk-height-1-1'>
 							<FontAwesomeIcon icon={icon} transform='grow-15 right-13'/>
-						</div>
+						</Margin>
 						<div className='uk-width-expand' style={{ marginRight: '20px' }}>
 							<p className='notification-title'>{title}</p>
 							<p className='notification-message'>{message}</p>

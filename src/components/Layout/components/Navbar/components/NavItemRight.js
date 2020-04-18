@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from '@reach/router'
-import { DataContext } from 'contexts/DataContext'
+import DataContext from 'contexts/DataContext'
 import React, { useContext } from 'react'
 
-export const NavItemRight = ({ location, transform }) => {
+const NavItemRight = ({ location, transform }) => {
 	const { userInfo } = useContext(DataContext)
 	const inOrOut = userInfo?.username ? 'out' : 'in'
 	
@@ -20,3 +20,5 @@ export const NavItemRight = ({ location, transform }) => {
 			</Link>
 		)
 }
+
+export default NavItemRight

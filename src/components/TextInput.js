@@ -1,20 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { capitalize } from 'lodash'
+import { upperFirst } from 'lodash'
 import React from 'react'
+import { Margin } from 'uikit-react'
 
-export const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = label, setState, capital }) => (
-	<div className='uk-margin-medium uk-text-capitalize'>
+const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = label, setState, capital }) => (
+	<Margin type='medium'>
 		{icon && <FontAwesomeIcon transform='shrink-4' {...{ icon }}/>}
-		{label}
+		{upperFirst(label)}
 		<input
 			maxLength='250'
 			className='uk-input'
 			placeholder={value ? undefined : defaultValue}
 			onChange={({ target: { value } }) => {
-				setState(capital ? capitalize(value) : value)
+				setState(capital ? upperFirst(value) : value)
 			}}
 			style={{ marginTop: '0.5em' }}
 			{...{ type, value }}
 		/>
-	</div>
+	</Margin>
 )
+
+export default TextInput

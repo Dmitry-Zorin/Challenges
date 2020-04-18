@@ -1,6 +1,8 @@
-import { InnerLayout } from 'components/InnerLayout'
-import { TextInput } from 'components/TextInput'
-import { DataContext } from 'contexts/DataContext'
+import ActionButton from 'components/ActionButton'
+import ButtonGroup from 'components/ButtonGroup'
+import InnerLayout from 'components/InnerLayout'
+import TextInput from 'components/TextInput'
+import DataContext from 'contexts/DataContext'
 import { invalid } from 'data/notifications/errors.json'
 import React, {
 	useCallback,
@@ -11,8 +13,7 @@ import React, {
 } from 'react'
 import { addNotification } from 'scripts/notifications'
 import { authorize, logout } from 'scripts/requests'
-import { AuthSubnav } from './components/AuthSubnav'
-import { SubmitButton } from './components/SubmitButton'
+import AuthSubnav from './components/AuthSubnav'
 
 const authOptions = {
 	login: {
@@ -27,7 +28,7 @@ const authOptions = {
 	},
 }
 
-export const Login = (props) => {
+const Login = (props) => {
 	const context = useContext(DataContext)
 	const isFirstRenderRef = useRef(true)
 	const [authOption, setAuthOption] = useState(authOptions.login)
@@ -56,7 +57,7 @@ export const Login = (props) => {
 					props.navigate('/')
 				})
 				.catch(() => {})
-	}, [authOption.action, context, username, password, props])
+	}, [context, username, password, authOption.action, props])
 	
 	return (
 		<InnerLayout>
@@ -75,8 +76,12 @@ export const Login = (props) => {
 					value={password}
 					setState={setPassword}
 				/>
-				<SubmitButton/>
+				<ButtonGroup>
+					<ActionButton type='submit' icon='paper-plane' value='Submit'/>
+				</ButtonGroup>
 			</form>
 		</InnerLayout>
 	)
 }
+
+export default Login

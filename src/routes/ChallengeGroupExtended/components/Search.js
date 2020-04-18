@@ -1,7 +1,8 @@
 import React from 'react'
+import { Margin } from 'uikit-react'
 
-export const Search = (props) => (
-	<div className='uk-search uk-search-default uk-width-expand uk-margin-small'>
+const Search = (props) => (
+	<Margin type='small' className='uk-search uk-search-default uk-width-expand'>
 		<span data-uk-search-icon/>
 		<input
 			type='search'
@@ -9,5 +10,7 @@ export const Search = (props) => (
 			placeholder='Search...'
 			{...props}
 		/>
-	</div>
+	</Margin>
 )
+
+export default Search

@@ -1,5 +1,6 @@
-import { SwitcherItem } from 'components/SwitcherItem'
+import SwitcherItem from 'components/SwitcherItem'
 import React from 'react'
+import { Margin } from 'uikit-react'
 
 const difficultyTypes = {
 	Easy: 'success',
@@ -7,8 +8,8 @@ const difficultyTypes = {
 	Hard: 'danger',
 }
 
-export const DifficultyInput = ({ difficulty, setState }) => (
-	<div className='uk-margin-medium'>
+const DifficultyInput = ({ difficulty, setState }) => (
+	<Margin type='medium'>
 		Difficulty
 		<ul
 			className='uk-subnav uk-subnav-pill uk-child-width-1-3'
@@ -24,5 +25,7 @@ export const DifficultyInput = ({ difficulty, setState }) => (
 				/>
 			))}
 		</ul>
-	</div>
+	</Margin>
 )
+
+export default DifficultyInput

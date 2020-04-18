@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DataContext } from 'contexts/DataContext'
-import { capitalize } from 'lodash'
+import DataContext from 'contexts/DataContext'
+import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
 import { updateChallenge } from 'scripts/requests'
 
@@ -11,7 +11,7 @@ const info = {
 	delete: { icon: 'trash-alt', buttonType: 'danger' },
 }
 
-export const UpdateButtons = ({ challenge, navigate, options }) => {
+const UpdateButtons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)
 	
 	const update = (action) => {
@@ -39,12 +39,12 @@ export const UpdateButtons = ({ challenge, navigate, options }) => {
 							key={o}
 							className={`uk-button uk-button-${action.buttonType} uk-padding-remove`}
 							style={{ width: '3em', marginLeft: '0.5em' }}
-							data-uk-tooltip={`title: ${capitalize(o)}; delay: 100`}
+							data-uk-tooltip={`title: ${upperFirst(o)}; delay: 100`}
 							onClick={() => update(o)}
 						>
 							<FontAwesomeIcon
 								icon={action.icon}
-								className='icon-center uk-margin-auto'
+								className='icon-center'
 								transform='grow-2'
 							/>
 						</button>
@@ -54,3 +54,5 @@ export const UpdateButtons = ({ challenge, navigate, options }) => {
 		</div>
 	)
 }
+
+export default UpdateButtons

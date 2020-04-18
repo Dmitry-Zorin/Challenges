@@ -1,20 +1,10 @@
 @import '../../styles/variables';
 
-.innerLayout {
+.card {
 	min-height: calc(100% - 2em);
 	padding: 2em 1em;
 	
 	@media (min-width: $breakpoint-small) {
 		padding: 2em;
-	}
-}
-
-.sideLink {
-	color: $muted-color;
-	margin: auto 0;
-	width: 6.5em;
-	
-	@media (max-width: $breakpoint-small) {
-		padding: 0;
 	}
 }

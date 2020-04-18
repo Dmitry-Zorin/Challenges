@@ -1,21 +1,21 @@
 import React from 'react'
 import ReactNotification from 'react-notifications-component'
 import { Container } from 'uikit-react'
-import { Header } from './components/Header'
-import { NavigationBar } from './components/Navbar'
-import { ScrollToTop } from './components/ScrollToTop'
+import { Header, Navbar, ScrollToTop } from './components'
 import { env, layout } from './Layout.module.scss'
 
-export const Layout = ({ children, location }) => (
-	<div>
+const Layout = ({ children, location }) => (
+	<>
 		<ScrollToTop {...{ location }}/>
-		<NavigationBar {...{ location }}/>
+		<Navbar {...{ location }}/>
 		<ReactNotification/>
 		<div className={env}>
 			<Container className={layout}>
-				<Header/>
+				<Header {...{ location }}/>
 				{children}
 			</Container>
 		</div>
-	</div>
+	</>
 )
+
+export default Layout

@@ -3,7 +3,7 @@ import React from 'react'
 
 const transform = 'shrink-3 down-0.5'
 
-export const Pagination = ({ page, maxPage, changePage }) => (
+const Pagination = ({ page, maxPage, changePage }) => (
 	<ul className='uk-pagination uk-margin-medium-top uk-flex-between'>
 		<li className={page < 1 ? 'uk-disabled' : ''}>
 			<a href='/#' onClick={e => changePage(e, -1)}>
@@ -23,3 +23,5 @@ export const Pagination = ({ page, maxPage, changePage }) => (
 		</li>
 	</ul>
 )
+
+export default Pagination

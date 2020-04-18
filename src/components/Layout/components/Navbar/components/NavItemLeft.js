@@ -5,7 +5,7 @@ import { Flex } from 'uikit-react'
 
 const text = 'Challenges'
 
-export const NavItemLeft = ({ location, transform }) => (
+const NavItemLeft = ({ location, transform }) => (
 	<Link to='/'>
 		{location.pathname === '/' ? (
 			<div className='uk-height-1-1'>
@@ -30,3 +30,5 @@ export const NavItemLeft = ({ location, transform }) => (
 		)}
 	</Link>
 )
+
+export default NavItemLeft

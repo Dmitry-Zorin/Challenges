@@ -1,10 +1,10 @@
 import React from 'react'
-import { Card } from 'uikit-react'
-import { Info } from './components/Info'
+import { Card, Margin } from 'uikit-react'
+import Info from './components/Info'
 import { container } from './LeftColumn.module.scss'
 
-export const LeftColumn = () => (
-	<div className='uk-width-auto uk-width-1-3@m uk-margin-remove'>
+const LeftColumn = () => (
+	<Margin type='remove' className='uk-width-auto uk-width-1-3@m'>
 		<div className={`${container} uk-visible@m`}>
 			<Card className='uk-height-1-1'>
 				<Info/>
@@ -15,5 +15,7 @@ export const LeftColumn = () => (
 				<Info/>
 			</div>
 		</div>
-	</div>
+	</Margin>
 )
+
+export default LeftColumn

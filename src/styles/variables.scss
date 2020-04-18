@@ -1,4 +1,5 @@
 $amount: 7;
+$header-ratio: 0.5;
 
 // Colors
 $background-color: rgb(40, 45, 55);
@@ -18,7 +19,7 @@ $card-background-light-hover-color: lighten($card-background-color, 2 * $amount)
 $card-background-light-active-color: lighten($card-background-color, 3 * $amount);
 $overlay-color: adjust-color($card-background-color, 4, 4, 4);
 
-$background-dark-color: darken($background-color, 3);
+$background-dark-color: darken($background-color, 5);
 $primary-hover-color: darken($primary-color, $amount);
 $inverse-color: $card-background-color;
 
@@ -27,10 +28,24 @@ $card-border-radius: 1em;
 $input-border-radius: $card-border-radius / 2;
 $misc-border-radius: $input-border-radius / 2;
 $icon-margin: 0.2em;
+$features-height: 16em;
 
 $font-size-medium: 1.15em;
 $font-size-large: 1.4em;
+$font-size-larger: 1.8em;
 $font-size-xlarge: 2em;
+
+$card-margin-small: 0.75em;
+$card-margin-medium: 1em;
+$card-margin-large: 1.5em;
+
+$navbar-height-small: 50px;
+$navbar-height-medium: 60px;
+$navbar-height-large: 70px;
+
+$viewport-height-small: calc(100vh - #{$navbar-height-small});
+$viewport-height-medium: calc(100vh - #{$navbar-height-medium});
+$viewport-height-large: calc(100vh - #{$navbar-height-large});
 
 $breakpoint-small: 640px;
 $breakpoint-medium: 960px;

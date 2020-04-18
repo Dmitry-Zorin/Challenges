@@ -1,17 +1,20 @@
 import { Router } from '@reach/router'
-import { DataContext } from 'contexts/DataContext'
+import Auth from 'components/Auth'
+import Layout from 'components/Layout'
+import DataContext from 'contexts/DataContext'
 import { challengeGroups, updateTimeout } from 'data/settings.json'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Challenge } from 'routes/Challenge'
-import { ChallengeGroupExtended } from 'routes/ChallengeGroupExtended'
-import { Dashboard } from 'routes/Dashboard'
-import { Login } from 'routes/Login'
+import {
+	Challenge,
+	ChallengeGroupExtended,
+	Dashboard,
+	Home,
+	Login,
+} from 'routes'
 import { getUserInfo } from 'scripts/requests'
 import { updateTime } from 'scripts/time'
-import { Auth } from './Auth'
-import { Layout } from './Layout'
 
-export const App = () => {
+const App = () => {
 	const [context, setContext] = useState({
 		showSpinner: (spinnerIsVisible = true) => {
 			updateContext({ spinnerIsVisible })
@@ -56,7 +59,11 @@ export const App = () => {
 		<DataContext.Provider value={context}>
 			<Router primary={false}>
 				<Layout path='/'>
-					<Dashboard default/>
+					{context.challenges?.ongoing ? (
+						<Dashboard default/>
+					) : (
+						<Home {...{ login }} default/>
+					)}
 					<Login path='login' {...{ login, logout }}/>
 					<Auth path='create' Component={Challenge}/>
 					<Auth path='edit' Component={Challenge}/>
@@ -73,3 +80,5 @@ export const App = () => {
 		</DataContext.Provider>
 	)
 }
+
+export default App

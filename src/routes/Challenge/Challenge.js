@@ -1,11 +1,9 @@
-import { InnerLayout } from 'components/InnerLayout'
-import { TextInput } from 'components/TextInput'
-import { DataContext } from 'contexts/DataContext'
+import InnerLayout from 'components/InnerLayout'
+import TextInput from 'components/TextInput'
+import DataContext from 'contexts/DataContext'
 import React, { useContext, useState } from 'react'
 import { saveChallenge } from 'scripts/requests'
-import { ActionButtons } from './components/ActionButtons'
-import { DifficultyInput } from './components/DifficultyInput'
-import { TimeInput } from './components/TimeInput'
+import { ActionButtons, DifficultyInput, TimeInput } from './components'
 
 const actions = {
 	create: {
@@ -20,7 +18,7 @@ const actions = {
 	},
 }
 
-export const Challenge = ({ navigate, location }) => {
+const Challenge = ({ navigate, location }) => {
 	const context = useContext(DataContext)
 	
 	const c = location.state?.challenge
@@ -71,7 +69,11 @@ export const Challenge = ({ navigate, location }) => {
 	
 	return (
 		<InnerLayout title={info.title}>
-			<form className='uk-form' onSubmit={e => save(e, defaultName)}>
+			<form
+				className='uk-form'
+				style={{ marginTop: '-2em' }}
+				onSubmit={e => save(e, defaultName)}
+			>
 				<TextInput
 					label='name'
 					value={name}
@@ -101,3 +103,5 @@ export const Challenge = ({ navigate, location }) => {
 		</InnerLayout>
 	)
 }
+
+export default Challenge

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { leftButton, rightButton } from './SignButton.module.scss'
 
-export const SignButton = ({ sign, icon, timeToMs, ms, setState, step = 1 }) => (
+const SignButton = ({ sign, icon, timeToMs, ms, setState, step = 1 }) => (
 	<button
 		type='button'
 		className={`
@@ -16,3 +16,5 @@ export const SignButton = ({ sign, icon, timeToMs, ms, setState, step = 1 }) => 
 		<FontAwesomeIcon className='uk-margin-auto' {...{ icon }}/>
 	</button>
 )
+
+export default SignButton

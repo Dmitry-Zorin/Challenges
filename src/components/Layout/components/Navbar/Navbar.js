@@ -6,13 +6,11 @@ import {
 	NavbarSticky,
 	NavItem,
 } from 'uikit-react'
-import { NavItemCenter } from './NavItemCenter'
-import { NavItemLeft } from './NavItemLeft'
-import { NavItemRight } from './NavItemRight'
+import { NavItemCenter, NavItemLeft, NavItemRight } from './components'
 
 const transform = 'shrink-3 down-0.5'
 
-export const NavigationBar = ({ location }) => (
+const NavigationBar = ({ location }) => (
 	<NavbarSticky>
 		<NavbarContainer>
 			<Container style={{ width: '100%' }}>
@@ -31,3 +29,5 @@ export const NavigationBar = ({ location }) => (
 		</NavbarContainer>
 	</NavbarSticky>
 )
+
+export default NavigationBar

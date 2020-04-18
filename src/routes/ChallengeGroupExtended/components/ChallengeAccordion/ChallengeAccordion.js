@@ -1,8 +1,8 @@
-import { GroupItem } from 'components/GroupItem'
+import GroupItem from 'components/GroupItem'
 import { itemsPerPage } from 'data/settings.json'
 import React, { useEffect } from 'react'
 import { Accordion, AccordionItem, Flex } from 'uikit-react'
-import { UpdateButtons } from './components/UpdateButtons'
+import UpdateButtons from './components/UpdateButtons'
 
 const options = {
 	ongoing: ['complete'],
@@ -16,7 +16,7 @@ const labelTypes = {
 	hard: 'danger',
 }
 
-export const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
+const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 	useEffect(() => {
 		// Fix for mount stutter
 		for (const content of document.querySelectorAll('.uk-accordion-content')) {
@@ -33,7 +33,7 @@ export const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 						className='uk-margin-remove'
 						title={<GroupItem challenge={c} {...{ group }} extended/>}
 						content={
-							<div>
+							<>
 								<Flex>
 									<div className={`uk-label uk-label-${labelTypes[c.difficulty.toLowerCase()]}`}>
 										{c.difficulty}
@@ -45,7 +45,7 @@ export const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 									/>
 								</Flex>
 								<hr className='uk-margin-remove-bottom'/>
-							</div>
+							</>
 						}
 					/>
 				))
@@ -53,3 +53,5 @@ export const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 		</Accordion>
 	)
 }
+
+export default ChallengeAccordion

@@ -1,3 +1,3 @@
 # Challenges
 
-Create and keep track of the challenges you create in your life!
+A simple way to keep track of the challenges you set for yourself!

@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react'
 import { toMs } from 'scripts/time'
-import { SignButton } from './components/SignButton'
+import SignButton from './components/SignButton'
 
-export const NumberInput = ({ label, time, ...props }) => {
+const NumberInput = ({ label, time, ...props }) => {
 	const setTime = useCallback(
 		e => {
 			const value = e.target.value
@@ -34,3 +34,5 @@ export const NumberInput = ({ label, time, ...props }) => {
 		</div>
 	)
 }
+
+export default NumberInput

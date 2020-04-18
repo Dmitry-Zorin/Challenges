@@ -44,7 +44,7 @@
 
 @mixin hook-button-misc() {
 	.uk-button-secondary {
-		@include create-button($background-dark-color, 4)
+		@include create-button($card-background-light-active-color, 4)
 	}
 	.uk-button-info {
 		@include create-button($blue)
@@ -60,7 +60,7 @@
 // Card
 @mixin hook-card() {
 	border-radius: $card-border-radius;
-	margin: 0.75em 0.5em;
+	margin: $card-margin-small 0.5em;
 	padding: 1.5em 1em;
 	overflow: hidden;
 	-webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -70,17 +70,17 @@
 	}
 	
 	@media (min-width: $breakpoint-small) {
-		margin: 1em 0.75em;
+		margin: $card-margin-medium 0.75em;
 		padding: 1.5em 1.25em;
 	}
 	
 	@media (min-width: $breakpoint-medium) {
-		margin: 1em 0.5em;
+		margin: $card-margin-medium 0.5em;
 		padding: 1.5em 1.5em;
 	}
 	
 	@media (min-width: $breakpoint-large) {
-		margin: 1.5em 0.75em;
+		margin: $card-margin-large 0.75em;
 		padding: 1.5em 1.75em;
 	}
 }
@@ -93,7 +93,9 @@
 // Flex
 @mixin hook-flex-misc() {
 	.uk-flex > * {
-		margin: auto;
+		&, & > * {
+			margin: auto;
+		}
 	}
 }
 
@@ -103,17 +105,17 @@
 }
 
 @mixin hook-navbar-nav-item() {
-	height: 50px;
+	height: $navbar-height-small;
 	text-transform: $navbar-nav-item-text-transform;
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color;
 	
 	@media (min-width: $breakpoint-small) {
-		height: 60px;
+		height: $navbar-height-medium;
 	}
 	
 	@media (min-width: $breakpoint-large) {
-		height: 70px;
+		height: $navbar-height-large;
 		padding: 0 3em;
 	}
 }

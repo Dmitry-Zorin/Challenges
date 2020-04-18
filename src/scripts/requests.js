@@ -2,7 +2,7 @@ import axios from 'axios'
 import challenges from 'data/notifications/challenges.json'
 import errors from 'data/notifications/errors.json'
 import user from 'data/notifications/user.json'
-import { capitalize } from 'lodash'
+import { upperFirst } from 'lodash'
 import { addNotification } from 'scripts/notifications'
 import { handleError } from 'scripts/utils'
 
@@ -83,19 +83,6 @@ export const logout = (context) => (
 		.catch(reject)
 )
 
-export const getChallenges = (context) => (
-	postQuery(
-		context,
-		`{ challenges { ${challengesQuery} } }`,
-		'get challenges',
-	)
-		.then(res => (
-			res?.challenges ? resolve(res.challenges)
-				: reject(addNotification(errors.response))
-		))
-		.catch(reject)
-)
-
 export const saveChallenge = (context, action, variables) => {
 	const info = {
 		create: {
@@ -149,7 +136,7 @@ export const saveChallenge = (context, action, variables) => {
 
 export const updateChallenge = (context, action, variables, name) => {
 	const query = `mutation($id: String!) {
-    challenge${capitalize(action)}(id: $id) {
+    challenge${upperFirst(action)}(id: $id) {
       ${challengesQuery}
     }
   }`

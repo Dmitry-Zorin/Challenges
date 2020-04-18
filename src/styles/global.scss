@@ -1,6 +1,7 @@
 @import 'variables';
 
 body {
+	box-sizing: content-box;
 	overflow-y: scroll;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
@@ -17,7 +18,7 @@ a:active p {
 	color: $primary-color;
 }
 
-svg:not(.icon-center) {
+svg:not(.icon-center):not(.icon-right) {
 	@extend .icon-left;
 }
 
@@ -37,10 +38,6 @@ svg:not(.icon-center) {
 	margin-right: $icon-margin;
 }
 
-.icon-left-2 {
-	margin-right: $icon-margin * 2;
-}
-
 .icon-right {
-	margin-left: $icon-margin;
+	margin-left: $icon-margin !important;
 }

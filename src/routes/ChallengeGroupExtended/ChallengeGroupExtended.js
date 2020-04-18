@@ -1,13 +1,11 @@
-import { InnerLayout } from 'components/InnerLayout'
-import { NoChallenges } from 'components/NoChallenges'
-import { DataContext } from 'contexts/DataContext'
+import InnerLayout from 'components/InnerLayout'
+import NoChallenges from 'components/NoChallenges'
+import DataContext from 'contexts/DataContext'
 import { itemsPerPage } from 'data/settings.json'
 import React, { useContext, useState } from 'react'
-import { ChallengeAccordion } from './components/ChallengeAccordion'
-import { Pagination } from './components/Pagination'
-import { Search } from './components/Search'
+import { ChallengeAccordion, Pagination, Search } from './components'
 
-export const ChallengeGroupExtended = ({ left, right, navigate }) => {
+const ChallengeGroupExtended = ({ left, right, navigate }) => {
 	const context = useContext(DataContext)
 	const [pattern, setPattern] = useState(/.*/)
 	const [page, setPage] = useState(0)
@@ -42,3 +40,5 @@ export const ChallengeGroupExtended = ({ left, right, navigate }) => {
 		</InnerLayout>
 	)
 }
+
+export default ChallengeGroupExtended
