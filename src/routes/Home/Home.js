@@ -6,7 +6,7 @@ const Home = (props) => (
 		<Features/>
 		<ScrollDown target='slideshow'/>
 		<Slideshow/>
-		<ScrollDown target='registration'/>
+		<br/>
 		<Registration {...props}/>
 		<div className='uk-visible@s' style={{ height: '10vh' }}/>
 	</div>

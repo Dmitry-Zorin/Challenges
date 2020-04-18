@@ -27,37 +27,35 @@ const Registration = (props) => {
 	}, [context, username, password, props])
 	
 	return (
-		<div id='registration'>
-			<InnerLayout>
-				<p className='font-size-xlarge uk-text-center'>
-					Start using
-					<span className='uk-text-primary uk-text-bold'> Challenges </span>
-					with one simple step!
-				</p>
-				<form className='uk-form uk-margin-medium-top' onSubmit={submit}>
-					<TextInput
-						icon='user'
-						label='username'
-						value={username}
-						setState={setUsername}
+		<InnerLayout>
+			<p className='font-size-xlarge uk-text-center'>
+				Start using
+				<span className='uk-text-primary uk-text-bold'> Challenges </span>
+				with one simple step!
+			</p>
+			<form className='uk-form uk-margin-medium-top' onSubmit={submit}>
+				<TextInput
+					icon='user'
+					label='username'
+					value={username}
+					setState={setUsername}
+				/>
+				<TextInput
+					type='password'
+					icon='lock'
+					label='password'
+					value={password}
+					setState={setPassword}
+				/>
+				<ButtonGroup>
+					<ActionButton
+						type='submit'
+						icon='user-plus'
+						value='create account'
 					/>
-					<TextInput
-						type='password'
-						icon='lock'
-						label='password'
-						value={password}
-						setState={setPassword}
-					/>
-					<ButtonGroup>
-						<ActionButton
-							type='submit'
-							icon='user-plus'
-							value='create account'
-						/>
-					</ButtonGroup>
-				</form>
-			</InnerLayout>
-		</div>
+				</ButtonGroup>
+			</form>
+		</InnerLayout>
 	)
 }
 

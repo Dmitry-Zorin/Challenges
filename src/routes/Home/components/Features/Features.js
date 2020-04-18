@@ -11,25 +11,21 @@ const Features = () => (
 					Choose any desired
 					<Muted text=' name'/>,
 					<Muted text=' difficulty'/>,
-					<Muted text=' duration'/>
+					<Muted text=' duration '/>
 					and
 					<Muted text=' delay '/>
 					for the challenge!
 				</Column>
-				
 				<Divider/>
-				
 				<Column title='monitor progress' icon='tachometer-alt'>
 					Keep track of all the
 					<Muted text=' ongoing'/>,
-					<Muted text=' upcoming'/>
+					<Muted text=' upcoming '/>
 					and
 					<Muted text=' completed '/>
 					challenges!
 				</Column>
-				
 				<Divider/>
-				
 				<Column title='update anytime' icon='sync-alt'>
 					<Muted text=' Start'/>,
 					<Muted text=' complete'/>,
