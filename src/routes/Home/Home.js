@@ -4,7 +4,7 @@ import { Features, Registration, ScrollDown, Slideshow } from './components'
 const Home = (props) => (
 	<div style={{ paddingBottom: '10vh' }}>
 		<Features/>
-		<ScrollDown target='slideshow'/>
+		<ScrollDown target='#slideshow'/>
 		<Slideshow/>
 		<br/>
 		<Registration {...props}/>

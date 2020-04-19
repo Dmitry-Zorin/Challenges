@@ -13,10 +13,12 @@
 	}
 }
 
+$header-ratio: 0.45;
+
 .headerLarge {
 	@extend .header;
-	min-height: 14em;
 	height: calc(#{$header-ratio} * #{$viewport-height-small} - 2 * #{$card-margin-small});
+	min-height: 14em;
 	
 	@media (min-width: $breakpoint-small) {
 		height: calc(#{$header-ratio} * #{$viewport-height-medium} - 2 * #{$card-margin-medium});

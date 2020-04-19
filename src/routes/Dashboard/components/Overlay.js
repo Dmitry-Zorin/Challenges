@@ -3,7 +3,7 @@ import React from 'react'
 
 const Overlay = ({ text }) => (
 	<div
-		className='uk-overlay uk-overlay-default uk-position-right uk-transition-slide-right uk-hidden-touch'
+		className='uk-overlay uk-overlay-default uk-position-right uk-hidden-touch uk-transition-slide-right'
 		style={{ width: '5.5em' }}
 	>
 		<p className='font-size-medium uk-position-center'>

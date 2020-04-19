@@ -27,7 +27,11 @@ const GroupItem = ({ group, challenge, extended }) => {
 			</div>
 			<Flex>
 				<div className='uk-text-meta'>
-					<FontAwesomeIcon icon={icon} className='icon-right' transform='shrink-3'/>
+					<FontAwesomeIcon
+						icon={icon}
+						className='icon-right'
+						transform='shrink-3'
+					/>
 					{!isInfiniteTime && time}
 				</div>
 			</Flex>

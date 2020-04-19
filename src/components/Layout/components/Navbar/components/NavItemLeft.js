@@ -10,7 +10,7 @@ const NavItemLeft = ({ location, transform }) => (
 		{location.pathname === '/' ? (
 			<div className='uk-height-1-1'>
 				<div
-					className='uk-flex uk-height-1-1 uk-hidden@m'
+					className='uk-hidden@m uk-flex uk-height-1-1'
 					data-uk-toggle='target: #info'
 				>
 					<p>
@@ -18,7 +18,7 @@ const NavItemLeft = ({ location, transform }) => (
 						{text}
 					</p>
 				</div>
-				<Flex className='uk-height-1-1 uk-visible@m'>
+				<Flex className='uk-visible@m uk-height-1-1'>
 					<p>{text}</p>
 				</Flex>
 			</div>

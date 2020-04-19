@@ -1,5 +1,9 @@
 @import '../../../../styles/variables';
 
-.card {
-	min-height: $features-height;
+.container {
+	padding: 0;
+	
+	@media (min-width: $breakpoint-medium) {
+		height: $features-height;
+	}
 }

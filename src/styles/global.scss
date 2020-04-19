@@ -41,3 +41,16 @@ svg:not(.icon-center):not(.icon-right) {
 .icon-right {
 	margin-left: $icon-margin !important;
 }
+
+.round-border {
+	border-radius: $card-border-radius;
+}
+
+.primary-border {
+	@extend .round-border;
+	border: 1px solid rgba($primary-color, 0.75);
+}
+
+.border {
+	border: 0.5px solid;
+}

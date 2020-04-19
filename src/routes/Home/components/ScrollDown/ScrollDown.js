@@ -4,17 +4,18 @@ import { Flex } from 'uikit-react'
 import { container } from './ScrollDown.module.scss'
 
 const ScrollDown = ({ target }) => (
-	<Flex className={container}>
-		<a
-			href={`#${target}`}
-			className='font-size-medium uk-text-light uk-visible@m'
-			data-uk-scroll='offset: 100'
-		>
-			Scroll down
-			<br/>
-			<FontAwesomeIcon icon='chevron-down'/>
+	<>
+		<br className='uk-hidden@m'/>
+		<a href={target} className='uk-visible@m' data-uk-scroll='offset: 80'>
+			<Flex className={container}>
+				<p className='font-size-medium uk-text-center uk-text-light'>
+					Scroll down
+					<br/>
+					<FontAwesomeIcon icon='chevron-down'/>
+				</p>
+			</Flex>
 		</a>
-	</Flex>
+	</>
 )
 
 export default ScrollDown

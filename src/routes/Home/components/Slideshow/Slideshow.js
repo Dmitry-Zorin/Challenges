@@ -1,23 +1,19 @@
-import Create from 'images/Create.png'
-import Monitor from 'images/Monitor.png'
-import Update from 'images/Update.png'
 import React from 'react'
-import { SlideItems, Slidenav, Thumbnav } from './components'
-
-const slides = [Create, Monitor, Update]
+import { Card } from 'uikit-react'
+import { SlideItems, Slidenav } from './components'
 
 const Slideshow = () => (
-	<div id='slideshow'>
+	<Card id='slideshow'>
 		<div
-			className='uk-position-relative uk-visible-toggle'
-			data-uk-slideshow='ratio: 4:3'
+			className='uk-position-relative uk-visible-toggle uk-padding-remove'
+			data-uk-slideshow='ratio: 13:12'
 		>
-			<SlideItems {...{ slides }}/>
-			<Thumbnav {...{ slides }}/>
+			<SlideItems/>
 			<Slidenav side='left'/>
 			<Slidenav side='right'/>
+			<ul className='uk-slideshow-nav uk-dotnav uk-flex-center uk-margin'/>
 		</div>
-	</div>
+	</Card>
 )
 
 export default Slideshow
