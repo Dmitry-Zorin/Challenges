@@ -8,21 +8,19 @@ import {
 } from 'uikit-react'
 import { NavItemCenter, NavItemLeft, NavItemRight } from './components'
 
-const transform = 'shrink-3 down-0.5'
-
 const NavigationBar = ({ location }) => (
 	<NavbarSticky>
 		<NavbarContainer>
 			<Container style={{ width: '100%' }}>
 				<Navbar>
 					<NavItem className='uk-navbar-left'>
-						<NavItemLeft {...{ location, transform }}/>
+						<NavItemLeft {...{ location }}/>
 					</NavItem>
 					<NavItem className='uk-navbar-center'>
 						<NavItemCenter/>
 					</NavItem>
 					<NavItem className='uk-navbar-right'>
-						<NavItemRight {...{ location, transform }}/>
+						<NavItemRight {...{ location }}/>
 					</NavItem>
 				</Navbar>
 			</Container>

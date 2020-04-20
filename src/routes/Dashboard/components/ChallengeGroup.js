@@ -12,11 +12,10 @@ const ChallengeGroup = ({ to, title, group = [] }) => (
 			<p className='font-size-large uk-text-center'>
 				{upperFirst(title)}
 			</p>
-			{group.length
-				? group.slice(0, 4).map(c => (
+			{!group.length ? <NoChallenges/>
+				: group.slice(0, 4).map(c => (
 					<GroupItem key={c._id} group={title} challenge={c}/>
 				))
-				: <NoChallenges/>
 			}
 			<Overlay text='see all'/>
 		</Card>

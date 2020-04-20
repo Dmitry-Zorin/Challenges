@@ -30,10 +30,9 @@ const ChallengeGroupExtended = ({ left, right, navigate }) => {
 	return (
 		<InnerLayout title={group} {...{ left, right }}>
 			<Search onChange={search}/>
-			{challenges.length
-				? <ChallengeAccordion {...{ challenges, group, page, navigate }}/>
-				: <NoChallenges extended/>
-			}
+			{!challenges.length ? <NoChallenges extended/> : (
+				<ChallengeAccordion {...{ challenges, group, page, navigate }}/>
+			)}
 			{challenges.length > itemsPerPage && (
 				<Pagination {...{ page, maxPage, changePage }}/>
 			)}

@@ -1,34 +1,35 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from '@reach/router'
-import React from 'react'
-import { Flex } from 'uikit-react'
+import DataContext from 'contexts/DataContext'
+import React, { useContext } from 'react'
+import { NavLink } from './'
 
-const text = 'Challenges'
-
-const NavItemLeft = ({ location, transform }) => (
-	<Link to='/'>
-		{location.pathname === '/' ? (
-			<div className='uk-height-1-1'>
-				<div
-					className='uk-hidden@m uk-flex uk-height-1-1'
+const NavItemLeft = ({ location }) => {
+	const { userInfo } = useContext(DataContext)
+	const userIsAuthorized = !!userInfo?.username
+	
+	if (location.pathname !== '/') return (
+		<NavLink
+			icon='chevron-left'
+			text={userIsAuthorized ? 'dashboard' : 'home'}
+		/>
+	)
+	
+	const text = 'Challenges'
+	return (
+		<>
+			{userIsAuthorized && (
+				<NavLink
+					className='uk-hidden@m'
+					icon='bars'
 					data-uk-toggle='target: #info'
-				>
-					<p>
-						<FontAwesomeIcon icon='bars' transform={transform}/>
-						{text}
-					</p>
-				</div>
-				<Flex className='uk-visible@m uk-height-1-1'>
-					<p>{text}</p>
-				</Flex>
-			</div>
-		) : (
-			<div>
-				<FontAwesomeIcon icon='chevron-left' transform={transform}/>
-				Dashboard
-			</div>
-		)}
-	</Link>
-)
+					{...{ text }}
+				/>
+			)}
+			<NavLink
+				className={userIsAuthorized ? 'uk-visible@m' : ''}
+				{...{ text }}
+			/>
+		</>
+	)
+}
 
 export default NavItemLeft

@@ -1,5 +1,4 @@
 import { Router } from '@reach/router'
-import Auth from 'components/Auth'
 import Layout from 'components/Layout'
 import DataContext from 'contexts/DataContext'
 import { challengeGroups, updateTimeout } from 'data/settings.json'
@@ -59,22 +58,24 @@ const App = () => {
 		<DataContext.Provider value={context}>
 			<Router primary={false}>
 				<Layout path='/'>
-					{context.challenges?.ongoing ? (
-						<Dashboard default/>
-					) : (
-						<Home {...{ login }} default/>
-					)}
 					<Login path='login' {...{ login, logout }}/>
-					<Auth path='create' Component={Challenge}/>
-					<Auth path='edit' Component={Challenge}/>
-					{challengeGroups.map((g, i) => (
-						<ChallengeGroupExtended
-							key={i}
-							path={`/${g}`}
-							right={`/${challengeGroups[++i % 3]}`}
-							left={`/${challengeGroups[++i % 3]}`}
-						/>
-					))}
+					{!context.challenges?.ongoing
+						? <Home {...{ login }} default/> : (
+							<>
+								<Dashboard default/>
+								<Challenge path='create'/>
+								<Challenge path='edit'/>
+								{challengeGroups.map(g => `/${g}`).map((g, i, cg) => (
+									<ChallengeGroupExtended
+										key={i}
+										path={g}
+										right={cg[++i % 3]}
+										left={cg[++i % 3]}
+									/>
+								))}
+							</>
+						)
+					}
 				</Layout>
 			</Router>
 		</DataContext.Provider>
