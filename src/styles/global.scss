@@ -22,6 +22,10 @@ svg:not(.icon-center):not(.icon-right) {
 	@extend .icon-left;
 }
 
+.text-secondary {
+	color: $secondary-color;
+}
+
 .font-size-medium {
 	font-size: $font-size-medium;
 }

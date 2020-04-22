@@ -11,7 +11,7 @@ const Info = () => {
 	
 	return userInfo === undefined ? null : userInfo.username ? (
 		<>
-			<p className='font-size-large uk-text-center'>
+			<p className='text-secondary font-size-large uk-text-center'>
 				<FontAwesomeIcon icon='user' transform='shrink-4'/>
 				{userInfo.username}
 			</p>

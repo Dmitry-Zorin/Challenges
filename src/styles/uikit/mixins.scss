@@ -34,19 +34,16 @@
 	transition-property: color, background-color;
 }
 
-@mixin create-button($color, $amount: $amount) {
-	background: $color;
-	color: $base-color;
-	
-	&:hover, &:active {
-		background: darken($color, $amount);
+@mixin create-button($color) {
+	&, &:hover, &:active {
+		background: $color;
 		color: $base-color;
 	}
 }
 
 @mixin hook-button-misc() {
 	.uk-button-secondary {
-		@include create-button($card-background-light-active-color, 4)
+		@include create-button($card-background-light-hover);
 	}
 	.uk-button-info {
 		@include create-button($blue)
@@ -60,30 +57,29 @@
 }
 
 // Card
+$margin-horizontal-small: 0.5em;
+$margin-horizontal-medium: 0.75em;
+
 @mixin hook-card() {
-	border-radius: $card-border-radius;
-	margin: $card-margin-small 0.5em;
-	padding: 1.5em 1em;
+	margin: $card-margin-small $margin-horizontal-small;
+	padding: $card-padding-vertical $card-padding;
 	overflow: hidden;
 	-webkit-mask-image: -webkit-radial-gradient(white, black);
-	
-	& > div {
-		@extend .uk-animation-fade;
-	}
+	border-radius: $card-border-radius;
 	
 	@media (min-width: $breakpoint-small) {
-		margin: $card-margin-medium 0.75em;
-		padding: 1.5em 1.25em;
+		margin: $card-margin-medium $margin-horizontal-medium;
+		padding: $card-padding-vertical $card-padding-small;
 	}
 	
 	@media (min-width: $breakpoint-medium) {
-		margin: $card-margin-medium 0.5em;
-		padding: 1.5em 1.5em;
+		margin: $card-margin-medium $margin-horizontal-small;
+		padding: $card-padding-vertical $card-padding-medium;
 	}
 	
 	@media (min-width: $breakpoint-large) {
-		margin: $card-margin-large 0.75em;
-		padding: 1.5em 1.75em;
+		margin: $card-margin-large $margin-horizontal-medium;
+		padding: $card-padding-vertical $card-padding-large;
 	}
 }
 
@@ -111,14 +107,20 @@
 	text-transform: $navbar-nav-item-text-transform;
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color;
+	padding: 0 $margin-horizontal-small + $card-padding;
 	
 	@media (min-width: $breakpoint-small) {
 		height: $navbar-height-medium;
+		padding: 0 $margin-horizontal-medium + $card-padding-small;
+	}
+	
+	@media (min-width: $breakpoint-medium) {
+		padding: 0 $margin-horizontal-small + $card-padding-medium;
 	}
 	
 	@media (min-width: $breakpoint-large) {
 		height: $navbar-height-large;
-		padding: 0 3em;
+		padding: 0 $margin-horizontal-medium + $card-padding-large;
 	}
 }
 

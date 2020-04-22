@@ -1,15 +1,15 @@
 import { Link } from '@reach/router'
+import AnimatedCard from 'components/Animated/AnimatedCard/AnimatedCard'
 import GroupItem from 'components/GroupItem'
 import NoChallenges from 'components/NoChallenges'
 import { upperFirst } from 'lodash'
 import React from 'react'
-import { Card } from 'uikit-react'
 import Overlay from './Overlay'
 
 const ChallengeGroup = ({ to, title, group = [] }) => (
 	<Link {...{ to }}>
-		<Card className='uk-transition-toggle' style={{ height: '15em' }}>
-			<p className='font-size-large uk-text-center'>
+		<AnimatedCard className='uk-transition-toggle' style={{ height: '15em' }}>
+			<p className='text-secondary font-size-large uk-text-center'>
 				{upperFirst(title)}
 			</p>
 			{!group.length ? <NoChallenges/>
@@ -18,7 +18,7 @@ const ChallengeGroup = ({ to, title, group = [] }) => (
 				))
 			}
 			<Overlay text='see all'/>
-		</Card>
+		</AnimatedCard>
 	</Link>
 )
 

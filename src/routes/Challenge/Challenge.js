@@ -52,7 +52,9 @@ const Challenge = ({ navigate, location }) => {
 		const variables = {
 			id: c?._id,
 			name: name || defaultName,
-			difficulty, duration, delay,
+			difficulty,
+			duration,
+			delay,
 		}
 		saveChallenge(context, info.action, variables)
 			.then(context.updateChallenges)
@@ -71,7 +73,6 @@ const Challenge = ({ navigate, location }) => {
 		<InnerLayout title={info.title}>
 			<form
 				className='uk-form'
-				style={{ marginTop: '-2em' }}
 				onSubmit={e => save(e, defaultName)}
 			>
 				<TextInput

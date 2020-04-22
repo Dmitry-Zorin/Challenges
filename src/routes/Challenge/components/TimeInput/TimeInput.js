@@ -12,7 +12,7 @@ const TimeInput = (props) => {
 	return (
 		<Margin type='medium'>
 			<Flex>
-				<p className='uk-width-expand'>
+				<p className='text-secondary uk-width-expand'>
 					{upperFirst(props.name)}
 				</p>
 				<div

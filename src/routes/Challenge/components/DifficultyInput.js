@@ -10,11 +10,10 @@ const difficultyTypes = {
 
 const DifficultyInput = ({ difficulty, setState }) => (
 	<Margin type='medium'>
-		Difficulty
-		<ul
-			className='uk-subnav uk-subnav-pill uk-child-width-1-3'
-			style={{ marginTop: '0.5em' }}
-		>
+		<p className='text-secondary' style={{ marginBottom: '-0.5em' }}>
+			Difficulty
+		</p>
+		<ul className='uk-subnav uk-subnav-pill uk-child-width-1-3'>
 			{Object.entries(difficultyTypes).map(([d, t]) => (
 				<SwitcherItem
 					key={d}

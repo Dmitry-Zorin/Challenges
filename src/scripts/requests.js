@@ -3,7 +3,7 @@ import challenges from 'data/notifications/challenges.json'
 import errors from 'data/notifications/errors.json'
 import user from 'data/notifications/user.json'
 import { upperFirst } from 'lodash'
-import { addNotification } from 'scripts/notifications'
+import { addNotification } from 'scripts/notification'
 import { handleError } from 'scripts/utils'
 
 const server = process.env.NODE_ENV === 'production' ? ''
@@ -126,7 +126,8 @@ export const saveChallenge = (context, action, variables) => {
 		variables,
 	)
 		.then(res => {
-			if (!res?.challenges) return reject(addNotification(errors.response))
+			if (!res?.challenges)
+				return reject(addNotification(errors.response))
 			
 			addNotification({ ...challenges[action], message: variables.name })
 			return resolve(res.challenges)
@@ -142,7 +143,8 @@ export const updateChallenge = (context, action, variables, name) => {
   }`
 	return postQuery(context, query, action, variables)
 		.then(res => {
-			if (!res?.challenges) return reject(addNotification(errors.response))
+			if (!res?.challenges)
+				return reject(addNotification(errors.response))
 			
 			addNotification({ ...challenges[action], message: name })
 			return resolve(res.challenges)

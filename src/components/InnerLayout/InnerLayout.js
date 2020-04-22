@@ -1,26 +1,33 @@
+import AnimatedCard from 'components/Animated/AnimatedCard/AnimatedCard'
 import React from 'react'
-import { Card, Flex, Margin } from 'uikit-react'
-import { SideLink, Title } from './components'
-import { card } from './InnerLayout.module.scss'
+import { Margin, Navbar, NavItem } from 'uikit-react'
+import { SideLink } from './components'
+import { card, navbar } from './InnerLayout.module.scss'
 
-const InnerLayout = ({ title, children, left, right }) => (
-	<Card className={card}>
+const InnerLayout = ({ children, left, right }) => (
+	<AnimatedCard className={`${card} ${left ? 'uk-padding-remove-top' : ''}`}>
 		<Margin
-			type='bottom'
+			type='top; bottom'
 			className='uk-align-center'
 			style={{ maxWidth: '800px' }}
 		>
-			<Title className='uk-hidden@s' {...{ title }}/>
-			<Flex className='uk-flex-between'>
-				{left && <SideLink to={left} side='left'/>}
-				<Title className='uk-visible@s' {...{ title }}/>
-				{right && <SideLink to={right} side='right'/>}
-			</Flex>
-			<Margin type={`${title ? 'medium-' : ''}top`}>
+			<Navbar className={navbar}>
+				{left && (
+					<NavItem className='uk-navbar-left'>
+						<SideLink to={left} side='left'/>
+					</NavItem>
+				)}
+				{right && (
+					<NavItem className='uk-navbar-right'>
+						<SideLink to={right} side='right'/>
+					</NavItem>
+				)}
+			</Navbar>
+			<Margin type='remove'>
 				{children}
 			</Margin>
 		</Margin>
-	</Card>
+	</AnimatedCard>
 )
 
 export default InnerLayout

@@ -8,3 +8,11 @@
 		padding: 2em;
 	}
 }
+
+.navbar {
+	margin-bottom: $card-padding-vertical;
+	
+	& li {
+		height: 43px;
+	}
+}

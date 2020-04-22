@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DataContext from 'contexts/DataContext'
+import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
 import { Flex } from 'uikit-react'
 import { header, headerLarge, title, titleLarge } from './Header.module.scss'
@@ -17,7 +18,7 @@ const Header = ({ location }) => {
 						className='uk-visible@s'
 						transform='shrink-2 down-0.4'
 					/>
-					Challenges
+					{upperFirst(location.pathname.slice(1) || 'challenges')}
 				</p>
 				{isHomePage && (
 					<p

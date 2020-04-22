@@ -5,7 +5,7 @@ import TextInput from 'components/TextInput'
 import DataContext from 'contexts/DataContext'
 import { invalid } from 'data/notifications/errors.json'
 import React, { useCallback, useContext, useState } from 'react'
-import { addNotification } from 'scripts/notifications'
+import { addNotification } from 'scripts/notification'
 import { authorize } from 'scripts/requests'
 
 const Registration = (props) => {

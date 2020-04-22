@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AnimatedButton from 'components/Animated/AnimatedButton/AnimatedButton'
 import DataContext from 'contexts/DataContext'
 import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
@@ -35,19 +36,20 @@ const UpdateButtons = ({ challenge, navigate, options }) => {
 			{[...options || [], 'edit', 'delete'].map(o => {
 					const action = info[o.toLowerCase()]
 					return (
-						<button
+						<AnimatedButton
 							key={o}
-							className={`uk-button uk-button-${action.buttonType} uk-padding-remove`}
+							className={`uk-button-${action.buttonType} uk-padding-remove`}
 							style={{ width: '3em', marginLeft: '0.5em' }}
 							data-uk-tooltip={`title: ${upperFirst(o)}; delay: 100`}
 							onClick={() => update(o)}
+							small
 						>
 							<FontAwesomeIcon
 								icon={action.icon}
 								className='icon-center'
 								transform='grow-2'
 							/>
-						</button>
+						</AnimatedButton>
 					)
 				},
 			)}

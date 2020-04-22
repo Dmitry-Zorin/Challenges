@@ -30,7 +30,7 @@ $header-ratio: 0.45;
 }
 
 .title {
-	color: darken($primary-color, 2);
+	color: $primary-color;
 	font-size: 3em;
 	font-weight: bold;
 }

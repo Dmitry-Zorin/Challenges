@@ -1,25 +1,42 @@
-$amount: 7;
+$breakpoint-small: 640px;
+$breakpoint-medium: 960px;
+$breakpoint-large: 1200px;
+$breakpoint-xlarge: 1600px;
 
 // Colors
-$background-color: rgb(40, 45, 55);
-$primary-color: rgb(255, 190, 85);
-$base-color: #EEE;
-$input-color: #000;
-$muted-color: #999;
 
-$blue: #3498DB;
-$green: #3BB15B;
-$red: #C14040;
+// https://coolors.co/ffbe3c-1b1f2d-252c39-393d4c-404454-4e5365-63697e-797e96
+$primary-color: #FFBE3C;
+$navbar-background: #1B1F2D;
+$background: #252C39;
+$card-background: #393D4C;
+$card-overlay-background: #404454;
+$card-background-light: #4E5365;
+$card-background-light-hover: #63697E;
+$card-background-light-active: #797E96;
 
-$navbar-color: adjust-color($background-color, -9, -10, -9);
-$card-background-color: adjust-color($background-color, 10, 9, 10);
-$card-background-light-color: lighten($card-background-color, $amount);
-$card-background-light-hover-color: lighten($card-background-color, 2 * $amount);
-$card-background-light-active-color: lighten($card-background-color, 3 * $amount);
-$overlay-color: adjust-color($card-background-color, 4, 4, 4);
+// https://coolors.co/dedce5-ccc7d8-aeabb2
+$base-color: #DEDCE5;
+$secondary-color: #ccc7d8;
+$muted-color: #aeabb2;
 
-$primary-hover-color: darken($primary-color, $amount);
-$inverse-color: $card-background-color;
+// https://coolors.co/1a93dd-23af59-c94049
+$blue: #1A93DD;
+$green: #23AF59;
+$red: #C94049;
+
+// https://coolors.co/ffbe3c-182938-1e3344-4c4747-544f4f-666060-7c7777-969393
+$primary-color: #FFBE3C;
+$navbar-background: #182938;
+$background: #1E3344;
+$card-background: #4C4747;
+$card-overlay-background: #544F4F;
+$card-background-light: #666060;
+$card-background-light-hover: #7c7777;
+$card-background-light-active: #969393;
+
+$inverse-color: $background;
+$selection-background: $secondary-color;
 
 // Dimensions
 $card-border-radius: 1em;
@@ -32,22 +49,24 @@ $font-size-large: 1.4em;
 $font-size-larger: 1.8em;
 $font-size-xlarge: 2em;
 
+$card-padding-vertical: 1.5em;
+
 $card-margin-small: 0.75em;
 $card-margin-medium: 1em;
 $card-margin-large: 1.5em;
 
-$navbar-height-small: 50px;
-$navbar-height-medium: 60px;
+$card-padding: 1em;
+$card-padding-small: 1.25em;
+$card-padding-medium: 1.5em;
+$card-padding-large: 1.75em;
+
+$navbar-height-small: 60px;
+$navbar-height-medium: 65px;
 $navbar-height-large: 70px;
 
 $viewport-height-small: calc(100vh - #{$navbar-height-small});
 $viewport-height-medium: calc(100vh - #{$navbar-height-medium});
 $viewport-height-large: calc(100vh - #{$navbar-height-large});
-
-$breakpoint-small: 640px;
-$breakpoint-medium: 960px;
-$breakpoint-large: 1200px;
-$breakpoint-xlarge: 1600px;
 
 // Shared
 $header-ratio: 0.45;

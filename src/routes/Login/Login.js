@@ -11,7 +11,7 @@ import React, {
 	useRef,
 	useState,
 } from 'react'
-import { addNotification } from 'scripts/notifications'
+import { addNotification } from 'scripts/notification'
 import { authorize, logout } from 'scripts/requests'
 import AuthSubnav from './components/AuthSubnav'
 

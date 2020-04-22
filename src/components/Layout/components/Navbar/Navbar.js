@@ -11,7 +11,7 @@ import { NavItemCenter, NavItemLeft, NavItemRight } from './components'
 const NavigationBar = ({ location }) => (
 	<NavbarSticky>
 		<NavbarContainer>
-			<Container style={{ width: '100%' }}>
+			<Container className='uk-padding-remove' style={{ width: '100%' }}>
 				<Navbar>
 					<NavItem className='uk-navbar-left'>
 						<NavItemLeft {...{ location }}/>

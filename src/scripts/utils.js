@@ -1,4 +1,4 @@
-import { addNotification } from 'scripts/notifications'
+import { addNotification } from 'scripts/notification'
 
 export const handleError = (err, message = 'Error') => {
 	const errors = err.response?.data?.errors

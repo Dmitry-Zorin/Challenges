@@ -10,13 +10,19 @@ const SlideItems = () => (
 				<img src={src} alt=''/>
 				<div
 					className='
-						uk-visible@m uk-overlay uk-overlay-primary
-						uk-position-top-right uk-position-small
-						uk-hidden-hover uk-transition-fade
-						uk-width-1-3 uk-text-center primary-border
+						uk-visible@m
+						uk-overlay
+						uk-overlay-primary
+						uk-position-top-right
+						uk-position-small
+						uk-hidden-hover
+						uk-transition-fade
+						uk-width-1-3
+						uk-text-center
+						primary-border
 					'
 				>
-					<p className='font-size-large uk-text-primary'>
+					<p className='uk-text-primary font-size-large'>
 						<FontAwesomeIcon transform='shrink-3' {...{ icon }}/>
 						{upperFirst(title)}
 					</p>

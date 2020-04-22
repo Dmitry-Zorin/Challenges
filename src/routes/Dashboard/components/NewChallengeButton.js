@@ -1,16 +1,20 @@
 import { Link } from '@reach/router'
+import AnimatedCard from 'components/Animated/AnimatedCard/AnimatedCard'
 import React from 'react'
-import { Card, Flex } from 'uikit-react'
+import { Flex } from 'uikit-react'
 import Overlay from './Overlay'
 
 const NewChallengeButton = () => (
 	<Link to='/create'>
-		<Card className='uk-transition-toggle' style={{ height: '6em' }}>
-			<Flex className='font-size-large uk-text-uppercase uk-height-1-1'>
-				<p>New challenge</p>
+		<AnimatedCard className='uk-transition-toggle'>
+			<Flex
+				className='font-size-large uk-text-uppercase'
+				style={{ height: '2em' }}
+			>
+				<p className='text-secondary'>New challenge</p>
 			</Flex>
 			<Overlay text='create'/>
-		</Card>
+		</AnimatedCard>
 	</Link>
 )
 

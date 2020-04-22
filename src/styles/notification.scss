@@ -1,0 +1,27 @@
+@import './variables';
+@import '../../node_modules/react-notifications-component/dist/scss/variables.scss';
+
+$info: $blue;
+$info_dark: darken($blue, 15);
+
+@import '../../node_modules/react-notifications-component/dist/scss/_types.scss';
+@import '../../node_modules/react-notifications-component/dist/scss/notification.scss';
+
+.notification-item {
+	.notification-icon {
+		padding: 0 10px 0 3px;
+	}
+	
+	.notification-content {
+		width: calc(100% - 8px);
+		padding: 10px 15px;
+	}
+	
+	.notification-title {
+		margin-top: 0;
+	}
+	
+	.notification-message {
+		max-width: 100%;
+	}
+}

@@ -2,12 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from '@reach/router'
 import { upperFirst } from 'lodash'
 import React from 'react'
-import { link } from './SideLink.module.scss'
 
 const SideLink = ({ to, side }) => {
 	const linkText = upperFirst(to.slice(1))
 	return (
-		<Link className={`${link} uk-text-${side}`} {...{ to }}>
+		<Link className={`uk-padding-remove-${side}`} {...{ to }}>
 			{side === 'right' && linkText}
 			<FontAwesomeIcon
 				icon={`chevron-${side}`}

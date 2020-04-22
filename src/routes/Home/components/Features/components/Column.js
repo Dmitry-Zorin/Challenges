@@ -8,7 +8,7 @@ const Column = ({ title, children, icon }) => (
 		type='remove'
 		className='uk-padding uk-text-center uk-width-1-1 uk-width-expand@m'
 	>
-		<p className='font-size-large uk-text-primary uk-margin-remove'>
+		<p className='uk-text-primary font-size-large uk-margin-remove'>
 			<FontAwesomeIcon transform='shrink-3' {...{ icon }}/>
 			{upperFirst(title)}
 		</p>
