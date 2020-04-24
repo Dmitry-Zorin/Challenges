@@ -2,6 +2,7 @@
 
 body {
 	box-sizing: content-box;
+	min-height: 100vh;
 	overflow-y: scroll;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
@@ -22,19 +23,19 @@ svg:not(.icon-center):not(.icon-right) {
 	@extend .icon-left;
 }
 
-.text-secondary {
-	color: $secondary-color;
-}
-
-.font-size-medium {
+.text-medium {
 	font-size: $font-size-medium;
 }
 
-.font-size-large {
+.text-large {
 	font-size: $font-size-large;
 }
 
-.font-size-xlarge {
+.text-larger {
+	font-size: $font-size-larger;
+}
+
+.text-xlarge {
 	font-size: $font-size-xlarge;
 }
 

@@ -16,15 +16,12 @@ const Header = ({ location }) => {
 					<FontAwesomeIcon
 						icon='tasks'
 						className='uk-visible@s'
-						transform='shrink-2 down-0.4'
+						transform='shrink-3 down-1'
 					/>
 					{upperFirst(location.pathname.slice(1) || 'challenges')}
 				</p>
 				{isHomePage && (
-					<p
-						className='uk-text-italic uk-padding'
-						style={{ fontSize: '1.8em', fontWeight: '200' }}
-					>
+					<p className='text-larger uk-text-italic uk-text-light uk-padding'>
 						A simple way to keep track of the challenges you set for yourself!
 					</p>
 				)}

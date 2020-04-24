@@ -6,7 +6,7 @@ const Overlay = ({ text }) => (
 		className='uk-overlay uk-overlay-default uk-position-right uk-hidden-touch uk-transition-slide-right'
 		style={{ width: '5.5em' }}
 	>
-		<p className='uk-text-primary font-size-medium uk-position-center'>
+		<p className='uk-text-primary text-medium uk-position-center'>
 			{upperFirst(text)}
 		</p>
 	</div>

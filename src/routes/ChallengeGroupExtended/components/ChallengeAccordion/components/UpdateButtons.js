@@ -47,7 +47,7 @@ const UpdateButtons = ({ challenge, navigate, options }) => {
 							<FontAwesomeIcon
 								icon={action.icon}
 								className='icon-center'
-								transform='grow-2'
+								transform='grow-1 right-1 down-1'
 							/>
 						</AnimatedButton>
 					)

@@ -12,7 +12,7 @@ const TimeInput = (props) => {
 	return (
 		<Margin type='medium'>
 			<Flex>
-				<p className='text-secondary uk-width-expand'>
+				<p className='uk-text-primary uk-width-expand'>
 					{upperFirst(props.name)}
 				</p>
 				<div
@@ -24,7 +24,7 @@ const TimeInput = (props) => {
 					<FontAwesomeIcon
 						icon='toggle-on'
 						className={`uk-text-${disabled ? 'muted' : 'primary'}`}
-						transform='grow-16 left-9 down-0.5'
+						transform='grow-16 left-6 down-1.5'
 						flip={disabled ? 'horizontal' : undefined}
 					/>
 				</div>
@@ -35,7 +35,7 @@ const TimeInput = (props) => {
 						<i>Unknown</i>
 					</Flex>
 				) : (
-					<Flex className='uk-grid-small uk-child-width-1-3 uk-margin-remove-top'>
+					<Flex className='uk-grid-small uk-child-width-1-3'>
 						{Object.entries(getTimeObj(props.ms)).map(([l, t]) => (
 							<NumberInput
 								key={l}

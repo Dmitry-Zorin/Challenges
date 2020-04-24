@@ -8,15 +8,15 @@ import Overlay from './Overlay'
 
 const ChallengeGroup = ({ to, title, group = [] }) => (
 	<Link {...{ to }}>
-		<AnimatedCard className='uk-transition-toggle' style={{ height: '15em' }}>
-			<p className='text-secondary font-size-large uk-text-center'>
+		<AnimatedCard className='uk-transition-toggle'>
+			<p className='uk-text-primary text-large uk-text-center'>
 				{upperFirst(title)}
 			</p>
-			{!group.length ? <NoChallenges/>
-				: group.slice(0, 4).map(c => (
+			{!group.length ? <NoChallenges/> : (
+				group.slice(0, 4).map(c => (
 					<GroupItem key={c._id} group={title} challenge={c}/>
 				))
-			}
+			)}
 			<Overlay text='see all'/>
 		</AnimatedCard>
 	</Link>

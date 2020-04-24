@@ -10,7 +10,9 @@ import '../node_modules/uikit/dist/js/uikit.min.js'
 import App from './App' // import App after styles
 
 ReactDOM.render(
-	<StrictMode><App/></StrictMode>,
+	<StrictMode>
+		<App/>
+	</StrictMode>,
 	document.getElementById('root'),
 )
 

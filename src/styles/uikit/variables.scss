@@ -1,14 +1,22 @@
 @import '../variables';
 
+$inverse-global-color-mode: none;
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&display=swap');
+
+$global-font-family: 'Baloo 2', sans-serif;
 $global-color: $base-color;
 $global-inverse-color: $inverse-color;
+$global-muted-color: $muted-color;
 $global-link-color: $base-color;
 $global-link-hover-color: $primary-color;
+
 $base-body-background: $background;
 $base-link-hover-text-decoration: none;
-$text-primary-color: $primary-color;
-$global-muted-color: $muted-color;
 $base-selection-background: $selection-background;
+$base-body-font-weight: 500;
+
+$text-primary-color: $primary-color;
 
 // Accordion
 $accordion-title-color: $base-color;
@@ -65,9 +73,10 @@ $label-danger-color: $base-color;
 // Navbar
 $navbar-nav-item-height: 0;
 $navbar-background: $navbar-background;
-$navbar-nav-item-color: $secondary-color;
+$navbar-nav-item-color: $primary-color;
 $navbar-nav-item-onclick-color: $primary-color;
 $navbar-nav-item-padding-horizontal: 0;
+$navbar-nav-item-font-size: 16px;
 
 // Search
 $search-color: $form-color;

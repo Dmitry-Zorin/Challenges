@@ -9,10 +9,10 @@ import { List, ListItem } from 'uikit-react'
 const Info = () => {
 	const { userInfo, challenges } = useContext(DataContext)
 	
-	return userInfo === undefined ? null : userInfo.username ? (
+	return userInfo === undefined ? null : (
 		<>
-			<p className='text-secondary font-size-large uk-text-center'>
-				<FontAwesomeIcon icon='user' transform='shrink-4'/>
+			<p className='uk-text-primary text-large uk-text-center'>
+				<FontAwesomeIcon icon='user' transform='shrink-5 down-0.5'/>
 				{userInfo.username}
 			</p>
 			<List>
@@ -25,11 +25,6 @@ const Info = () => {
 				))}
 			</List>
 		</>
-	) : (
-		<p className='font-size-large uk-text-center uk-text-muted'>
-			<FontAwesomeIcon icon='user-slash' transform='shrink-4'/>
-			No info...
-		</p>
 	)
 }
 

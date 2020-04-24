@@ -11,7 +11,7 @@ const SideLink = ({ to, side }) => {
 			<FontAwesomeIcon
 				icon={`chevron-${side}`}
 				className={`icon-${side}`}
-				transform='shrink-3 down-0.5'
+				transform='shrink-4 up-1.5'
 			/>
 			{side === 'left' && linkText}
 		</Link>

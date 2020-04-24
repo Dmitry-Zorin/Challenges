@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
 import { toMs } from 'scripts/time'
+import { Flex } from 'uikit-react'
 import SignButton from './components/SignButton'
 
 const NumberInput = ({ label, time, ...props }) => {
@@ -27,10 +28,10 @@ const NumberInput = ({ label, time, ...props }) => {
 					onChange={setTime}
 				/>
 			</label>
-			<div className='uk-child-width-1-2'>
+			<Flex className='uk-flex-1'>
 				<SignButton sign={-1} icon='minus' {...props}/>
 				<SignButton sign={+1} icon='plus' {...props}/>
-			</div>
+			</Flex>
 		</div>
 	)
 }

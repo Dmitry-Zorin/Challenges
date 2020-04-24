@@ -22,11 +22,11 @@ const SlideItems = () => (
 						primary-border
 					'
 				>
-					<p className='uk-text-primary font-size-large'>
-						<FontAwesomeIcon transform='shrink-3' {...{ icon }}/>
+					<p className='uk-text-primary text-large'>
+						<FontAwesomeIcon transform='shrink-5 down-1' {...{ icon }}/>
 						{upperFirst(title)}
 					</p>
-					<p className='font-size-medium'>
+					<p className='text-medium uk-text-light'>
 						{component()}
 					</p>
 				</div>

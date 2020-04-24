@@ -10,7 +10,7 @@ const difficultyTypes = {
 
 const DifficultyInput = ({ difficulty, setState }) => (
 	<Margin type='medium'>
-		<p className='text-secondary' style={{ marginBottom: '-0.5em' }}>
+		<p className='uk-text-primary' style={{ marginBottom: '-0.5em' }}>
 			Difficulty
 		</p>
 		<ul className='uk-subnav uk-subnav-pill uk-child-width-1-3'>

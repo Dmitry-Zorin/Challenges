@@ -43,7 +43,7 @@
 
 @mixin hook-button-misc() {
 	.uk-button-secondary {
-		@include create-button($card-background-light-hover);
+		@include create-button(rgba(white, 0.2));
 	}
 	.uk-button-info {
 		@include create-button($blue)
@@ -97,9 +97,15 @@ $margin-horizontal-medium: 0.75em;
 	}
 }
 
+// Overlay
+@mixin hook-overlay() {
+	backdrop-filter: blur(3px);
+}
+
 // Navbar
 @mixin hook-navbar() {
 	padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+	font-weight: 400;
 }
 
 @mixin hook-navbar-nav-item() {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Features, Registration, ScrollDown, Slideshow } from './components'
 
 const Home = (props) => (
-	<div style={{ paddingBottom: '10vh' }}>
+	<div className='uk-text-light' style={{ paddingBottom: '10vh' }}>
 		<Features/>
 		<ScrollDown target='#slideshow'/>
 		<Slideshow/>

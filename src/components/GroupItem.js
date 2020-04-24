@@ -18,7 +18,7 @@ const GroupItem = ({ group, challenge, extended }) => {
 		: time || group === 'completed'
 			? icons[group] : 'exclamation'
 	
-	const style = extended ? '' : 'font-size-medium uk-text-truncate'
+	const style = extended ? '' : 'text-medium uk-text-truncate'
 	
 	return (
 		<Flex className='uk-margin-small'>
@@ -30,7 +30,7 @@ const GroupItem = ({ group, challenge, extended }) => {
 					<FontAwesomeIcon
 						icon={icon}
 						className='icon-right'
-						transform='shrink-3'
+						transform='shrink-4'
 					/>
 					{!isInfiniteTime && time}
 				</div>

@@ -5,8 +5,8 @@ import { Margin } from 'uikit-react'
 
 const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = label, setState, capital }) => (
 	<Margin type='medium'>
-		<p className='text-secondary' style={{ marginBottom: '0.5em' }}>
-			{icon && <FontAwesomeIcon transform='shrink-4' {...{ icon }}/>}
+		<p className='uk-text-primary' style={{ marginBottom: '0.5em' }}>
+			{icon && <FontAwesomeIcon transform='shrink-5 down-1' {...{ icon }}/>}
 			{upperFirst(label)}
 		</p>
 		<input

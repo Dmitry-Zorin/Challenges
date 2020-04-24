@@ -8,12 +8,12 @@ const Column = ({ title, children, icon }) => (
 		type='remove'
 		className='uk-padding uk-text-center uk-width-1-1 uk-width-expand@m'
 	>
-		<p className='uk-text-primary font-size-large uk-margin-remove'>
-			<FontAwesomeIcon transform='shrink-3' {...{ icon }}/>
+		<p className='uk-text-primary text-large uk-margin-remove'>
+			<FontAwesomeIcon transform='shrink-5 down-1' {...{ icon }}/>
 			{upperFirst(title)}
 		</p>
 		<br/>
-		<p className='font-size-medium uk-text-light uk-margin-remove'>
+		<p className='text-medium uk-text-light uk-margin-remove'>
 			{children}
 		</p>
 	</Margin>

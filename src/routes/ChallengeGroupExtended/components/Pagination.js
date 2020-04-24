@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 
-const transform = 'shrink-3 down-0.5'
+const transform = 'shrink-4 down-1.25'
 
 const Pagination = ({ page, maxPage, changePage }) => (
 	<ul className='uk-pagination uk-margin-medium-top uk-flex-between'>

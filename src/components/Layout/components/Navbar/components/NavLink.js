@@ -4,7 +4,7 @@ import React from 'react'
 
 const NavLink = ({ text, icon, to = '', ...props }) => (
 	<Link to={`/${to}`} {...props}>
-		{icon && <FontAwesomeIcon transform='shrink-3 down-0.5' {...{ icon }}/>}
+		{icon && <FontAwesomeIcon transform='shrink-4 up-0.75' {...{ icon }}/>}
 		{text}
 	</Link>
 )

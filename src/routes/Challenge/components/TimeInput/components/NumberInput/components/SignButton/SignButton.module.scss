@@ -1,8 +1,12 @@
 @import '../../../../../../../../styles/variables';
 
+$margin: 4px;
+
 .button {
+	flex-grow: 1;
+	
 	&, &:hover, &:active {
-		border-top: 2px solid $card-background;
+		margin-top: 2 * $margin;
 	}
 }
 
@@ -10,7 +14,7 @@
 	@extend .button;
 	
 	&, &:hover, &:active {
-		border-right: 1px solid $card-background;
+		margin-right: $margin;
 	}
 }
 
@@ -18,6 +22,6 @@
 	@extend .button;
 	
 	&, &:hover, &:active {
-		border-left: 1px solid $card-background;
+		margin-left: $margin;
 	}
 }

@@ -31,11 +31,11 @@ $header-ratio: 0.45;
 
 .title {
 	color: $primary-color;
-	font-size: 3em;
+	font-size: 3.3em;
 	font-weight: bold;
 }
 
 .titleLarge {
 	@extend .title;
-	font-size: 4em;
+	font-size: 4.5em;
 }

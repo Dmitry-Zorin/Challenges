@@ -28,7 +28,7 @@ const Registration = (props) => {
 	
 	return (
 		<InnerLayout>
-			<p className='font-size-xlarge uk-text-center'>
+			<p className='text-xlarge uk-text-light uk-text-center'>
 				Start using
 				<span className='uk-text-primary uk-text-bold'> Challenges </span>
 				with one simple step!

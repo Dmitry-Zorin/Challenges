@@ -1,5 +1,5 @@
 {
-	"short_name": "Challenges",
+	"name": "Challenges",
 	"start_url": ".",
 	"display": "standalone",
 	"theme_color": "rgb(40, 45, 55)",

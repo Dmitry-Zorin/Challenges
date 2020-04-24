@@ -8,10 +8,10 @@ const NewChallengeButton = () => (
 	<Link to='/create'>
 		<AnimatedCard className='uk-transition-toggle'>
 			<Flex
-				className='font-size-large uk-text-uppercase'
+				className='text-large uk-text-uppercase'
 				style={{ height: '2em' }}
 			>
-				<p className='text-secondary'>New challenge</p>
+				<p className='uk-text-primary'>New challenge</p>
 			</Flex>
 			<Overlay text='create'/>
 		</AnimatedCard>
