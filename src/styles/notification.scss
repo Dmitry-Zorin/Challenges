@@ -1,11 +1,13 @@
 @import './variables';
-@import '../../node_modules/react-notifications-component/dist/scss/variables.scss';
-
-$info: $blue;
-$info_dark: darken($blue, 15);
-
 @import '../../node_modules/react-notifications-component/dist/scss/_types.scss';
 @import '../../node_modules/react-notifications-component/dist/scss/notification.scss';
+
+.notification-info {
+	@extend .notification-default;
+	
+	background: $blue;
+	border-left: 8px solid darken($blue, 15);
+}
 
 .notification-item {
 	.notification-icon {

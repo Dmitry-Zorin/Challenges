@@ -16,7 +16,7 @@ export const addNotification = ({
 		container: 'top-right',
 		animationIn: ['animated', animationIn],
 		animationOut: ['animated', animationOut],
-		dismiss: { duration: 30000 },
+		dismiss: { duration: 3000 },
 		content: <Notification {...{ type, icon, title, message }}/>,
 		...settings,
 	})
