@@ -3,25 +3,19 @@
 $margin: 4px;
 
 .button {
-	flex-grow: 1;
-	
 	&, &:hover, &:active {
 		margin-top: 2 * $margin;
 	}
-}
-
-.leftButton {
-	@extend .button;
 	
-	&, &:hover, &:active {
-		margin-right: $margin;
+	&.left {
+		&, &:hover, &:active {
+			margin-right: $margin;
+		}
 	}
-}
-
-.rightButton {
-	@extend .button;
 	
-	&, &:hover, &:active {
-		margin-left: $margin;
+	&.right {
+		&, &:hover, &:active {
+			margin-left: $margin;
+		}
 	}
 }

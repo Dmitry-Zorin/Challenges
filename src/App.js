@@ -22,6 +22,7 @@ const App = () => {
 			challenges = updateTime(contextRef.current, challenges)
 			updateContext({ challenges })
 		},
+		setTitle: (title) => updateContext({ title }),
 	})
 	const contextRef = useRef(context)
 	const intervalRef = useRef()
@@ -65,12 +66,12 @@ const App = () => {
 								<Dashboard default/>
 								<Challenge path='create'/>
 								<Challenge path='edit'/>
-								{challengeGroups.map(g => `/${g}`).map((g, i, cg) => (
+								{challengeGroups.map((g, i) => (
 									<ChallengeGroupExtended
 										key={i}
 										path={g}
-										right={cg[++i % 3]}
-										left={cg[++i % 3]}
+										right={challengeGroups[++i % 3]}
+										left={challengeGroups[++i % 3]}
 									/>
 								))}
 							</>

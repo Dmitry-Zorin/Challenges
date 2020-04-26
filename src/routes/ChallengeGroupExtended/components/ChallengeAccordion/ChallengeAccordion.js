@@ -36,7 +36,7 @@ const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 							<>
 								<Flex>
 									<div className={`uk-label uk-label-${labelTypes[c.difficulty.toLowerCase()]}`}>
-										{c.difficulty}
+										<p>{c.difficulty}</p>
 									</div>
 									<UpdateButtons
 										challenge={c}

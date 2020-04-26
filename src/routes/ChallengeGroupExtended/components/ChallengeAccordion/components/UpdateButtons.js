@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import AnimatedButton from 'components/Animated/AnimatedButton/AnimatedButton'
+import AnimatedButton from 'components/animated/AnimatedButton'
 import DataContext from 'contexts/DataContext'
 import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
@@ -47,7 +47,7 @@ const UpdateButtons = ({ challenge, navigate, options }) => {
 							<FontAwesomeIcon
 								icon={action.icon}
 								className='icon-center'
-								transform='grow-1 right-1 down-1'
+								transform='grow-1 right-0.5 down-1'
 							/>
 						</AnimatedButton>
 					)

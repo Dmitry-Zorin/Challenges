@@ -32,6 +32,7 @@
 	text-transform: $button-text-transform;
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color;
+	padding: 0;
 }
 
 @mixin create-button($color) {
@@ -58,13 +59,13 @@
 
 // Card
 $margin-horizontal-small: 0.5em;
-$margin-horizontal-medium: 0.75em;
+$margin-horizontal-medium: 0.8em;
 
 @mixin hook-card() {
 	margin: $card-margin-small $margin-horizontal-small;
 	padding: $card-padding-vertical $card-padding;
 	overflow: hidden;
-	-webkit-mask-image: -webkit-radial-gradient(white, black);
+	mask-image: -webkit-radial-gradient(white, black);
 	border-radius: $card-border-radius;
 	
 	@media (min-width: $breakpoint-small) {
@@ -86,14 +87,17 @@ $margin-horizontal-medium: 0.75em;
 // Form
 @mixin hook-form() {
 	border-radius: $input-border-radius;
+	padding-top: $font-padding-top;
+	
+	&::placeholder {
+		padding-top: $font-padding-top / 2;
+	}
 }
 
 // Flex
 @mixin hook-flex-misc() {
-	.uk-flex > * {
-		&, & > * {
-			margin: auto;
-		}
+	.uk-flex > div {
+		margin: auto;
 	}
 }
 
@@ -105,14 +109,12 @@ $margin-horizontal-medium: 0.75em;
 // Navbar
 @mixin hook-navbar() {
 	padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
-	font-weight: 400;
+	font-weight: lighter;
 }
 
 @mixin hook-navbar-nav-item() {
 	height: $navbar-height-small;
 	text-transform: $navbar-nav-item-text-transform;
-	transition: 0.1s ease-in-out;
-	transition-property: color, background-color;
 	padding: 0 $margin-horizontal-small + $card-padding;
 	
 	@media (min-width: $breakpoint-small) {
@@ -143,7 +145,7 @@ $margin-horizontal-medium: 0.75em;
 
 // Search
 @mixin hook-search-input() {
-	border-radius: $input-border-radius;
+	@include hook-form();
 }
 
 // Subnav
@@ -151,6 +153,8 @@ $margin-horizontal-medium: 0.75em;
 	border-radius: $input-border-radius;
 	height: 1.9em;
 	padding-top: 0.7em;
+	transition: 0.1s ease-in-out;
+	transition-property: color, background-color;
 }
 
 @mixin hook-subnav-pill-item-active() {
@@ -162,5 +166,12 @@ $margin-horizontal-medium: 0.75em;
 	&.danger {
 		background: $red;
 		color: $base-color;
+	}
+}
+
+// Text
+@mixin hook-text-misc() {
+	.uk-text-normal {
+		font-weight: $base-body-font-weight;
 	}
 }

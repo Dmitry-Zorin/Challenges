@@ -60,7 +60,7 @@ const Login = (props) => {
 	}, [context, username, password, authOption.action, props])
 	
 	return (
-		<InnerLayout>
+		<InnerLayout title={authOption.title}>
 			<AuthSubnav {...{ authOption, authOptions, setAuthOption }}/>
 			<form className='uk-form uk-margin-medium-top' onSubmit={submit}>
 				<TextInput

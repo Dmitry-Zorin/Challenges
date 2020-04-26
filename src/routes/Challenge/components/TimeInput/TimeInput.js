@@ -1,38 +1,39 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AnimatedDiv from 'components/animated/AnimatedDiv'
+import AnimatedSwitch from 'components/animated/AnimatedSwitch'
 import { upperFirst } from 'lodash'
 import React, { useState } from 'react'
 import { getTimeObj, toMs } from 'scripts/time'
-import { Flex, Margin } from 'uikit-react'
+import { Flex } from 'uikit-react'
 import NumberInput from './components/NumberInput'
-import { container, toggle, unknown } from './TimeInput.module.scss'
+import { container, unknown } from './TimeInput.module.scss'
 
 const TimeInput = (props) => {
 	const [disabled, setDisabled] = useState(false)
 	
 	return (
-		<Margin type='medium'>
+		<AnimatedDiv className='uk-margin-medium'>
 			<Flex>
 				<p className='uk-text-primary uk-width-expand'>
 					{upperFirst(props.name)}
 				</p>
-				<div
-					className={toggle} onClick={() => {
-					props.setState(disabled ? 0 : toMs.TOO_MANY_YEARS)
-					setDisabled(!disabled)
-				}}
-				>
-					<FontAwesomeIcon
-						icon='toggle-on'
-						className={`uk-text-${disabled ? 'muted' : 'primary'}`}
-						transform='grow-16 left-6 down-1.5'
-						flip={disabled ? 'horizontal' : undefined}
-					/>
-				</div>
+				<AnimatedSwitch
+					isOn={!disabled}
+					onClick={() => {
+						props.setState(disabled ? 0 : toMs.TOO_MANY_YEARS)
+						setDisabled(!disabled)
+					}}
+				/>
 			</Flex>
-			<div className={container}>
+			<AnimatedDiv
+				key={disabled}
+				transition={{ duration: 0.3 }}
+				className={container}
+			>
 				{disabled ? (
 					<Flex className={unknown}>
-						<i>Unknown</i>
+						<p className='uk-margin-auto-vertical uk-text-italic'>
+							Unknown
+						</p>
 					</Flex>
 				) : (
 					<Flex className='uk-grid-small uk-child-width-1-3'>
@@ -48,8 +49,8 @@ const TimeInput = (props) => {
 						))}
 					</Flex>
 				)}
-			</div>
-		</Margin>
+			</AnimatedDiv>
+		</AnimatedDiv>
 	)
 }
 

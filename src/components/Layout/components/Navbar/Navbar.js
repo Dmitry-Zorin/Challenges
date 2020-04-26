@@ -1,31 +1,31 @@
+import AnimatedListItem from 'components/animated/AnimatedListItem'
 import React from 'react'
 import {
 	Container,
-	Navbar,
+	Navbar as UIKitNavbar,
 	NavbarContainer,
 	NavbarSticky,
-	NavItem,
 } from 'uikit-react'
 import { NavItemCenter, NavItemLeft, NavItemRight } from './components'
 
-const NavigationBar = ({ location }) => (
+const Navbar = ({ location }) => (
 	<NavbarSticky>
 		<NavbarContainer>
 			<Container className='uk-padding-remove' style={{ width: '100%' }}>
-				<Navbar>
-					<NavItem className='uk-navbar-left'>
+				<UIKitNavbar>
+					<AnimatedListItem className='uk-navbar-left'>
 						<NavItemLeft {...{ location }}/>
-					</NavItem>
-					<NavItem className='uk-navbar-center'>
+					</AnimatedListItem>
+					<AnimatedListItem className='uk-navbar-center'>
 						<NavItemCenter/>
-					</NavItem>
-					<NavItem className='uk-navbar-right'>
+					</AnimatedListItem>
+					<AnimatedListItem className='uk-navbar-right'>
 						<NavItemRight {...{ location }}/>
-					</NavItem>
-				</Navbar>
+					</AnimatedListItem>
+				</UIKitNavbar>
 			</Container>
 		</NavbarContainer>
 	</NavbarSticky>
 )
 
-export default NavigationBar
+export default Navbar

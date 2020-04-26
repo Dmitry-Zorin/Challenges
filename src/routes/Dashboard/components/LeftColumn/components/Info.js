@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from '@reach/router'
+import AnimatedListItem from 'components/animated/AnimatedListItem'
+import Link from 'components/Link'
 import DataContext from 'contexts/DataContext'
 import { challengeGroups } from 'data/settings.json'
 import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
-import { List, ListItem } from 'uikit-react'
+import { Flex, List } from 'uikit-react'
 
 const Info = () => {
 	const { userInfo, challenges } = useContext(DataContext)
@@ -12,18 +13,18 @@ const Info = () => {
 	return userInfo === undefined ? null : (
 		<>
 			<p className='uk-text-primary text-large uk-text-center'>
-				<FontAwesomeIcon icon='user' transform='shrink-5 down-0.5'/>
+				<FontAwesomeIcon icon='user' transform='shrink-5 down-0.8'/>
 				{userInfo.username}
 			</p>
-			<List>
-				{challengeGroups.map(g => (
-					<ListItem key={g}>
-						<Link to={`/${g}`}>
-							{`${upperFirst(g)}: ${challenges[g].length}`}
-						</Link>
-					</ListItem>
-				))}
-			</List>
+			<Flex className='uk-margin-top'>
+				<List>
+					{challengeGroups.map(g => (
+						<AnimatedListItem key={g}>
+							<Link to={g} text={[upperFirst(g), challenges[g].length].join(': ')}/>
+						</AnimatedListItem>
+					))}
+				</List>
+			</Flex>
 		</>
 	)
 }

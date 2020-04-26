@@ -2,16 +2,14 @@
 
 $inverse-global-color-mode: none;
 
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&display=swap');
-
-$global-font-family: 'Baloo 2', sans-serif;
+$global-font-family: $font-family;
 $global-color: $base-color;
 $global-inverse-color: $inverse-color;
 $global-muted-color: $muted-color;
 $global-link-color: $base-color;
 $global-link-hover-color: $primary-color;
 
-$base-body-background: $background;
+$base-body-background: $background1;
 $base-link-hover-text-decoration: none;
 $base-selection-background: $selection-background;
 $base-body-font-weight: 500;

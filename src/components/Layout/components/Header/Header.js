@@ -3,22 +3,28 @@ import DataContext from 'contexts/DataContext'
 import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
 import { Flex } from 'uikit-react'
-import { header, headerLarge, title, titleLarge } from './Header.module.scss'
+import { header, large, title as titleStyle } from './Header.module.scss'
 
 const Header = ({ location }) => {
-	const { challenges } = useContext(DataContext)
-	const isHomePage = location.pathname === '/' && !challenges?.ongoing
+	const { challenges, title } = useContext(DataContext)
+	const isRoot = location.pathname === '/'
+	const isHomePage = isRoot && !challenges?.ongoing
+	const sizeStyle = isHomePage ? large : ''
 	
 	return (
-		<Flex className={isHomePage ? headerLarge : header}>
+		<Flex className={[header, sizeStyle].join(' ')}>
 			<div className='uk-text-center'>
-				<p className={isHomePage ? titleLarge : title}>
-					<FontAwesomeIcon
-						icon='tasks'
-						className='uk-visible@s'
-						transform='shrink-3 down-1'
-					/>
-					{upperFirst(location.pathname.slice(1) || 'challenges')}
+				<p className={[titleStyle, sizeStyle].join(' ')}>
+					{!isRoot ? upperFirst(title) : (
+						<>
+							<FontAwesomeIcon
+								icon='tasks'
+								className='uk-visible@s'
+								transform='shrink-3 down-0.75'
+							/>
+							Challenges
+						</>
+					)}
 				</p>
 				{isHomePage && (
 					<p className='text-larger uk-text-italic uk-text-light uk-padding'>

@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AnimatedDiv from 'components/animated/AnimatedDiv'
 import { infinity } from 'data/settings.json'
 import React from 'react'
 import { getChallengeTime } from 'scripts/time'
@@ -18,24 +19,31 @@ const GroupItem = ({ group, challenge, extended }) => {
 		: time || group === 'completed'
 			? icons[group] : 'exclamation'
 	
-	const style = extended ? '' : 'text-medium uk-text-truncate'
-	
 	return (
-		<Flex className='uk-margin-small'>
-			<div className={`${style} uk-width-expand`}>
+		<AnimatedDiv
+			className='uk-flex uk-margin-small'
+			key={challenge._id}
+			positionTransition
+		>
+			<p
+				className={`
+						${extended ? '' : 'text-medium uk-text-truncate'}
+						uk-width-expand
+					`}
+			>
 				{challenge.name}
-			</div>
+			</p>
 			<Flex>
-				<div className='uk-text-meta'>
+				<p className='uk-text-meta'>
 					<FontAwesomeIcon
-						icon={icon}
 						className='icon-right'
-						transform='shrink-4'
+						transform='shrink-4 down-0.75'
+						{...{ icon }}
 					/>
 					{!isInfiniteTime && time}
-				</div>
+				</p>
 			</Flex>
-		</Flex>
+		</AnimatedDiv>
 	)
 }
 

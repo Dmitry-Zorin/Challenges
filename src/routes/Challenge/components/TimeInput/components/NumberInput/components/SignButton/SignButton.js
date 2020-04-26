@@ -1,15 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import AnimatedButton from 'components/Animated/AnimatedButton'
+import AnimatedButton from 'components/animated/AnimatedButton'
 import React from 'react'
-import { leftButton, rightButton } from './SignButton.module.scss'
+import { button, left, right } from './SignButton.module.scss'
 
 const SignButton = ({ sign, icon, timeToMs, ms, setState, step = 1 }) => (
 	<AnimatedButton
 		type='button'
-		className={`${sign < 0 ? leftButton : rightButton} uk-button-default`}
+		className={[button, sign < 0 ? left : right].join(' ')}
 		onClick={() => setState(Math.max(0, ms + sign * step * timeToMs))}
 	>
-		<FontAwesomeIcon transform='shrink-2' {...{ icon }}/>
+		<FontAwesomeIcon className='icon-center' transform='shrink-2' {...{ icon }}/>
 	</AnimatedButton>
 )
 

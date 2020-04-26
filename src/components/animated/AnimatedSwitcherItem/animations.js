@@ -4,7 +4,7 @@ const switcherItem = {
 		borderRadius: '8%',
 	},
 	whileTap: {
-		scale: 0.9,
+		scale: 0.95,
 		borderRadius: '6%',
 	},
 }

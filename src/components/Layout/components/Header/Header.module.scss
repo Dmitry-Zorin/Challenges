@@ -1,5 +1,7 @@
 @import '../../../../styles/variables';
 
+$header-ratio: 0.45;
+
 .header {
 	height: 6em;
 	padding-top: $card-margin-small;
@@ -11,21 +13,18 @@
 	@media (min-width: $breakpoint-large) {
 		padding-top: $card-margin-large;
 	}
-}
-
-$header-ratio: 0.45;
-
-.headerLarge {
-	@extend .header;
-	height: calc(#{$header-ratio} * #{$viewport-height-small} - 2 * #{$card-margin-small});
-	min-height: 14em;
 	
-	@media (min-width: $breakpoint-small) {
-		height: calc(#{$header-ratio} * #{$viewport-height-medium} - 2 * #{$card-margin-medium});
-	}
-	
-	@media (min-width: $breakpoint-large) {
-		height: calc(#{$header-ratio} * #{$viewport-height-large} - 2 * #{$card-margin-large});
+	&.large {
+		height: calc(#{$header-ratio} * #{$viewport-height-small} - 2 * #{$card-margin-small});
+		min-height: 14em;
+		
+		@media (min-width: $breakpoint-small) {
+			height: calc(#{$header-ratio} * #{$viewport-height-medium} - 2 * #{$card-margin-medium});
+		}
+		
+		@media (min-width: $breakpoint-large) {
+			height: calc(#{$header-ratio} * #{$viewport-height-large} - 2 * #{$card-margin-large});
+		}
 	}
 }
 
@@ -33,9 +32,8 @@ $header-ratio: 0.45;
 	color: $primary-color;
 	font-size: 3.3em;
 	font-weight: bold;
-}
-
-.titleLarge {
-	@extend .title;
-	font-size: 4.5em;
+	
+	&.large {
+		font-size: 4.5em;
+	}
 }

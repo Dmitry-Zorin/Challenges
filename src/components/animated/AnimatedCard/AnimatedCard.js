@@ -2,11 +2,14 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import card from './animations.js'
 
-const AnimatedCard = ({ className, children, ...props }) => (
+const animations = Object.keys(card)
+	.reduce((o, k) => (o[k] = k) && o, {})
+
+const AnimatedCard = ({ children, className }) => (
 	<motion.div
 		className={`uk-card uk-card-default ${className}`}
-		{...card}
-		{...props}
+		variants={card}
+		{...animations}
 	>
 		{children}
 	</motion.div>

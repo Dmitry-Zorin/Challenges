@@ -1,6 +1,6 @@
-import SwitcherItem from 'components/SwitcherItem'
+import AnimatedDiv from 'components/animated/AnimatedDiv'
+import AnimatedSwitcherItem from 'components/animated/AnimatedSwitcherItem'
 import React from 'react'
-import { Margin } from 'uikit-react'
 
 const difficultyTypes = {
 	Easy: 'success',
@@ -9,13 +9,16 @@ const difficultyTypes = {
 }
 
 const DifficultyInput = ({ difficulty, setState }) => (
-	<Margin type='medium'>
-		<p className='uk-text-primary' style={{ marginBottom: '-0.5em' }}>
+	<AnimatedDiv className='uk-margin-medium'>
+		<p className='uk-text-primary'>
 			Difficulty
 		</p>
-		<ul className='uk-subnav uk-subnav-pill uk-child-width-1-3'>
+		<ul
+			className='uk-subnav uk-subnav-pill uk-child-width-1-3'
+			style={{ marginTop: '0.5em' }}
+		>
 			{Object.entries(difficultyTypes).map(([d, t]) => (
-				<SwitcherItem
+				<AnimatedSwitcherItem
 					key={d}
 					value={d}
 					type={t}
@@ -24,7 +27,7 @@ const DifficultyInput = ({ difficulty, setState }) => (
 				/>
 			))}
 		</ul>
-	</Margin>
+	</AnimatedDiv>
 )
 
 export default DifficultyInput

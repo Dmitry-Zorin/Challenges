@@ -1,0 +1,39 @@
+@import '../../../styles/variables';
+
+$size: 1.2em;
+$padding: 0.1 * $size;
+$width: 1.8 * $size;
+
+.switch {
+	border-radius: 100px;
+	cursor: pointer;
+	display: flex;
+	padding: $padding $padding * $width / ($size + 2 * $padding);
+	width: $width;
+	
+	&.on {
+		background: $primary-color;
+		justify-content: flex-end;
+		
+		& * {
+			background: $base-color;
+		}
+	}
+	
+	&.off {
+		background: $card-background-light;
+		justify-content: flex-start;
+		
+		& * {
+			background: $card-background-light-hover;
+		}
+	}
+	
+	& * {
+		border-radius: 50%;
+		box-shadow: 0 0 3px rgba(black, 0.3);
+		height: $size;
+		margin: auto 0;
+		width: $size;
+	}
+}

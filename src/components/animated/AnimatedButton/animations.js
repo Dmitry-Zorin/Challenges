@@ -5,7 +5,7 @@ const button = {
 			borderRadius: '8%',
 		},
 		whileTap: {
-			scale: 0.9,
+			scale: 0.95,
 			borderRadius: '6%',
 		},
 	},
@@ -15,7 +15,7 @@ const button = {
 			borderRadius: '8%',
 		},
 		whileTap: {
-			scale: 0.8,
+			scale: 0.9,
 			borderRadius: '6%',
 		},
 	},

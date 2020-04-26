@@ -1,5 +1,5 @@
 import { Link } from '@reach/router'
-import AnimatedCard from 'components/Animated/AnimatedCard/AnimatedCard'
+import AnimatedCard from 'components/animated/AnimatedCard'
 import GroupItem from 'components/GroupItem'
 import NoChallenges from 'components/NoChallenges'
 import { upperFirst } from 'lodash'

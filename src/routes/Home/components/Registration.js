@@ -33,7 +33,7 @@ const Registration = (props) => {
 				<span className='uk-text-primary uk-text-bold'> Challenges </span>
 				with one simple step!
 			</p>
-			<form className='uk-form uk-margin-medium-top' onSubmit={submit}>
+			<form className='uk-form uk-text-normal uk-margin-medium-top' onSubmit={submit}>
 				<TextInput
 					icon='user'
 					label='username'

@@ -2,21 +2,24 @@
 
 body {
 	box-sizing: content-box;
-	min-height: 100vh;
 	overflow-y: scroll;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
-	-webkit-user-select: none;
+	user-select: none;
 }
 
-a:hover p {
-	@media (hover: hover) {
-		color: $primary-color;
-	}
+#root {
+	background: $background;
+	min-height: 100vh;
 }
 
-a:active p {
-	color: $primary-color;
+p {
+	padding-top: $font-padding-top;
+	margin: 0 auto !important;
+}
+
+a {
+	-webkit-user-drag: none;
 }
 
 svg:not(.icon-center):not(.icon-right) {
@@ -53,9 +56,10 @@ svg:not(.icon-center):not(.icon-right) {
 
 .primary-border {
 	@extend .round-border;
-	border: 1px solid rgba($primary-color, 0.75);
+	border: 1px solid rgba($primary-color, 0.8);
 }
 
 .border {
 	border: 0.5px solid;
+	border-radius: 5px;
 }

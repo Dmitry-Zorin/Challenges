@@ -1,18 +1,15 @@
 @import '../../../../styles/variables';
 
-.toggle {
-	cursor: pointer;
-	padding-left: 0.5em;
-}
+$margin: 1.5em;
 
 .container {
 	border: 0.5px solid rgba(white, 0);
-	height: 6.95em;
+	height: 7.1em;
 }
 
 .unknown {
 	background: $card-background-light;
 	border-radius: $input-border-radius;
-	height: calc(100% - 1.5em - 1px);
-	margin-top: 1.5em;
+	height: calc(100% - #{$margin} - 1px);
+	margin-top: $margin;
 }
