@@ -15,12 +15,7 @@ const Dashboard = () => {
 			<div className='uk-width-expand'>
 				<NewChallengeButton/>
 				{challengeGroups.map(g => (
-					<ChallengeGroup
-						key={g}
-						title={g}
-						to={g}
-						group={challenges?.[g]}
-					/>
+					<ChallengeGroup key={g} title={g} group={challenges?.[g]}/>
 				))}
 			</div>
 		</Flex>

@@ -17,7 +17,7 @@ export const updateTime = (context, challenges = context.challenges) => {
 	for (const c of ongoing) {
 		const ms = c.endDate - now
 		if (ms < 0 && ms >= -updateTimeout && (c.endDate - c.startDate)) {
-			addNotification({ ...completeReady, message: c.name })
+			addNotification(context, { ...completeReady, message: c.name })
 		}
 		c.timeLeft = getTimeString(c, ms)
 	}
@@ -25,7 +25,7 @@ export const updateTime = (context, challenges = context.challenges) => {
 	for (const c of upcoming) {
 		const ms = c.startDate - now
 		if (ms < 0 && ms >= -updateTimeout) {
-			addNotification({ ...startReady, message: c.name })
+			addNotification(context, { ...startReady, message: c.name })
 		}
 		c.startsIn = getTimeString(c, ms)
 	}

@@ -13,7 +13,6 @@ import React, {
 } from 'react'
 import { addNotification } from 'scripts/notification'
 import { authorize, logout } from 'scripts/requests'
-import AuthSubnav from './components/AuthSubnav'
 
 const authOptions = {
 	login: {
@@ -46,10 +45,9 @@ const Login = (props) => {
 			.catch(() => {})
 	}, [context, props])
 	
-	const submit = useCallback(e => {
+	const onSubmit = useCallback(e => {
 		e.preventDefault()
-		
-		!(username && password) ? addNotification(invalid)
+		!(username && password) ? addNotification(context, invalid)
 			: authorize(context, authOption.action, { username, password })
 				.then(user => {
 					if (!user) return
@@ -59,10 +57,17 @@ const Login = (props) => {
 				.catch(() => {})
 	}, [context, username, password, authOption.action, props])
 	
+	const items = Object.values(authOptions).map(o => ({
+		key: o.action,
+		icon: o.icon,
+		value: o.title,
+		active: o.action === authOption.action,
+		onClick: () => setAuthOption(o),
+	}))
+	
 	return (
-		<InnerLayout title={authOption.title}>
-			<AuthSubnav {...{ authOption, authOptions, setAuthOption }}/>
-			<form className='uk-form uk-margin-medium-top' onSubmit={submit}>
+		<InnerLayout title={authOption.title} {...{ items }}>
+			<form className='uk-form' {...{ onSubmit }}>
 				<TextInput
 					icon='user'
 					label='username'

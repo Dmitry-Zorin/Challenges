@@ -9,7 +9,9 @@ const SignButton = ({ sign, icon, timeToMs, ms, setState, step = 1 }) => (
 		className={[button, sign < 0 ? left : right].join(' ')}
 		onClick={() => setState(Math.max(0, ms + sign * step * timeToMs))}
 	>
-		<FontAwesomeIcon className='icon-center' transform='shrink-2' {...{ icon }}/>
+		<FontAwesomeIcon
+			className='icon-center'
+			transform='shrink-2' {...{ icon }}/>
 	</AnimatedButton>
 )
 

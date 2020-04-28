@@ -23,7 +23,7 @@ const SlideItems = () => (
 					'
 				>
 					<p className='uk-text-primary text-large'>
-						<FontAwesomeIcon transform='shrink-5 down-1' {...{ icon }}/>
+						<FontAwesomeIcon transform='shrink-5 down-0.75' {...{ icon }}/>
 						{upperFirst(title)}
 					</p>
 					<p className='text-medium uk-text-light'>

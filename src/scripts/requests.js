@@ -38,7 +38,7 @@ export const getUserInfo = (context) => (
 	)
 		.then(res => (
 			res?.user !== undefined ? resolve(res.user)
-				: reject(addNotification(errors.response))
+				: reject(addNotification(context, errors.response))
 		))
 		.catch(reject)
 )
@@ -54,12 +54,12 @@ export const authorize = (context, action, variables) => {
 	return postQuery(context, query, actionName, variables)
 		.then(res => {
 			if (res?.user === null) {
-				return reject(addNotification(errors[action]))
+				return reject(addNotification(context, errors[action]))
 			}
 			if (res?.user === undefined) {
-				return reject(addNotification(errors.response))
+				return reject(addNotification(context, errors.response))
 			}
-			addNotification({ ...user[action], message: res.user.username })
+			addNotification(context, { ...user[action], message: res.user.username })
 			return resolve(res.user)
 		})
 		.catch(reject)
@@ -73,12 +73,15 @@ export const logout = (context) => (
 	)
 		.then(res => {
 			if (res?.user) {
-				return reject(addNotification(errors.logout))
+				return reject(addNotification(context, errors.logout))
 			}
 			if (res?.user === undefined) {
-				return reject(addNotification(errors.response))
+				return reject(addNotification(context, errors.response))
 			}
-			addNotification({ ...user.logout, message: context.userInfo.username })
+			addNotification(
+				context,
+				{ ...user.logout, message: context.userInfo.username },
+			)
 		})
 		.catch(reject)
 )
@@ -127,9 +130,12 @@ export const saveChallenge = (context, action, variables) => {
 	)
 		.then(res => {
 			if (!res?.challenges)
-				return reject(addNotification(errors.response))
+				return reject(addNotification(context, errors.response))
 			
-			addNotification({ ...challenges[action], message: variables.name })
+			addNotification(
+				context,
+				{ ...challenges[action], message: variables.name },
+			)
 			return resolve(res.challenges)
 		})
 		.catch(reject)
@@ -144,9 +150,9 @@ export const updateChallenge = (context, action, variables, name) => {
 	return postQuery(context, query, action, variables)
 		.then(res => {
 			if (!res?.challenges)
-				return reject(addNotification(errors.response))
+				return reject(addNotification(context, errors.response))
 			
-			addNotification({ ...challenges[action], message: name })
+			addNotification(context, { ...challenges[action], message: name })
 			return resolve(res.challenges)
 		})
 		.catch(reject)
@@ -158,6 +164,6 @@ const postQuery = (context, query, action, variables) => {
 	
 	return axios.post(apiServer, { query, variables }, { withCredentials: true })
 		.then(res => resolve(res.data.data[api]))
-		.catch(err => reject(handleError(err, `Failed to ${action}`)))
+		.catch(err => reject(handleError(context, err, `Failed to ${action}`)))
 		.finally(() => context.showSpinner(false))
 }

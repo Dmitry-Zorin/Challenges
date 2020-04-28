@@ -3,10 +3,11 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import switcherItem from './animations.js'
 
-const AnimatedSwitcherItem = ({ icon, value, type, active, onClick }) => (
+const AnimatedSwitcherItem = ({ icon, value, type, active, onClick, className, ...props }) => (
 	<motion.li
-		className={['uk-text-center', active && 'uk-active'].join(' ')}
+		className={['uk-text-center', active && 'uk-active', className].join(' ')}
 		{...switcherItem}
+		{...props}
 	>
 		<a href='/#' className={type} onClick={e => onClick(e.preventDefault())}>
 			<p>

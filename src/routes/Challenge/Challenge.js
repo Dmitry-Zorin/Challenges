@@ -5,19 +5,6 @@ import React, { useContext, useState } from 'react'
 import { saveChallenge } from 'scripts/requests'
 import { ActionButtons, DifficultyInput, TimeInput } from './components'
 
-const actions = {
-	create: {
-		action: 'create',
-		title: 'new challenge',
-		save: 'create challenge',
-	},
-	edit: {
-		action: 'edit',
-		title: 'edit challenge',
-		save: 'save',
-	},
-}
-
 const Challenge = ({ navigate, location }) => {
 	const context = useContext(DataContext)
 	
@@ -38,10 +25,14 @@ const Challenge = ({ navigate, location }) => {
 	)
 	
 	const info = c?._id ? {
-		...actions.edit,
+		action: 'edit',
+		title: 'edit challenge',
+		save: 'save',
 		navigate: () => window.history.back(),
 	} : {
-		...actions.create,
+		action: 'create',
+		title: 'new challenge',
+		save: 'create challenge',
 		navigate: () => navigate('..'),
 	}
 	

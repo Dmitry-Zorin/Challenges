@@ -1,0 +1,41 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.container {
+	padding: 0;
+	pointer-events: none;
+	position: fixed;
+	right: 0;
+	z-index: 1;
+	
+	@media (max-width: $breakpoint-small) {
+		left: 0;
+	}
+}
+
+.notification {
+	@include gradient-style($blue);
+	cursor: pointer;
+	margin-bottom: 0;
+	margin-top: 1em;
+	padding: 1em 0;
+	pointer-events: all;
+	border-radius: $border-radius-large;
+	
+	@media (min-width: $breakpoint-small) {
+		min-width: 350px;
+	}
+}
+
+.icon {
+	padding: 0 1.25em;
+	text-align: center;
+}
+
+.success {
+	@include gradient-style($green);
+}
+
+.danger {
+	@include gradient-style($red);
+}

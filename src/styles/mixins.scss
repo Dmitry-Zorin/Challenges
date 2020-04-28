@@ -1,0 +1,29 @@
+@import './variables';
+
+@mixin gradient-style($color, $amount: 4) {
+	background: linear-gradient(
+			lighten($color, $amount),
+			darken($color, $amount)
+	);
+	color: $base-color;
+}
+
+@mixin gradient-opacity-style($color, $multiplier: 1, $amount: 0.0175) {
+	background: linear-gradient(
+			rgba($color, $multiplier * $opacity + $amount),
+			rgba($color, $multiplier * $opacity - $amount)
+	);
+	color: $base-color;
+}
+
+@mixin button-style($color) {
+	&, &:hover, &:active {
+		@include gradient-style($color);
+	}
+}
+
+@mixin button-opacity-style($color) {
+	&, &:hover, &:active {
+		@include gradient-opacity-style($color, 3);
+	}
+}

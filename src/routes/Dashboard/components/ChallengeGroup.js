@@ -6,8 +6,8 @@ import { upperFirst } from 'lodash'
 import React from 'react'
 import Overlay from './Overlay'
 
-const ChallengeGroup = ({ to, title, group = [] }) => (
-	<Link {...{ to }}>
+const ChallengeGroup = ({ title, group = [] }) => (
+	<Link to={`/groups/${title}`}>
 		<AnimatedCard className='uk-transition-toggle'>
 			<p className='uk-text-primary text-large uk-text-center'>
 				{upperFirst(title)}

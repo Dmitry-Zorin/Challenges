@@ -1,23 +1,9 @@
 const button = {
-	default: {
-		whileHover: {
-			scale: 1.1,
-			borderRadius: '8%',
-		},
-		whileTap: {
-			scale: 0.95,
-			borderRadius: '6%',
-		},
+	whileHover: {
+		scale: 1.1,
 	},
-	small: {
-		whileHover: {
-			scale: 1.2,
-			borderRadius: '8%',
-		},
-		whileTap: {
-			scale: 0.9,
-			borderRadius: '6%',
-		},
+	whileTap: {
+		scale: 0.95,
 	},
 }
 

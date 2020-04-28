@@ -1,37 +1,36 @@
 @import '../../../styles/variables';
+@import '../../../styles/mixins';
 
-$size: 1.2em;
-$padding: 0.1 * $size;
-$width: 1.8 * $size;
+$size: 1.3em;
 
 .switch {
-	border-radius: 100px;
+	border-radius: $size;
 	cursor: pointer;
 	display: flex;
-	padding: $padding $padding * $width / ($size + 2 * $padding);
-	width: $width;
+	padding: 2px;
+	width: 2 * $size;
 	
 	&.on {
-		background: $primary-color;
+		@include gradient-style($primary-color);
 		justify-content: flex-end;
 		
 		& * {
-			background: $base-color;
+			@include gradient-style($base-color);
 		}
 	}
 	
 	&.off {
-		background: $card-background-light;
+		@include gradient-opacity-style($card-background);
 		justify-content: flex-start;
 		
 		& * {
-			background: $card-background-light-hover;
+			@include gradient-opacity-style($card-background);
 		}
 	}
 	
 	& * {
-		border-radius: 50%;
-		box-shadow: 0 0 3px rgba(black, 0.3);
+		border-radius: 100%;
+		box-shadow: 0 0 3px rgba(black, 0.25);
 		height: $size;
 		margin: auto 0;
 		width: $size;

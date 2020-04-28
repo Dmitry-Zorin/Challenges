@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-import ReactNotification from 'react-notifications-component'
-import { Container } from 'uikit-react'
-import { Header, Navbar } from './components'
+import { Header, Navbar, Notifications } from './components'
 import { env, layout } from './Layout.module.scss'
 
 const Layout = ({ children, location }) => {
@@ -12,12 +10,12 @@ const Layout = ({ children, location }) => {
 	return (
 		<>
 			<Navbar {...{ location }}/>
-			<ReactNotification/>
 			<div className={env}>
-				<Container className={layout}>
+				<Notifications/>
+				<div className={'uk-container ' + layout}>
 					<Header {...{ location }}/>
 					{children}
-				</Container>
+				</div>
 			</div>
 		</>
 	)

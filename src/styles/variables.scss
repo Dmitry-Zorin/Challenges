@@ -2,7 +2,7 @@
 
 // Font
 $font-family: 'Baloo 2', sans-serif;
-$font-padding-top: 0.1em;
+$font-padding-top: 0.15em;
 
 $font-size-medium: 1.1em;
 $font-size-large: 1.4em;
@@ -13,20 +13,15 @@ $font-size-xlarge: 2em;
 $primary-color: #FFBB3C;
 
 // https://coolors.co/2E304A-322A39
-$background1: #2E304A;
-$background2: #322A39;
+$background1: #272C44;
+$background2: #3F263D;
 $background: linear-gradient(to bottom right, $background1, $background2, $background1);
 
-$navbar-background: darken($background1, 7);
+$navbar-background: darken($background1, 5);
 
-$color: white;
+$card-background-color: white;
 $opacity: 0.1;
-
-$card-background: rgba($color, $opacity);
-$card-overlay-background: rgba($color, $opacity);
-$card-background-light: rgba($color, $opacity);
-$card-background-light-hover: rgba($color, 2 * $opacity);
-$card-background-light-active: rgba($color, 3 * $opacity);
+$card-background: rgba($card-background-color, $opacity);
 
 $base-color: white;
 $muted-color: darken($base-color, 25);
@@ -45,21 +40,21 @@ $breakpoint-medium: 960px;
 $breakpoint-large: 1200px;
 $breakpoint-xlarge: 1600px;
 
-$card-border-radius: 1em;
-$input-border-radius: $card-border-radius / 2;
-$misc-border-radius: $input-border-radius / 2;
-$icon-margin: 0.2em;
+$border-radius-small: 7px;
+$border-radius-medium: 14px;
+$border-radius-large: 21px;
+$border-radius-xlarge: 28px;
 
 $card-padding-vertical: 1.5em;
 
-$card-margin-small: 0.8em;
+$card-margin-small: 0.75em;
 $card-margin-medium: 1em;
 $card-margin-large: 1.5em;
 
 $card-padding: 1em;
-$card-padding-small: 1.3em;
+$card-padding-small: 1.25em;
 $card-padding-medium: 1.5em;
-$card-padding-large: 1.8em;
+$card-padding-large: 1.75em;
 
 $navbar-height-small: 60px;
 $navbar-height-medium: 65px;
@@ -69,6 +64,8 @@ $viewport-height-small: calc(100vh - #{$navbar-height-small});
 $viewport-height-medium: calc(100vh - #{$navbar-height-medium});
 $viewport-height-large: calc(100vh - #{$navbar-height-large});
 
+$icon-margin: 0.25em;
+
 // Shared
 $header-ratio: 0.45;
-$features-height: 16em;
+$features-height: 15em;

@@ -8,7 +8,7 @@ import { header, large, title as titleStyle } from './Header.module.scss'
 const Header = ({ location }) => {
 	const { challenges, title } = useContext(DataContext)
 	const isRoot = location.pathname === '/'
-	const isHomePage = isRoot && !challenges?.ongoing
+	const isHomePage = isRoot && challenges && !challenges?.ongoing
 	const sizeStyle = isHomePage ? large : ''
 	
 	return (
@@ -20,7 +20,7 @@ const Header = ({ location }) => {
 							<FontAwesomeIcon
 								icon='tasks'
 								className='uk-visible@s'
-								transform='shrink-3 down-0.75'
+								transform='shrink-3 down-1.5'
 							/>
 							Challenges
 						</>

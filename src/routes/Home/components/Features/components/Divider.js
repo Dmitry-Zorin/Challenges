@@ -2,12 +2,12 @@ import React from 'react'
 
 const Divider = () => (
 	<>
-		<div className='uk-visible@m uk-margin-remove'>
+		<li className='uk-visible@m uk-margin-remove uk-width-auto'>
 			<hr className='uk-divider-vertical uk-height-1-1'/>
-		</div>
-		<div className='uk-hidden@m uk-width-1-1 uk-padding uk-padding-remove-vertical'>
+		</li>
+		<li className='uk-hidden@m uk-padding uk-padding-remove-vertical'>
 			<hr/>
-		</div>
+		</li>
 	</>
 )
 

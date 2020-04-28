@@ -1,9 +1,7 @@
 {
 	"create": {
 		"title": "New challenge!",
-		"icon": "tasks",
-		"animationIn": "bounceInRight",
-		"animationOut": "bounceOutRight"
+		"icon": "tasks"
 	},
 	"edit": {
 		"title": "Challenge updated",
@@ -11,9 +9,7 @@
 	},
 	"start": {
 		"title": "Challenge started!",
-		"icon": "stopwatch",
-		"animationIn": "zoomIn",
-		"animationOut": "zoomOut"
+		"icon": "stopwatch"
 	},
 	"startReady": {
 		"title": "Challenge is ready to start",
@@ -21,10 +17,8 @@
 	},
 	"complete": {
 		"title": "Challenge completed!",
-		"type": "success",
 		"icon": "award",
-		"animationIn": "bounceInRight",
-		"animationOut": "bounceOutRight"
+		"type": "success"
 	},
 	"completeReady": {
 		"title": "Challenge is ready to complete",
@@ -33,8 +27,6 @@
 	"delete": {
 		"title": "Challenge deleted",
 		"icon": "trash-alt",
-		"type": "danger",
-		"animationIn": "zoomIn",
-		"animationOut": "zoomOut"
+		"type": "danger"
 	}
 }

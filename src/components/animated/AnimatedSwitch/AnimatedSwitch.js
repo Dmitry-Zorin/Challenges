@@ -4,9 +4,9 @@ import { off, on, switch as switchStyle } from './AnimatedSwitch.module.scss'
 
 const duration = 0.15
 
-const AnimatedSwitch = ({ isOn, ...props }) => (
+const AnimatedSwitch = ({ isOn, className, ...props }) => (
 	<motion.div
-		className={[switchStyle, isOn ? on : off].join(' ')}
+		className={[switchStyle, isOn ? on : off, className].join(' ')}
 		transition={{ duration: 2 * duration }}
 		{...props}
 		animate

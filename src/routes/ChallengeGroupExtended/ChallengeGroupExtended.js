@@ -1,34 +1,40 @@
 import InnerLayout from 'components/InnerLayout'
 import NoChallenges from 'components/NoChallenges'
 import DataContext from 'contexts/DataContext'
-import { itemsPerPage } from 'data/settings.json'
+import { challengeGroups, itemsPerPage } from 'data/settings.json'
+import { upperFirst } from 'lodash'
 import React, { useContext, useState } from 'react'
 import { ChallengeAccordion, Pagination, Search } from './components'
 
-const ChallengeGroupExtended = ({ left, right, navigate }) => {
+const ChallengeGroupExtended = ({ group, navigate }) => {
 	const context = useContext(DataContext)
 	const [pattern, setPattern] = useState(/.*/)
-	const [page, setPage] = useState(0)
+	const [page, setPage] = useState(1)
 	
 	const search = e => {
 		const value = e.target.value || ' '
 		setPattern(new RegExp(value.split(' ').join('.*'), 'i'))
-		setPage(0)
+		setPage(1)
 	}
 	
-	const changePage = (e, diff) => {
+	const changePage = (e, page = +e.target.text) => {
 		e.preventDefault()
-		const newPage = page + diff
-		if (newPage >= 0 && newPage < maxPage) setPage(newPage)
+		if (page > 0 && page <= maxPage) setPage(page)
 	}
 	
-	const group = window.location.pathname.slice(1)
 	const challengeGroup = context.challenges?.[group] || []
 	const challenges = challengeGroup.filter(c => pattern.test(c.name))
 	const maxPage = Math.ceil(challenges.length / itemsPerPage)
 	
+	const items = challengeGroups.map(g => ({
+		key: g,
+		value: upperFirst(g),
+		active: g === group,
+		onClick: () => navigate(`../${g}`),
+	}))
+	
 	return (
-		<InnerLayout title={group} {...{ left, right }}>
+		<InnerLayout title={group} {...{ items }}>
 			<Search onChange={search}/>
 			{!challenges.length ? <NoChallenges extended/> : (
 				<ChallengeAccordion {...{ challenges, group, page, navigate }}/>

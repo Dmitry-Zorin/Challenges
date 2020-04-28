@@ -26,7 +26,7 @@ const TimeInput = (props) => {
 			</Flex>
 			<AnimatedDiv
 				key={disabled}
-				transition={{ duration: 0.3 }}
+				transition={{ duration: 0.25 }}
 				className={container}
 			>
 				{disabled ? (
@@ -36,7 +36,7 @@ const TimeInput = (props) => {
 						</p>
 					</Flex>
 				) : (
-					<Flex className='uk-grid-small uk-child-width-1-3'>
+					<Flex className='uk-grid-small uk-child-width-expand'>
 						{Object.entries(getTimeObj(props.ms)).map(([l, t]) => (
 							<NumberInput
 								key={l}

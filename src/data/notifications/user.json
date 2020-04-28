@@ -2,21 +2,15 @@
 	"signUp": {
 		"title": "Welcome!",
 		"icon": "smile",
-		"type": "success",
-		"animationIn": "tada",
-		"animationOut": "bounceOutUp"
+		"type": "success"
 	},
 	"login": {
 		"title": "Welcome back!",
 		"icon": "smile",
-		"type": "success",
-		"animationIn": "tada",
-		"animationOut": "bounceOutUp"
+		"type": "success"
 	},
 	"logout": {
 		"title": "Goodbye!",
-		"icon": "sad-tear",
-		"animationIn": "swing",
-		"animationOut": "fadeOutUp"
+		"icon": "sad-tear"
 	}
 }

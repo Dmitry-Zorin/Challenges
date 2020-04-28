@@ -16,7 +16,7 @@ const Registration = (props) => {
 	const submit = useCallback(e => {
 		e.preventDefault()
 		
-		!(username && password) ? addNotification(invalid)
+		!(username && password) ? addNotification(context, invalid)
 			: authorize(context, 'signUp', { username, password })
 				.then(user => {
 					if (!user) return
@@ -33,7 +33,10 @@ const Registration = (props) => {
 				<span className='uk-text-primary uk-text-bold'> Challenges </span>
 				with one simple step!
 			</p>
-			<form className='uk-form uk-text-normal uk-margin-medium-top' onSubmit={submit}>
+			<form
+				className='uk-form uk-text-normal uk-margin-medium-top'
+				onSubmit={submit}
+			>
 				<TextInput
 					icon='user'
 					label='username'

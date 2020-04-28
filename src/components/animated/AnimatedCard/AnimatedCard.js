@@ -5,11 +5,12 @@ import card from './animations.js'
 const animations = Object.keys(card)
 	.reduce((o, k) => (o[k] = k) && o, {})
 
-const AnimatedCard = ({ children, className }) => (
+const AnimatedCard = ({ children, className, ...props }) => (
 	<motion.div
 		className={`uk-card uk-card-default ${className}`}
 		variants={card}
 		{...animations}
+		{...props}
 	>
 		{children}
 	</motion.div>

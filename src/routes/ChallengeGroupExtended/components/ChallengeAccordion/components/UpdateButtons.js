@@ -39,10 +39,9 @@ const UpdateButtons = ({ challenge, navigate, options }) => {
 						<AnimatedButton
 							key={o}
 							className={`uk-button-${action.buttonType} uk-padding-remove`}
-							style={{ width: '3em', marginLeft: '0.5em' }}
+							style={{ width: '3em', marginLeft: '0.5em', borderRadius: '100%' }}
 							data-uk-tooltip={`title: ${upperFirst(o)}; delay: 100`}
 							onClick={() => update(o)}
-							small
 						>
 							<FontAwesomeIcon
 								icon={action.icon}

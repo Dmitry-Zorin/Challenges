@@ -14,8 +14,8 @@ body {
 }
 
 p {
-	padding-top: $font-padding-top;
 	margin: 0 auto !important;
+	padding-top: $font-padding-top;
 }
 
 a {
@@ -24,6 +24,10 @@ a {
 
 svg:not(.icon-center):not(.icon-right) {
 	@extend .icon-left;
+}
+
+ul {
+	list-style: none;
 }
 
 .text-medium {
@@ -51,12 +55,12 @@ svg:not(.icon-center):not(.icon-right) {
 }
 
 .round-border {
-	border-radius: $card-border-radius;
+	border-radius: $border-radius-large;
 }
 
 .primary-border {
 	@extend .round-border;
-	border: 1px solid rgba($primary-color, 0.8);
+	border: 1px solid rgba($primary-color, 0.75);
 }
 
 .border {

@@ -26,11 +26,10 @@ const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 	
 	return (
 		<Accordion>
-			{challenges.slice(page * itemsPerPage, (page + 1) * itemsPerPage)
+			{challenges.slice((page - 1) * itemsPerPage, page * itemsPerPage)
 				.map(c => (
 					<AccordionItem
 						key={c._id}
-						className='uk-margin-remove'
 						title={<GroupItem challenge={c} {...{ group }} extended/>}
 						content={
 							<>
@@ -44,7 +43,7 @@ const ChallengeAccordion = ({ challenges, page, group, navigate }) => {
 										{...{ navigate }}
 									/>
 								</Flex>
-								<hr className='uk-margin-remove-bottom'/>
+								<hr/>
 							</>
 						}
 					/>

@@ -1,29 +1,23 @@
 import AnimatedCard from 'components/animated/AnimatedCard'
+import Subnav from 'components/Subnav'
 import DataContext from 'contexts/DataContext'
 import React, { useContext, useEffect } from 'react'
 import { Margin } from 'uikit-react'
-import Navbar from './components/Navbar'
-import { card } from './InnerLayout.module.scss'
 
-const InnerLayout = ({ children, title, left, right, ...props }) => {
+const InnerLayout = ({ children, title, items, ...props }) => {
 	const { setTitle } = useContext(DataContext)
 	
 	useEffect(() => setTitle(title), [title, setTitle])
 	
 	return (
-		<AnimatedCard
-			className={[card, left && 'uk-padding-remove-top'].join(' ')}
-			{...props}
-		>
+		<AnimatedCard {...props}>
 			<Margin
-				type={`${left ? 'remove-' : ''}top; bottom`}
+				type={'top; bottom'}
 				className='uk-align-center'
-				style={{ maxWidth: '800px' }}
+				style={{ maxWidth: 800 }}
 			>
-				<Navbar {...{ left, right }}/>
-				<Margin type='remove'>
-					{children}
-				</Margin>
+				{items && <Subnav {...{ items }}/>}
+				{children}
 			</Margin>
 		</AnimatedCard>
 	)
