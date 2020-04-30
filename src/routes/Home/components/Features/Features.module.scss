@@ -1,6 +1,8 @@
 @import '../../../../styles/variables';
 
 .container {
+	margin-top: 0;
+	margin-bottom: 0;
 	padding: 0;
 	
 	@media (min-width: $breakpoint-medium) {

@@ -8,10 +8,10 @@
 	color: $base-color;
 }
 
-@mixin gradient-opacity-style($color, $multiplier: 1, $amount: 0.0175) {
+@mixin gradient-opacity-style($color, $multiplier: 1, $amount: 0.02) {
 	background: linear-gradient(
-			rgba($color, $multiplier * $opacity + $amount),
-			rgba($color, $multiplier * $opacity - $amount)
+			rgba($color, $multiplier * ($opacity + $amount)),
+			rgba($color, $multiplier * ($opacity - $amount))
 	);
 	color: $base-color;
 }

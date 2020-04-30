@@ -7,7 +7,7 @@ const animations = Object.keys(card)
 
 const AnimatedCard = ({ children, className, ...props }) => (
 	<motion.div
-		className={`uk-card uk-card-default ${className}`}
+		className={`uk-card uk-card-default uk-card-body ${className}`}
 		variants={card}
 		{...animations}
 		{...props}

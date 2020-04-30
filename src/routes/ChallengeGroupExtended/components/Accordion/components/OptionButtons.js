@@ -12,7 +12,7 @@ const info = {
 	delete: { icon: 'trash-alt', buttonType: 'danger' },
 }
 
-const UpdateButtons = ({ challenge, navigate, options }) => {
+const OptionButtons = ({ challenge, navigate, options }) => {
 	const context = useContext(DataContext)
 	
 	const update = (action) => {
@@ -32,7 +32,7 @@ const UpdateButtons = ({ challenge, navigate, options }) => {
 	}
 	
 	return (
-		<div className='uk-width-expand uk-text-right uk-animation'>
+		<div className='uk-width-expand uk-text-right'>
 			{[...options || [], 'edit', 'delete'].map(o => {
 					const action = info[o.toLowerCase()]
 					return (
@@ -56,4 +56,4 @@ const UpdateButtons = ({ challenge, navigate, options }) => {
 	)
 }
 
-export default UpdateButtons
+export default OptionButtons

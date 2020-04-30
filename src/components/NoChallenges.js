@@ -4,7 +4,6 @@ import React from 'react'
 const NoChallenges = ({ extended, className, ...props }) => (
 	<p
 		className={`
-			uk-margin-${extended ? 'medium-top text-medium' : 'small'}
 			uk-text-center
 			uk-text-muted
 			${className}

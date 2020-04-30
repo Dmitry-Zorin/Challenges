@@ -2,17 +2,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DataContext from 'contexts/DataContext'
 import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
-import { Flex } from 'uikit-react'
 import { header, large, title as titleStyle } from './Header.module.scss'
 
 const Header = ({ location }) => {
 	const { challenges, title } = useContext(DataContext)
 	const isRoot = location.pathname === '/'
 	const isHomePage = isRoot && challenges && !challenges?.ongoing
-	const sizeStyle = isHomePage ? large : ''
+	const sizeStyle = isHomePage && large
 	
 	return (
-		<Flex className={[header, sizeStyle].join(' ')}>
+		<div className={[header, sizeStyle, 'uk-flex'].join(' ')}>
 			<div className='uk-text-center'>
 				<p className={[titleStyle, sizeStyle].join(' ')}>
 					{!isRoot ? upperFirst(title) : (
@@ -32,7 +31,7 @@ const Header = ({ location }) => {
 					</p>
 				)}
 			</div>
-		</Flex>
+		</div>
 	)
 }
 

@@ -4,7 +4,6 @@ import DataContext from 'contexts/DataContext'
 import { challengeGroups } from 'data/settings.json'
 import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
-import { List } from 'uikit-react'
 
 const Info = () => {
 	const { userInfo, challenges } = useContext(DataContext)
@@ -15,13 +14,13 @@ const Info = () => {
 				<FontAwesomeIcon icon='user' transform='shrink-5 down-0.5'/>
 				{userInfo.username}
 			</p>
-			<List>
+			<ul className='uk-list'>
 				{challengeGroups.map(g => (
 					<li key={g}>
 						<Link to={`groups/${g}`} text={`${upperFirst(g)}: ${challenges[g].length}`}/>
 					</li>
 				))}
-			</List>
+			</ul>
 		</>
 	)
 }

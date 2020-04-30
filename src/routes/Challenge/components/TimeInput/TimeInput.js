@@ -3,7 +3,6 @@ import AnimatedSwitch from 'components/animated/AnimatedSwitch'
 import { upperFirst } from 'lodash'
 import React, { useState } from 'react'
 import { getTimeObj, toMs } from 'scripts/time'
-import { Flex } from 'uikit-react'
 import NumberInput from './components/NumberInput'
 import { container, unknown } from './TimeInput.module.scss'
 
@@ -12,7 +11,7 @@ const TimeInput = (props) => {
 	
 	return (
 		<AnimatedDiv className='uk-margin-medium'>
-			<Flex>
+			<div className='uk-flex'>
 				<p className='uk-text-primary uk-width-expand'>
 					{upperFirst(props.name)}
 				</p>
@@ -23,20 +22,20 @@ const TimeInput = (props) => {
 						setDisabled(!disabled)
 					}}
 				/>
-			</Flex>
+			</div>
 			<AnimatedDiv
 				key={disabled}
 				transition={{ duration: 0.25 }}
 				className={container}
 			>
 				{disabled ? (
-					<Flex className={unknown}>
+					<div className={`${unknown} uk-flex`}>
 						<p className='uk-margin-auto-vertical uk-text-italic'>
 							Unknown
 						</p>
-					</Flex>
+					</div>
 				) : (
-					<Flex className='uk-grid-small uk-child-width-expand'>
+					<div className='uk-flex uk-grid-small uk-child-width-expand'>
 						{Object.entries(getTimeObj(props.ms)).map(([l, t]) => (
 							<NumberInput
 								key={l}
@@ -47,7 +46,7 @@ const TimeInput = (props) => {
 								{...props}
 							/>
 						))}
-					</Flex>
+					</div>
 				)}
 			</AnimatedDiv>
 		</AnimatedDiv>

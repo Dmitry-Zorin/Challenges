@@ -5,7 +5,6 @@ import { button, left, right } from './SignButton.module.scss'
 
 const SignButton = ({ sign, icon, timeToMs, ms, setState, step = 1 }) => (
 	<AnimatedButton
-		type='button'
 		className={[button, sign < 0 ? left : right].join(' ')}
 		onClick={() => setState(Math.max(0, ms + sign * step * timeToMs))}
 	>

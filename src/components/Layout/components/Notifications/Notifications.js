@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DataContext from 'contexts/DataContext'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useContext } from 'react'
-import { Flex } from 'uikit-react'
 import styles from './Notifications.module.scss'
 
 const { notification, container, icon: iconStyle, ...types } = styles
@@ -13,18 +12,15 @@ const Notification = () => {
 		<ul className={container}>
 			<AnimatePresence>
 				{notifications.map(({ id, title, message, icon, type }) => (
-					<motion.li
-						key={id}
-						exit={{ opacity: 0, scale: 0.5 }}
-						animate
-					>
+					<motion.li key={id} exit={{ opacity: 0, scale: 0.5 }} animate>
 						<motion.div
 							className={['uk-card', notification, types[type]].join(' ')}
 							onClick={() => removeNotification(id)}
 							initial={{ opacity: 0, scale: 0.5 }}
 							animate={{ opacity: 1, scale: 1 }}
+							transition={{ duration: 0.5 }}
 						>
-							<Flex>
+							<div className='uk-flex'>
 								<div className={iconStyle}>
 									<FontAwesomeIcon
 										size='2x'
@@ -33,11 +29,11 @@ const Notification = () => {
 										{...{ icon }}
 									/>
 								</div>
-								<div className='uk-width-expand'>
+								<div className='uk-width-expand uk-margin-right'>
 									<p className='uk-text-bold'>{title}</p>
 									<p>{message}</p>
 								</div>
-							</Flex>
+							</div>
 						</motion.div>
 					</motion.li>
 				))}

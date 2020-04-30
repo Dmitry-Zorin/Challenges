@@ -4,13 +4,12 @@ import React from 'react'
 
 const difficultyTypes = {
 	Easy: 'success',
-	Medium: '',
+	Medium: 'primary',
 	Hard: 'danger',
 }
 
 const DifficultyInput = ({ difficulty, setState }) => {
 	const items = Object.entries(difficultyTypes).map(([d, t]) => ({
-		key: d,
 		value: d,
 		type: t,
 		active: d === difficulty,

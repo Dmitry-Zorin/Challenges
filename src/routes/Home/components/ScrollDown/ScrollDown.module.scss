@@ -6,10 +6,10 @@ $ratio: 1 - $header-ratio;
 	min-height: 4em;
 	
 	@media (min-width: $breakpoint-medium) {
-		height: calc(#{$ratio} * #{$viewport-height-medium} - #{$features-height} - 2 * #{$card-margin-medium});
+		height: calc(#{$ratio} * #{$viewport-height-medium} - #{$features-height});
 	}
 	
 	@media (min-width: $breakpoint-large) {
-		height: calc(#{$ratio} * #{$viewport-height-large} - #{$features-height} - 2 * #{$card-margin-large});
+		height: calc(#{$ratio} * #{$viewport-height-large} - #{$features-height});
 	}
 }

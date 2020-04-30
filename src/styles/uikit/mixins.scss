@@ -1,54 +1,38 @@
-@import '../variables';
 @import '../mixins';
 @import './variables';
-@import 'node_modules/uikit/src/scss/variables-theme';
-
-@mixin hook-base-hr() {
-	border-width: 0.5px;
-	opacity: 0.25;
-}
-
-// Accordion
-@mixin hook-accordion-title() {
-	overflow: hidden;
-	
-	.uk-open & > *:not(.uk-text-meta) {
-		color: $primary-color;
-	}
-}
-
-@mixin hook-accordion-content() {
-	display: none; // Fix for mount stutter
-}
 
 // Button
 @mixin hook-button() {
 	border-radius: $border-radius-medium;
-	text-transform: $button-text-transform;
+	text-transform: uppercase;
 	transition: 0.1s ease-in-out;
 	transition-property: color, background-color;
 	padding: 0;
 }
 
 @mixin hook-button-default() {
-	@include gradient-opacity-style($card-background);
+	@include gradient-opacity-style($card-default-background);
 }
 
 @mixin hook-button-default-hover() {
-	@include gradient-opacity-style($card-background, 2);
+	@include gradient-opacity-style($card-default-background, 2);
 }
 
 @mixin hook-button-default-active() {
-	@include gradient-opacity-style($card-background, 3);
+	@include gradient-opacity-style($card-default-background, 3);
 }
 
 @mixin hook-button-primary() {
-	@include gradient-style($primary-color);
-	color: $inverse-color;
+	@include gradient-style($global-primary-background);
+	color: $global-inverse-color;
 }
 
 @mixin hook-button-primary-hover() {
-	@include gradient-style($green);
+	@include gradient-style($global-success-background);
+	
+	&.switcher {
+		@include hook-button-primary();
+	}
 }
 
 @mixin hook-button-primary-active() {
@@ -56,7 +40,7 @@
 }
 
 @mixin hook-button-danger() {
-	@include gradient-style($red);
+	@include gradient-style($global-danger-background);
 }
 
 @mixin hook-button-danger-hover() {
@@ -69,50 +53,33 @@
 
 @mixin hook-button-misc() {
 	.uk-button-secondary {
-		@include button-opacity-style($card-background);
+		@include button-opacity-style($card-default-background);
 	}
 	.uk-button-info {
-		@include button-style($blue);
+		@include button-style($global-secondary-background);
 	}
 	.uk-button-success {
-		@include button-style($green);
+		@include button-style($global-success-background);
 	}
 }
 
 // Card
-$margin-horizontal-small: 0.5em;
-$margin-horizontal-medium: 0.75em;
-
 @mixin hook-card() {
-	margin: $card-margin-small $margin-horizontal-small;
-	padding: $card-padding-vertical $card-padding;
+	margin: 2 * $card-margin-small $card-margin-small;
 	overflow: hidden;
 	border-radius: $border-radius-xlarge;
-	
-	@media (min-width: $breakpoint-small) {
-		margin: $card-margin-medium $margin-horizontal-medium;
-		padding: $card-padding-vertical $card-padding-small;
-	}
-	
-	@media (min-width: $breakpoint-medium) {
-		margin: $card-margin-medium $margin-horizontal-small;
-		padding: $card-padding-vertical $card-padding-medium;
-	}
+	z-index: 0;
 	
 	@media (min-width: $breakpoint-large) {
-		margin: $card-margin-large $margin-horizontal-medium;
-		padding: $card-padding-vertical $card-padding-large;
+		padding: $card-body-padding-vertical-l $card-body-padding-horizontal-l;
+		margin: 2 * $card-margin-large $card-margin-large;
 	}
-}
-
-@mixin hook-card-default() {
-	@include gradient-opacity-style($card-background);
 }
 
 // Form
 @mixin hook-form() {
 	@include gradient-style($base-color);
-	color: $inverse-color;
+	color: $global-inverse-color;
 	border-radius: $border-radius-medium;
 	padding-top: $font-padding-top;
 	
@@ -141,82 +108,42 @@ $margin-horizontal-medium: 0.75em;
 	@include gradient-style($red);
 }
 
-// Overlay
-@mixin hook-overlay() {
-	//backdrop-filter: blur(3px);
-}
-
 // Navbar
-@mixin hook-navbar() {
+@mixin hook-navbar-container() {
 	padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
 	font-weight: lighter;
 }
 
 @mixin hook-navbar-nav-item() {
 	height: $navbar-height-small;
-	text-transform: $navbar-nav-item-text-transform;
-	padding: 0 $margin-horizontal-small + $card-padding;
+	text-transform: uppercase;
+	margin: 0 $card-margin-small;
 	
 	@media (min-width: $breakpoint-small) {
 		height: $navbar-height-medium;
-		padding: 0 $margin-horizontal-medium + $card-padding-small;
-	}
-	
-	@media (min-width: $breakpoint-medium) {
-		padding: 0 $margin-horizontal-small + $card-padding-medium;
 	}
 	
 	@media (min-width: $breakpoint-large) {
+		padding: 0 $card-body-padding-horizontal-l;
+		margin: 0 $card-margin-large;
 		height: $navbar-height-large;
-		padding: 0 $margin-horizontal-medium + $card-padding-large;
 	}
 }
 
 @mixin hook-navbar-nav-item-hover() {
 	@media (hover: hover) {
-		color: $primary-color;
+		color: $global-link-hover-color;
 	}
 }
 
 // Pagination
 @mixin hook-pagination-item-hover() {
-	color: $primary-color
+	color: $global-link-hover-color;
 }
 
 // Search
-@mixin hook-search-input() {
-	@include hook-form();
-}
-
 @mixin hook-search-default-input() {
 	@include hook-form();
-}
-
-// Subnav
-@mixin hook-subnav-pill-item() {
-	@extend .uk-button;
-	@include hook-button-default();
-	padding: 0;
-}
-
-@mixin hook-subnav-pill-item-hover() {
-	@include hook-button-default-hover();
-}
-
-@mixin hook-subnav-pill-item-onclick() {
-	@include hook-button-default-hover();
-}
-
-@mixin hook-subnav-pill-item-active() {
-	@include hook-button-primary();
-	
-	&.success {
-		@include gradient-style($green);
-	}
-	
-	&.danger {
-		@include gradient-style($red);
-	}
 }
 
 // Text

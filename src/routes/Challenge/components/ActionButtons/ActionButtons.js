@@ -6,16 +6,15 @@ const ActionButtons = ({ saveValue, withCancel }) => (
 	<ButtonGroup>
 		{withCancel && (
 			<ActionButton
-				type='button'
 				value='Cancel'
 				icon='times-circle'
 				onClick={() => window.history.back()}
 			/>
 		)}
 		<ActionButton
-			type='submit'
 			value={saveValue}
 			icon={withCancel ? 'check-circle' : 'plus-circle'}
+			submit
 		/>
 	</ButtonGroup>
 )

@@ -4,26 +4,19 @@ $header-ratio: 0.45;
 
 .header {
 	height: 6em;
-	padding-top: $card-margin-small;
-	
-	@media (min-width: $breakpoint-small) {
-		padding-top: $card-margin-medium;
-	}
+	margin-top: 2 * $card-margin-small;
 	
 	@media (min-width: $breakpoint-large) {
-		padding-top: $card-margin-large;
+		margin-top: 2 * $card-margin-large;
 	}
 	
 	&.large {
-		height: calc(#{$header-ratio} * #{$viewport-height-small} - 2 * #{$card-margin-small});
+		margin: 0;
+		height: calc(#{$header-ratio} * #{$viewport-height-small});
 		min-height: 14em;
 		
-		@media (min-width: $breakpoint-small) {
-			height: calc(#{$header-ratio} * #{$viewport-height-medium} - 2 * #{$card-margin-medium});
-		}
-		
 		@media (min-width: $breakpoint-large) {
-			height: calc(#{$header-ratio} * #{$viewport-height-large} - 2 * #{$card-margin-large});
+			height: calc(#{$header-ratio} * #{$viewport-height-large});
 		}
 	}
 }

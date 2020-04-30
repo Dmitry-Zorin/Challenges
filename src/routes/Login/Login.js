@@ -58,7 +58,6 @@ const Login = (props) => {
 	}, [context, username, password, authOption.action, props])
 	
 	const items = Object.values(authOptions).map(o => ({
-		key: o.action,
 		icon: o.icon,
 		value: o.title,
 		active: o.action === authOption.action,
@@ -82,7 +81,7 @@ const Login = (props) => {
 					setState={setPassword}
 				/>
 				<ButtonGroup>
-					<ActionButton type='submit' icon='paper-plane' value='Submit'/>
+					<ActionButton icon='paper-plane' value='Submit' submit/>
 				</ButtonGroup>
 			</form>
 		</InnerLayout>

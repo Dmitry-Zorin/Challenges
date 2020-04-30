@@ -1,9 +1,8 @@
 import React from 'react'
-import { Card } from 'uikit-react'
 import { SlideItems, Slidenav } from './components'
 
 const Slideshow = () => (
-	<Card id='slideshow'>
+	<div id='slideshow' className='uk-card uk-card-default uk-card-body uk-margin-remove-top'>
 		<div
 			className='uk-position-relative uk-visible-toggle uk-padding-remove'
 			data-uk-slideshow='ratio: 13:12'
@@ -11,9 +10,9 @@ const Slideshow = () => (
 			<SlideItems/>
 			<Slidenav side='left'/>
 			<Slidenav side='right'/>
-			<ul className='uk-slideshow-nav uk-dotnav uk-flex-center uk-margin'/>
+			<ul className='uk-slideshow-nav uk-dotnav uk-flex-center uk-margin-top'/>
 		</div>
-	</Card>
+	</div>
 )
 
 export default Slideshow

@@ -1,11 +1,10 @@
 import AnimatedCard from 'components/animated/AnimatedCard'
 import React from 'react'
-import { Margin } from 'uikit-react'
 import Info from './components/Info'
 import { container } from './LeftColumn.module.scss'
 
 const LeftColumn = () => (
-	<Margin type='remove' className='uk-width-auto uk-width-1-3@m'>
+	<div className='uk-margin-remove uk-width-auto uk-width-1-3@m'>
 		<div className={`uk-visible@m ${container}`}>
 			<AnimatedCard className='uk-height-1-1'>
 				<Info/>
@@ -16,7 +15,7 @@ const LeftColumn = () => (
 				<Info/>
 			</div>
 		</div>
-	</Margin>
+	</div>
 )
 
 export default LeftColumn

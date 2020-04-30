@@ -62,10 +62,7 @@ const Challenge = ({ navigate, location }) => {
 	
 	return (
 		<InnerLayout title={info.title}>
-			<form
-				className='uk-form'
-				onSubmit={e => save(e, defaultName)}
-			>
+			<form className='uk-form' onSubmit={e => save(e, defaultName)}>
 				<TextInput
 					label='name'
 					value={name}
@@ -73,24 +70,10 @@ const Challenge = ({ navigate, location }) => {
 					setState={setName}
 					capital
 				/>
-				<DifficultyInput
-					setState={setDifficulty}
-					{...{ difficulty }}
-				/>
-				<TimeInput
-					name='duration'
-					ms={duration}
-					setState={setDuration}
-				/>
-				<TimeInput
-					name='delay'
-					ms={delay}
-					setState={setDelay}
-				/>
-				<ActionButtons
-					saveValue={info.save}
-					withCancel={!!c?._id}
-				/>
+				<DifficultyInput setState={setDifficulty} {...{ difficulty }}/>
+				<TimeInput name='duration' ms={duration} setState={setDuration}/>
+				<TimeInput name='delay' ms={delay} setState={setDelay}/>
+				<ActionButtons saveValue={info.save} withCancel={!!c?._id}/>
 			</form>
 		</InnerLayout>
 	)

@@ -3,34 +3,50 @@
 $inverse-global-color-mode: none;
 
 $global-font-family: $font-family;
+$global-font-size: 1em;
+
+$global-primary-background: $primary-color;
 $global-color: $base-color;
-$global-inverse-color: $inverse-color;
+$global-inverse-color: $navbar-background;
 $global-muted-color: $muted-color;
 $global-link-color: $base-color;
 $global-link-hover-color: $primary-color;
 
-$base-body-background: $navbar-background;
-$base-link-hover-text-decoration: none;
-$base-selection-background: $selection-background;
+$global-secondary-background: $blue;
+$global-success-background: $green;
+$global-danger-background: $red;
+
+$global-small-gutter: $border-radius-medium;
+$global-gutter: $border-radius-large;
+$global-medium-gutter: $border-radius-xlarge;
+
+$global-z-index: $z-index;
+
+// Base
 $base-body-font-weight: 500;
+$base-body-background: $navbar-background;
+$base-selection-background: $muted-color;
+$base-link-hover-text-decoration: none;
 
-$text-primary-color: $primary-color;
+$base-hr-border: rgba($muted-color, 0.25);
 
-// Accordion
-$accordion-item-margin-top: 0;
-$accordion-title-line-height: 2.4;
-$accordion-title-color: $base-color;
-$accordion-title-hover-color: $primary-color;
-$accordion-content-margin-top: 0;
+// Card
+$card-default-background: $card-background;
+$card-body-padding-horizontal: $border-radius-large;
+$card-body-padding-horizontal-l: $border-radius-xlarge;
+$card-body-padding-vertical: $border-radius-large;
+$card-body-padding-vertical-l: $border-radius-xlarge;
 
-// Button
-$button-border-width: 0;
+// Container
+$container-padding-horizontal: 0;
+$container-padding-horizontal-s: $card-margin-small;
+$container-padding-horizontal-m: $card-margin-small;
 
-// Grid
-$global-small-gutter: 20px;
+// Divider
+$divider-vertical-border: $base-hr-border;
 
 // Form
-$form-focus-color: $inverse-color;
+$form-focus-color: $global-inverse-color;
 $form-padding-horizontal: $border-radius-medium;
 
 // Overlay
@@ -40,24 +56,25 @@ $overlay-primary-color-mode: dark;
 
 // Offcanvas
 $offcanvas-bar-background: $navbar-background;
-$offcanvas-bar-color-mode: $base-color;
-$offcanvas-bar-padding-horizontal: calc(20px + env(safe-area-inset-left));
+$offcanvas-bar-color-mode: dark;
+$offcanvas-bar-padding-horizontal: calc(env(safe-area-inset-left) + #{$global-gutter});
 
 // Label
 $label-border-radius: $border-radius-small;
 
 // Navbar
 $navbar-nav-item-height: 0;
-$navbar-background: $navbar-background;
-$navbar-nav-item-color: $primary-color;
-$navbar-nav-item-onclick-color: $primary-color;
-$navbar-nav-item-padding-horizontal: 0;
-$navbar-nav-item-font-size: 16px;
+$navbar-nav-item-padding-horizontal: $card-body-padding-horizontal;
+$navbar-nav-item-font-size: $global-font-size;
+$navbar-nav-item-color: $global-primary-background;
+$navbar-nav-item-onclick-color: $global-primary-background;
 
 // Slidenav
-$slidenav-color: $base-color;
-$slidenav-hover-color: $primary-color;
+$slidenav-color: $global-link-color;
+$slidenav-hover-color: $global-link-hover-color;
+
+// Text
+$text-primary-color: $global-primary-background;
 
 // Tooltip
-$tooltip-color: $base-color;
 $tooltip-border-radius: $border-radius-small;

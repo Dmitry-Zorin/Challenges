@@ -3,7 +3,6 @@ import AnimatedDiv from 'components/animated/AnimatedDiv'
 import { infinity } from 'data/settings.json'
 import React from 'react'
 import { getChallengeTime } from 'scripts/time'
-import { Flex } from 'uikit-react'
 
 const icons = {
 	ongoing: 'arrow-down',
@@ -20,16 +19,16 @@ const GroupItem = ({ group, challenge, extended }) => {
 			? icons[group] : 'exclamation'
 	
 	return (
-		<AnimatedDiv className='uk-flex uk-margin-small'>
+		<AnimatedDiv className='uk-flex'>
 			<p
-				className={`
-					${extended ? '' : 'text-medium uk-text-truncate'}
-					uk-width-expand
-				`}
+				className={[
+					'uk-width-expand',
+					!extended && 'uk-text-truncate'
+				].join(' ')}
 			>
 				{challenge.name}
 			</p>
-			<Flex>
+			<div className='uk-flex'>
 				<p className='uk-text-meta'>
 					<FontAwesomeIcon
 						className='icon-right'
@@ -38,7 +37,7 @@ const GroupItem = ({ group, challenge, extended }) => {
 					/>
 					{!isInfiniteTime && time}
 				</p>
-			</Flex>
+			</div>
 		</AnimatedDiv>
 	)
 }

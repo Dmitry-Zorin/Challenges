@@ -51,11 +51,7 @@ const Registration = (props) => {
 					setState={setPassword}
 				/>
 				<ButtonGroup>
-					<ActionButton
-						type='submit'
-						icon='user-plus'
-						value='create account'
-					/>
+					<ActionButton icon='user-plus' value='create account' submit/>
 				</ButtonGroup>
 			</form>
 		</InnerLayout>
