@@ -36,7 +36,6 @@ const App = () => {
 			challenges = updateTime(contextRef.current, challenges)
 			updateContext({ challenges })
 		},
-		setTitle: (title) => updateContext({ title }),
 	})
 	const contextRef = useRef(context)
 	const intervalRef = useRef()

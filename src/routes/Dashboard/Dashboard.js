@@ -1,12 +1,10 @@
 import DataContext from 'contexts/DataContext'
 import { challengeGroups } from 'data/settings.json'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { ChallengeGroup, LeftColumn, NewChallengeButton } from './components'
 
 const Dashboard = () => {
-	const { challenges, setTitle } = useContext(DataContext)
-	
-	useEffect(() => setTitle(), [setTitle])
+	const { challenges } = useContext(DataContext)
 	
 	return (
 		<div className='uk-flex'>

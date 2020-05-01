@@ -8,6 +8,7 @@ import { Accordion, Pagination, Search } from './components'
 
 const ChallengeGroupExtended = ({ group, navigate }) => {
 	const context = useContext(DataContext)
+	
 	const [pattern, setPattern] = useState(/.*/)
 	const [page, setPage] = useState(1)
 	
@@ -33,7 +34,7 @@ const ChallengeGroupExtended = ({ group, navigate }) => {
 	}))
 	
 	return (
-		<InnerLayout title={group} {...{ items }}>
+		<InnerLayout {...{ items }}>
 			<Search onChange={search}/>
 			{!challenges.length ? <NoChallenges extended/> : (
 				<Accordion key={group} {...{ challenges, group, page, navigate }}/>

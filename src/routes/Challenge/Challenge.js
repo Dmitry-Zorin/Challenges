@@ -62,7 +62,10 @@ const Challenge = ({ navigate, location }) => {
 	
 	return (
 		<InnerLayout title={info.title}>
-			<form className='uk-form' onSubmit={e => save(e, defaultName)}>
+			<form
+				className='uk-form uk-margin-small-top'
+				onSubmit={e => save(e, defaultName)}
+			>
 				<TextInput
 					label='name'
 					value={name}

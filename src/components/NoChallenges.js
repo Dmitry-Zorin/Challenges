@@ -3,11 +3,13 @@ import React from 'react'
 
 const NoChallenges = ({ extended, className, ...props }) => (
 	<p
-		className={`
-			uk-text-center
-			uk-text-muted
-			${className}
-		`}
+		className={[
+			'uk-text-center',
+			'uk-text-muted',
+			'uk-margin-top',
+			extended ? 'text-medium uk-padding' : 'uk-margin-small-bottom',
+			className,
+		].join(' ')}
 		{...props}
 	>
 		<FontAwesomeIcon

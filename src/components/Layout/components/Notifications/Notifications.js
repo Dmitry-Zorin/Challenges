@@ -8,6 +8,7 @@ const { notification, container, icon: iconStyle, ...types } = styles
 
 const Notification = () => {
 	const { notifications, removeNotification } = useContext(DataContext)
+	
 	return (
 		<ul className={container}>
 			<AnimatePresence>

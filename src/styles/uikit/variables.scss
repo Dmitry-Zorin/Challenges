@@ -16,10 +16,6 @@ $global-secondary-background: $blue;
 $global-success-background: $green;
 $global-danger-background: $red;
 
-$global-small-gutter: $border-radius-medium;
-$global-gutter: $border-radius-large;
-$global-medium-gutter: $border-radius-xlarge;
-
 $global-z-index: $z-index;
 
 // Base
@@ -52,12 +48,10 @@ $form-padding-horizontal: $border-radius-medium;
 // Overlay
 $overlay-default-background: $card-background;
 $overlay-primary-background: $background;
-$overlay-primary-color-mode: dark;
 
 // Offcanvas
 $offcanvas-bar-background: $navbar-background;
-$offcanvas-bar-color-mode: dark;
-$offcanvas-bar-padding-horizontal: calc(env(safe-area-inset-left) + #{$global-gutter});
+$offcanvas-bar-padding-horizontal: calc(env(safe-area-inset-left) + #{$card-body-padding-horizontal});
 
 // Label
 $label-border-radius: $border-radius-small;

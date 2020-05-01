@@ -3,7 +3,7 @@ import ButtonGroup from 'components/ButtonGroup'
 import React from 'react'
 
 const ActionButtons = ({ saveValue, withCancel }) => (
-	<ButtonGroup>
+	<ButtonGroup padding>
 		{withCancel && (
 			<ActionButton
 				value='Cancel'

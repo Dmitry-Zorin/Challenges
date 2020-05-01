@@ -8,34 +8,49 @@ import React, { useCallback, useContext, useState } from 'react'
 import { addNotification } from 'scripts/notification'
 import { authorize } from 'scripts/requests'
 
-const Registration = (props) => {
+const Authorization = ({ action = 'signUp', items, ...props }) => {
 	const context = useContext(DataContext)
+	
 	const [username, setUsername] = useState()
 	const [password, setPassword] = useState()
 	
-	const submit = useCallback(e => {
+	const onSubmit = useCallback(e => {
 		e.preventDefault()
 		
 		!(username && password) ? addNotification(context, invalid)
-			: authorize(context, 'signUp', { username, password })
+			: authorize(context, action, { username, password })
 				.then(user => {
 					if (!user) return
 					props.login(user)
 					props.navigate('/')
 				})
 				.catch(() => {})
-	}, [context, username, password, props])
+	}, [context, username, password, action, props])
+	
+	const buttonProps = items ? {
+		icon: 'paper-plane',
+		value: 'submit',
+	} : {
+		icon: 'user-plus',
+		value: 'create account',
+	}
 	
 	return (
-		<InnerLayout>
-			<p className='text-xlarge uk-text-light uk-text-center'>
-				Start using
-				<span className='uk-text-primary uk-text-bold'> Challenges </span>
-				with one simple step!
-			</p>
+		<InnerLayout {...{ items }}>
+			{!items && (
+				<p className='text-xlarge uk-text-light uk-text-center uk-padding-small'>
+					Start using
+					<span className='uk-text-primary uk-text-bold'> Challenges </span>
+					with one simple step!
+				</p>
+			)}
 			<form
-				className='uk-form uk-text-normal uk-margin-medium-top'
-				onSubmit={submit}
+				className={`
+					uk-form
+					uk-text-normal
+					uk-margin${items ? '-medium-top' : ''}
+				`}
+				{...{ onSubmit }}
 			>
 				<TextInput
 					icon='user'
@@ -50,12 +65,12 @@ const Registration = (props) => {
 					value={password}
 					setState={setPassword}
 				/>
-				<ButtonGroup>
-					<ActionButton icon='user-plus' value='create account' submit/>
+				<ButtonGroup padding>
+					<ActionButton {...buttonProps} submit/>
 				</ButtonGroup>
 			</form>
 		</InnerLayout>
 	)
 }
 
-export default Registration
+export default Authorization
