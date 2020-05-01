@@ -12,11 +12,11 @@ const info = {
 	delete: { icon: 'trash-alt', buttonType: 'danger' },
 }
 
-const OptionButtons = ({ challenge, navigate, options }) => {
+const OptionButton = ({ challenge, navigate, option }) => {
 	const context = useContext(DataContext)
 	
-	const update = (action) => {
-		if (action === 'edit') {
+	const onClick = () => {
+		if (option === 'edit') {
 			return navigate('/edit', { state: { challenge } })
 		}
 		const { challenges, updateChallenges } = context
@@ -27,33 +27,25 @@ const OptionButtons = ({ challenge, navigate, options }) => {
 		
 		updateChallenges(challenges)
 		
-		updateChallenge(context, action, { id }, name)
+		updateChallenge(context, option, { id }, name)
 			.then(updateChallenges).catch(() => {})
 	}
 	
 	return (
-		<div className='uk-width-expand uk-text-right'>
-			{[...options || [], 'edit', 'delete'].map(o => {
-					const action = info[o.toLowerCase()]
-					return (
-						<AnimatedButton
-							key={o}
-							className={`uk-button-${action.buttonType} uk-padding-remove`}
-							style={{ width: '3em', marginLeft: '0.5em', borderRadius: '100%' }}
-							data-uk-tooltip={`title: ${upperFirst(o)}; delay: 100`}
-							onClick={() => update(o)}
-						>
-							<FontAwesomeIcon
-								icon={action.icon}
-								className='icon-center'
-								transform='grow-1 right-0.5 down-1'
-							/>
-						</AnimatedButton>
-					)
-				},
-			)}
-		</div>
+		<AnimatedButton
+			key={option}
+			className={`uk-button-${info[option].buttonType} uk-padding-remove`}
+			style={{ width: '3em', marginLeft: '0.5em', borderRadius: '100%' }}
+			data-uk-tooltip={`title: ${upperFirst(option)}; delay: 100`}
+			{...{ onClick }}
+		>
+			<FontAwesomeIcon
+				icon={info[option].icon}
+				className='icon-center'
+				transform='grow-1 right-0.5 down-1'
+			/>
+		</AnimatedButton>
 	)
 }
 
-export default OptionButtons
+export default OptionButton

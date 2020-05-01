@@ -7,7 +7,7 @@ import NumberInput from './components/NumberInput'
 import { container, unknown } from './TimeInput.module.scss'
 
 const TimeInput = (props) => {
-	const [disabled, setDisabled] = useState(false)
+	const [disabled, setDisabled] = useState(props.ms > toMs.MANY_YEARS)
 	
 	return (
 		<AnimatedDiv className='uk-margin-medium'>
@@ -24,9 +24,9 @@ const TimeInput = (props) => {
 				/>
 			</div>
 			<AnimatedDiv
+				className={container}
 				key={disabled}
 				transition={{ duration: 0.25 }}
-				className={container}
 			>
 				{disabled ? (
 					<div className={`${unknown} uk-flex`}>

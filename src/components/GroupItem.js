@@ -32,7 +32,7 @@ const GroupItem = ({ group, challenge, extended }) => {
 				<p className='uk-text-meta'>
 					<FontAwesomeIcon
 						className='icon-right'
-						transform={`shrink-4 down-${extended ? 2 : 0.75}`}
+						transform={`shrink-4 down-${extended ? 1.5 : 0.75}`}
 						{...{ icon }}
 					/>
 					{!isInfiniteTime && time}

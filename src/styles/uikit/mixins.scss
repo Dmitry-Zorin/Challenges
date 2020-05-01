@@ -130,12 +130,6 @@
 	}
 }
 
-@mixin hook-navbar-nav-item-hover() {
-	@media (hover: hover) {
-		color: $global-link-hover-color;
-	}
-}
-
 // Pagination
 @mixin hook-pagination-item-hover() {
 	color: $global-link-hover-color;

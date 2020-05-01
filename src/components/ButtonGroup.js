@@ -7,7 +7,7 @@ const ButtonGroup = ({ children, className = '', padding = false, ...props }) =>
 			'uk-flex',
 			'uk-flex-center',
 			'uk-grid-small',
-			padding && 'uk-padding-small',
+			padding && 'uk-padding-small uk-padding-remove-horizontal',
 			className,
 		].join(' ')}
 		{...props}
