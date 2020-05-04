@@ -8,7 +8,7 @@ const Overlay = ({ children, to = '', text }) => {
 	const [isVisible, setIsVisible] = useState(false)
 	
 	return (
-		<Link to={`/${to}`}>
+		<Link {...{ to }}>
 			<AnimatedCard
 				onMouseEnter={() => setIsVisible(true)}
 				onMouseLeave={() => setIsVisible(false)}
@@ -20,14 +20,14 @@ const Overlay = ({ children, to = '', text }) => {
 						'uk-position-right',
 						'uk-hidden-touch',
 						'uk-flex',
-						isVisible && 'blur'
+						isVisible ? 'blur' : '',
 					].join(' ')}
 					style={{ width: 150 }}
 					initial={{ x: '100%', opacity: 0 }}
 					animate={{ x: isVisible ? 0 : '100%', opacity: +isVisible }}
 					transition={{ duration: 0.4 }}
 				>
-					<p className='uk-margin-auto-vertical uk-text-primary text-medium'>
+					<p className='uk-text-primary text-medium'>
 						{upperFirst(text)}
 					</p>
 				</motion.div>

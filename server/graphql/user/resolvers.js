@@ -26,12 +26,16 @@ const resolvers = {
 			context.logout()
 			return getUser(context)
 		},
+		settingsEdit: (_, { settings }, context) => {
+			const user = context.getUser()
+			user.settings = Object.assign(user.settings, settings)
+			
+			return user.save()
+				.then(() => ({ settings: user.settings }))
+				.catch(console.log)
+		},
 	},
 }
-
-const getUser = (context) => ({
-	user: context.getUserInfo(context.getUser()),
-})
 
 const authenticate = ({ username, password }, context) => (
 	context.authenticate('graphql-local', { username, password })
@@ -40,5 +44,9 @@ const authenticate = ({ username, password }, context) => (
 			return getUser(context)
 		})
 )
+
+const getUser = (context) => ({
+	user: context.getUserInfo(context.getUser()),
+})
 
 module.exports = resolvers

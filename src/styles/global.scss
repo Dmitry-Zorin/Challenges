@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 body {
 	box-sizing: content-box;
@@ -13,17 +14,33 @@ body {
 	min-height: 100vh;
 }
 
-p {
-	margin: 0 auto !important;
-	padding-top: $font-padding-top;
+p, a.text {
+	@include text-crop();
+}
+
+p, .uk-list > li {
+	//border: 1px solid;
 }
 
 a {
 	-webkit-user-drag: none;
 }
 
-svg:not(.icon-center):not(.icon-right) {
-	@extend .icon-left;
+svg {
+	margin: 0 $icon-margin 0 0;
+	transform: scale(1);
+	
+	&.icon-center {
+		margin: 0;
+	}
+	
+	&.icon-right {
+		margin: 0 0 0 $icon-margin;
+	}
+	
+	&.svg-inline--fa {
+		height: 0.8em;
+	}
 }
 
 .text-medium {
@@ -40,14 +57,6 @@ svg:not(.icon-center):not(.icon-right) {
 
 .text-xlarge {
 	font-size: $font-size-xlarge;
-}
-
-.icon-left {
-	margin-right: $icon-margin;
-}
-
-.icon-right {
-	margin-left: $icon-margin !important;
 }
 
 .round-border {

@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import AnimatedButton from 'components/animated/AnimatedButton'
 import DataContext from 'contexts/DataContext'
 import { upperFirst } from 'lodash'
@@ -35,16 +34,11 @@ const OptionButton = ({ challenge, navigate, option }) => {
 		<AnimatedButton
 			key={option}
 			className={`uk-button-${info[option].buttonType} uk-padding-remove`}
-			style={{ width: '3em', marginLeft: '0.5em', borderRadius: '100%' }}
+			icon={info[option].icon}
 			data-uk-tooltip={`title: ${upperFirst(option)}; delay: 100`}
+			style={{ width: '3em', marginLeft: '0.5em', borderRadius: '100%' }}
 			{...{ onClick }}
-		>
-			<FontAwesomeIcon
-				icon={info[option].icon}
-				className='icon-center'
-				transform='grow-1 right-0.5 down-1'
-			/>
-		</AnimatedButton>
+		/>
 	)
 }
 

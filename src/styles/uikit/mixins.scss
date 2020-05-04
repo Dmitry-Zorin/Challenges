@@ -11,15 +11,15 @@
 }
 
 @mixin hook-button-default() {
-	@include gradient-opacity-style($card-default-background);
+	@include gradient-opacity-style();
 }
 
 @mixin hook-button-default-hover() {
-	@include gradient-opacity-style($card-default-background, 2);
+	@include gradient-opacity-style(2);
 }
 
 @mixin hook-button-default-active() {
-	@include gradient-opacity-style($card-default-background, 3);
+	@include hook-button-default-hover();
 }
 
 @mixin hook-button-primary() {
@@ -39,6 +39,18 @@
 	@include hook-button-primary-hover();
 }
 
+@mixin hook-button-secondary() {
+	@include gradient-opacity-style(2);
+}
+
+@mixin hook-button-secondary-hover() {
+	@include hook-button-secondary();
+}
+
+@mixin hook-button-secondary-active() {
+	@include hook-button-secondary();
+}
+
 @mixin hook-button-danger() {
 	@include gradient-style($global-danger-background);
 }
@@ -52,9 +64,6 @@
 }
 
 @mixin hook-button-misc() {
-	.uk-button-secondary {
-		@include button-opacity-style($card-default-background);
-	}
 	.uk-button-info {
 		@include button-style($global-secondary-background);
 	}
@@ -69,10 +78,16 @@
 	overflow: hidden;
 	border-radius: $border-radius-xlarge;
 	z-index: 0;
+	transition: 0.5s;
+	transition-property: background-color;
 	
 	@media (min-width: $breakpoint-large) {
 		padding: $card-body-padding-vertical-l $card-body-padding-horizontal-l;
 		margin: 2 * $card-margin-large $card-margin-large;
+	}
+	
+	&.light {
+		background: $card-background-light;
 	}
 }
 
@@ -81,11 +96,6 @@
 	@include gradient-style($base-color);
 	color: $global-inverse-color;
 	border-radius: $border-radius-medium;
-	padding-top: $font-padding-top;
-	
-	&::placeholder {
-		padding-top: $font-padding-top / 2;
-	}
 }
 
 // Flex
@@ -96,6 +106,12 @@
 }
 
 // Label
+@mixin hook-label() {
+	@include text-crop(1.1, 4px, 4px);
+	border-radius: $border-radius-small;
+	text-transform: uppercase;
+}
+
 @mixin hook-label-success() {
 	@include gradient-style($green);
 }
@@ -127,6 +143,13 @@
 		padding: 0 $card-body-padding-horizontal-l;
 		margin: 0 $card-margin-large;
 		height: $navbar-height-large;
+	}
+}
+
+// Overlay
+@mixin hook-overlay-default() {
+	.light & {
+		background: $card-background-light;
 	}
 }
 

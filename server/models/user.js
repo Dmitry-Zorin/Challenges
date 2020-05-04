@@ -17,10 +17,15 @@ const challengesSchema = new Schema({
 	timestamps: true,
 })
 
+const settingsSchema = new Schema({
+	theme: { type: String, required: true },
+})
+
 const userSchema = new Schema({
 	username: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
 	challenges: { type: challengesSchema, required: true },
+	settings: { type: settingsSchema, required: true },
 }, {
 	timestamps: true,
 })

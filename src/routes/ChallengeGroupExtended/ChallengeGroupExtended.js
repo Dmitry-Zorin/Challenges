@@ -30,14 +30,20 @@ const ChallengeGroupExtended = ({ group, navigate }) => {
 	const items = challengeGroups.map(g => ({
 		value: upperFirst(g),
 		active: g === group,
-		onClick: () => navigate(`../${g}`),
+		onClick: () => {
+			setPage(1)
+			navigate(`../${g}`)
+		},
 	}))
 	
 	return (
-		<InnerLayout {...{ items }}>
+		<InnerLayout className='uk-margin-medium-bottom' {...{ items }}>
 			<Search onChange={search}/>
 			{!challenges.length ? <NoChallenges extended/> : (
-				<Accordion key={group} {...{ challenges, group, page, navigate }}/>
+				<Accordion
+					key={group + page}
+					{...{ challenges, group, page, navigate }}
+				/>
 			)}
 			{challenges.length > itemsPerPage && (
 				<Pagination {...{ page, maxPage, changePage }}/>

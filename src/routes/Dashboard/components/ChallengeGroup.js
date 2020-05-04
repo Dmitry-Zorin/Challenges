@@ -9,11 +9,15 @@ const ChallengeGroup = ({ title, group = [] }) => (
 		<p className='uk-text-primary text-large uk-text-center'>
 			{upperFirst(title)}
 		</p>
-		<div className='text-medium' data-uk-margin>
+		<div className='text-medium'>
 			{!group.length ? <NoChallenges/> : (
-				group.slice(0, 4).map(c => (
-					<GroupItem key={c._id} group={title} challenge={c}/>
-				))
+				<ul className='uk-list'>
+					{group.slice(0, 4).map(c => (
+						<li key={c._id}>
+							<GroupItem group={title} challenge={c}/>
+						</li>
+					))}
+				</ul>
 			)}
 		</div>
 	</Overlay>

@@ -10,31 +10,45 @@ import {
 	Home,
 	Login,
 } from 'routes'
-import { getUserInfo } from 'scripts/requests'
+import { getUserInfo, saveSettings } from 'scripts/requests'
 import { updateTime } from 'scripts/time'
 
 const App = () => {
 	const [context, setContext] = useState({
-		notifications: [],
-		updateNotifications: (notifications) => {
-			updateContext({ notifications })
-			setTimeout(() => {
-				const currentNotifications = contextRef.current.notifications
-				if (currentNotifications[0]?.id !== notifications.pop()?.id) return
-				updateContext({ notifications: currentNotifications.slice(1) })
-			}, notificationTimeout)
-		},
-		removeNotification: (id) => {
-			const currentNotifications = contextRef.current.notifications
-			const notifications = currentNotifications.filter(n => n.id !== id)
-			updateContext({ notifications })
-		},
 		showSpinner: (spinnerIsVisible = true) => {
 			updateContext({ spinnerIsVisible })
 		},
 		updateChallenges: (challenges) => {
 			challenges = updateTime(contextRef.current, challenges)
 			updateContext({ challenges })
+		},
+		notifications: [],
+		addNotification: (notification) => {
+			contextRef.current.notifications.push(notification)
+			updateContext()
+			setTimeout(() => {
+				if (context.notifications[0]?.id !== notification.id) return
+				updateContext({ notifications: context.notifications.slice(1) })
+			}, notificationTimeout)
+		},
+		removeNotification: (id) => {
+			const notifications = context.notifications.filter(n => n.id !== id)
+			updateContext({ notifications })
+		},
+		changeSetting: (setting) => {
+			Object.assign(contextRef.current.userInfo.settings, {
+				...setting,
+				areChanged: true,
+			})
+			updateContext()
+		},
+		saveSettings: () => {
+			saveSettings(context, context.userInfo.settings)
+				.then(() => {
+					delete contextRef.current.userInfo.settings.areChanged
+					updateContext()
+				})
+				.catch(() => {})
 		},
 	})
 	const contextRef = useRef(context)
@@ -45,8 +59,8 @@ const App = () => {
 		setContext({ ...contextRef.current })
 	}, [])
 	
-	const login = useCallback(({ username, challenges }) => {
-		updateContext({ userInfo: { username } })
+	const login = useCallback(({ username, challenges, settings }) => {
+		updateContext({ userInfo: { username, settings } })
 		context.updateChallenges(challenges)
 		intervalRef.current = setInterval(context.updateChallenges, updateTimeout)
 	}, [context, updateContext])

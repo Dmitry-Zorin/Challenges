@@ -6,8 +6,8 @@ import { container } from './Features.module.scss'
 
 const Features = () => (
 	<AnimatedCard className={container}>
-		<div className='uk-flex uk-height-1-1'>
-			<ul className='uk-list uk-flex uk-flex-wrap uk-flex-wrap-stretch uk-text-center'>
+		<div className='uk-flex uk-height-1-1 uk-text-center'>
+			<ul className='uk-list uk-flex uk-flex-wrap uk-flex-wrap-stretch'>
 				{features.map(({ component, ...props }, i) => (
 					<React.Fragment key={i}>
 						<Column {...props}>{component()}</Column>

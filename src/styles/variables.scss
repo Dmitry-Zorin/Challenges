@@ -4,7 +4,6 @@ $z-index: 100;
 
 // Font
 $font-family: 'Baloo 2', sans-serif;
-$font-padding-top: 0.15rem;
 
 $font-size-medium: 1.1em;
 $font-size-large: 1.4em;
@@ -14,18 +13,18 @@ $font-size-xlarge: 2em;
 // Colors
 $primary-color: #FFBB3C;
 
-// https://coolors.co/2E304A-322A39
-$background1: #272C44;
-$background2: #3F263D;
-$background: linear-gradient(to bottom right, $background1, $background2, $background1);
+// https://coolors.co/gradient-maker/483456-2B3256?type=radial&position=37.5,100
+$background1: #483456;
+$background2: #2B3256;
+$background: radial-gradient(circle, $background1, $background2);
 
-$navbar-background: darken($background1, 5);
+$navbar-background: darken($background2, 11);
 
-$opacity: 0.1;
-$card-background: rgba(white, $opacity);
+$card-background: rgba(darken($background2, 16), 0.5);
+$card-background-light: rgba(white, 0.1);
 
 $base-color: white;
-$muted-color: darken($base-color, 25);
+$muted-color: darken($base-color, 37.5);
 
 // https://coolors.co/1a93dd-23af59-c94049
 $blue: #1A93DD;
@@ -54,7 +53,8 @@ $viewport-height-small: calc(100vh - #{$navbar-height-small});
 $viewport-height-medium: calc(100vh - #{$navbar-height-medium});
 $viewport-height-large: calc(100vh - #{$navbar-height-large});
 
-$icon-margin: 0.25em;
+$text-margin: 10px;
+$icon-margin: 0.1em;
 
 // Shared
 $header-ratio: 0.45;

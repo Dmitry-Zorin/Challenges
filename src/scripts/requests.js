@@ -21,9 +21,14 @@ const challengesQuery = `challenges {
 	completed ${challengeQuery}
 }`
 
+const settingsQuery = `settings {
+	theme
+}`
+
 const userQuery = `{
 	username
 	${challengesQuery}
+	${settingsQuery}
 }`
 
 // Shortcuts
@@ -85,6 +90,29 @@ export const logout = (context) => (
 		})
 		.catch(reject)
 )
+
+export const saveSettings = (context, settings) => {
+	const query = `mutation($theme: String!) {
+		settingsEdit(
+			settings: {
+				theme: $theme
+			}
+		) {
+			${settingsQuery}
+		}
+	}`
+	return postQuery(context, query, 'save user settings', settings)
+		.then(res => {
+			if (res?.settings === null) {
+				return reject(addNotification(context, errors.settings))
+			}
+			if (res?.settings === undefined) {
+				return reject(addNotification(context, errors.response))
+			}
+			addNotification(context, user.settings)
+		})
+		.catch(reject)
+}
 
 export const saveChallenge = (context, action, variables) => {
 	const info = {
@@ -162,7 +190,11 @@ const postQuery = (context, query, action, variables) => {
 	const api = query.match(/{\s*([^({ ]+)\s*[({]/)[1]
 	context.showSpinner()
 	
-	return axios.post(apiServer, { query, variables }, { withCredentials: true })
+	return axios.post(
+		apiServer,
+		{ query: query.replace(/\s+/g, ' '), variables },
+		{ withCredentials: true },
+	)
 		.then(res => resolve(res.data.data[api]))
 		.catch(err => reject(handleError(context, err, `Failed to ${action}`)))
 		.finally(() => context.showSpinner(false))

@@ -1,17 +1,25 @@
 @import './variables';
 
-@mixin gradient-style($color, $amount: 4) {
+@mixin gradient-style($color) {
+	$amount: 5;
+	
 	background: linear-gradient(
+		//darken($color, $amount),
 			lighten($color, $amount),
-			darken($color, $amount)
+			darken($color, $amount),
 	);
 	color: $base-color;
 }
 
-@mixin gradient-opacity-style($color, $multiplier: 1, $amount: 0.02) {
+@mixin gradient-opacity-style($multiplier: 1) {
+	$color: white;
+	$opacity: 0.05;
+	$diff: 0.1;
+	$amount: 0.025;
+	
 	background: linear-gradient(
-			rgba($color, $multiplier * ($opacity + $amount)),
-			rgba($color, $multiplier * ($opacity - $amount))
+			rgba($color, $opacity + $multiplier * ($diff + $amount)),
+			rgba($color, $opacity + $multiplier * ($diff - $amount))
 	);
 	color: $base-color;
 }
@@ -22,8 +30,31 @@
 	}
 }
 
-@mixin button-opacity-style($color) {
-	&, &:hover, &:active {
-		@include gradient-opacity-style($color, 3);
+// http://text-crop.eightshapes.com
+@mixin text-crop($line-height: 1.3, $top-adjustment: $text-margin, $bottom-adjustment: $text-margin) {
+	$top-crop: 0;
+	$bottom-crop: 6;
+	$crop-font-size: 36;
+	$crop-line-height: 1.2;
+	
+	$dynamic-top-crop: max(($top-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
+	$dynamic-bottom-crop: max(($bottom-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
+	
+	line-height: $line-height;
+	
+	&::before,
+	&::after {
+		content: '';
+		display: block;
+		height: 0;
+		width: 0;
+	}
+	
+	&::before {
+		margin-bottom: calc(-#{$dynamic-top-crop}em + #{$top-adjustment});
+	}
+	
+	&::after {
+		margin-top: calc(-#{$dynamic-bottom-crop}em + #{$bottom-adjustment});
 	}
 }

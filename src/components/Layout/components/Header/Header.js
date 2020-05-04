@@ -8,20 +8,14 @@ const Header = ({ location }) => {
 	
 	const isRoot = location.pathname === '/'
 	const isHomePage = isRoot && challenges && !challenges?.ongoing
-	const sizeStyle = isHomePage && large
+	const sizeStyle = isHomePage ? large : ''
 	
 	return (
 		<div className={[header, sizeStyle, 'uk-flex'].join(' ')}>
 			<div className='uk-text-center'>
 				<p className={[titleStyle, sizeStyle].join(' ')}>
-					<>
-						<FontAwesomeIcon
-							icon='tasks'
-							className='uk-visible@s'
-							transform='shrink-3 down-1.5'
-						/>
-						Challenges
-					</>
+					<FontAwesomeIcon icon='tasks' className='uk-visible@s'/>
+					Challenges
 				</p>
 				{isHomePage && (
 					<p className='text-larger uk-text-italic uk-text-light uk-padding'>

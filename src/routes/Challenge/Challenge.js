@@ -63,7 +63,7 @@ const Challenge = ({ navigate, location }) => {
 	return (
 		<InnerLayout title={info.title}>
 			<form
-				className='uk-form uk-margin-small-top'
+				className='uk-form'
 				onSubmit={e => save(e, defaultName)}
 			>
 				<TextInput
@@ -76,7 +76,7 @@ const Challenge = ({ navigate, location }) => {
 				<DifficultyInput setState={setDifficulty} {...{ difficulty }}/>
 				<TimeInput name='duration' ms={duration} setState={setDuration}/>
 				<TimeInput name='delay' ms={delay} setState={setDelay}/>
-				<ActionButtons saveValue={info.save} withCancel={!!c?._id}/>
+				<ActionButtons saveValue={info.save} withCancel={!!c?._id} padding/>
 			</form>
 		</InnerLayout>
 	)

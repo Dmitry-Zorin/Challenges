@@ -36,15 +36,15 @@ const Authorization = ({ action = 'signUp', items, ...props }) => {
 	}
 	
 	return (
-		<InnerLayout {...{ items }} padding>
+		<InnerLayout {...{ items }}>
 			{!items && (
-				<p className='text-xlarge uk-text-light uk-text-center uk-padding-small'>
+				<p className='text-xlarge uk-text-light uk-text-center uk-margin-medium'>
 					Start using
 					<span className='uk-text-primary uk-text-bold'> Challenges </span>
 					with one simple step!
 				</p>
 			)}
-			<form className='uk-form uk-text-normal uk-margin-top' {...{ onSubmit }}>
+			<form className='uk-form uk-text-normal' {...{ onSubmit }}>
 				<TextInput
 					icon='user'
 					label='username'

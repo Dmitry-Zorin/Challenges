@@ -27,7 +27,7 @@ const Accordion = ({ challenges, page, group, navigate }) => {
 	return (
 		<motion.ul
 			className='uk-list'
-			style={{ fontSize: '1.25em', lineHeight: 2.5 }}
+			style={{ fontSize: '1.25em' }}
 			variants={{ animate: { transition: { staggerChildren: 0.05 } } }}
 		>
 			{challenges.slice((page - 1) * itemsPerPage, page * itemsPerPage)
@@ -43,11 +43,12 @@ const Accordion = ({ challenges, page, group, navigate }) => {
 									animate={{ height: 'auto', opacity: 1 }}
 									exit={{ height: 0, opacity: 0 }}
 									transition={{ duration: 0.2 }}
-									style={{ overflow: 'hidden' }}
 								>
 									<div className='uk-flex'>
-										<div className={`uk-label uk-label-${labelTypes[c.difficulty.toLowerCase()]}`}>
-											<p>{c.difficulty}</p>
+										<div className='uk-flex'>
+											<div className={`uk-label uk-label-${labelTypes[c.difficulty.toLowerCase()]}`}>
+												{c.difficulty}
+											</div>
 										</div>
 										<div className='uk-width-expand uk-text-right'>
 											{[...options[group], 'edit', 'delete'].map(o => (

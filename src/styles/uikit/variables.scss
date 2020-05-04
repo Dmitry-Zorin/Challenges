@@ -20,18 +20,18 @@ $global-z-index: $z-index;
 
 // Base
 $base-body-font-weight: 500;
-$base-body-background: $navbar-background;
+$base-body-background: $background2;
 $base-selection-background: $muted-color;
 $base-link-hover-text-decoration: none;
-
 $base-hr-border: rgba($muted-color, 0.25);
+$base-margin-vertical: 0;
 
 // Card
 $card-default-background: $card-background;
 $card-body-padding-horizontal: $border-radius-large;
 $card-body-padding-horizontal-l: $border-radius-xlarge;
-$card-body-padding-vertical: $border-radius-large;
-$card-body-padding-vertical-l: $border-radius-xlarge;
+$card-body-padding-vertical: calc(#{$border-radius-large} - #{$text-margin});
+$card-body-padding-vertical-l: calc(#{$border-radius-xlarge} - #{$text-margin});
 
 // Container
 $container-padding-horizontal: 0;
@@ -53,8 +53,8 @@ $overlay-primary-background: $background;
 $offcanvas-bar-background: $navbar-background;
 $offcanvas-bar-padding-horizontal: calc(env(safe-area-inset-left) + #{$card-body-padding-horizontal});
 
-// Label
-$label-border-radius: $border-radius-small;
+// List
+$list-margin-top: 0;
 
 // Navbar
 $navbar-nav-item-height: 0;
@@ -70,6 +70,7 @@ $slidenav-hover-color: $global-link-hover-color;
 
 // Text
 $text-primary-color: $global-primary-background;
+$text-meta-font-size: 0.8em;
 
 // Tooltip
 $tooltip-border-radius: $border-radius-small;

@@ -4,14 +4,13 @@ import { fill } from 'lodash'
 import React from 'react'
 
 const sideLength = 2
-const transform = 'shrink-4 down-1.25'
 
 const Pagination = ({ page, maxPage, changePage }) => (
-	<AnimatedDiv>
-		<ul className='uk-pagination uk-margin-top uk-flex-between'>
+	<AnimatedDiv className='uk-padding-small uk-padding-remove-horizontal uk-margin-small-top'>
+		<ul className='uk-pagination uk-flex-between'>
 			<li className={page < 2 ? 'uk-disabled' : ''}>
 				<a href='/#' onClick={e => changePage(e, page - 1)}>
-					<FontAwesomeIcon icon='chevron-left' {...{ transform }}/>
+					<FontAwesomeIcon icon='chevron-left'/>
 					Previous
 				</a>
 			</li>
@@ -63,11 +62,7 @@ const Pagination = ({ page, maxPage, changePage }) => (
 			<li className={page > maxPage - 1 ? 'uk-disabled' : ''}>
 				<a href='/#' onClick={e => changePage(e, page + 1)}>
 					Next
-					<FontAwesomeIcon
-						icon='chevron-right'
-						className='icon-right'
-						{...{ transform }}
-					/>
+					<FontAwesomeIcon icon='chevron-right' className='icon-right'/>
 				</a>
 			</li>
 		</ul>

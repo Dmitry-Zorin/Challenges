@@ -3,9 +3,6 @@ const { challengeGroups } = require('../../settings.json')
 // TODO: Validate input
 
 const resolvers = {
-	Query: {
-		challenges: (...args) => getUpdatedChallenges(args),
-	},
 	Mutation: {
 		challengeAdd: (...args) => (
 			getUpdatedChallenges(args, ({ challenges }, { challenge }) => {

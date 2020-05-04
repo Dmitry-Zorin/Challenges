@@ -9,7 +9,7 @@ $margin: 1.5em;
 }
 
 .unknown {
-	@include gradient-opacity-style($card-background);
+	@include gradient-opacity-style();
 	border-radius: $border-radius-medium;
 	height: calc(100% - #{$margin} - 1px);
 	margin-top: $margin;

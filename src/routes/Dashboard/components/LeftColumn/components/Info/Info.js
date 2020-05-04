@@ -4,6 +4,7 @@ import DataContext from 'contexts/DataContext'
 import { challengeGroups } from 'data/settings.json'
 import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
+import Settings from './components/Settings'
 
 const Info = () => {
 	const { userInfo, challenges } = useContext(DataContext)
@@ -11,16 +12,21 @@ const Info = () => {
 	return !userInfo ? null : (
 		<>
 			<p className='uk-text-primary text-large uk-text-center'>
-				<FontAwesomeIcon icon='user' transform='shrink-5 down-0.5'/>
+				<FontAwesomeIcon icon='user'/>
 				{userInfo.username}
 			</p>
 			<ul className='uk-list'>
 				{challengeGroups.map(g => (
 					<li key={g}>
-						<Link to={`groups/${g}`} text={`${upperFirst(g)}: ${challenges[g].length}`}/>
+						<Link
+							to={`groups/${g}`}
+							className='text'
+							text={`${upperFirst(g)}: ${challenges[g].length}`}
+						/>
 					</li>
 				))}
 			</ul>
+			<Settings/>
 		</>
 	)
 }

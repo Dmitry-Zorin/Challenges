@@ -2,8 +2,8 @@ import ActionButton from 'components/ActionButton'
 import ButtonGroup from 'components/ButtonGroup'
 import React from 'react'
 
-const ActionButtons = ({ saveValue, withCancel }) => (
-	<ButtonGroup padding>
+const ActionButtons = ({ saveValue, withCancel, ...props }) => (
+	<ButtonGroup {...props}>
 		{withCancel && (
 			<ActionButton
 				value='Cancel'

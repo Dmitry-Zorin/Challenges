@@ -24,15 +24,13 @@ const TimeInput = (props) => {
 				/>
 			</div>
 			<AnimatedDiv
-				className={container}
 				key={disabled}
+				className={container}
 				transition={{ duration: 0.25 }}
 			>
 				{disabled ? (
 					<div className={`${unknown} uk-flex`}>
-						<p className='uk-margin-auto-vertical uk-text-italic'>
-							Unknown
-						</p>
+						<p className='uk-text-italic'>Unknown</p>
 					</div>
 				) : (
 					<div className='uk-flex uk-grid-small uk-child-width-expand'>

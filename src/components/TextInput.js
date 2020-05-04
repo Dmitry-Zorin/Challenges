@@ -4,10 +4,10 @@ import { motion } from 'framer-motion'
 import { upperFirst } from 'lodash'
 import React from 'react'
 
-const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = label, setState, capital, className, style, ...props }) => (
+const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = label, setState, capital, className, ...props }) => (
 	<AnimatedDiv className='uk-margin-medium'>
 		<p className='uk-text-primary'>
-			{icon && <FontAwesomeIcon transform='shrink-5 down-1' {...{ icon }}/>}
+			{icon && <FontAwesomeIcon {...{ icon }}/>}
 			{upperFirst(label)}
 		</p>
 		<motion.input
@@ -17,7 +17,6 @@ const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = labe
 			onChange={({ target: { value } }) => {
 				setState(capital ? upperFirst(value) : value)
 			}}
-			style={{ marginTop: '0.5em', ...style }}
 			{...{ type, value, ...props }}
 			animated
 		/>
