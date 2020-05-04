@@ -25,7 +25,7 @@ $height: 80px;
 	pointer-events: all;
 	
 	@media (min-width: $breakpoint-small) {
-		margin: $card-margin-large
+		margin: $card-margin-large;
 		width: 350px;
 	}
 }
