@@ -23,16 +23,21 @@ $height: 80px;
 	min-height: $height;
 	padding: 0;
 	pointer-events: all;
+	display: flex;
+	align-items: center;
 	
 	@media (min-width: $breakpoint-small) {
 		margin: $card-margin-large;
 		width: 350px;
 	}
-}
-
-.icon {
-	margin: auto;
-	min-width: $height;
+	
+	p {
+		@include text-crop(0.6);
+	}
+	
+	svg {
+		min-width: $height;
+	}
 }
 
 .info {

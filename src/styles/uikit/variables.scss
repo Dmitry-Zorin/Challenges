@@ -17,36 +17,33 @@ $global-success-background: $green;
 $global-danger-background: $red;
 
 $global-z-index: $z-index;
+$global-border: rgba($muted-color, 0.25);
 
 // Base
 $base-body-font-weight: 500;
 $base-body-background: $background2;
 $base-selection-background: $muted-color;
 $base-link-hover-text-decoration: none;
-$base-hr-border: rgba($muted-color, 0.25);
 $base-margin-vertical: 0;
 
 // Card
-$card-default-background: $card-background;
+$card-default-background: rgba(white, 0);
 $card-body-padding-horizontal: $border-radius-large;
 $card-body-padding-horizontal-l: $border-radius-xlarge;
-$card-body-padding-vertical: calc(#{$border-radius-large} - #{$text-margin});
-$card-body-padding-vertical-l: calc(#{$border-radius-xlarge} - #{$text-margin});
+$card-body-padding-vertical: $border-radius-xlarge - $text-padding;
+$card-body-padding-vertical-l: $card-body-padding-vertical;
 
 // Container
 $container-padding-horizontal: 0;
 $container-padding-horizontal-s: $card-margin-small;
 $container-padding-horizontal-m: $card-margin-small;
 
-// Divider
-$divider-vertical-border: $base-hr-border;
-
 // Form
 $form-focus-color: $global-inverse-color;
 $form-padding-horizontal: $border-radius-medium;
 
 // Overlay
-$overlay-default-background: $card-background;
+$overlay-default-background: $card-default-background;
 $overlay-primary-background: $background;
 
 // Offcanvas
@@ -70,7 +67,6 @@ $slidenav-hover-color: $global-link-hover-color;
 
 // Text
 $text-primary-color: $global-primary-background;
-$text-meta-font-size: 0.8em;
 
 // Tooltip
 $tooltip-border-radius: $border-radius-small;

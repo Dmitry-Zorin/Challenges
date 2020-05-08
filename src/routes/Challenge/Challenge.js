@@ -76,7 +76,7 @@ const Challenge = ({ navigate, location }) => {
 				<DifficultyInput setState={setDifficulty} {...{ difficulty }}/>
 				<TimeInput name='duration' ms={duration} setState={setDuration}/>
 				<TimeInput name='delay' ms={delay} setState={setDelay}/>
-				<ActionButtons saveValue={info.save} withCancel={!!c?._id} padding/>
+				<ActionButtons saveValue={info.save} withCancel={!!c?._id}/>
 			</form>
 		</InnerLayout>
 	)

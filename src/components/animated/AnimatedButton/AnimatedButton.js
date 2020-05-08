@@ -3,22 +3,25 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import button from './animations.js'
 
-const AnimatedButton = ({ icon, value, className = '', submit = false, primary = false, ...props }) => (
-	<motion.button
-		type={submit ? 'submit' : 'button'}
-		className={`
-			uk-button
-			uk-button-${primary ? 'primary' : 'default'}
-			${className}
-		`}
-		{...button}
-		{...props}
-	>
-		{icon && (
-			<FontAwesomeIcon className={value ? '' : 'icon-center'} {...{ icon }}/>
-		)}
-		{value}
-	</motion.button>
+const AnimatedButton = ({ icon, value, submit, type = 'default', className = '', ...props }) => (
+	<div className='uk-child-width-expand'>
+		<motion.button
+			type={submit ? 'submit' : 'button'}
+			className={`uk-button uk-button-${type} ${className}`}
+			{...button}
+			{...props}
+		>
+			<p>
+				{icon && (
+					<FontAwesomeIcon
+						className={value ? '' : 'icon-center'}
+						{...{ icon }}
+					/>
+				)}
+				{value}
+			</p>
+		</motion.button>
+	</div>
 )
 
 export default AnimatedButton

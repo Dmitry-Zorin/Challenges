@@ -37,14 +37,16 @@ const ChallengeGroupExtended = ({ group, navigate }) => {
 	}))
 	
 	return (
-		<InnerLayout className='uk-margin-medium-bottom' {...{ items }}>
+		<InnerLayout {...{ items }}>
 			<Search onChange={search}/>
-			{!challenges.length ? <NoChallenges extended/> : (
-				<Accordion
-					key={group + page}
-					{...{ challenges, group, page, navigate }}
-				/>
-			)}
+			<div className='text-large'>
+				{!challenges.length ? <NoChallenges extended/> : (
+					<Accordion
+						key={group + page}
+						{...{ challenges, group, page, navigate }}
+					/>
+				)}
+			</div>
 			{challenges.length > itemsPerPage && (
 				<Pagination {...{ page, maxPage, changePage }}/>
 			)}

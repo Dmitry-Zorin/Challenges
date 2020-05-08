@@ -4,7 +4,6 @@
 	$amount: 5;
 	
 	background: linear-gradient(
-		//darken($color, $amount),
 			lighten($color, $amount),
 			darken($color, $amount),
 	);
@@ -31,7 +30,7 @@
 }
 
 // http://text-crop.eightshapes.com
-@mixin text-crop($line-height: 1.3, $top-adjustment: $text-margin, $bottom-adjustment: $text-margin) {
+@mixin text-crop($line-height: 1.4, $adjustment: -3px) {
 	$top-crop: 0;
 	$bottom-crop: 6;
 	$crop-font-size: 36;
@@ -51,10 +50,10 @@
 	}
 	
 	&::before {
-		margin-bottom: calc(-#{$dynamic-top-crop}em + #{$top-adjustment});
+		margin-bottom: calc(-#{$dynamic-top-crop}em + #{$adjustment});
 	}
 	
 	&::after {
-		margin-top: calc(-#{$dynamic-bottom-crop}em + #{$bottom-adjustment});
+		margin-top: calc(-#{$dynamic-bottom-crop}em + #{$adjustment});
 	}
 }

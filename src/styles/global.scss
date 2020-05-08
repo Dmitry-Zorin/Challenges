@@ -1,25 +1,22 @@
 @import 'variables';
 @import 'mixins';
 
-body {
-	box-sizing: content-box;
-	overflow-y: scroll;
-	-webkit-tap-highlight-color: transparent;
-	-webkit-touch-callout: none;
-	user-select: none;
-}
-
 #root {
 	background: $background;
 	min-height: 100vh;
 }
 
-p, a.text {
-	@include text-crop();
+body {
+	overflow-y: scroll;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	user-select: none;
+	box-sizing: border-box !important;
 }
 
-p, .uk-list > li {
-	//border: 1px solid;
+p {
+	@include text-crop();
+	padding: $text-padding 0;
 }
 
 a {
@@ -43,24 +40,22 @@ svg {
 	}
 }
 
-.text-medium {
-	font-size: $font-size-medium;
-}
-
-.text-large {
-	font-size: $font-size-large;
-}
-
-.text-larger {
-	font-size: $font-size-larger;
-}
-
-.text-xlarge {
-	font-size: $font-size-xlarge;
+.text-meta {
+	font-size: $font-size-small;
+	color: $muted-color;
 }
 
 .round-border {
 	border-radius: $border-radius-large;
+}
+
+.padding {
+	padding: $padding 0;
+}
+
+.padding-input {
+	padding-top: $padding-text;
+	padding-bottom: $padding;
 }
 
 .primary-border {
@@ -75,4 +70,15 @@ svg {
 
 .blur {
 	backdrop-filter: blur(3px);
+}
+
+@each $size, $font-size in (
+	medium: $font-size-medium,
+	large: $font-size-large,
+	larger: $font-size-larger,
+	xlarge: $font-size-xlarge,
+) {
+	.text-#{$size} {
+		font-size: $font-size;
+	}
 }

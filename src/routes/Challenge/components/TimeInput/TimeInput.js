@@ -10,8 +10,8 @@ const TimeInput = (props) => {
 	const [disabled, setDisabled] = useState(props.ms > toMs.MANY_YEARS)
 	
 	return (
-		<AnimatedDiv className='uk-margin-medium'>
-			<div className='uk-flex'>
+		<AnimatedDiv className='padding-input'>
+			<div className='uk-flex uk-flex-middle'>
 				<p className='uk-text-primary uk-width-expand'>
 					{upperFirst(props.name)}
 				</p>
@@ -29,7 +29,7 @@ const TimeInput = (props) => {
 				transition={{ duration: 0.25 }}
 			>
 				{disabled ? (
-					<div className={`${unknown} uk-flex`}>
+					<div className={`${unknown} uk-flex uk-flex-center uk-flex-middle`}>
 						<p className='uk-text-italic'>Unknown</p>
 					</div>
 				) : (

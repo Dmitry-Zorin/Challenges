@@ -1,4 +1,4 @@
-import ActionButton from 'components/ActionButton'
+import AnimatedButton from 'components/animated/AnimatedButton'
 import ButtonGroup from 'components/ButtonGroup'
 import InnerLayout from 'components/InnerLayout'
 import TextInput from 'components/TextInput'
@@ -38,7 +38,7 @@ const Authorization = ({ action = 'signUp', items, ...props }) => {
 	return (
 		<InnerLayout {...{ items }}>
 			{!items && (
-				<p className='text-xlarge uk-text-light uk-text-center uk-margin-medium'>
+				<p className='text-xlarge uk-text-center padding'>
 					Start using
 					<span className='uk-text-primary uk-text-bold'> Challenges </span>
 					with one simple step!
@@ -58,8 +58,8 @@ const Authorization = ({ action = 'signUp', items, ...props }) => {
 					value={password}
 					setState={setPassword}
 				/>
-				<ButtonGroup padding>
-					<ActionButton {...buttonProps} submit/>
+				<ButtonGroup>
+					<AnimatedButton type='primary' {...buttonProps} submit/>
 				</ButtonGroup>
 			</form>
 		</InnerLayout>

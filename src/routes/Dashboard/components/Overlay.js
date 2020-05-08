@@ -15,19 +15,18 @@ const Overlay = ({ children, to = '', text }) => {
 			>
 				{children}
 				<motion.div
-					className={[
-						'uk-overlay-default',
-						'uk-position-right',
-						'uk-hidden-touch',
-						'uk-flex',
-						isVisible ? 'blur' : '',
-					].join(' ')}
+					className={`
+						uk-overlay-default
+						uk-position-right
+						uk-hidden-touch
+						${isVisible ? 'blur' : ''}
+					`}
 					style={{ width: 150 }}
-					initial={{ x: '100%', opacity: 0 }}
+					initial={false}
 					animate={{ x: isVisible ? 0 : '100%', opacity: +isVisible }}
 					transition={{ duration: 0.4 }}
 				>
-					<p className='uk-text-primary text-medium'>
+					<p className='uk-position-center uk-text-primary'>
 						{upperFirst(text)}
 					</p>
 				</motion.div>

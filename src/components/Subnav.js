@@ -4,17 +4,13 @@ import React from 'react'
 
 const Subnav = ({ items, ...props }) => (
 	<ButtonGroup {...props}>
-		{items.map(({ icon, value, active, type = 'primary', ...props }) => (
-			<div key={value} className='uk-margin-remove uk-width-1-3@m'>
-				<AnimatedButton
-					className={[
-						'switcher',
-						'uk-width-1-1',
-						`uk-button-${active ? type : 'default'}`,
-					].join(' ')}
-					{...{ icon, value, ...props }}
-				/>
-			</div>
+		{items.map(({ active, type = 'primary', ...props }) => (
+			<AnimatedButton
+				key={props.value}
+				className='switcher'
+				type={active ? type : 'default'}
+				{...props}
+			/>
 		))}
 	</ButtonGroup>
 )

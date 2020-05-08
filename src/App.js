@@ -13,6 +13,8 @@ import {
 import { getUserInfo, saveSettings } from 'scripts/requests'
 import { updateTime } from 'scripts/time'
 
+const defaultSettings = { theme: 'dark' }
+
 const App = () => {
 	const [context, setContext] = useState({
 		showSpinner: (spinnerIsVisible = true) => {
@@ -67,7 +69,10 @@ const App = () => {
 	
 	const logout = useCallback(() => {
 		clearInterval(intervalRef.current)
-		updateContext({ challenges: {}, userInfo: {} })
+		updateContext({
+			challenges: {},
+			userInfo: { settings: defaultSettings },
+		})
 	}, [updateContext])
 	
 	useEffect(() => clearInterval(intervalRef.current), [])
@@ -87,17 +92,16 @@ const App = () => {
 			<Router primary={false}>
 				<Layout path='/'>
 					<Login path='login' {...{ login, logout }}/>
-					{!context.challenges ? null
-						: !context.challenges.ongoing
-							? <Home {...{ login }} default/> : (
-								<>
-									<Dashboard default/>
-									<Challenge path='create'/>
-									<Challenge path='edit'/>
-									<ChallengeGroupExtended path='groups/:group'/>
-								</>
-							)
-					}
+					{!context.challenges ? null : !context.challenges.ongoing ? (
+						<Home {...{ login }} default/>
+					) : (
+						<>
+							<Dashboard default/>
+							<Challenge path='create'/>
+							<Challenge path='edit'/>
+							<ChallengeGroupExtended path='groups/:group'/>
+						</>
+					)}
 				</Layout>
 			</Router>
 		</DataContext.Provider>

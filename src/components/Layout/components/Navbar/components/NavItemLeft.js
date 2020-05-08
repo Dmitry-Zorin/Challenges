@@ -7,10 +7,7 @@ const NavItemLeft = ({ location }) => {
 	const userIsAuthorized = !!userInfo?.username
 	
 	if (location.pathname !== '/') return (
-		<Link
-			icon='chevron-left'
-			text={userIsAuthorized ? 'dashboard' : 'home'}
-		/>
+		<Link icon='chevron-left' text={userIsAuthorized ? 'dashboard' : 'home'}/>
 	)
 	
 	const text = 'Challenges'
@@ -25,10 +22,7 @@ const NavItemLeft = ({ location }) => {
 					{...{ text }}
 				/>
 			)}
-			<Link
-				className={userIsAuthorized ? 'uk-visible@m' : ''}
-				{...{ text }}
-			/>
+			<Link className={userIsAuthorized ? 'uk-visible@m' : ''} {...{ text }}/>
 		</>
 	)
 }

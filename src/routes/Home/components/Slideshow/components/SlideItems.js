@@ -1,11 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { upperFirst } from 'lodash'
 import React from 'react'
-import features from 'routes/Home/data/features'
+import features from 'routes/Home/features'
 
 const SlideItems = () => (
 	<ul className='uk-slideshow-items'>
-		{features.map(({ src, title, icon, component }) => (
+		{features.map(({ src, Component }) => (
 			<li key={src} className='round-border'>
 				<img src={src} alt=''/>
 				<div
@@ -22,11 +20,7 @@ const SlideItems = () => (
 						primary-border
 					'
 				>
-					<p className='uk-text-primary text-large'>
-						<FontAwesomeIcon {...{ icon }}/>
-						{upperFirst(title)}
-					</p>
-					<p className='text-medium'>{component()}</p>
+					<Component/>
 				</div>
 			</li>
 		))}

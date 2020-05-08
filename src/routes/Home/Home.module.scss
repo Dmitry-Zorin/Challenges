@@ -1,0 +1,9 @@
+@import '../../styles/variables';
+
+.registration {
+	padding: $padding 0;
+	
+	@media (min-width: $breakpoint-small) {
+		min-height: 70vh;
+	}
+}

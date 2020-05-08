@@ -5,6 +5,9 @@ $header-ratio: 0.45;
 .header {
 	height: 6em;
 	margin-top: 2 * $card-margin-small;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	
 	@media (min-width: $breakpoint-large) {
 		margin-top: 2 * $card-margin-large;
@@ -15,6 +18,10 @@ $header-ratio: 0.45;
 		margin: 0;
 		min-height: 14em;
 		
+		@media (min-width: $breakpoint-medium) {
+			height: calc(#{$header-ratio} * #{$viewport-height-medium});
+		}
+		
 		@media (min-width: $breakpoint-large) {
 			height: calc(#{$header-ratio} * #{$viewport-height-large});
 		}
@@ -23,10 +30,15 @@ $header-ratio: 0.45;
 
 .title {
 	color: $primary-color;
-	font-size: 3.25em;
+	font-size: 3.5em;
 	font-weight: bold;
 	
-	&.large {
-		font-size: 4.5em;
+	.large & {
+		margin-bottom: $padding;
+		
+		@media (min-width: $breakpoint-small) {
+			font-size: 6em;
+			margin-bottom: 2 * $padding;
+		}
 	}
 }

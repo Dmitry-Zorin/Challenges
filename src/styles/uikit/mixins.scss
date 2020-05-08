@@ -82,32 +82,39 @@
 	transition-property: background-color;
 	
 	@media (min-width: $breakpoint-large) {
-		padding: $card-body-padding-vertical-l $card-body-padding-horizontal-l;
 		margin: 2 * $card-margin-large $card-margin-large;
+	}
+	
+	&.dark {
+		background: $card-background-dark;
 	}
 	
 	&.light {
 		background: $card-background-light;
 	}
+	
+	&.large {
+		padding-top: $padding;
+		padding-bottom: $padding;
+	}
 }
 
 // Form
 @mixin hook-form() {
-	@include gradient-style($base-color);
+	@include gradient-style(darken($base-color, 5));
 	color: $global-inverse-color;
 	border-radius: $border-radius-medium;
 }
 
-// Flex
-@mixin hook-flex-misc() {
-	.uk-flex > * {
-		margin: auto;
+@mixin hook-form-misc() {
+	.uk-input::placeholder {
+		@include text-crop(1.6);
 	}
 }
 
 // Label
 @mixin hook-label() {
-	@include text-crop(1.1, 4px, 4px);
+	@include text-crop(1.1, 4px);
 	border-radius: $border-radius-small;
 	text-transform: uppercase;
 }
@@ -130,10 +137,17 @@
 	font-weight: lighter;
 }
 
+@mixin hook-navbar() {
+	padding: 0 $card-margin-small;
+	
+	@media (min-width: $breakpoint-large) {
+		padding: 0 $card-margin-large;
+	}
+}
+
 @mixin hook-navbar-nav-item() {
 	height: $navbar-height-small;
 	text-transform: uppercase;
-	margin: 0 $card-margin-small;
 	
 	@media (min-width: $breakpoint-small) {
 		height: $navbar-height-medium;
@@ -141,15 +155,20 @@
 	
 	@media (min-width: $breakpoint-large) {
 		padding: 0 $card-body-padding-horizontal-l;
-		margin: 0 $card-margin-large;
 		height: $navbar-height-large;
 	}
 }
 
+@mixin hook-navbar-misc() {}
+
 // Overlay
 @mixin hook-overlay-default() {
+	.dark & {
+		background: rgba($card-background-dark, 0.375);
+	}
+	
 	.light & {
-		background: $card-background-light;
+		background: rgba($card-background-light, 0.075);
 	}
 }
 
@@ -161,6 +180,12 @@
 // Search
 @mixin hook-search-default-input() {
 	@include hook-form();
+}
+
+@mixin hook-search-misc() {
+	.uk-search-input::placeholder {
+		@include text-crop(1.6);
+	}
 }
 
 // Text

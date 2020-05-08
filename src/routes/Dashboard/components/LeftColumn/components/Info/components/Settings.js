@@ -5,24 +5,25 @@ import React, { useContext } from 'react'
 
 const Settings = () => {
 	const {
-		userInfo: { settings },
+		userInfo: { settings: { theme, ...settings } },
 		changeSetting,
 		saveSettings,
 	} = useContext(DataContext)
 	
 	return (
 		<>
-			<p className='uk-text-muted uk-text-center uk-margin-medium-top'>
+			<p className='uk-text-muted uk-text-center'>
 				Settings
 			</p>
 			<ul className='uk-list'>
-				<li className='uk-flex'>
-					<p className='uk-width-expand'>Theme</p>
+				<li className='uk-flex uk-flex-middle uk-grid-small'>
+					<p className='uk-width-expand'>Theme:</p>
+					<p>{theme}</p>
 					<AnimatedSwitch
-						isOn={settings.theme === 'light'}
+						isOn={theme === 'light'}
 						onClick={() => {
 							changeSetting({
-								theme: settings.theme === 'light' ? 'dark' : 'light',
+								theme: theme === 'light' ? 'dark' : 'light',
 							})
 						}}
 					/>
@@ -30,7 +31,7 @@ const Settings = () => {
 			</ul>
 			{settings.areChanged && (
 				<AnimatedButton
-					className='uk-width-1-1 uk-margin-small'
+					className='uk-margin-small uk-margin-small-top'
 					icon='save'
 					value='save'
 					onClick={saveSettings}

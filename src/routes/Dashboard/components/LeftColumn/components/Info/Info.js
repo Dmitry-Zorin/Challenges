@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Link from 'components/Link'
+import { Link } from '@reach/router'
 import DataContext from 'contexts/DataContext'
 import { challengeGroups } from 'data/settings.json'
 import { upperFirst } from 'lodash'
@@ -18,14 +18,14 @@ const Info = () => {
 			<ul className='uk-list'>
 				{challengeGroups.map(g => (
 					<li key={g}>
-						<Link
-							to={`groups/${g}`}
-							className='text'
-							text={`${upperFirst(g)}: ${challenges[g].length}`}
-						/>
+						<Link to={`groups/${g}`} className='uk-flex'>
+							<p className='uk-width-expand'>{upperFirst(g)}:</p>
+							<p>{challenges[g].length}</p>
+						</Link>
 					</li>
 				))}
 			</ul>
+			<hr/>
 			<Settings/>
 		</>
 	)

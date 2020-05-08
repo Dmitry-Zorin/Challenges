@@ -1,21 +1,21 @@
+import AnimatedCard from 'components/animated/AnimatedCard'
 import React from 'react'
 import { SlideItems, Slidenav } from './components'
 
 const Slideshow = () => (
-	<div
-		id='slideshow'
-		className='uk-card uk-card-default uk-card-body uk-margin-remove-top'
-	>
+	<AnimatedCard id='slideshow' className='uk-margin-remove-top' large>
 		<div
-			className='uk-position-relative uk-visible-toggle uk-padding-remove'
+			className='uk-position-relative uk-visible-toggle'
 			data-uk-slideshow='ratio: 13:12'
 		>
 			<SlideItems/>
 			<Slidenav side='left'/>
 			<Slidenav side='right'/>
-			<ul className='uk-slideshow-nav uk-dotnav uk-flex-center uk-margin-top'/>
+			<div className='padding uk-padding-remove-bottom'>
+				<ul className='uk-slideshow-nav uk-dotnav uk-flex-center'/>
+			</div>
 		</div>
-	</div>
+	</AnimatedCard>
 )
 
 export default Slideshow

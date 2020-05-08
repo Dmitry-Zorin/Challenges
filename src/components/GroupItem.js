@@ -19,15 +19,15 @@ const GroupItem = ({ group, challenge, extended }) => {
 			? icons[group] : 'exclamation'
 	
 	return (
-		<AnimatedDiv
-			className='uk-flex'
-			style={extended ? { padding: '0.5em 0' } : {}}
-		>
-			<p className={`uk-width-expand ${extended ? '' : 'uk-text-truncate'}`}>
+		<AnimatedDiv className='uk-flex uk-flex-middle'>
+			<p className={`
+				uk-width-expand
+				${extended ? 'padding' : 'uk-text-truncate'}
+			`}>
 				{challenge.name}
 			</p>
-			<p className='uk-text-meta'>
-				<FontAwesomeIcon {...{ icon }}/>
+			<p className='text-meta'>
+				<FontAwesomeIcon className='icon-right' {...{ icon }}/>
 				{!isInfiniteTime && time}
 			</p>
 		</AnimatedDiv>

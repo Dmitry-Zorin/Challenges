@@ -9,7 +9,7 @@ const Dashboard = () => {
 	return (
 		<div className='uk-flex'>
 			<LeftColumn/>
-			<div className='uk-width-expand'>
+			<div className='uk-width-expand text-medium'>
 				<NewChallengeButton/>
 				{challengeGroups.map(g => (
 					<ChallengeGroup key={g} title={g} group={challenges?.[g]}/>

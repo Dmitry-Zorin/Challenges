@@ -6,9 +6,9 @@ const ScrollDown = ({ target }) => (
 	<>
 		<br className='uk-hidden@m'/>
 		<a href={target} className='uk-visible@m' data-uk-scroll='offset: 80'>
-			<div className={`${container} uk-flex`}>
+			<div className={`${container} uk-flex uk-flex-center uk-flex-middle`}>
 				<div className='uk-text-center'>
-					<p className='text-medium uk-text-light'>
+					<p className='text-medium'>
 						Scroll down
 						<br/>
 						<FontAwesomeIcon icon='chevron-down'/>

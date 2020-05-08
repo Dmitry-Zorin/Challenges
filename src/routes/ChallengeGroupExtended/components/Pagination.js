@@ -6,7 +6,7 @@ import React from 'react'
 const sideLength = 2
 
 const Pagination = ({ page, maxPage, changePage }) => (
-	<AnimatedDiv className='uk-padding-small uk-padding-remove-horizontal uk-margin-small-top'>
+	<AnimatedDiv className='padding'>
 		<ul className='uk-pagination uk-flex-between'>
 			<li className={page < 2 ? 'uk-disabled' : ''}>
 				<a href='/#' onClick={e => changePage(e, page - 1)}>

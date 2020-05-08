@@ -1,15 +1,16 @@
 import Authorization from 'components/Authorization'
 import React from 'react'
 import { Features, ScrollDown, Slideshow } from './components'
+import { registration } from './Home.module.scss'
 
 const Home = (props) => (
-	<div className='uk-text-light' style={{ paddingBottom: '10vh' }}>
+	<div className='uk-text-light'>
 		<Features/>
 		<ScrollDown target='#slideshow'/>
 		<Slideshow/>
-		<br/>
-		<Authorization {...props}/>
-		<div className='uk-visible@s' style={{ height: '10vh' }}/>
+		<div className={registration}>
+			<Authorization {...props}/>
+		</div>
 	</div>
 )
 

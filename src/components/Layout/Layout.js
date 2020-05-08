@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Header, Navbar, Notifications } from './components'
-import { env, layout } from './Layout.module.scss'
+import { env, container } from './Layout.module.scss'
 
 const Layout = ({ children, location }) => {
 	useEffect(
@@ -12,7 +12,7 @@ const Layout = ({ children, location }) => {
 			<Navbar {...{ location }}/>
 			<div className={env}>
 				<Notifications/>
-				<div className={`uk-container ${layout}`}>
+				<div className={`uk-container ${container}`}>
 					<Header {...{ location }}/>
 					{children}
 				</div>

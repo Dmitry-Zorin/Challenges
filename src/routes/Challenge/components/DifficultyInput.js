@@ -17,9 +17,9 @@ const DifficultyInput = ({ difficulty, setState }) => {
 	}))
 	
 	return (
-		<AnimatedDiv className='uk-margin-medium'>
+		<AnimatedDiv className='padding-input'>
 			<p className='uk-text-primary'>Difficulty</p>
-			<Subnav {...{ items }}/>
+			<Subnav {...{ items }} padding={false}/>
 		</AnimatedDiv>
 	)
 }

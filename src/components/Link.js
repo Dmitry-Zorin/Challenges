@@ -2,16 +2,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link as RouterLink } from '@reach/router'
 import React from 'react'
 
-const Link = ({ to = '', text, icon, right = false, ...props }) => (
+const Link = ({ to = '', text, icon, right, ...props }) => (
 	<RouterLink {...{ to, ...props }}>
-		{right && text}
-		{icon && (
-			<FontAwesomeIcon
-				className={`icon-${right ? 'right' : 'left'}`}
-				{...{ icon }}
-			/>
-		)}
-		{!right && text}
+		<p>
+			{right && text}
+			{icon && (
+				<FontAwesomeIcon
+					className={`icon-${right ? 'right' : 'left'}`}
+					{...{ icon }}
+				/>
+			)}
+			{!right && text}
+		</p>
 	</RouterLink>
 )
 
