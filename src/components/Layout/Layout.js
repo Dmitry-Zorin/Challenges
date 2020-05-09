@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Header, Navbar, Notifications } from './components'
-import { env, container } from './Layout.module.scss'
+import { container, env } from './Layout.module.scss'
 
 const Layout = ({ children, location }) => {
 	useEffect(

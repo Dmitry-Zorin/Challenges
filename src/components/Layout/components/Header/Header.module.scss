@@ -3,11 +3,11 @@
 $header-ratio: 0.45;
 
 .header {
-	height: 6em;
-	margin-top: 2 * $card-margin-small;
-	display: flex;
 	align-items: center;
+	display: flex;
+	height: 6em;
 	justify-content: center;
+	margin-top: 2 * $card-margin-small;
 	
 	@media (min-width: $breakpoint-large) {
 		margin-top: 2 * $card-margin-large;

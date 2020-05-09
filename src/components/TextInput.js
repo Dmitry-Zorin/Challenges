@@ -5,7 +5,7 @@ import { upperFirst } from 'lodash'
 import React from 'react'
 
 const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = label, setState, capital, className, ...props }) => (
-	<AnimatedDiv className='padding-input'>
+	<AnimatedDiv className='padding-text-top'>
 		<p className='uk-text-primary'>
 			{icon && <FontAwesomeIcon {...{ icon }}/>}
 			{upperFirst(label)}

@@ -1,10 +1,9 @@
-import GroupItem from 'components/GroupItem'
 import { itemsPerPage } from 'data/settings.json'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import React, { useCallback, useState } from 'react'
-import AccordionContent from './components/AccordionContent'
+import AccordionItem from './components/AccordionItem'
 
-const Accordion = ({ challenges, page, group, navigate }) => {
+const Accordion = ({ challenges, page, ...props }) => {
 	const [openItem, setOpenItem] = useState()
 	
 	const onClick = useCallback((e, id) => {
@@ -19,24 +18,14 @@ const Accordion = ({ challenges, page, group, navigate }) => {
 		>
 			{challenges.slice((page - 1) * itemsPerPage, page * itemsPerPage)
 				.map(c => (
-					<li key={c._id}>
-						<a href='/#' onClick={e => onClick(e, c._id)}>
-							<GroupItem challenge={c} {...{ group }} extended/>
-						</a>
-						<AnimatePresence initial={false}>
-							{openItem !== c._id ? null : (
-								<motion.div
-									initial={{ height: 0, opacity: 0 }}
-									animate={{ height: 'auto', opacity: 1 }}
-									exit={{ height: 0, opacity: 0 }}
-									transition={{ duration: 0.2 }}
-								>
-									<AccordionContent challenge={c} {...{ group, navigate }}/>
-								</motion.div>
-							)}
-						</AnimatePresence>
-					</li>
-				))}
+					<AccordionItem
+						key={c._id}
+						challenge={c}
+						active={openItem === c._id}
+						{...{ onClick, ...props }}
+					/>
+				))
+			}
 		</motion.ul>
 	)
 }

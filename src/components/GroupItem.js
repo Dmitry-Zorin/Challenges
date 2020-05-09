@@ -10,20 +10,23 @@ const icons = {
 	completed: 'check',
 }
 
-const GroupItem = ({ group, challenge, extended }) => {
+const GroupItem = ({ group, challenge, active, extended }) => {
 	const time = getChallengeTime(challenge)
 	const isInfiniteTime = time === infinity
 	
 	const icon = isInfiniteTime ? 'question'
-		: time || group === 'completed'
-			? icons[group] : 'exclamation'
+		: time || group === 'completed' ? icons[group]
+			: 'exclamation'
 	
 	return (
 		<AnimatedDiv className='uk-flex uk-flex-middle'>
-			<p className={`
+			<p
+				className={`
 				uk-width-expand
 				${extended ? 'padding' : 'uk-text-truncate'}
-			`}>
+				${active ? 'uk-text-primary' : ''}
+			`}
+			>
 				{challenge.name}
 			</p>
 			<p className='text-meta'>

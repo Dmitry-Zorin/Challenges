@@ -42,7 +42,8 @@ export const getUserInfo = (context) => (
 		'get user info',
 	)
 		.then(res => (
-			res?.user !== undefined ? resolve(res.user)
+			res?.user !== undefined
+				? resolve(res.user)
 				: reject(addNotification(context, errors.response))
 		))
 		.catch(reject)

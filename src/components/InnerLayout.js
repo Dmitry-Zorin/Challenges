@@ -6,7 +6,10 @@ const InnerLayout = ({ children, title, items, ...props }) => (
 	<AnimatedCard {...props} large>
 		<div className='uk-align-center' style={{ maxWidth: 800 }}>
 			{title && (
-				<p className='uk-text-primary text-xlarge uk-text-center uk-text-capitalize padding-text'>
+				<p
+					className='uk-text-center uk-text-primary uk-text-capitalize'
+					style={{ fontSize: '2.2em' }}
+				>
 					{title}
 				</p>
 			)}

@@ -13,7 +13,11 @@ const Header = ({ location }) => {
 		<header className={`${header} ${isHomePage ? large : ''}`}>
 			<div className='uk-text-center uk-padding-small'>
 				<p className={title}>
-					<FontAwesomeIcon icon='tasks' className='uk-visible@s'/>
+					<FontAwesomeIcon
+						icon='tasks'
+						className='uk-visible@s'
+						transform='down-0.4'
+					/>
 					Challenges
 				</p>
 				{isHomePage && (

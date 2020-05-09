@@ -29,9 +29,8 @@ const NumberInput = ({ label, time, ms, setState, timeToMs, step }) => {
 			</label>
 			<div className='uk-flex uk-child-width-expand'>
 				{[-1, 1].map(sign => (
-					<div className={sign < 0 ? '' : 'uk-margin-small-left'}>
+					<div key={sign} className={sign < 0 ? '' : 'uk-margin-small-left'}>
 						<AnimatedButton
-							key={sign}
 							icon={sign < 0 ? 'minus' : 'plus'}
 							onClick={() => setState(Math.max(0, ms + sign * step * timeToMs))}
 						/>

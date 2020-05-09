@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from 'framer-motion'
 import React from 'react'
-import button from './animations.js'
+import button from './animation.js'
 
 const AnimatedButton = ({ icon, value, submit, type = 'default', className = '', ...props }) => (
 	<div className='uk-child-width-expand'>

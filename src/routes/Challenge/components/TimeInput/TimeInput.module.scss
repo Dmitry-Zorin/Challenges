@@ -1,16 +1,16 @@
 @import '../../../../styles/variables';
 @import '../../../../styles/mixins';
 
-$margin: 1.5em;
-
-.container {
-	border: 0.5px solid rgba(white, 0);
-	height: 7.1em;
-}
-
 .unknown {
-	@include gradient-opacity-style();
+	border: 1px dashed $muted-color;
 	border-radius: $border-radius-medium;
-	height: calc(100% - #{$margin} - 1px);
-	margin-top: $margin;
+	
+	:global(.dark) & {
+		background: rgba($card-background-dark, 0.15);
+		color: $muted-color;
+	}
+	
+	:global(.light) & {
+		background: rgba($card-background-light, 0.05);
+	}
 }

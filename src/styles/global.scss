@@ -11,7 +11,7 @@ body {
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
 	user-select: none;
-	box-sizing: border-box !important;
+	cursor: default;
 }
 
 p {
@@ -37,12 +37,13 @@ svg {
 	
 	&.svg-inline--fa {
 		height: 0.8em;
+		vertical-align: -0.08em;
 	}
 }
 
 .text-meta {
-	font-size: $font-size-small;
 	color: $muted-color;
+	font-size: $font-size-small;
 }
 
 .round-border {
@@ -53,9 +54,18 @@ svg {
 	padding: $padding 0;
 }
 
-.padding-input {
-	padding-top: $padding-text;
+.padding-text {
+	padding: $padding-text 0;
+}
+
+.padding-text-top {
 	padding-bottom: $padding;
+	padding-top: $padding-text;
+}
+
+.padding-text-bottom {
+	padding-bottom: $padding-text;
+	padding-top: $padding;
 }
 
 .primary-border {

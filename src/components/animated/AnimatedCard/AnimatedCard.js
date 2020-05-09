@@ -1,12 +1,12 @@
 import DataContext from 'contexts/DataContext'
 import { motion } from 'framer-motion'
 import React, { useContext } from 'react'
-import card from './animations.js'
+import card from './animation.js'
 
 const animations = Object.keys(card)
 	.reduce((o, k) => (o[k] = k) && o, {})
 
-const AnimatedCard = ({ children, className, large, ...props }) => {
+const AnimatedCard = ({ children, className = '', large, ...props }) => {
 	const { userInfo } = useContext(DataContext)
 	
 	return (

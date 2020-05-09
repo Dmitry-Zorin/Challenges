@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import React from 'react'
-import listItem from './animations.js'
+import listItem from './animation.js'
 
 const AnimatedListItem = ({ children, ...props }) => (
 	<motion.li {...listItem} {...props}>

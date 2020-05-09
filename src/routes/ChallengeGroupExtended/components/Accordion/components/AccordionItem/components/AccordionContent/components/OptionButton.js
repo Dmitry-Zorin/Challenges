@@ -10,6 +10,7 @@ const info = {
 	edit: { icon: 'pen', buttonType: 'secondary' },
 	delete: { icon: 'trash-alt', buttonType: 'danger' },
 }
+const size = 40
 
 const OptionButton = ({ challenge, navigate, option }) => {
 	const context = useContext(DataContext)
@@ -33,10 +34,14 @@ const OptionButton = ({ challenge, navigate, option }) => {
 	return (
 		<AnimatedButton
 			key={option}
-			className={`uk-button-${info[option].buttonType} uk-margin-small-left`}
+			className={`
+				uk-button-${info[option].buttonType}
+				uk-border-circle
+				uk-margin-small-left
+			`}
 			icon={info[option].icon}
 			data-uk-tooltip={`title: ${upperFirst(option)}; delay: 100`}
-			style={{ width: 45, height: 45, borderRadius: '100%' }}
+			style={{ width: size, height: size }}
 			{...{ onClick }}
 		/>
 	)

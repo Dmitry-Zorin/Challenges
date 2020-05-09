@@ -17,7 +17,8 @@ const Authorization = ({ action = 'signUp', items, ...props }) => {
 	const onSubmit = useCallback(e => {
 		e.preventDefault()
 		
-		!(username && password) ? addNotification(context, invalid)
+		!(username && password)
+			? addNotification(context, invalid)
 			: authorize(context, action, { username, password })
 				.then(user => {
 					if (!user) return
