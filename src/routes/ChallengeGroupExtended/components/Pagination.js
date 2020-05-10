@@ -1,12 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import AnimatedDiv from 'components/animated/AnimatedDiv'
 import { fill } from 'lodash'
 import React from 'react'
 
 const sideLength = 2
 
 const Pagination = ({ page, maxPage, changePage }) => (
-	<AnimatedDiv className='padding'>
+	<div className='padding'>
 		<ul className='uk-pagination uk-flex-between'>
 			<li className={page < 2 ? 'uk-disabled' : ''}>
 				<a href='/#' onClick={e => changePage(e, page - 1)}>
@@ -66,7 +65,7 @@ const Pagination = ({ page, maxPage, changePage }) => (
 				</a>
 			</li>
 		</ul>
-	</AnimatedDiv>
+	</div>
 )
 
 export default Pagination

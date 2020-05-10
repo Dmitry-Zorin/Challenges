@@ -1,4 +1,4 @@
-const div = {
+const fade = {
 	initial: {
 		opacity: 0,
 	},
@@ -7,4 +7,4 @@ const div = {
 	},
 }
 
-export default div
+export default fade

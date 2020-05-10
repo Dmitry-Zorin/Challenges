@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import AnimatedDiv from 'components/animated/AnimatedDiv'
+import Animation from 'components/Animation'
 import { infinity } from 'data/settings.json'
 import React from 'react'
 import { getChallengeTime } from 'scripts/time'
@@ -19,7 +19,7 @@ const GroupItem = ({ group, challenge, active, extended }) => {
 			: 'exclamation'
 	
 	return (
-		<AnimatedDiv className='uk-flex uk-flex-middle'>
+		<Animation type='fade' className='uk-flex uk-flex-middle'>
 			<p
 				className={`
 				uk-width-expand
@@ -33,7 +33,7 @@ const GroupItem = ({ group, challenge, active, extended }) => {
 				<FontAwesomeIcon className='icon-right' {...{ icon }}/>
 				{!isInfiniteTime && time}
 			</p>
-		</AnimatedDiv>
+		</Animation>
 	)
 }
 

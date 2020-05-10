@@ -1,5 +1,4 @@
-import InnerLayout from 'components/InnerLayout'
-import NoChallenges from 'components/NoChallenges'
+import { InnerLayout, NoChallenges } from 'components'
 import DataContext from 'contexts/DataContext'
 import { challengeGroups, itemsPerPage } from 'data/settings.json'
 import { upperFirst } from 'lodash'

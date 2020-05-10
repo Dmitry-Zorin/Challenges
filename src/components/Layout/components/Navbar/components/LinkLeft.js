@@ -2,7 +2,7 @@ import Link from 'components/Link'
 import DataContext from 'contexts/DataContext'
 import React, { useContext } from 'react'
 
-const NavItemLeft = ({ location }) => {
+const LinkLeft = ({ location }) => {
 	const { userInfo } = useContext(DataContext)
 	const userIsAuthorized = !!userInfo?.username
 	
@@ -27,4 +27,4 @@ const NavItemLeft = ({ location }) => {
 	)
 }
 
-export default NavItemLeft
+export default LinkLeft

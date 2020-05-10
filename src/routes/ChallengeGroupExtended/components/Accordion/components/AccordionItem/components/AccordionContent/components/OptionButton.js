@@ -1,5 +1,6 @@
-import AnimatedButton from 'components/animated/AnimatedButton'
+import { Animation, Button } from 'components'
 import DataContext from 'contexts/DataContext'
+import { AnimatePresence } from 'framer-motion'
 import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
 import { updateChallenge } from 'scripts/requests'
@@ -32,18 +33,17 @@ const OptionButton = ({ challenge, navigate, option }) => {
 	}
 	
 	return (
-		<AnimatedButton
-			key={option}
-			className={`
-				uk-button-${info[option].buttonType}
-				uk-border-circle
-				uk-margin-small-left
-			`}
-			icon={info[option].icon}
-			data-uk-tooltip={`title: ${upperFirst(option)}; delay: 100`}
-			style={{ width: size, height: size }}
-			{...{ onClick }}
-		/>
+		<AnimatePresence>
+			<Animation type='zoom' className='uk-margin-small-left'>
+				<Button
+					className={`uk-button-${info[option].buttonType} uk-border-circle`}
+					icon={info[option].icon}
+					style={{ width: size, height: size }}
+					data-uk-tooltip={`title: ${upperFirst(option)}; delay: 100`}
+					{...{ onClick }}
+				/>
+			</Animation>
+		</AnimatePresence>
 	)
 }
 

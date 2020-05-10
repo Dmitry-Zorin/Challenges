@@ -1,14 +1,12 @@
-import AnimatedCard from 'components/animated/AnimatedCard'
+import Card from 'components/Card'
 import React from 'react'
 import Info from './components/Info'
 
 const LeftColumn = () => (
 	<>
-		<div className='uk-visible@m uk-flex uk-width-1-3'>
-			<AnimatedCard className='uk-width-1-1'>
-				<Info/>
-			</AnimatedCard>
-		</div>
+		<Card className='uk-visible@m uk-width-1-3'>
+			<Info/>
+		</Card>
 		<div id='info' data-uk-offcanvas='overlay: true'>
 			<div className='uk-offcanvas-bar'>
 				<Info/>

@@ -34,11 +34,10 @@ $header-ratio: 0.45;
 	font-weight: bold;
 	
 	.large & {
-		margin-bottom: $padding;
+		margin-bottom: 3vh;
 		
 		@media (min-width: $breakpoint-small) {
 			font-size: 6em;
-			margin-bottom: 2 * $padding;
 		}
 	}
 }

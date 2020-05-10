@@ -1,6 +1,5 @@
-import AnimatedListItem from 'components/animated/AnimatedListItem'
 import React from 'react'
-import { NavItemCenter, NavItemLeft, NavItemRight } from './components'
+import { LinkCenter, LinkLeft, LinkRight, NavItem } from './components'
 
 const Navbar = ({ location }) => (
 	<div data-uk-sticky>
@@ -9,23 +8,23 @@ const Navbar = ({ location }) => (
 				<div className='uk-navbar'>
 					<div className='uk-navbar-left'>
 						<ul className='uk-navbar-nav'>
-							<AnimatedListItem>
-								<NavItemLeft {...{ location }}/>
-							</AnimatedListItem>
+							<NavItem>
+								<LinkLeft {...{ location }}/>
+							</NavItem>
 						</ul>
 					</div>
 					<div className='uk-navbar-center'>
 						<ul className='uk-navbar-nav'>
-							<AnimatedListItem>
-								<NavItemCenter/>
-							</AnimatedListItem>
+							<NavItem>
+								<LinkCenter/>
+							</NavItem>
 						</ul>
 					</div>
 					<div className='uk-navbar-right'>
 						<ul className='uk-navbar-nav'>
-							<AnimatedListItem>
-								<NavItemRight {...{ location }}/>
-							</AnimatedListItem>
+							<NavItem>
+								<LinkRight {...{ location }}/>
+							</NavItem>
 						</ul>
 					</div>
 				</div>

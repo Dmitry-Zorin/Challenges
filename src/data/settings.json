@@ -1,7 +1,8 @@
 {
 	"updateTimeout": 1000,
-	"notificationTimeout": 3000,
+	"notificationTimeout": 30000,
 	"itemsPerPage": 10,
 	"challengeGroups": [ "ongoing", "upcoming", "completed" ],
-	"infinity": "infinity"
+	"infinity": "infinity",
+	"defaultUserSettings": { "theme": "dark" }
 }

@@ -2,7 +2,7 @@ import Link from 'components/Link'
 import DataContext from 'contexts/DataContext'
 import React, { useContext } from 'react'
 
-const NavItemRight = ({ location }) => {
+const LinkRight = ({ location }) => {
 	const { userInfo } = useContext(DataContext)
 	if (!userInfo) return null
 	
@@ -15,4 +15,4 @@ const NavItemRight = ({ location }) => {
 	)
 }
 
-export default NavItemRight
+export default LinkRight

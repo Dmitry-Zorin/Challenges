@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DataContext from 'contexts/DataContext'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useContext } from 'react'
-import notification, { transition } from './animation'
+import notification from './Notifications.animation'
 import styles from './Notifications.module.scss'
 
 const { container, ...types } = styles
@@ -15,7 +15,7 @@ const Notification = () => {
 			<AnimatePresence>
 				{[...notifications].reverse()
 					.map(({ id, title, message, icon, type = 'info' }) => (
-						<motion.li key={id} {...{ transition }} animate>
+						<motion.li key={id} transition={{ duration: 0.5 }} animate>
 							<motion.div
 								className={[styles.notification, types[type]].join(' ')}
 								onClick={() => removeNotification(id)}

@@ -6,7 +6,7 @@ const card = {
 		scale: 1,
 		transition: {
 			type: 'spring',
-			stiffness: 260,
+			stiffness: 200,
 			damping: 20,
 			staggerChildren: 0.05,
 		},

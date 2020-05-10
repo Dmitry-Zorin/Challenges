@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DataContext from 'contexts/DataContext'
 import React, { useContext } from 'react'
 
-const NavItemCenter = () => {
+const LinkCenter = () => {
 	const { spinnerIsVisible } = useContext(DataContext)
 	
 	return !spinnerIsVisible ? null : (
@@ -12,4 +12,4 @@ const NavItemCenter = () => {
 	)
 }
 
-export default NavItemCenter
+export default LinkCenter

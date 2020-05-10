@@ -4,7 +4,12 @@ import React from 'react'
 const Slidenav = ({ side }) => (
 	<a
 		href='/#'
-		className={`uk-visible@s uk-hidden-hover uk-position-center-${side} uk-height-1-1 uk-width-1-5`}
+		className={`
+			uk-visible@s
+			uk-position-center-${side}
+			uk-height-1-1
+			uk-width-1-5
+		`}
 		data-uk-slideshow-item={side === 'left' ? 'previous' : 'next'}
 	>
 		<FontAwesomeIcon

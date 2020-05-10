@@ -1,7 +1,11 @@
 import { Router } from '@reach/router'
 import Layout from 'components/Layout'
 import DataContext from 'contexts/DataContext'
-import { notificationTimeout, updateTimeout } from 'data/settings.json'
+import {
+	defaultUserSettings,
+	notificationTimeout,
+	updateTimeout,
+} from 'data/settings.json'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import {
 	Challenge,
@@ -12,8 +16,6 @@ import {
 } from 'routes'
 import { getUserInfo, saveSettings } from 'scripts/requests'
 import { updateTime } from 'scripts/time'
-
-const defaultSettings = { theme: 'dark' }
 
 const App = () => {
 	const [context, setContext] = useState({
@@ -47,7 +49,9 @@ const App = () => {
 		saveSettings: () => {
 			saveSettings(context, context.userInfo.settings)
 				.then(() => {
-					delete contextRef.current.userInfo.settings.areChanged
+					const settings = contextRef.current.userInfo.settings
+					delete settings.areChanged
+					localStorage.setItem('settings', JSON.stringify(settings))
 					updateContext()
 				})
 				.catch(() => {})
@@ -62,6 +66,7 @@ const App = () => {
 	}, [])
 	
 	const login = useCallback(({ username, challenges, settings }) => {
+		localStorage.setItem('settings', JSON.stringify(settings))
 		updateContext({ userInfo: { username, settings } })
 		context.updateChallenges(challenges)
 		intervalRef.current = setInterval(context.updateChallenges, updateTimeout)
@@ -71,7 +76,7 @@ const App = () => {
 		clearInterval(intervalRef.current)
 		updateContext({
 			challenges: {},
-			userInfo: { settings: defaultSettings },
+			userInfo: { settings: defaultUserSettings },
 		})
 	}, [updateContext])
 	
@@ -83,6 +88,8 @@ const App = () => {
 			updateContext({ challenges })
 		}
 		else if (context.spinnerIsVisible === undefined) {
+			const settings = JSON.parse(localStorage.getItem('settings'))
+			updateContext({ userInfo: { settings: settings || defaultUserSettings } })
 			getUserInfo(context).then(login).catch(logout)
 		}
 	}, [context, updateContext, login, logout])

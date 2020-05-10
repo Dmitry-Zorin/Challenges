@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Header, Navbar, Notifications } from './components'
 import { container, env } from './Layout.module.scss'
 
-const Layout = ({ children, location }) => {
+const Layout = ({ location, children }) => {
 	useEffect(
 		() => window.scrollTo(0, 0),
 		[location.pathname],

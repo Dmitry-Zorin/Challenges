@@ -1,5 +1,4 @@
-import AnimatedDiv from 'components/animated/AnimatedDiv'
-import Subnav from 'components/Subnav'
+import { Animation, Subnav } from 'components'
 import React from 'react'
 
 const difficultyTypes = {
@@ -17,10 +16,10 @@ const DifficultyInput = ({ difficulty, setState }) => {
 	}))
 	
 	return (
-		<AnimatedDiv className='padding-text-top'>
+		<Animation type='fade' className='padding-text-top'>
 			<p className='uk-text-primary'>Difficulty</p>
 			<Subnav padding={false} {...{ items }}/>
-		</AnimatedDiv>
+		</Animation>
 	)
 }
 

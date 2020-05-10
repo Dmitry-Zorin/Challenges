@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 
-const NoChallenges = ({ extended, className, ...props }) => (
+const NoChallenges = ({ extended }) => (
 	<div className={extended ? 'padding-text' : ''}>
-		<p className={`uk-text-center uk-text-muted ${className}`} {...props}>
+		<p className='uk-text-center uk-text-muted'>
 			<FontAwesomeIcon icon='ban'/>
 			No challenges...
 		</p>

@@ -1,4 +1,4 @@
-import AnimatedButton from 'components/animated/AnimatedButton'
+import Button from 'components/Button'
 import React, { useCallback } from 'react'
 import { toMs } from 'scripts/time'
 
@@ -29,12 +29,12 @@ const NumberInput = ({ label, time, ms, setState, timeToMs, step }) => {
 			</label>
 			<div className='uk-flex uk-child-width-expand'>
 				{[-1, 1].map(sign => (
-					<div key={sign} className={sign < 0 ? '' : 'uk-margin-small-left'}>
-						<AnimatedButton
-							icon={sign < 0 ? 'minus' : 'plus'}
-							onClick={() => setState(Math.max(0, ms + sign * step * timeToMs))}
-						/>
-					</div>
+					<Button
+						key={sign}
+						className={sign < 0 ? '' : 'uk-margin-small-left'}
+						icon={sign < 0 ? 'minus' : 'plus'}
+						onClick={() => setState(Math.max(0, ms + sign * step * timeToMs))}
+					/>
 				))}
 			</div>
 		</div>

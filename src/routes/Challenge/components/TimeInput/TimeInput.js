@@ -1,5 +1,4 @@
-import AnimatedDiv from 'components/animated/AnimatedDiv'
-import AnimatedSwitch from 'components/animated/AnimatedSwitch'
+import { Animation, Switch } from 'components'
 import { motion } from 'framer-motion'
 import { upperFirst } from 'lodash'
 import React, { useState } from 'react'
@@ -11,12 +10,12 @@ const TimeInput = ({ ms, ...props }) => {
 	const [disabled, setDisabled] = useState(ms > toMs.MANY_YEARS)
 	
 	return (
-		<AnimatedDiv className='padding-text-top'>
+		<Animation type='fade' className='padding-text-top'>
 			<div className='uk-flex uk-flex-middle'>
 				<p className='uk-text-primary uk-width-expand'>
 					{upperFirst(props.name)}
 				</p>
-				<AnimatedSwitch
+				<Switch
 					isOn={!disabled}
 					onClick={() => {
 						props.setState(disabled ? 0 : toMs.TOO_MANY_YEARS)
@@ -27,7 +26,6 @@ const TimeInput = ({ ms, ...props }) => {
 			<div className='uk-position-relative'>
 				<motion.div
 					className='uk-flex uk-grid-small uk-child-width-expand'
-					initial={false}
 					animate={disabled
 						? { opacity: 0, transition: { duration: 0 } }
 						: { opacity: 1 }
@@ -45,18 +43,14 @@ const TimeInput = ({ ms, ...props }) => {
 					))}
 				</motion.div>
 				{disabled && (
-					<motion.div
-						className={`${unknown} uk-position-cover`}
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-					>
+					<Animation type='fade' className={`${unknown} uk-position-cover`}>
 						<p className='uk-position-center uk-text-italic'>
 							Unknown
 						</p>
-					</motion.div>
+					</Animation>
 				)}
 			</div>
-		</AnimatedDiv>
+		</Animation>
 	)
 }
 

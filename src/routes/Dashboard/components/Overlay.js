@@ -1,15 +1,15 @@
 import { Link } from '@reach/router'
-import AnimatedCard from 'components/animated/AnimatedCard'
+import Card from 'components/Card'
 import { motion } from 'framer-motion'
 import { upperFirst } from 'lodash'
 import React, { useState } from 'react'
 
-const Overlay = ({ children, to = '', text }) => {
+const Overlay = ({ to = '', text, children }) => {
 	const [isVisible, setIsVisible] = useState(false)
 	
 	return (
 		<Link {...{ to }}>
-			<AnimatedCard
+			<Card
 				onMouseEnter={() => setIsVisible(true)}
 				onMouseLeave={() => setIsVisible(false)}
 			>
@@ -23,14 +23,17 @@ const Overlay = ({ children, to = '', text }) => {
 					`}
 					style={{ width: 150 }}
 					initial={false}
-					animate={{ x: isVisible ? 0 : '100%', opacity: +isVisible }}
-					transition={{ duration: 0.4 }}
+					animate={{
+						x: isVisible ? 0 : '100%',
+						opacity: +isVisible,
+						transition: { duration: 0.4 },
+					}}
 				>
 					<p className='uk-position-center uk-text-primary'>
 						{upperFirst(text)}
 					</p>
 				</motion.div>
-			</AnimatedCard>
+			</Card>
 		</Link>
 	)
 }

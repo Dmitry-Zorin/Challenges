@@ -1,8 +1,9 @@
-import AnimatedDiv from 'components/animated/AnimatedDiv'
-import React from 'react'
+import Animation from 'components/Animation'
+import React, { Children } from 'react'
 
-const ButtonGroup = ({ children, className = '', padding = true, ...props }) => (
-	<AnimatedDiv
+const ButtonGroup = ({ padding = true, className = '', children, ...props }) => (
+	<Animation
+		type='fade'
 		className={`
 			uk-flex
 			uk-flex-center
@@ -14,8 +15,10 @@ const ButtonGroup = ({ children, className = '', padding = true, ...props }) => 
 		`}
 		{...props}
 	>
-		{children}
-	</AnimatedDiv>
+		{Children.map(children, (c, i) => c && (
+			<div key={i}>{c}</div>
+		))}
+	</Animation>
 )
 
 export default ButtonGroup

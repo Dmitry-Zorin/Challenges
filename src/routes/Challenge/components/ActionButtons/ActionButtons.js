@@ -1,18 +1,17 @@
-import AnimatedButton from 'components/animated/AnimatedButton'
-import ButtonGroup from 'components/ButtonGroup'
+import { Button, ButtonGroup } from 'components'
 import React from 'react'
 
 const ActionButtons = ({ saveValue, withCancel, ...props }) => (
 	<ButtonGroup {...props}>
 		{withCancel && (
-			<AnimatedButton
+			<Button
 				type='primary'
 				value='Cancel'
 				icon='times-circle'
 				onClick={() => window.history.back()}
 			/>
 		)}
-		<AnimatedButton
+		<Button
 			type='primary'
 			value={saveValue}
 			icon={withCancel ? 'check-circle' : 'plus-circle'}

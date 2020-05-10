@@ -1,14 +1,11 @@
-import AnimatedButton from 'components/animated/AnimatedButton'
-import ButtonGroup from 'components/ButtonGroup'
-import InnerLayout from 'components/InnerLayout'
-import TextInput from 'components/TextInput'
+import { Button, ButtonGroup, InnerLayout, TextInput } from 'components'
 import DataContext from 'contexts/DataContext'
 import { invalid } from 'data/notifications/errors.json'
 import React, { useCallback, useContext, useState } from 'react'
 import { addNotification } from 'scripts/notification'
 import { authorize } from 'scripts/requests'
 
-const Authorization = ({ action = 'signUp', items, ...props }) => {
+const Authorization = ({ action = 'signUp', items, login, navigate }) => {
 	const context = useContext(DataContext)
 	
 	const [username, setUsername] = useState()
@@ -22,11 +19,11 @@ const Authorization = ({ action = 'signUp', items, ...props }) => {
 			: authorize(context, action, { username, password })
 				.then(user => {
 					if (!user) return
-					props.login(user)
-					props.navigate('/')
+					login(user)
+					navigate('/')
 				})
 				.catch(() => {})
-	}, [context, username, password, action, props])
+	}, [context, username, password, action, login, navigate])
 	
 	const buttonProps = items ? {
 		icon: 'paper-plane',
@@ -60,7 +57,7 @@ const Authorization = ({ action = 'signUp', items, ...props }) => {
 					setState={setPassword}
 				/>
 				<ButtonGroup>
-					<AnimatedButton type='primary' {...buttonProps} submit/>
+					<Button type='primary' {...buttonProps} submit/>
 				</ButtonGroup>
 			</form>
 		</InnerLayout>

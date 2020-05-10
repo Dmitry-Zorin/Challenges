@@ -1,3 +1,4 @@
-export { default as NavItemLeft } from './NavItemLeft'
-export { default as NavItemRight } from './NavItemRight'
-export { default as NavItemCenter } from './NavItemCenter'
+export { default as NavItem } from './NavItem'
+export { default as LinkLeft } from './LinkLeft'
+export { default as LinkRight } from './LinkRight'
+export { default as LinkCenter } from './LinkCenter'

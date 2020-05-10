@@ -30,7 +30,10 @@ const Login = (props) => {
 		if (!context.userInfo?.username) return
 		
 		logout(context)
-			.then(() => localStorage.clear(props.logout()))
+			.then(() => {
+				props.logout()
+				localStorage.clear()
+			})
 			.catch(() => {})
 	}, [context, props])
 	

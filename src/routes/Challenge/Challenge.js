@@ -1,5 +1,4 @@
-import InnerLayout from 'components/InnerLayout'
-import TextInput from 'components/TextInput'
+import { InnerLayout, TextInput } from 'components'
 import DataContext from 'contexts/DataContext'
 import React, { useContext, useState } from 'react'
 import { saveChallenge } from 'scripts/requests'
