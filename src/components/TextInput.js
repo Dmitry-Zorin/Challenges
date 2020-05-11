@@ -11,12 +11,12 @@ const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = labe
 			{upperFirst(label)}
 		</p>
 		<motion.input
-			maxLength='250'
 			className='uk-input'
 			placeholder={value ? undefined : defaultValue}
 			onChange={({ target: { value } }) => {
 				setState(capital ? upperFirst(value) : value)
 			}}
+			maxLength='250'
 			{...{ type, value }}
 			animated
 		/>
