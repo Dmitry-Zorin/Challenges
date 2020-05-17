@@ -1,18 +1,15 @@
 import Button from 'components/Button'
-import React, { useCallback } from 'react'
+import React from 'react'
 import { toMs } from 'scripts/time'
 
 const NumberInput = ({ label, time, ms, setState, timeToMs, step }) => {
-	const setTime = useCallback(
-		e => {
-			const value = e.target.value
-			if (isNaN(value)) return
-			
-			const timeToMs = toMs[label.slice(0, -1).toUpperCase()]
-			setState(ms + (value - time) * timeToMs)
-		},
-		[label, setState, ms, time],
-	)
+	const setTime = (e) => {
+		const value = e.target.value
+		if (isNaN(value)) return
+		
+		const timeToMs = toMs[label.slice(0, -1).toUpperCase()]
+		setState(ms + (value - time) * timeToMs)
+	}
 	
 	return (
 		<div className='uk-text-right' data-uk-margin>

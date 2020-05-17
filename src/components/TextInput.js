@@ -1,16 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Animation from 'components/Animation'
-import { motion } from 'framer-motion'
 import { upperFirst } from 'lodash'
 import React from 'react'
 
 const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = label, setState, capital }) => (
-	<Animation type='fade' className='padding-text-top'>
+	<div className='padding-text-top'>
 		<p className='uk-text-primary'>
 			{icon && <FontAwesomeIcon {...{ icon }}/>}
 			{upperFirst(label)}
 		</p>
-		<motion.input
+		<input
 			className='uk-input'
 			placeholder={value ? undefined : defaultValue}
 			onChange={({ target: { value } }) => {
@@ -18,9 +16,8 @@ const TextInput = ({ type = 'text', icon, label, value = '', defaultValue = labe
 			}}
 			maxLength='250'
 			{...{ type, value }}
-			animated
 		/>
-	</Animation>
+	</div>
 )
 
 export default TextInput

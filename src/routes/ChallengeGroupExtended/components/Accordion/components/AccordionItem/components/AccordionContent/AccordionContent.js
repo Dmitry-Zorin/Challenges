@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion'
 import React from 'react'
+import accordionContent from './AccordionContent.animation'
 import OptionButton from './components/OptionButton'
 
 const options = {
@@ -18,7 +20,7 @@ const AccordionContent = ({ group, challenge, navigate }) => {
 	const labelType = labelTypes[difficulty.toLowerCase()]
 	
 	return (
-		<>
+		<motion.div animate='animate' exit='initial' variants={accordionContent}>
 			<div data-uk-grid>
 				<div className='uk-flex uk-flex-middle'>
 					<div className={`uk-label uk-label-${labelType}`}>
@@ -34,7 +36,7 @@ const AccordionContent = ({ group, challenge, navigate }) => {
 			<div className='padding uk-padding-remove-bottom'>
 				<hr className='uk-margin-remove'/>
 			</div>
-		</>
+		</motion.div>
 	)
 }
 

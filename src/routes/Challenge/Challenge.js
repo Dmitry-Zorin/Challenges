@@ -1,11 +1,12 @@
 import { InnerLayout, TextInput } from 'components'
-import DataContext from 'contexts/DataContext'
+import RequestContext from 'contexts/RequestContext'
+import UserContext from 'contexts/UserContext'
 import React, { useContext, useState } from 'react'
-import { saveChallenge } from 'scripts/requests'
 import { ActionButtons, DifficultyInput, TimeInput } from './components'
 
 const Challenge = ({ navigate, location }) => {
-	const context = useContext(DataContext)
+	const context = useContext(UserContext)
+	const { saveChallenge } = useContext(RequestContext)
 	
 	const c = location.state?.challenge
 	const startDate = c?.startDate || 0
@@ -46,7 +47,7 @@ const Challenge = ({ navigate, location }) => {
 			duration,
 			delay,
 		}
-		saveChallenge(context, info.action, variables)
+		saveChallenge(info.action, variables)
 			.then(context.updateChallenges)
 			.catch(() => {})
 	}

@@ -5,30 +5,32 @@
 @mixin hook-button() {
 	border-radius: $border-radius-medium;
 	text-transform: uppercase;
-	transition: 0.1s ease-in-out;
-	transition-property: color, background-color;
 	padding: 0;
+	font-weight: 500;
 }
 
 @mixin hook-button-default() {
-	@include gradient-opacity-style();
+	@include gradient-opacity-style(2);
+	color: $control-color;
 }
 
 @mixin hook-button-default-hover() {
-	@include gradient-opacity-style(2);
+	@include gradient-opacity-style(4);
+	color: $control-color;
 }
 
 @mixin hook-button-default-active() {
 	@include hook-button-default-hover();
+	color: $control-color;
 }
 
 @mixin hook-button-primary() {
-	@include gradient-style($global-primary-background);
-	color: $global-inverse-color;
+	@include gradient-style($primary-color);
+	color: $control-color;
 }
 
 @mixin hook-button-primary-hover() {
-	@include gradient-style($global-success-background);
+	@include gradient-style($green);
 	
 	&.switcher {
 		@include hook-button-primary();
@@ -40,7 +42,7 @@
 }
 
 @mixin hook-button-secondary() {
-	@include gradient-opacity-style(2);
+	@include gradient-style($gray);
 }
 
 @mixin hook-button-secondary-hover() {
@@ -78,19 +80,11 @@
 	overflow: hidden;
 	border-radius: $border-radius-xlarge;
 	z-index: 0;
-	transition: 0.5s;
-	transition-property: background-color;
+	transition: background 0.5s, box-shadow 0.2s;
+	transition-timing-function: ease-out;
 	
 	@media (min-width: $breakpoint-large) {
 		margin: 2 * $card-margin-large $card-margin-large;
-	}
-	
-	&.dark {
-		background: $card-background-dark;
-	}
-	
-	&.light {
-		background: $card-background-light;
 	}
 	
 	&.large {
@@ -99,16 +93,32 @@
 	}
 }
 
+@mixin hook-card-default() {
+	background: $card-background-light;
+	box-shadow: $card-shadow;
+}
+
+@mixin hook-card-default-hover() {
+	@include hook-card-default();
+	box-shadow: $card-hover-shadow;
+}
+
 // Form
 @mixin hook-form() {
-	@include gradient-style(darken($base-color, 5));
-	color: $global-inverse-color;
+	@include gradient-opacity-style(7);
+	color: $control-color;
 	border-radius: $border-radius-medium;
+}
+
+@mixin hook-form-focus() {
+	background: white;
+	color: $base-color;
 }
 
 @mixin hook-form-misc() {
 	.uk-input::placeholder {
 		@include text-crop(1.6);
+		color: $muted-color;
 	}
 }
 
@@ -164,13 +174,7 @@
 
 // Overlay
 @mixin hook-overlay-default() {
-	.dark & {
-		background: rgba($card-background-dark, 0.375);
-	}
-	
-	.light & {
-		background: rgba($card-background-light, 0.075);
-	}
+	background: rgba(darken($card-background-light, 15), 0.8);
 }
 
 // Pagination
@@ -183,6 +187,10 @@
 	@include hook-form();
 }
 
+@mixin hook-search-default-input-focus() {
+	@include hook-form-focus();
+}
+
 @mixin hook-search-misc() {
 	.uk-search-input::placeholder {
 		@include text-crop(1.6);
@@ -191,8 +199,12 @@
 
 // Text
 @mixin hook-text-misc() {
-	.uk-text-normal {
-		font-weight: $base-body-font-weight;
+	.uk-text-primary {
+		text-shadow: 0 1px 0 rgba($base-color, 0.2), 0 1px 1px rgba($base-color, 0.1);
+		
+		& > svg {
+			filter: drop-shadow(0 1px 0 rgba($base-color, 0.2)) drop-shadow(0 1px 0.5px rgba($base-color, 0.1));
+		}
 	}
 }
 

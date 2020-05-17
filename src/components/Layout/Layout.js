@@ -1,23 +1,26 @@
-import React, { useEffect } from 'react'
+import { useLocation } from '@reach/router'
+import SettingsContext from 'contexts/SettingsContext'
+import React, { useContext, useEffect } from 'react'
 import { Header, Navbar, Notifications } from './components'
 import { container, env } from './Layout.module.scss'
 
-const Layout = ({ location, children }) => {
-	useEffect(
-		() => window.scrollTo(0, 0),
-		[location.pathname],
-	)
+const Layout = ({ children }) => {
+	const { settings } = useContext(SettingsContext)
+	const { pathname } = useLocation()
+	
+	useEffect(() => window.scrollTo(0, 0), [pathname])
+	
 	return (
-		<>
-			<Navbar {...{ location }}/>
+		<div className={settings.theme}>
+			<Navbar/>
 			<div className={env}>
 				<Notifications/>
 				<div className={`uk-container ${container}`}>
-					<Header {...{ location }}/>
+					<Header/>
 					{children}
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

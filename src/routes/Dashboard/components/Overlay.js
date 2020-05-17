@@ -4,29 +4,27 @@ import { motion } from 'framer-motion'
 import { upperFirst } from 'lodash'
 import React, { useState } from 'react'
 
-const Overlay = ({ to = '', text, children }) => {
+const Overlay = ({ to = '', text, children, ...props }) => {
 	const [isVisible, setIsVisible] = useState(false)
+	
+	const onMouseEnter = () => setIsVisible(true)
+	const onMouseLeave = () => setIsVisible(false)
 	
 	return (
 		<Link {...{ to }}>
 			<Card
-				onMouseEnter={() => setIsVisible(true)}
-				onMouseLeave={() => setIsVisible(false)}
-			>
+				className='uk-card-hover' {...{
+				onMouseEnter,
+				onMouseLeave, ...props,
+			}}>
 				{children}
 				<motion.div
-					className={`
-						uk-overlay-default
-						uk-position-right
-						uk-hidden-touch
-						${isVisible ? 'blur' : ''}
-					`}
-					style={{ width: 150 }}
+					className='uk-overlay-default uk-position-right uk-width-1-5'
 					initial={false}
 					animate={{
 						x: isVisible ? 0 : '100%',
 						opacity: +isVisible,
-						transition: { duration: 0.4 },
+						transition: { ease: 'easeOut', duration: 0.4, delay: 0.1 },
 					}}
 				>
 					<p className='uk-position-center uk-text-primary'>

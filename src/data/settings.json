@@ -4,5 +4,5 @@
 	"itemsPerPage": 10,
 	"challengeGroups": [ "ongoing", "upcoming", "completed" ],
 	"infinity": "infinity",
-	"defaultUserSettings": { "theme": "dark" }
+	"defaultUserSettings": { "theme": "light" }
 }

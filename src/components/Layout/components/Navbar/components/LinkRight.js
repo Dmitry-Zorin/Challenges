@@ -1,12 +1,15 @@
+import { useLocation } from '@reach/router'
 import Link from 'components/Link'
-import DataContext from 'contexts/DataContext'
+import UserContext from 'contexts/UserContext'
 import React, { useContext } from 'react'
 
-const LinkRight = ({ location }) => {
-	const { userInfo } = useContext(DataContext)
+const LinkRight = () => {
+	const { userInfo } = useContext(UserContext)
+	const { pathname } = useLocation()
+	
 	if (!userInfo) return null
 	
-	if (!location.pathname.match(/\/($|create|edit)/))
+	if (!pathname.match(/\/($|create|edit)/))
 		return <Link to='create' text='create' icon='plus'/>
 	
 	const inOrOut = userInfo?.username ? 'out' : 'in'

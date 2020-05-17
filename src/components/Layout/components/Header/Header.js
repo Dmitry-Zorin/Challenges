@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import DataContext from 'contexts/DataContext'
+import { useLocation } from '@reach/router'
+import UserContext from 'contexts/UserContext'
 import React, { useContext } from 'react'
 import { header, large, title } from './Header.module.scss'
 
-const Header = ({ location }) => {
-	const { challenges } = useContext(DataContext)
+const Header = () => {
+	const { challenges } = useContext(UserContext)
 	
-	const isRoot = location.pathname === '/'
+	const isRoot = useLocation().pathname === '/'
 	const isHomePage = isRoot && challenges && !challenges?.ongoing
 	
 	return (
@@ -21,7 +22,7 @@ const Header = ({ location }) => {
 					Challenges
 				</p>
 				{isHomePage && (
-					<p className='uk-text-light uk-text-italic text-larger'>
+					<p className='text-inverse uk-text-italic text-larger'>
 						A simple way to keep track of the challenges you set for yourself!
 					</p>
 				)}

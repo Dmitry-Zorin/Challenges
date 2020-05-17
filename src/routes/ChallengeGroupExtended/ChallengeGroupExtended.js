@@ -1,12 +1,12 @@
 import { InnerLayout, NoChallenges } from 'components'
-import DataContext from 'contexts/DataContext'
+import UserContext from 'contexts/UserContext'
 import { challengeGroups, itemsPerPage } from 'data/settings.json'
 import { upperFirst } from 'lodash'
 import React, { useContext, useState } from 'react'
 import { Accordion, Pagination, Search } from './components'
 
 const ChallengeGroupExtended = ({ group, navigate }) => {
-	const context = useContext(DataContext)
+	const context = useContext(UserContext)
 	
 	const [pattern, setPattern] = useState(/.*/)
 	const [page, setPage] = useState(1)
@@ -39,7 +39,9 @@ const ChallengeGroupExtended = ({ group, navigate }) => {
 		<InnerLayout {...{ items }}>
 			<Search onChange={search}/>
 			<div className='text-large'>
-				{!challenges.length ? <NoChallenges extended/> : (
+				{!challenges.length ? (
+					<NoChallenges extended/>
+				) : (
 					<Accordion
 						key={group + page}
 						{...{ challenges, group, page, navigate }}

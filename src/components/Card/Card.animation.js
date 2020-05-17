@@ -1,6 +1,6 @@
 const card = {
 	initial: {
-		scale: 0.925,
+		scale: 0.9,
 	},
 	animate: {
 		scale: 1,

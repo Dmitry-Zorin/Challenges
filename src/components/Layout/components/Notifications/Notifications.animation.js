@@ -11,15 +11,16 @@ const notification = {
 		transition: {
 			type: 'spring',
 			stiffness: 150,
-			damping: 10,
+			damping: 15,
 		},
 	},
-}
-
-notification.exit = {
-	...notification.initial,
-	transition: {
-		duration: 0.25,
+	exit: {
+		opacity: 0,
+		scale: 1.1,
+		y: 4,
+		transition: {
+			ease: 'easeOut',
+		},
 	},
 }
 

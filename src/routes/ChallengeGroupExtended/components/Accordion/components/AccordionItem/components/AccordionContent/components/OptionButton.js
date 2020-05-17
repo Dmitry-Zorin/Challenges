@@ -1,9 +1,8 @@
 import { Animation, Button } from 'components'
-import DataContext from 'contexts/DataContext'
+import { RequestContext, UserContext } from 'contexts'
 import { AnimatePresence } from 'framer-motion'
 import { upperFirst } from 'lodash'
 import React, { useContext } from 'react'
-import { updateChallenge } from 'scripts/requests'
 
 const info = {
 	start: { icon: 'play', buttonType: 'info' },
@@ -14,13 +13,13 @@ const info = {
 const size = 40
 
 const OptionButton = ({ challenge, navigate, option }) => {
-	const context = useContext(DataContext)
+	const { challenges, updateChallenges } = useContext(UserContext)
+	const { updateChallenge } = useContext(RequestContext)
 	
 	const onClick = () => {
 		if (option === 'edit') {
 			return navigate('/edit', { state: { challenge } })
 		}
-		const { challenges, updateChallenges } = context
 		const { _id: id, name } = challenge
 		
 		for (const [name, group] of Object.entries(challenges))
@@ -28,8 +27,9 @@ const OptionButton = ({ challenge, navigate, option }) => {
 		
 		updateChallenges(challenges)
 		
-		updateChallenge(context, option, { id }, name)
-			.then(updateChallenges).catch(() => {})
+		updateChallenge(option, { id }, name)
+			.then(updateChallenges)
+			.catch(() => {})
 	}
 	
 	return (
@@ -40,6 +40,8 @@ const OptionButton = ({ challenge, navigate, option }) => {
 					icon={info[option].icon}
 					style={{ width: size, height: size }}
 					data-uk-tooltip={`title: ${upperFirst(option)}; delay: 100`}
+					whileHover={{ scale: 1.1 }}
+					whiteTap={{ scale: 0.9 }}
 					{...{ onClick }}
 				/>
 			</Animation>

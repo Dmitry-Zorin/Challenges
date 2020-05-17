@@ -1,16 +1,32 @@
-import { Animation, Button, Switch } from 'components'
-import DataContext from 'contexts/DataContext'
-import React, { useContext } from 'react'
+import { Button, Switch } from 'components'
+import RequestContext from 'contexts/RequestContext'
+import SettingsContext from 'contexts/SettingsContext'
+import React, { useContext, useState } from 'react'
 
 const Settings = () => {
-	const {
-		userInfo: { settings: { theme, ...settings } },
-		changeSetting,
-		saveSettings,
-	} = useContext(DataContext)
+	const { settings, changeSetting } = useContext(SettingsContext)
+	const { saveSettings } = useContext(RequestContext)
+	
+	const [settingsDidChange, setSettingsDidChange] = useState(false)
+	
+	const _changeSetting = (setting) => {
+		changeSetting(setting)
+		setSettingsDidChange(true)
+	}
+	
+	const _saveSettings = () => {
+		saveSettings(settings)
+			.then(() => {
+				setSettingsDidChange(false)
+				localStorage.setItem('settings', JSON.stringify(settings))
+			})
+			.catch(() => {})
+	}
+	
+	const { theme } = settings
 	
 	return (
-		<Animation type='fade'>
+		<>
 			<p className='uk-text-muted uk-text-center'>
 				Settings
 			</p>
@@ -21,7 +37,7 @@ const Settings = () => {
 						<Switch
 							isOn={theme === 'light'}
 							onClick={() => {
-								changeSetting({
+								_changeSetting({
 									theme: theme === 'light' ? 'dark' : 'light',
 								})
 							}}
@@ -30,15 +46,15 @@ const Settings = () => {
 					<p>{theme}</p>
 				</li>
 			</ul>
-			{settings.areChanged && (
+			{settingsDidChange && (
 				<Button
 					className='uk-margin-small uk-margin-small-top'
 					icon='save'
 					value='save'
-					onClick={saveSettings}
+					onClick={_saveSettings}
 				/>
 			)}
-		</Animation>
+		</>
 	)
 }
 

@@ -12,10 +12,7 @@ const Button = ({ icon, value, submit, type = 'default', className = '', ...prop
 	>
 		<p>
 			{icon && (
-				<FontAwesomeIcon
-					className={value ? '' : 'icon-center'}
-					{...{ icon }}
-				/>
+				<FontAwesomeIcon className={value ? '' : 'icon-center'} {...{ icon }}/>
 			)}
 			{value}
 		</p>

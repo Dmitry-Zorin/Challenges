@@ -8,7 +8,6 @@ import {
 	faCalendarPlus,
 	faCheck,
 	faCheckCircle,
-	faChevronDown,
 	faChevronLeft,
 	faChevronRight,
 	faClock,
@@ -30,7 +29,6 @@ import {
 	faSignInAlt,
 	faSignOutAlt,
 	faSmile,
-	faSpinner,
 	faStopwatch,
 	faSyncAlt,
 	faTachometerAlt,
@@ -39,7 +37,6 @@ import {
 	faTrashAlt,
 	faUser,
 	faUserPlus,
-	faUserSlash,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -51,7 +48,6 @@ library.add(
 	faCalendarPlus,
 	faCheck,
 	faCheckCircle,
-	faChevronDown,
 	faChevronLeft,
 	faChevronRight,
 	faClock,
@@ -73,7 +69,6 @@ library.add(
 	faSignInAlt,
 	faSignOutAlt,
 	faSmile,
-	faSpinner,
 	faStopwatch,
 	faSyncAlt,
 	faTachometerAlt,
@@ -82,5 +77,4 @@ library.add(
 	faTrashAlt,
 	faUser,
 	faUserPlus,
-	faUserSlash,
 )

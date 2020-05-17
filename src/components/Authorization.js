@@ -1,29 +1,32 @@
+import { useNavigate } from '@reach/router'
 import { Button, ButtonGroup, InnerLayout, TextInput } from 'components'
-import DataContext from 'contexts/DataContext'
+import { NotificationContext, RequestContext, UserContext } from 'contexts'
 import { invalid } from 'data/notifications/errors.json'
-import React, { useCallback, useContext, useState } from 'react'
-import { addNotification } from 'scripts/notification'
-import { authorize } from 'scripts/requests'
+import React, { useContext, useState } from 'react'
 
-const Authorization = ({ action = 'signUp', items, login, navigate }) => {
-	const context = useContext(DataContext)
+const Authorization = ({ action = 'signUp', items }) => {
+	const { authorize } = useContext(RequestContext)
+	const { addNotification } = useContext(NotificationContext)
+	const { login } = useContext(UserContext)
+	
+	const navigate = useNavigate()
 	
 	const [username, setUsername] = useState()
 	const [password, setPassword] = useState()
 	
-	const onSubmit = useCallback(e => {
+	const onSubmit = (e) => {
 		e.preventDefault()
 		
 		!(username && password)
-			? addNotification(context, invalid)
-			: authorize(context, action, { username, password })
+			? addNotification(invalid)
+			: authorize(action, { username, password })
 				.then(user => {
 					if (!user) return
 					login(user)
 					navigate('/')
 				})
 				.catch(() => {})
-	}, [context, username, password, action, login, navigate])
+	}
 	
 	const buttonProps = items ? {
 		icon: 'paper-plane',
@@ -42,7 +45,7 @@ const Authorization = ({ action = 'signUp', items, login, navigate }) => {
 					with one simple step!
 				</p>
 			)}
-			<form className='uk-form uk-text-normal' {...{ onSubmit }}>
+			<form className='uk-form' {...{ onSubmit }}>
 				<TextInput
 					icon='user'
 					label='username'

@@ -1,9 +1,7 @@
-import Animation from 'components/Animation'
 import React, { Children } from 'react'
 
 const ButtonGroup = ({ padding = true, className = '', children, ...props }) => (
-	<Animation
-		type='fade'
+	<div
 		className={`
 			uk-flex
 			uk-flex-center
@@ -18,7 +16,7 @@ const ButtonGroup = ({ padding = true, className = '', children, ...props }) => 
 		{Children.map(children, (c, i) => c && (
 			<div key={i}>{c}</div>
 		))}
-	</Animation>
+	</div>
 )
 
 export default ButtonGroup

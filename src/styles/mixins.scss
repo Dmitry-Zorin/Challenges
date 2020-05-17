@@ -7,18 +7,18 @@
 			lighten($color, $amount),
 			darken($color, $amount),
 	);
-	color: $base-color;
+	color: $inverse-color;
 }
 
 @mixin gradient-opacity-style($multiplier: 1) {
 	$color: white;
 	$opacity: 0.05;
 	$diff: 0.1;
-	$amount: 0.025;
+	$amount: 0.075;
 	
 	background: linear-gradient(
-			rgba($color, $opacity + $multiplier * ($diff + $amount)),
-			rgba($color, $opacity + $multiplier * ($diff - $amount))
+			rgba($color, $opacity + $multiplier * $diff + $amount),
+			rgba($color, $opacity + $multiplier * $diff - $amount)
 	);
 	color: $base-color;
 }

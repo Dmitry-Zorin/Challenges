@@ -7,7 +7,6 @@ $global-font-size: 1em;
 
 $global-primary-background: $primary-color;
 $global-color: $base-color;
-$global-inverse-color: $navbar-background;
 $global-muted-color: $muted-color;
 $global-link-color: $base-color;
 $global-link-hover-color: $primary-color;
@@ -17,12 +16,11 @@ $global-success-background: $green;
 $global-danger-background: $red;
 
 $global-z-index: $z-index;
-$global-border: rgba($muted-color, 0.25);
+$global-border: rgba($muted-color, 0.5);
 
 // Base
-$base-body-font-weight: 500;
-$base-body-background: $background2;
-$base-selection-background: $muted-color;
+$base-body-background: darken($navbar-background, 6);
+$base-selection-background: $primary-color;
 $base-link-hover-text-decoration: none;
 $base-margin-vertical: 0;
 
@@ -39,12 +37,11 @@ $container-padding-horizontal-s: $card-margin-small;
 $container-padding-horizontal-m: $card-margin-small;
 
 // Form
-$form-focus-color: $global-inverse-color;
 $form-padding-horizontal: $border-radius-medium;
 
 // Overlay
 $overlay-default-background: $card-default-background;
-$overlay-primary-background: $background;
+$overlay-primary-background: $card-background-light;
 
 // Offcanvas
 $offcanvas-bar-background: $navbar-background;
@@ -57,16 +54,16 @@ $list-margin-top: 0;
 $navbar-nav-item-height: 0;
 $navbar-nav-item-padding-horizontal: $card-body-padding-horizontal;
 $navbar-nav-item-font-size: $global-font-size;
-$navbar-nav-item-color: $global-primary-background;
-$navbar-nav-item-hover-color: $global-primary-background;
-$navbar-nav-item-onclick-color: $global-primary-background;
+$navbar-nav-item-color: $primary-color;
+$navbar-nav-item-hover-color: $primary-color;
+$navbar-nav-item-onclick-color: $primary-color;
 
 // Slidenav
-$slidenav-color: $global-link-color;
-$slidenav-hover-color: $global-link-hover-color;
+$slidenav-color: $inverse-color;
+$slidenav-hover-color: $primary-color;
 
 // Text
-$text-primary-color: $global-primary-background;
+$text-primary-color: $primary-color;
 
 // Tooltip
 $tooltip-border-radius: $border-radius-small;

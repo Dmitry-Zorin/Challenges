@@ -5,15 +5,15 @@ import { registration } from './Home.module.scss'
 
 const slideshowId = 'slideshow'
 
-const Home = (props) => (
-	<div className='uk-text-light'>
+const Home = () => (
+	<>
 		<Features/>
 		<ScrollDown target={slideshowId}/>
 		<Slideshow id={slideshowId}/>
 		<div className={registration}>
-			<Authorization {...props}/>
+			<Authorization/>
 		</div>
-	</div>
+	</>
 )
 
 export default Home

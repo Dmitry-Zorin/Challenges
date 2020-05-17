@@ -10,7 +10,7 @@ const TimeInput = ({ ms, ...props }) => {
 	const [disabled, setDisabled] = useState(ms > toMs.MANY_YEARS)
 	
 	return (
-		<Animation type='fade' className='padding-text-top'>
+		<div className='padding-text-top'>
 			<div className='uk-flex uk-flex-middle'>
 				<p className='uk-text-primary uk-width-expand'>
 					{upperFirst(props.name)}
@@ -50,7 +50,7 @@ const TimeInput = ({ ms, ...props }) => {
 					</Animation>
 				)}
 			</div>
-		</Animation>
+		</div>
 	)
 }
 

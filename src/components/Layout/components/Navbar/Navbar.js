@@ -1,7 +1,7 @@
 import React from 'react'
 import { LinkCenter, LinkLeft, LinkRight, NavItem } from './components'
 
-const Navbar = ({ location }) => (
+const Navbar = () => (
 	<div data-uk-sticky>
 		<nav className='uk-navbar-container' data-uk-navbar>
 			<div className='uk-container uk-flex-1'>
@@ -9,7 +9,7 @@ const Navbar = ({ location }) => (
 					<div className='uk-navbar-left'>
 						<ul className='uk-navbar-nav'>
 							<NavItem>
-								<LinkLeft {...{ location }}/>
+								<LinkLeft/>
 							</NavItem>
 						</ul>
 					</div>
@@ -23,7 +23,7 @@ const Navbar = ({ location }) => (
 					<div className='uk-navbar-right'>
 						<ul className='uk-navbar-nav'>
 							<NavItem>
-								<LinkRight {...{ location }}/>
+								<LinkRight/>
 							</NavItem>
 						</ul>
 					</div>

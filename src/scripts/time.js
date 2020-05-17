@@ -1,6 +1,5 @@
 import { completeReady, startReady } from 'data/notifications/challenges.json'
 import { infinity, updateTimeout } from 'data/settings.json'
-import { addNotification } from 'scripts/notification'
 
 export const toMs = {
 	TOO_MANY_YEARS: 6e12,
@@ -10,14 +9,14 @@ export const toMs = {
 	MINUTE: 6e4,
 }
 
-export const updateTime = (context, challenges = context.challenges) => {
+export const updateTime = (challenges, addNotification) => {
 	const { ongoing, upcoming, completed } = challenges
 	const now = new Date().getTime()
 	
 	for (const c of ongoing) {
 		const ms = c.endDate - now
 		if (ms < 0 && ms >= -updateTimeout && (c.endDate - c.startDate)) {
-			addNotification(context, { ...completeReady, message: c.name })
+			addNotification({ ...completeReady, message: c.name })
 		}
 		c.timeLeft = getTimeString(c, ms)
 	}
@@ -25,7 +24,7 @@ export const updateTime = (context, challenges = context.challenges) => {
 	for (const c of upcoming) {
 		const ms = c.startDate - now
 		if (ms < 0 && ms >= -updateTimeout) {
-			addNotification(context, { ...startReady, message: c.name })
+			addNotification({ ...startReady, message: c.name })
 		}
 		c.startsIn = getTimeString(c, ms)
 	}

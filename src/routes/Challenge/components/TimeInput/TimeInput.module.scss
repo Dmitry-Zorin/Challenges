@@ -2,15 +2,7 @@
 @import '../../../../styles/mixins';
 
 .unknown {
+	background: rgba(white, 0.1);
 	border: 1px dashed $muted-color;
 	border-radius: $border-radius-medium;
-	
-	:global(.dark) & {
-		background: rgba($card-background-dark, 0.15);
-		color: $muted-color;
-	}
-	
-	:global(.light) & {
-		background: rgba($card-background-light, 0.05);
-	}
 }

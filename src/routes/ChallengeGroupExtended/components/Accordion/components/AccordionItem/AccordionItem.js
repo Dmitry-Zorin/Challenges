@@ -1,26 +1,25 @@
 import GroupItem from 'components/GroupItem'
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
-import accordionItem from './AccordionItem.animation'
 import AccordionContent from './components/AccordionContent'
 
 const AccordionItem = ({ challenge, group, active, onClick, navigate }) => (
-	<li>
+	<motion.li
+		variants={{
+			initial: { opacity: 0, height: 0 },
+			animate: { opacity: 1, height: 'auto' },
+		}}
+		transition={{ ease: 'easeOut', duration: 0.5 }}
+	>
 		<a href='/#' onClick={e => onClick(e, challenge._id)}>
 			<GroupItem {...{ challenge, group, active }} extended/>
 		</a>
 		<AnimatePresence>
 			{!active ? null : (
-				<motion.div
-					animate='animate'
-					exit='initial'
-					variants={accordionItem}
-				>
-					<AccordionContent {...{ challenge, group, navigate }}/>
-				</motion.div>
+				<AccordionContent {...{ challenge, group, navigate }}/>
 			)}
 		</AnimatePresence>
-	</li>
+	</motion.li>
 )
 
 export default AccordionItem

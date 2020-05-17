@@ -1,13 +1,16 @@
 @import 'variables';
 @import 'mixins';
 
-#root {
-	background: $background;
-	min-height: 100vh;
-}
-
 body {
+	background: radial-gradient(
+			circle at 50% 35%,
+			lighten($background, 6),
+			$background 75%,
+			darken($background, 4)
+	);
 	cursor: default;
+	min-height: 100vh;
+	overflow-x: hidden;
 	overflow-y: scroll;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
@@ -41,9 +44,26 @@ svg {
 	}
 }
 
+button, input {
+	box-shadow: $control-shadow;
+	transition: box-shadow 0.2s ease-out;
+}
+
+button:hover, input:focus {
+	box-shadow: $control-hover-shadow;
+}
+
+nav {
+	box-shadow: $card-shadow;
+}
+
 .text-meta {
 	color: $muted-color;
 	font-size: $font-size-small;
+}
+
+.text-inverse {
+	color: $inverse-color;
 }
 
 .round-border {
@@ -70,16 +90,13 @@ svg {
 
 .primary-border {
 	@extend .round-border;
-	border: 1px solid rgba($primary-color, 0.75);
+	border: 1px solid $primary-color;
+	box-shadow: $card-shadow;
 }
 
 .border {
 	border: 0.5px solid;
 	border-radius: 5px;
-}
-
-.blur {
-	backdrop-filter: blur(3px);
 }
 
 @each $size, $font-size in (

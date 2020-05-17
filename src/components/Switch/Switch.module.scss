@@ -1,37 +1,33 @@
 @import '../../styles/variables';
+@import '../../styles/global';
 @import '../../styles/mixins';
 
 $size: 20px;
+$padding: 2px;
 
 .switch {
-	border-radius: $size;
+	border-radius: calc(#{$size} + 2 * #{$padding});
+	box-shadow: $control-shadow;
 	cursor: pointer;
 	display: flex;
-	padding: 2px;
+	padding: $padding;
 	width: 2 * $size;
-	
-	& * {
-		border-radius: 100%;
-		box-shadow: 0 0 3px rgba(black, 0.25);
-		height: $size;
-		width: $size;
-	}
+}
+
+.slider {
+	@include gradient-style($background);
+	border-radius: $size;
+	box-shadow: $control-shadow;
+	padding: $size / 2;
 }
 
 .on {
 	@include gradient-style($primary-color);
 	justify-content: flex-end;
 	
-	& * {
-		@include gradient-style($base-color);
-	}
 }
 
 .off {
 	@include gradient-opacity-style();
 	justify-content: flex-start;
-	
-	& * {
-		@include gradient-opacity-style();
-	}
 }

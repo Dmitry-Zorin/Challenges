@@ -1,16 +1,10 @@
 import { motion } from 'framer-motion'
 import React from 'react'
-import { off, on, switch as switchStyle } from './Switch.module.scss'
-
-const transition = { duration: 0.2 }
+import { off, on, slider, switch as _switch } from './Switch.module.scss'
 
 const Switch = ({ isOn, ...props }) => (
-	<motion.div
-		className={[switchStyle, isOn ? on : off].join(' ')}
-		{...{ transition, ...props }}
-		animate
-	>
-		<motion.div {...{ transition }} animate/>
+	<motion.div className={`${_switch} ${isOn ? on : off}`} {...props} animate>
+		<motion.div className={slider} animate/>
 	</motion.div>
 )
 
