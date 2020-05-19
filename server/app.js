@@ -21,14 +21,6 @@ connectToDb(process.env.ATLAS_URI, {
 	useUnifiedTopology: true,
 }).catch(console.log)
 
-// Update user settings
-User.find({}, (err, users) => {
-	users.forEach(u => {
-		if (!u.settings) u.settings = { theme: 'dark' }
-		u.save()
-	})
-})
-
 const app = express()
 const isProductionEnv = process.env.NODE_ENV === 'production'
 

@@ -25,7 +25,7 @@ $base-link-hover-text-decoration: none;
 $base-margin-vertical: 0;
 
 // Card
-$card-default-background: rgba(white, 0);
+$card-default-background: $card-background-light;
 $card-body-padding-horizontal: $border-radius-large;
 $card-body-padding-horizontal-l: $border-radius-xlarge;
 $card-body-padding-vertical: $border-radius-xlarge - $text-padding;
@@ -41,10 +41,12 @@ $form-padding-horizontal: $border-radius-medium;
 
 // Overlay
 $overlay-default-background: $card-default-background;
-$overlay-primary-background: $card-background-light;
+$overlay-primary-background: $card-default-background;
 
 // Offcanvas
-$offcanvas-bar-background: $navbar-background;
+$offcanvas-bar-width: 85%;
+$offcanvas-bar-background: $card-default-background;
+$offcanvas-overlay-background: rgba(black, 0.5);
 $offcanvas-bar-padding-horizontal: calc(env(safe-area-inset-left) + #{$card-body-padding-horizontal});
 
 // List

@@ -3,10 +3,9 @@
 
 body {
 	background: radial-gradient(
-			circle at 50% 35%,
-			lighten($background, 6),
-			$background 75%,
-			darken($background, 4)
+			ellipse at 50% 35%,
+			lighten($background, 5),
+			adjust_hue($background, 10)
 	);
 	cursor: default;
 	min-height: 100vh;
@@ -64,6 +63,9 @@ nav {
 
 .text-inverse {
 	color: $inverse-color;
+	a:hover & {
+		color: $primary-color;
+	}
 }
 
 .round-border {

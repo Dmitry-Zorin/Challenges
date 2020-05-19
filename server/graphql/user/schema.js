@@ -32,7 +32,7 @@ const schema = gql`
   }
 
   input SettingsInput {
-    theme: String = "dark"
+    theme: String = "light"
   }
 `
 

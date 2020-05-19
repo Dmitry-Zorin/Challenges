@@ -3,7 +3,7 @@ import Overlay from './Overlay'
 
 const NewChallengeButton = () => (
 	<Overlay to='create' text='create'>
-		<p className='uk-text-primary uk-text-center uk-text-uppercase text-large padding'>
+		<p className='uk-text-primary uk-text-center uk-text-uppercase text-medium padding'>
 			New challenge
 		</p>
 	</Overlay>

@@ -7,7 +7,7 @@ const InnerLayout = ({ title, items, children, ...props }) => (
 			{title && (
 				<p
 					className='uk-text-center uk-text-primary uk-text-bold uk-text-capitalize'
-					style={{ fontSize: '2.2em' }}
+					style={{ fontSize: '2.25em' }}
 				>
 					{title}
 				</p>

@@ -18,7 +18,7 @@ const challengesSchema = new Schema({
 })
 
 const settingsSchema = new Schema({
-	theme: { type: String, required: true },
+	theme: { type: String, required: true, default: 'light' },
 })
 
 const userSchema = new Schema({

@@ -10,12 +10,12 @@
 }
 
 @mixin hook-button-default() {
-	@include gradient-opacity-style(2);
+	@include gradient-opacity-style();
 	color: $control-color;
 }
 
 @mixin hook-button-default-hover() {
-	@include gradient-opacity-style(4);
+	@include gradient-opacity-style(2);
 	color: $control-color;
 }
 
@@ -25,12 +25,13 @@
 }
 
 @mixin hook-button-primary() {
-	@include gradient-style($primary-color);
+	@include gradient-style($primary-color, 5);
 	color: $control-color;
 }
 
 @mixin hook-button-primary-hover() {
-	@include gradient-style($green);
+	@include gradient-style($primary-color, 5, -5);
+	color: $control-color;
 	
 	&.switcher {
 		@include hook-button-primary();
@@ -96,16 +97,28 @@
 @mixin hook-card-default() {
 	background: $card-background-light;
 	box-shadow: $card-shadow;
+	
+	.dark & {
+		background: $card-background-dark;
+		//color: white;
+	}
 }
 
 @mixin hook-card-default-hover() {
 	@include hook-card-default();
 	box-shadow: $card-hover-shadow;
+	
+	@media (hover: hover) {
+		.text-meta {
+			transition: filter 0.4s ease-in;
+			filter: blur(3px);
+		}
+	}
 }
 
 // Form
 @mixin hook-form() {
-	@include gradient-opacity-style(7);
+	@include gradient-opacity-style(9);
 	color: $control-color;
 	border-radius: $border-radius-medium;
 }
@@ -118,7 +131,7 @@
 @mixin hook-form-misc() {
 	.uk-input::placeholder {
 		@include text-crop(1.6);
-		color: $muted-color;
+		color: rgba($muted-color, 0.35);
 	}
 }
 
@@ -172,9 +185,14 @@
 @mixin hook-navbar-misc() {
 }
 
+// Offcanvas
+@mixin hook-offcanvas-bar() {
+	max-width: 400px;
+}
+
 // Overlay
 @mixin hook-overlay-default() {
-	background: rgba(darken($card-background-light, 15), 0.8);
+	background: rgba(black, 0.15);
 }
 
 // Pagination
@@ -194,16 +212,18 @@
 @mixin hook-search-misc() {
 	.uk-search-input::placeholder {
 		@include text-crop(1.6);
+		color: rgba($muted-color, 0.35);
 	}
 }
 
 // Text
 @mixin hook-text-misc() {
 	.uk-text-primary {
-		text-shadow: 0 1px 0 rgba($base-color, 0.2), 0 1px 1px rgba($base-color, 0.1);
+		font-weight: 500;
+		text-shadow: $control-shadow;
 		
 		& > svg {
-			filter: drop-shadow(0 1px 0 rgba($base-color, 0.2)) drop-shadow(0 1px 0.5px rgba($base-color, 0.1));
+			filter: drop-shadow(0 1px 0.5px rgba(black, 0.2)) drop-shadow(0 1px 1px rgba(black, 0.1));
 		}
 	}
 }

@@ -4,14 +4,16 @@ const resolvers = {
 	},
 	Mutation: {
 		signUp: (_, { username, password }, context) => (
-			!username || !password ? { user: null }
+			!(username && password) ? { user: null }
 				: context.User.findOne({ username })
 					.then(async user => {
-						// User already exists
 						if (user) return { user: null }
 						
 						await new context.User({
-							username, password, challenges: {},
+							username,
+							password,
+							challenges: {},
+							settings: {}
 						}).save()
 						
 						return authenticate({ username, password }, context)
@@ -41,6 +43,7 @@ const authenticate = ({ username, password }, context) => (
 	context.authenticate('graphql-local', { username, password })
 		.then(async ({ user }) => {
 			if (user) await context.login(user)
+			console.log(getUser(context))
 			return getUser(context)
 		})
 )

@@ -52,9 +52,12 @@ export const RequestProvider = ({ children }) => {
 		)
 			.then(res => resolve(res.data.data[api]))
 			.catch(err => {
+				console.log(err)
 				const errors = err.response?.data?.errors
-				if (errors) console.log('Errors', errors.map(e => e.message))
-				reject(addNotification({
+				if (errors) {
+					console.log('Errors', errors.map(e => e.message))
+				}
+				return reject(addNotification({
 					title: 'Error',
 					message: `Failed to ${action}`,
 					type: 'danger',
@@ -86,6 +89,7 @@ export const RequestProvider = ({ children }) => {
 			
 			return postQuery(query, actionName, variables)
 				.then(res => {
+					console.log(res)
 					if (res?.user === null) {
 						return reject(addNotification(errors[action]))
 					}
