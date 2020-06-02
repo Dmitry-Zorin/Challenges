@@ -13,7 +13,7 @@ const resolvers = {
 							username,
 							password,
 							challenges: {},
-							settings: {}
+							settings: {},
 						}).save()
 						
 						return authenticate({ username, password }, context)

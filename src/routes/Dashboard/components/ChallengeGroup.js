@@ -5,7 +5,7 @@ import Overlay from './Overlay'
 
 const ChallengeGroup = ({ title, group = [] }) => (
 	<Overlay to={`groups/${title}`} text='see all'>
-		<p className='uk-text-primary uk-text-center text-medium'>
+		<p className='uk-text-primary uk-text-center uk-text-bold text-large'>
 			{upperFirst(title)}
 		</p>
 		{!group.length ? (

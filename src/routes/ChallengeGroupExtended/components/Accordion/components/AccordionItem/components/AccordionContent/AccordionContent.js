@@ -15,7 +15,7 @@ const labelTypes = {
 	hard: 'danger',
 }
 
-const AccordionContent = ({ group, challenge, navigate }) => {
+const AccordionContent = ({ group, challenge }) => {
 	const { difficulty } = challenge
 	const labelType = labelTypes[difficulty.toLowerCase()]
 	
@@ -23,13 +23,13 @@ const AccordionContent = ({ group, challenge, navigate }) => {
 		<motion.div animate='animate' exit='initial' variants={accordionContent}>
 			<div data-uk-grid>
 				<div className='uk-flex uk-flex-middle'>
-					<div className={`uk-label uk-label-${labelType}`}>
+					<motion.div className={`uk-label uk-label-${labelType}`}>
 						{difficulty}
-					</div>
+					</motion.div>
 				</div>
 				<div className='uk-width-expand uk-flex uk-flex-right'>
 					{[...options[group], 'edit', 'delete'].map(o => (
-						<OptionButton key={o} option={o} {...{ challenge, navigate }}/>
+						<OptionButton key={o} option={o} {...{ challenge }}/>
 					))}
 				</div>
 			</div>

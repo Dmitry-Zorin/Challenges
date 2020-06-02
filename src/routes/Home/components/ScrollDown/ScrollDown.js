@@ -10,7 +10,7 @@ const ScrollDown = ({ target }) => (
 		<br className='uk-hidden@m'/>
 		<a href={`#${target}`} className='uk-visible@m' data-uk-scroll='offset: 80'>
 			<div className={container}>
-				<div className='text-inverse text-medium'>
+				<div className='text-medium'>
 					<p style={{ lineHeight: 0 }}>Scroll down</p>
 					<ul className='uk-list'>
 						{[...Array(numberOfArrows).keys()].map(i => (

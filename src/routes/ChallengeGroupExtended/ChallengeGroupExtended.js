@@ -42,10 +42,7 @@ const ChallengeGroupExtended = ({ group, navigate }) => {
 				{!challenges.length ? (
 					<NoChallenges extended/>
 				) : (
-					<Accordion
-						key={group + page}
-						{...{ challenges, group, page, navigate }}
-					/>
+					<Accordion key={group + page} {...{ challenges, group, page }}/>
 				)}
 			</div>
 			{challenges.length > itemsPerPage && (

@@ -5,39 +5,32 @@ $z-index: 100;
 // Font
 $font-family: 'Baloo 2', sans-serif;
 
-$font-size-small: 0.8em;
-$font-size-medium: 1.2em;
-$font-size-large: 1.3em;
+$font-size-small: 0.9em;
+$font-size-medium: 1.1em;
+$font-size-large: 1.25em;
 $font-size-larger: 1.75em;
 $font-size-xlarge: 2em;
 
 // Colors
-// https://coolors.co/ffb219-4c4c66-b7a5a5
-$background: #4C4C66;
-$navbar-background: darken($background, 15);
+// https://coolors.co/222435-212233-ffb959-ffd9a5-9596a5
+$background: #2C2E3F;
+$navbar-background: #222435;
 
-$card-background-light: #B7A5A5;
-$card-background-dark: #B7A5A5;
+$card-background-light: $navbar-background;//#D1BEB0;
+$card-background-dark: $navbar-background;
 
-$primary-color: #FFB219;
-$base-color: black;
-$inverse-color: white;
+$primary-color: #FFB959;
+$base-color: #FFE9CC;
+$control-color: $background;
 
-$control-color: $navbar-background;
 $control-active-color: $base-color;
-$muted-color: rgba($navbar-background, 0.75);
+$muted-color: #9596A5;
 
-$card-shadow: 0 1px 2px rgba(black, 0.6), 0 1px 3px rgba(black, 0.3);
-$card-hover-shadow: 0 3px 6px rgba(black, 0.6), 0 3px 9px rgba(black, 0.3);
-
-$control-shadow: 0 1px 1px rgba(black, 0.2), 0 1px 2px rgba(black, 0.1);
-$control-hover-shadow: 0 2px 4px rgba(black, 0.2), 0 2px 6px rgba(black, 0.1);
-
-// https://coolors.co/727b87-397cbf-29A55F-bf3944
-$blue: #397CBF;
-$green: #29A55F;
-$red: #BF3944;
-$gray: #727B87;
+// https://coolors.co/9795A5-4ca5ff-3dcc6c-e5505c
+$gray: #9795A5;
+$blue: #4CA5FF;
+$green: #3DCC6C;
+$red: #E5505C;
 
 // Dimensions
 $breakpoint-small: 640px;
@@ -46,7 +39,7 @@ $breakpoint-large: 1200px;
 $breakpoint-xlarge: 1600px;
 
 $border-radius-small: 7px;
-$border-radius-medium: 14px;
+$border-radius-medium: 20px;
 $border-radius-large: 21px;
 $border-radius-xlarge: 28px;
 
@@ -70,3 +63,8 @@ $padding-text: $padding - $text-padding;
 // Shared
 $header-ratio: 0.45;
 $features-height: 15em;
+
+$shadow1: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+$shadow2: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+$shadow3: 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12);
+$shadow4: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);

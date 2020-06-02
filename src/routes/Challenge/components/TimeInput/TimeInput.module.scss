@@ -2,7 +2,6 @@
 @import '../../../../styles/mixins';
 
 .unknown {
-	background: rgba(black, 0.05);
-	border: 1px dashed $muted-color;
+	background: rgba(white, 0.2);
 	border-radius: $border-radius-medium;
 }

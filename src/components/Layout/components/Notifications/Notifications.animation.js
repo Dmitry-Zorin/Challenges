@@ -1,8 +1,8 @@
 const notification = {
 	initial: {
 		opacity: 0,
-		scale: 0.25,
-		y: -30,
+		scale: 0.5,
+		y: -20,
 	},
 	animate: {
 		opacity: 1,
@@ -10,8 +10,7 @@ const notification = {
 		y: 0,
 		transition: {
 			type: 'spring',
-			stiffness: 150,
-			damping: 15,
+			mass: 0.5,
 		},
 	},
 	exit: {

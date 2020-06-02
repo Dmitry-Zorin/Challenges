@@ -2,11 +2,6 @@
 @import 'mixins';
 
 body {
-	background: radial-gradient(
-			ellipse at 50% 35%,
-			lighten($background, 5),
-			adjust_hue($background, 10)
-	);
 	cursor: default;
 	min-height: 100vh;
 	overflow-x: hidden;
@@ -14,6 +9,14 @@ body {
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
 	user-select: none;
+}
+
+.router {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
 }
 
 p {
@@ -27,7 +30,6 @@ a {
 
 svg {
 	margin: 0 $icon-margin 0 0;
-	transform: scale(1);
 	
 	&.icon-center {
 		margin: 0;
@@ -43,29 +45,9 @@ svg {
 	}
 }
 
-button, input {
-	box-shadow: $control-shadow;
-	transition: box-shadow 0.2s ease-out;
-}
-
-button:hover, input:focus {
-	box-shadow: $control-hover-shadow;
-}
-
-nav {
-	box-shadow: $card-shadow;
-}
-
 .text-meta {
 	color: $muted-color;
 	font-size: $font-size-small;
-}
-
-.text-inverse {
-	color: $inverse-color;
-	a:hover & {
-		color: $primary-color;
-	}
 }
 
 .round-border {
@@ -93,7 +75,6 @@ nav {
 .primary-border {
 	@extend .round-border;
 	border: 1px solid $primary-color;
-	box-shadow: $card-shadow;
 }
 
 .border {

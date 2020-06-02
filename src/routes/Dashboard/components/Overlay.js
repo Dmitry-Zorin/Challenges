@@ -17,11 +17,8 @@ const Overlay = ({ to = '', text, children }) => {
 				<motion.div
 					className='uk-overlay-default uk-position-right uk-width-1-5'
 					initial={false}
-					animate={{
-						x: isVisible ? 0 : '100%',
-						opacity: +isVisible,
-						transition: { ease: 'easeOut', duration: 0.4 },
-					}}
+					animate={{ x: `${100 * !isVisible}%`, opacity: +isVisible }}
+					transition={{ ease: 'easeOut', duration: 0.5 }}
 				>
 					<p className='uk-position-center uk-text-primary'>
 						{upperFirst(text)}

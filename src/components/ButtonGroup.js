@@ -1,21 +1,22 @@
 import React, { Children } from 'react'
 
-const ButtonGroup = ({ padding = true, className = '', children, ...props }) => (
-	<div
-		className={`
+const ButtonGroup = ({ padding = true, className = '', children, subnav, ...props }) => (
+	<div className={padding ? 'padding' : ''}>
+		<div
+			className={`
 			uk-flex
 			uk-flex-center
-			uk-grid-small
 			uk-child-width-1-2@s
 			uk-child-width-1-3@m
-			${padding ? 'padding' : ''}
+			${subnav ? '' : 'uk-grid-small'}
 			${className}
 		`}
-		{...props}
-	>
-		{Children.map(children, (c, i) => c && (
-			<div key={i}>{c}</div>
-		))}
+			{...props}
+		>
+			{Children.map(children, (c, i) => c && (
+				<div key={i}>{c}</div>
+			))}
+		</div>
 	</div>
 )
 

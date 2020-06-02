@@ -1,5 +1,5 @@
 import React from 'react'
-import { LinkCenter, LinkLeft, LinkRight, NavItem } from './components'
+import { LinkCenter, LinkLeft, LinkRight } from './components'
 
 const Navbar = () => (
 	<div data-uk-sticky>
@@ -8,23 +8,23 @@ const Navbar = () => (
 				<div className='uk-navbar'>
 					<div className='uk-navbar-left'>
 						<ul className='uk-navbar-nav'>
-							<NavItem>
+							<li>
 								<LinkLeft/>
-							</NavItem>
+							</li>
 						</ul>
 					</div>
 					<div className='uk-navbar-center'>
 						<ul className='uk-navbar-nav'>
-							<NavItem>
+							<li>
 								<LinkCenter/>
-							</NavItem>
+							</li>
 						</ul>
 					</div>
 					<div className='uk-navbar-right'>
 						<ul className='uk-navbar-nav'>
-							<NavItem>
+							<li>
 								<LinkRight/>
-							</NavItem>
+							</li>
 						</ul>
 					</div>
 				</div>

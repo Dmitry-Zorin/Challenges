@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { infinity } from 'data/settings.json'
+import { motion } from 'framer-motion'
 import React from 'react'
 import { getChallengeTime } from 'scripts/time'
 
@@ -11,14 +11,19 @@ const icons = {
 
 const GroupItem = ({ group, challenge, active, extended }) => {
 	const time = getChallengeTime(challenge)
-	const isInfiniteTime = time === infinity
+	const isInfiniteTime = time === 'infinity'
 	
 	const icon = isInfiniteTime ? 'question'
 		: time || group === 'completed'
 			? icons[group] : 'exclamation'
 	
 	return (
-		<div className='uk-flex uk-flex-middle'>
+		<motion.div
+			className='uk-flex uk-flex-middle'
+			exit={{height: 0, opacity: 0}}
+			transition={{ ease: 'easeOut' }}
+			//animate
+		>
 			<p
 				className={`
 					uk-width-expand
@@ -32,7 +37,7 @@ const GroupItem = ({ group, challenge, active, extended }) => {
 				<FontAwesomeIcon className='icon-right' {...{ icon }}/>
 				{!isInfiniteTime && time}
 			</p>
-		</div>
+		</motion.div>
 	)
 }
 

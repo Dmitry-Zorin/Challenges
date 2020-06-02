@@ -11,18 +11,20 @@ $global-muted-color: $muted-color;
 $global-link-color: $base-color;
 $global-link-hover-color: $primary-color;
 
-$global-secondary-background: $blue;
-$global-success-background: $green;
-$global-danger-background: $red;
-
 $global-z-index: $z-index;
-$global-border: rgba($muted-color, 0.5);
+$global-border: $muted-color;
 
 // Base
-$base-body-background: darken($navbar-background, 6);
+$base-body-font-weight: 500;
+$base-body-background: $background;
 $base-selection-background: $primary-color;
 $base-link-hover-text-decoration: none;
 $base-margin-vertical: 0;
+
+// Button
+$button-border-width: 0;
+$button-primary-hover-color: $base-color;
+$button-primary-active-color: $base-color;
 
 // Card
 $card-default-background: $card-background-light;
@@ -38,6 +40,8 @@ $container-padding-horizontal-m: $card-margin-small;
 
 // Form
 $form-padding-horizontal: $border-radius-medium;
+$form-color: $control-color;
+$form-focus-color: $control-color;
 
 // Overlay
 $overlay-default-background: $card-default-background;
@@ -60,8 +64,12 @@ $navbar-nav-item-color: $primary-color;
 $navbar-nav-item-hover-color: $primary-color;
 $navbar-nav-item-onclick-color: $primary-color;
 
+// Search
+$search-icon-color: $muted-color;
+$search-default-background: white;
+
 // Slidenav
-$slidenav-color: $inverse-color;
+$slidenav-color: $muted-color;
 $slidenav-hover-color: $primary-color;
 
 // Text

@@ -6,7 +6,7 @@ const InnerLayout = ({ title, items, children, ...props }) => (
 		<div className='uk-align-center' style={{ maxWidth: 800 }}>
 			{title && (
 				<p
-					className='uk-text-center uk-text-primary uk-text-bold uk-text-capitalize'
+					className='uk-text-center uk-text-primary uk-text-capitalize uk-text-bold'
 					style={{ fontSize: '2.25em' }}
 				>
 					{title}

@@ -19,7 +19,6 @@ $height: 80px;
 .notification {
 	align-items: center;
 	border-radius: $border-radius-large;
-	box-shadow: $card-shadow;
 	cursor: pointer;
 	display: flex;
 	margin: $card-margin-small;
@@ -42,13 +41,13 @@ $height: 80px;
 }
 
 .info {
-	@include gradient-style($blue);
+	background: $blue;
 }
 
 .success {
-	@include gradient-style($green);
+	background: $green;
 }
 
 .danger {
-	@include gradient-style($red);
+	background: $red;
 }

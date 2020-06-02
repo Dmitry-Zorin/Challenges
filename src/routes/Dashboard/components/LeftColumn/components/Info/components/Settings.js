@@ -17,8 +17,8 @@ const Settings = () => {
 	const _saveSettings = () => {
 		saveSettings(settings)
 			.then(() => {
-				setSettingsDidChange(false)
 				localStorage.setItem('settings', JSON.stringify(settings))
+				setSettingsDidChange(false)
 			})
 			.catch(() => {})
 	}
@@ -46,14 +46,13 @@ const Settings = () => {
 					<p>{theme}</p>
 				</li>
 			</ul>
-			{settingsDidChange && (
-				<Button
-					className='uk-margin-small uk-margin-small-top'
-					icon='save'
-					value='save'
-					onClick={_saveSettings}
-				/>
-			)}
+			<Button
+				className='uk-margin-small-top'
+				style={{ display: settingsDidChange ? 'block' : 'none' }}
+				icon='save'
+				value='save'
+				onClick={_saveSettings}
+			/>
 		</>
 	)
 }

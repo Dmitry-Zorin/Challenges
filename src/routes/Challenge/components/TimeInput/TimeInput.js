@@ -25,7 +25,8 @@ const TimeInput = ({ ms, ...props }) => {
 			</div>
 			<div className='uk-position-relative'>
 				<motion.div
-					className='uk-flex uk-grid-small uk-child-width-expand'
+					className='uk-flex uk-grid-small'
+					initial={false}
 					animate={disabled
 						? { opacity: 0, transition: { duration: 0 } }
 						: { opacity: 1 }

@@ -11,7 +11,7 @@ const Info = () => {
 	
 	return (
 		<>
-			<p className='uk-text-primary text-large uk-text-center'>
+			<p className='uk-text-primary uk-text-center uk-text-bold text-large'>
 				<FontAwesomeIcon icon='user'/>
 				{userInfo?.username || ''}
 			</p>

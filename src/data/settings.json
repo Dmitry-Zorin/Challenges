@@ -3,6 +3,5 @@
 	"notificationTimeout": 3000,
 	"itemsPerPage": 10,
 	"challengeGroups": [ "ongoing", "upcoming", "completed" ],
-	"infinity": "infinity",
 	"defaultUserSettings": { "theme": "light" }
 }

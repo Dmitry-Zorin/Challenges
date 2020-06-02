@@ -7,27 +7,23 @@ $padding: 2px;
 
 .switch {
 	border-radius: calc(#{$size} + 2 * #{$padding});
-	box-shadow: $control-shadow;
 	cursor: pointer;
 	display: flex;
 	padding: $padding;
 	width: 2 * $size;
+	transition: background 0.3s ease, border 0.2s ease;
+	
+	&.on {
+		background: $primary-color;
+	}
+	
+	&.off {
+		background: rgba(white, 0.2);
+	}
 }
 
 .slider {
-	@include gradient-style($background);
+	background: white;
 	border-radius: $size;
-	box-shadow: $control-shadow;
 	padding: $size / 2;
-}
-
-.on {
-	@include gradient-style($primary-color);
-	justify-content: flex-end;
-	
-}
-
-.off {
-	@include gradient-opacity-style();
-	justify-content: flex-start;
 }

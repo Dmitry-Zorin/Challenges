@@ -1,13 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { motion } from 'framer-motion'
 import React from 'react'
-import buttonAnimation from './Button.animation'
 
 const Button = ({ icon, value, submit, type = 'default', className = '', ...props }) => (
-	<motion.button
+	<button
 		type={submit ? 'submit' : 'button'}
-		className={`uk-button uk-button-${type} ${className} uk-width-1-1`}
-		{...buttonAnimation}
+		className={`uk-button uk-button-${type} uk-width-1-1 ${className}`}
 		{...props}
 	>
 		<p>
@@ -16,7 +13,7 @@ const Button = ({ icon, value, submit, type = 'default', className = '', ...prop
 			)}
 			{value}
 		</p>
-	</motion.button>
+	</button>
 )
 
 export default Button

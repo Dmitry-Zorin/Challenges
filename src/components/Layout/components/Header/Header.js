@@ -22,7 +22,7 @@ const Header = () => {
 					Challenges
 				</p>
 				{isHomePage && (
-					<p className='text-inverse uk-text-italic text-larger'>
+					<p className='uk-text-italic text-larger'>
 						A simple way to keep track of the challenges you set for yourself!
 					</p>
 				)}

@@ -6,8 +6,7 @@ const zoom = {
 		scale: 1,
 		transition: {
 			type: 'spring',
-			stiffness: 200,
-			damping: 20,
+			mass: 0.5,
 		},
 	},
 }

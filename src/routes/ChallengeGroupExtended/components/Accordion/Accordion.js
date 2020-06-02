@@ -6,11 +6,6 @@ import AccordionItem from './components/AccordionItem'
 const Accordion = ({ challenges, page, ...props }) => {
 	const [openItem, setOpenItem] = useState()
 	
-	const onClick = (e, id) => {
-		e.preventDefault()
-		setOpenItem(openItem !== id && id)
-	}
-	
 	return (
 		<motion.ul
 			className='uk-list'
@@ -29,7 +24,8 @@ const Accordion = ({ challenges, page, ...props }) => {
 							key={c._id}
 							challenge={c}
 							active={openItem === c._id}
-							{...{ onClick, ...props }}
+							onClick={id => setOpenItem(openItem !== id && id)}
+							{...props}
 						/>
 					))
 				}
