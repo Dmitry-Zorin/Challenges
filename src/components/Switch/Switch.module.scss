@@ -11,19 +11,19 @@ $padding: 2px;
 	display: flex;
 	padding: $padding;
 	width: 2 * $size;
-	transition: background 0.3s ease, border 0.2s ease;
+	transition: background 0.3s ease;
 	
 	&.on {
 		background: $primary-color;
 	}
 	
 	&.off {
-		background: rgba(white, 0.2);
+		background: $control-background;
 	}
 }
 
 .slider {
-	background: white;
+	background: $control-color;
 	border-radius: $size;
 	padding: $size / 2;
 }

@@ -26,11 +26,7 @@ const Subnav = ({ items, ...props }) => (
 						/>
 					)}
 					<div
-						className={`
-								uk-position-cover
-								uk-border-pill
-								${active ? 'active' : ''}
-							`}
+						className={`uk-position-cover ${active ? 'active' : ''}`}
 						style={{ zIndex: 1, pointerEvents: 'none' }}
 					>
 						<p className='uk-position-center uk-text-uppercase uk-text-small'>

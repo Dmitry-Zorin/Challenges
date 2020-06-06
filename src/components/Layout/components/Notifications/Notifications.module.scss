@@ -25,6 +25,9 @@ $height: 80px;
 	min-height: $height;
 	padding: 0;
 	pointer-events: all;
+	box-shadow: $shadow;
+	border: 1px solid $muted-color;
+	color: white;
 	
 	@media (min-width: $breakpoint-small) {
 		margin: $card-margin-large;

@@ -2,21 +2,14 @@
 @import 'mixins';
 
 body {
-	cursor: default;
+	background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="4" height="4"%3E%3Cpath fill="%23fff" fill-opacity="0.1" d="M1 3h1v1H1V3zm2-2h1v1H3V1z"/%3E%3C/svg%3E');
 	min-height: 100vh;
+	cursor: default;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
 	user-select: none;
-}
-
-.router {
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
 }
 
 p {

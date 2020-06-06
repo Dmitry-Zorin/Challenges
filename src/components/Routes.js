@@ -15,15 +15,32 @@ const Routes = () => {
 	const location = useLocation()
 	
 	return (
-		<AnimatePresence>
+		<AnimatePresence exitBeforeEnter>
 			<motion.div
-				key={location.key}
-				className='uk-position-relative'
-				initial={{ scale: 0.9, opacity: 0 }}
-				animate={{ scale: 1, opacity: 1, transition: { delay: 0.2, duration: 0.6 } }}
-				exit={{ scale: 0.9, opacity: 0, transition: {duration: 0.2} }}
+				key={location.pathname.split('/')[1] || location.key}
+				initial='initial'
+				animate='animate'
+				exit='exit'
+				variants={{
+					initial: { opacity: 0, scale: 0.9 },
+					animate: {
+						opacity: 1,
+						scale: 1,
+						transition: {
+							duration: 0.6,
+							ease: 'easeOut'
+						},
+					},
+					exit: {
+						opacity: 0,
+						scale: 0.9,
+						transition: {
+							ease: 'easeOut',
+						},
+					},
+				}}
 			>
-				<Router primary={false} {...{ location }} className='router'>
+				<Router primary={false} {...{ location }}>
 					<Login path='login'/>
 					{!challenges ? null : !challenges.ongoing ? (
 						<Home default/>

@@ -1,9 +1,7 @@
-import { motion } from 'framer-motion'
 import React from 'react'
-import card from './Card.animation'
 
 const Card = ({ large, className = '', children, ...props }) => (
-	<motion.div
+	<div
 		className={`
 			uk-card
 			uk-card-default
@@ -11,13 +9,10 @@ const Card = ({ large, className = '', children, ...props }) => (
 			${large ? 'large' : ''}
 			${className}
 		`}
-		initial='initial'
-		animate='animate'
-		variants={card}
 		{...props}
 	>
 		{children}
-	</motion.div>
+	</div>
 )
 
 export default Card
