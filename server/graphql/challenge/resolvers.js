@@ -1,7 +1,5 @@
 const { challengeGroups } = require('../../settings.json')
 
-// TODO: Validate input
-
 const resolvers = {
 	Mutation: {
 		challengeAdd: (...args) => (

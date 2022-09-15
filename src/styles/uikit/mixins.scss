@@ -7,7 +7,7 @@
 	height: 40px;
 	padding: 0;
 	text-transform: uppercase;
-	transform: none;
+	transform: scale(1);
 	transition: all 0.2s ease;
 	transition-property: background, color, transform, filter;
 	
@@ -103,12 +103,10 @@
 	border-radius: $border-radius-xlarge;
 	margin: 2 * $card-margin-small $card-margin-small;
 	overflow: hidden;
-	transition: background 0.5s;
-	transition-timing-function: ease;
+	transition: background 0.5s ease, filter 0.4s ease;
 	z-index: 0;
 	border: 1px solid $muted-color;
 	box-shadow: $shadow;
-	
 	
 	@media (min-width: $breakpoint-large) {
 		margin: 2 * $card-margin-large $card-margin-large;
@@ -125,9 +123,6 @@
 	
 	.dark & {
 		background: $card-background-dark;
-	}
-	
-	.text-meta {
 	}
 }
 
@@ -190,6 +185,14 @@
 	@media (min-width: $breakpoint-large) {
 		padding: 0 $card-margin-large;
 	}
+	
+	li {
+		position: relative;
+		
+		p {
+		 z-index: 0;
+		}
+	}
 }
 
 @mixin hook-navbar-nav-item() {
@@ -198,12 +201,24 @@
 	transition: background 0.2s ease;
 	font-weight: 400;
 	
-	&:hover {
-		background: lighten($navbar-background, 5);
+	&:before {
+		background: rgba(black, 0.2);
+		content: '';
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		clip-path: ellipse(0% 0%);
+		transition: clip-path 0.4s ease;
 	}
 	
-	&:active {
-		background: darken($navbar-background, 1);
+	&:hover:before {
+		clip-path: ellipse(50% 100%);
+	}
+	
+	&:active:before {
+		clip-path: ellipse(0% 0%);
 	}
 	
 	@media (min-width: $breakpoint-small) {
@@ -226,8 +241,7 @@
 
 // Overlay
 @mixin hook-overlay-default() {
-	background: rgba($base-color, 0.05);
-	border-left: 1px solid rgba(white, 0.1);
+	background: rgba(black, 0.15);
 }
 
 // Pagination

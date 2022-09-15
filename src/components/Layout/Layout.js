@@ -2,7 +2,7 @@ import { useLocation } from '@reach/router'
 import SettingsContext from 'contexts/SettingsContext'
 import React, { useContext, useEffect } from 'react'
 import { Header, Navbar, Notifications } from './components'
-import { container, env } from './Layout.module.scss'
+import { env } from './Layout.module.scss'
 
 const Layout = ({ children }) => {
 	const { settings } = useContext(SettingsContext)
@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
 			<Navbar/>
 			<div className={env}>
 				<Notifications/>
-				<div className={`uk-container ${container}`}>
+				<div className='uk-container'>
 					<Header/>
 					{children}
 				</div>

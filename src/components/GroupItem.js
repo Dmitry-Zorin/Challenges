@@ -20,9 +20,9 @@ const GroupItem = ({ group, challenge, active, extended }) => {
 	return (
 		<motion.div
 			className='uk-flex uk-flex-middle'
-			exit={{height: 0, opacity: 0}}
+			//exit={{height: 0, opacity: 0}}
 			transition={{ ease: 'easeOut' }}
-			//animate
+			animate
 		>
 			<p
 				className={`

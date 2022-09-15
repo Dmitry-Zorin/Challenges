@@ -20,8 +20,8 @@ const NumberInput = ({ label, time, ms, setState, timeToMs, step }) => {
 			transition: {
 				type: 'spring',
 				stiffness: 300,
-				damping: 40,
-				velocity: 300,
+				damping: 30,
+				velocity: 200,
 			},
 		})
 	}, [controls, time])
