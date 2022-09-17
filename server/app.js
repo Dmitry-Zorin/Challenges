@@ -39,10 +39,7 @@ app.use(
 			collection: 'sessions',
 			expires: maxAge,
 		}),
-		cookie: {
-			maxAge,
-			secure: isProductionEnv,
-		},
+		cookie: { maxAge },
 	}),
 )
 

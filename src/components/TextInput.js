@@ -29,6 +29,7 @@ const TextInput = ({
 				setState(capital ? upperFirst(value) : value)
 			}}
 			maxLength={250}
+			style={{ paddingLeft: '1.25rem' }}
 			{...{ type, value }}
 		/>
 	</div>
