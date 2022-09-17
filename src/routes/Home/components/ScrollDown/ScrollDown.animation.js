@@ -10,7 +10,8 @@ const arrows = {
 		transition: {
 			times: getTimesArray(...props),
 			duration: 3,
-			loop: Infinity,
+			repeatType: 'loop',
+			repeat: Infinity,
 		},
 	}),
 }

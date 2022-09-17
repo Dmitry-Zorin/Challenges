@@ -1,20 +1,22 @@
-import Feature1 from 'routes/Home/components/Feature1'
-import Feature2 from 'routes/Home/components/Feature2'
-import Feature3 from 'routes/Home/components/Feature3'
-import { create, monitor, update } from 'routes/Home/images'
+import createChallengeImg from 'images/Create-challenges.png'
+import monitorProgressImg from 'images/Monitor-progress.png'
+import updateAnytimeImg from 'images/Update-anytime.png'
+import CreateChallengesFeature from './components/CreateChallengesFeature'
+import MonitorProgressFeature from './components/MonitorProgressFeature'
+import UpdateAnytimeFeature from './components/UpdateAnytimeFeature'
 
 const features = [
 	{
-		src: create,
-		Component: Feature1,
+		src: createChallengeImg,
+		Component: CreateChallengesFeature,
 	},
 	{
-		src: monitor,
-		Component: Feature2,
+		src: monitorProgressImg,
+		Component: MonitorProgressFeature,
 	},
 	{
-		src: update,
-		Component: Feature3,
+		src: updateAnytimeImg,
+		Component: UpdateAnytimeFeature,
 	},
 ]
 

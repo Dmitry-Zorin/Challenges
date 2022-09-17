@@ -1,6 +1,6 @@
 import Authorization from 'components/Authorization'
 import { RequestContext, UserContext } from 'contexts'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 
 const authOptions = {
 	login: {
@@ -18,17 +18,17 @@ const authOptions = {
 const Login = () => {
 	const { userInfo, logout: logoutUser } = useContext(UserContext)
 	const { logout } = useContext(RequestContext)
-	
+
 	const [authOption, setAuthOption] = useState(authOptions.login)
-	
+
 	const isFirstRenderRef = useRef(true)
-	
+
 	useEffect(() => {
 		if (!isFirstRenderRef.current) return
 		isFirstRenderRef.current = false
-		
+
 		if (!userInfo?.username) return
-		
+
 		logout(userInfo.username)
 			.then(() => {
 				logoutUser()
@@ -36,15 +36,15 @@ const Login = () => {
 			})
 			.catch(() => {})
 	}, [userInfo, logout, logoutUser])
-	
-	const items = Object.values(authOptions).map(o => ({
+
+	const items = Object.values(authOptions).map((o) => ({
 		icon: o.icon,
 		value: o.title,
 		active: o.action === authOption.action,
 		onClick: () => setAuthOption(o),
 	}))
-	
-	return <Authorization action={authOption.action} {...{ items }}/>
+
+	return <Authorization action={authOption.action} {...{ items }} />
 }
 
 export default Login

@@ -1,5 +1,6 @@
+import { HStack } from 'components'
 import { motion } from 'framer-motion'
-import React from 'react'
+
 import accordionContent from './AccordionContent.animation'
 import OptionButton from './components/OptionButton'
 
@@ -18,23 +19,24 @@ const labelTypes = {
 const AccordionContent = ({ group, challenge }) => {
 	const { difficulty } = challenge
 	const labelType = labelTypes[difficulty.toLowerCase()]
-	
+
 	return (
-		<motion.div animate='animate' exit='initial' variants={accordionContent}>
-			<div data-uk-grid>
-				<div className='uk-flex uk-flex-middle'>
-					<motion.div className={`uk-label uk-label-${labelType}`}>
-						{difficulty}
-					</motion.div>
-				</div>
-				<div className='uk-width-expand uk-flex uk-flex-right'>
-					{[...options[group], 'edit', 'delete'].map(o => (
-						<OptionButton key={o} option={o} {...{ challenge }}/>
+		<motion.div
+			variants={accordionContent}
+			initial="initial"
+			animate="animate"
+			exit="initial"
+		>
+			<HStack>
+				<div className={`uk-label uk-label-${labelType}`}>{difficulty}</div>
+				<div className="uk-width-expand uk-flex uk-flex-right">
+					{[...options[group], 'edit', 'delete'].map((o) => (
+						<OptionButton key={o} option={o} challenge={challenge} />
 					))}
 				</div>
-			</div>
-			<div className='padding uk-padding-remove-bottom'>
-				<hr className='uk-margin-remove'/>
+			</HStack>
+			<div className="padding uk-padding-remove-bottom">
+				<hr className="uk-margin-remove" />
 			</div>
 		</motion.div>
 	)

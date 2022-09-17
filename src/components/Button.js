@@ -1,18 +1,28 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import { HStack } from 'components'
 
-const Button = ({ icon, value, submit, type = 'default', className = '', ...props }) => (
+const Button = ({
+	icon,
+	value,
+	submit,
+	type = 'default',
+	className = '',
+	...props
+}) => (
 	<button
 		type={submit ? 'submit' : 'button'}
 		className={`uk-button uk-button-${type} uk-width-1-1 ${className}`}
 		{...props}
 	>
-		<p>
+		<HStack className="uk-flex-center">
 			{icon && (
-				<FontAwesomeIcon className={value ? '' : 'icon-center'} {...{ icon }}/>
+				<FontAwesomeIcon
+					icon={icon}
+					className={value ? undefined : 'icon-center'}
+				/>
 			)}
-			{value}
-		</p>
+			{value && <p>{value}</p>}
+		</HStack>
 	</button>
 )
 

@@ -3,7 +3,7 @@
 $inverse-global-color-mode: none;
 
 $global-font-family: $font-family;
-$global-font-size: 1em;
+$global-font-size: 1rem;
 
 $global-primary-background: $primary-color;
 $global-color: $base-color;
@@ -15,7 +15,6 @@ $global-z-index: $z-index;
 $global-border: $muted-color;
 
 // Base
-$base-body-font-weight: 500;
 $base-body-background: $background;
 $base-selection-background: $muted-color;
 $base-link-hover-text-decoration: none;
@@ -27,11 +26,11 @@ $button-primary-hover-color: $base-color;
 $button-primary-active-color: $base-color;
 
 // Card
-$card-default-background: $card-background-light;
+$card-default-background: $card-background;
 $card-body-padding-horizontal: $border-radius-large;
 $card-body-padding-horizontal-l: $border-radius-xlarge;
-$card-body-padding-vertical: $border-radius-xlarge - $text-padding;
-$card-body-padding-vertical-l: $card-body-padding-vertical;
+$card-body-padding-vertical: $padding;
+$card-body-padding-vertical-l: $padding;
 
 // Container
 $container-padding-horizontal: 0;
@@ -51,7 +50,9 @@ $overlay-primary-background: $card-default-background;
 $offcanvas-bar-width: 85%;
 $offcanvas-bar-background: $card-default-background;
 $offcanvas-overlay-background: rgba(black, 0.5);
-$offcanvas-bar-padding-horizontal: calc(env(safe-area-inset-left) + #{$card-body-padding-horizontal});
+$offcanvas-bar-padding-horizontal: calc(
+	env(safe-area-inset-left) + #{$card-body-padding-horizontal}
+);
 
 // List
 $list-margin-top: 0;
@@ -59,7 +60,6 @@ $list-margin-top: 0;
 // Navbar
 $navbar-nav-item-height: 0;
 $navbar-nav-item-padding-horizontal: $card-body-padding-horizontal;
-$navbar-nav-item-font-size: $global-font-size;
 $navbar-nav-item-color: $primary-color;
 $navbar-nav-item-hover-color: $primary-color;
 $navbar-nav-item-onclick-color: $primary-color;

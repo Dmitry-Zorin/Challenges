@@ -1,73 +1,74 @@
-@import 'variables';
-@import 'mixins';
+@use 'variables';
+@use 'mixins';
 
 body {
 	background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="4" height="4"%3E%3Cpath fill="%23fff" fill-opacity="0.1" d="M1 3h1v1H1V3zm2-2h1v1H3V1z"/%3E%3C/svg%3E');
 	min-height: 100vh;
-	cursor: default;
 	overflow-x: hidden;
 	overflow-y: scroll;
-	-webkit-tap-highlight-color: transparent;
-	-webkit-touch-callout: none;
-	user-select: none;
-}
-
-p {
-	@include text-crop();
-	padding: $text-padding 0;
-}
-
-a {
-	-webkit-user-drag: none;
 }
 
 svg {
-	margin: 0 $icon-margin 0 0;
-	
+	margin-right: variables.$icon-margin;
+
 	&.icon-center {
 		margin: 0;
 	}
-	
+
 	&.icon-right {
-		margin: 0 0 0 $icon-margin;
+		margin-left: variables.$icon-margin;
 	}
-	
-	&.svg-inline--fa {
-		height: 0.8em;
-		vertical-align: -0.08em;
-	}
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type='number'] {
+	-moz-appearance: textfield;
+	font-size: 1.15rem;
 }
 
 .text-meta {
-	color: $muted-color;
-	font-size: $font-size-small;
+	color: variables.$muted-color;
+	font-size: variables.$font-size-small;
 }
 
 .round-border {
-	border-radius: $border-radius-large;
+	border-radius: variables.$border-radius-large;
 }
 
 .padding {
-	padding: $padding 0;
+	padding: variables.$padding 0;
+}
+
+.padding-small {
+	padding: variables.$padding-small 0;
+}
+
+.text-padding {
+	padding: variables.$text-padding 0;
 }
 
 .padding-text {
-	padding: $padding-text 0;
+	padding: variables.$padding-text 0;
 }
 
 .padding-text-top {
-	padding-bottom: $padding;
-	padding-top: $padding-text;
+	padding-bottom: variables.$padding;
+	padding-top: variables.$padding-text;
 }
 
 .padding-text-bottom {
-	padding-bottom: $padding-text;
-	padding-top: $padding;
+	padding-bottom: variables.$padding-text;
+	padding-top: variables.$padding;
 }
 
 .primary-border {
 	@extend .round-border;
-	border: 1px solid $primary-color;
+	border: 1px solid variables.$primary-color;
 }
 
 .border {
@@ -75,12 +76,15 @@ svg {
 	border-radius: 5px;
 }
 
-@each $size, $font-size in (
-	medium: $font-size-medium,
-	large: $font-size-large,
-	larger: $font-size-larger,
-	xlarge: $font-size-xlarge,
-) {
+@each $size,
+	$font-size
+		in (
+			medium: variables.$font-size-medium,
+			large: variables.$font-size-large,
+			larger: variables.$font-size-larger,
+			xlarge: variables.$font-size-xlarge
+		)
+{
 	.text-#{$size} {
 		font-size: $font-size;
 	}

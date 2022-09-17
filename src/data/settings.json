@@ -2,6 +2,5 @@
 	"updateTimeout": 1000,
 	"notificationTimeout": 3000,
 	"itemsPerPage": 10,
-	"challengeGroups": [ "ongoing", "upcoming", "completed" ],
-	"defaultUserSettings": { "theme": "light" }
+	"challengeGroups": ["ongoing", "upcoming", "completed"]
 }

@@ -12,9 +12,5 @@
 	"logout": {
 		"title": "Goodbye!",
 		"icon": "sad-tear"
-	},
-	"settings": {
-		"title": "Settings saved!",
-		"icon": "sync-alt"
 	}
 }

@@ -1,30 +1,26 @@
-import { LocationProvider } from '@reach/router'
 import { Layout, Routes } from 'components'
 import {
 	NotificationProvider,
 	RequestProvider,
-	SettingsProvider,
 	SpinnerProvider,
 	UserProvider,
 } from 'contexts'
-import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 
 const App = () => (
-	<NotificationProvider>
-		<SpinnerProvider>
-			<RequestProvider>
-				<UserProvider>
-					<SettingsProvider>
-						<LocationProvider>
-							<Layout>
-								<Routes/>
-							</Layout>
-						</LocationProvider>
-					</SettingsProvider>
-				</UserProvider>
-			</RequestProvider>
-		</SpinnerProvider>
-	</NotificationProvider>
+	<BrowserRouter>
+		<NotificationProvider>
+			<SpinnerProvider>
+				<RequestProvider>
+					<UserProvider>
+						<Layout>
+							<Routes />
+						</Layout>
+					</UserProvider>
+				</RequestProvider>
+			</SpinnerProvider>
+		</NotificationProvider>
+	</BrowserRouter>
 )
 
 export default App

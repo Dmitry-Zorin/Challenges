@@ -7,7 +7,8 @@ const circles = {
 		opacity: [opacity, 1, opacity],
 		transition: {
 			times: getTimesArray(...props),
-			loop: Infinity,
+			repeatType: 'loop',
+			repeat: Infinity,
 		},
 	}),
 }

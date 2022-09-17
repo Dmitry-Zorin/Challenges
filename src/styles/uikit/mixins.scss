@@ -1,24 +1,25 @@
 @import '../mixins';
 @import './variables';
+@import '../variables';
 
 // Button
 @mixin hook-button() {
-	border-radius: 20px;
-	height: 40px;
+	border-radius: $border-radius-large;
+	height: 2.5rem;
 	padding: 0;
 	text-transform: uppercase;
 	transform: scale(1);
 	transition: all 0.2s ease;
 	transition-property: background, color, transform, filter;
-	
+
 	&:active {
 		transform: scale(0.9);
 	}
 }
 
 .button {
-	border-radius: 20px;
-	height: 40px;
+	border-radius: $border-radius-large;
+	height: 2.5rem;
 }
 
 @mixin hook-button-default() {
@@ -46,7 +47,7 @@
 
 .success {
 	background: $green;
-	
+
 	& + div {
 		transition: color 0.3s ease-in;
 		color: $control-color;
@@ -55,7 +56,7 @@
 
 .primary {
 	background: $primary-color;
-	
+
 	& + div {
 		transition: color 0.3s ease-in;
 		color: $control-color;
@@ -64,7 +65,7 @@
 
 .danger {
 	background: $red;
-	
+
 	& + div {
 		transition: color 0.3s ease-in;
 		color: $control-color;
@@ -74,7 +75,7 @@
 .sign {
 	background: transparent;
 	color: $control-color !important;
-	
+
 	&:hover {
 		background: $muted-color;
 	}
@@ -84,15 +85,15 @@
 	.uk-button-secondary {
 		@include button($gray);
 	}
-	
+
 	.uk-button-info {
 		@include button($blue);
 	}
-	
+
 	.uk-button-success {
 		@include button($green);
 	}
-	
+
 	.uk-button-danger {
 		@include button($red);
 	}
@@ -103,56 +104,40 @@
 	border-radius: $border-radius-xlarge;
 	margin: 2 * $card-margin-small $card-margin-small;
 	overflow: hidden;
-	transition: background 0.5s ease, filter 0.4s ease;
+	transition: filter 0.2s ease;
 	z-index: 0;
 	border: 1px solid $muted-color;
 	box-shadow: $shadow;
-	
+
 	@media (min-width: $breakpoint-large) {
 		margin: 2 * $card-margin-large $card-margin-large;
-	}
-	
-	&.large {
-		padding-bottom: $padding;
-		padding-top: $padding;
 	}
 }
 
 @mixin hook-card-default() {
-	background: $card-background-light;
-	
-	.dark & {
-		background: $card-background-dark;
-	}
+	background: $card-background;
 }
 
 @mixin hook-card-default-hover() {
-	@include hook-card-default;
-	
 	@media (hover: hover) {
-		.text-meta {
-			filter: blur(1px);
-		}
+		filter: brightness(1.1);
 	}
+}
+
+@mixin hook-card-body {
+	padding: $padding;
 }
 
 // Form
 @mixin hook-form() {
 	@include button($control-background, $base-color);
-	border-radius: 20px;
+	border-radius: $border-radius-large;
 	font-size: 1.05em;
 	transition: border 0.2s ease;
 }
 
-@mixin hook-form-misc() {
-	.uk-input::placeholder {
-		@include text-crop(1.6);
-	}
-}
-
 // Label
 @mixin hook-label() {
-	@include text-crop(1.1, 4px);
 	border-radius: $border-radius-small;
 	font-weight: 500;
 	text-transform: uppercase;
@@ -174,23 +159,24 @@
 
 // Navbar
 @mixin hook-navbar-container() {
-	padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+	padding: env(safe-area-inset-top) env(safe-area-inset-right) 0
+		env(safe-area-inset-left);
 	border-bottom: 1px solid $muted-color;
 	box-shadow: $shadow;
 }
 
 @mixin hook-navbar() {
 	padding: 0 $card-margin-small;
-	
+
 	@media (min-width: $breakpoint-large) {
 		padding: 0 $card-margin-large;
 	}
-	
+
 	li {
 		position: relative;
-		
+
 		p {
-		 z-index: 0;
+			z-index: 0;
 		}
 	}
 }
@@ -198,50 +184,29 @@
 @mixin hook-navbar-nav-item() {
 	height: $navbar-height-small;
 	text-transform: uppercase;
-	transition: background 0.2s ease;
-	font-weight: 400;
-	
-	&:before {
-		background: rgba(black, 0.2);
-		content: '';
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		position: absolute;
-		clip-path: ellipse(0% 0%);
-		transition: clip-path 0.4s ease;
-	}
-	
-	&:hover:before {
-		clip-path: ellipse(50% 100%);
-	}
-	
-	&:active:before {
-		clip-path: ellipse(0% 0%);
-	}
-	
+
 	@media (min-width: $breakpoint-small) {
 		height: $navbar-height-medium;
 	}
-	
+
 	@media (min-width: $breakpoint-large) {
 		height: $navbar-height-large;
 		padding: 0 $card-body-padding-horizontal-l;
 	}
 }
 
-@mixin hook-navbar-misc() {
+@mixin hook-navbar-nav-item-hover() {
+	color: $base-color;
 }
 
 // Offcanvas
 @mixin hook-offcanvas-bar() {
-	max-width: 400px;
+	max-width: 25rem;
 }
 
 // Overlay
 @mixin hook-overlay-default() {
-	background: rgba(black, 0.15);
+	background: rgba(white, 0.05);
 }
 
 // Pagination
@@ -256,10 +221,9 @@
 
 @mixin hook-search-misc() {
 	.uk-search-input::placeholder {
-		@include text-crop(1.6);
 		color: $muted-color;
 	}
-	
+
 	.uk-search-icon {
 		z-index: 1;
 	}

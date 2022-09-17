@@ -1,7 +1,6 @@
-import { Router, useLocation } from '@reach/router'
 import { UserContext } from 'contexts'
-import { AnimatePresence, motion } from 'framer-motion'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
+import { Route, Routes as ReactRouterRoutes } from 'react-router-dom'
 import {
 	Challenge,
 	ChallengeGroupExtended,
@@ -12,44 +11,21 @@ import {
 
 const Routes = () => {
 	const { challenges } = useContext(UserContext)
-	const location = useLocation()
-	
+
 	return (
-		<AnimatePresence exitBeforeEnter>
-			<motion.div
-				key={location.pathname.split('/')[1] || location.key}
-				initial='initial'
-				animate='animate'
-				exit='initial'
-				variants={{
-					initial: {
-						opacity: 0,
-						scale: 0.95,
-					},
-					animate: {
-						opacity: 1,
-						scale: 1,
-					},
-				}}
-				transition={{
-					duration: 0.3,
-				}}
-			>
-				<Router primary={false} {...{ location }}>
-					<Login path='login'/>
-					{!challenges ? null : !challenges.ongoing ? (
-						<Home default/>
-					) : (
-						<>
-							<Dashboard default/>
-							<Challenge path='create'/>
-							<Challenge path='edit'/>
-							<ChallengeGroupExtended path='groups/:group'/>
-						</>
-					)}
-				</Router>
-			</motion.div>
-		</AnimatePresence>
+		<ReactRouterRoutes>
+			<Route path="login" element={<Login />} />
+			{!challenges ? null : !challenges.ongoing ? (
+				<Route path="/" element={<Home />} />
+			) : (
+				<>
+					<Route path="/" element={<Dashboard />} />
+					<Route path="create" element={<Challenge />} />
+					<Route path="edit" element={<Challenge />} />
+					<Route path="groups/:group" element={<ChallengeGroupExtended />} />
+				</>
+			)}
+		</ReactRouterRoutes>
 	)
 }
 

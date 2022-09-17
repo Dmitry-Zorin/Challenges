@@ -1,23 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 // Font
-$font-family: 'Baloo 2', sans-serif;
+$font-family: 'Poppins', sans-serif;
 
-$font-size-small: 0.9em;
-$font-size-medium: 1.1em;
-$font-size-large: 1.25em;
-$font-size-larger: 1.75em;
-$font-size-xlarge: 2em;
+$font-size-small: 0.875rem;
+$font-size-medium: 1.125rem;
+$font-size-large: 1.25rem;
+$font-size-larger: 1.5rem;
+$font-size-xlarge: 1.75rem;
 
 // Colors
 // https://coolors.co/ffcd59-2e323a-979590-fff7e5
 $background: #979590;
-$navbar-background: #2E323A;
+$navbar-background: #2e323a;
 
-$card-background-light: $navbar-background; //#CCC5B7;
-$card-background-dark: $navbar-background;
+$card-background: $navbar-background;
 
-$primary-color: #FFCD59;
+$primary-color: #ffcd59;
 $base-color: #fff7e5;
 
 $control-background: rgba(white, 0.3);
@@ -26,10 +25,10 @@ $control-color: $navbar-background;
 $control-active-color: $base-color;
 $muted-color: rgba(white, 0.5);
 
-$gray: #9795A5;
-$blue: #6698FF;
-$green: #82D856;
-$red: #FF6666;
+$gray: #9795a5;
+$blue: #6698ff;
+$green: #82d856;
+$red: #ff6666;
 
 // Dimensions
 $breakpoint-small: 640px;
@@ -37,13 +36,13 @@ $breakpoint-medium: 960px;
 $breakpoint-large: 1200px;
 $breakpoint-xlarge: 1600px;
 
-$border-radius-small: 7px;
-$border-radius-medium: 20px;
-$border-radius-large: 21px;
-$border-radius-xlarge: 28px;
+$border-radius-small: 8px;
+$border-radius-medium: 16px;
+$border-radius-large: 24px;
+$border-radius-xlarge: 32px;
 
-$card-margin-small: 4px;
-$card-margin-large: 12px;
+$card-margin-small: 8px;
+$card-margin-large: 16px;
 
 $navbar-height-small: 60px;
 $navbar-height-medium: 65px;
@@ -53,21 +52,20 @@ $viewport-height-small: calc(100vh - #{$navbar-height-small});
 $viewport-height-medium: calc(100vh - #{$navbar-height-medium});
 $viewport-height-large: calc(100vh - #{$navbar-height-large});
 
-$icon-margin: 0.1em;
+$icon-margin: 0.375rem;
 
-$text-padding: 13px;
-$padding: 25px;
+$text-padding: 16px;
+$padding-small: 12px;
+$padding: 24px;
 $padding-text: $padding - $text-padding;
 
 // Shared
 $header-ratio: 0.45;
-$features-height: 15em;
+$features-height: 15rem;
 
 // Misc
 $z-index: 100;
 
-$shadow: 0 1px 1px rgba(black, 0.25),
-0 2px 2px rgba(black, 0.20),
-0 4px 4px rgba(black, 0.15),
-0 8px 8px rgba(black, 0.10),
-0 16px 16px rgba(black, 0.05);
+$shadow: 0 1px 1px rgba(black, 0.25), 0 2px 2px rgba(black, 0.2),
+	0 4px 4px rgba(black, 0.15), 0 8px 8px rgba(black, 0.1),
+	0 16px 16px rgba(black, 0.05);

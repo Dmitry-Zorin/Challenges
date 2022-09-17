@@ -1,9 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
 
 const Slidenav = ({ side }) => (
 	<a
-		href='/#'
+		href="/#"
 		className={`
 			uk-visible@s
 			uk-position-center-${side}
@@ -14,8 +13,8 @@ const Slidenav = ({ side }) => (
 	>
 		<FontAwesomeIcon
 			icon={`chevron-${side}`}
-			className='uk-position-center'
-			size='2x'
+			className="uk-position-center"
+			size="2x"
 		/>
 	</a>
 )

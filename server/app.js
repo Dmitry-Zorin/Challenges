@@ -15,40 +15,49 @@ const { day } = require('./settings.json')
 
 configEnv({ path: `${__dirname}/.env` })
 
-connectToDb(process.env.ATLAS_URI, {
-	useNewUrlParser: true,
-	useCreateIndex: true,
-	useUnifiedTopology: true,
-}).catch(console.log)
+connectToDb(process.env.ATLAS_URI).catch(console.log)
 
 const app = express()
 const isProductionEnv = process.env.NODE_ENV === 'production'
 
-app.use(cors({
-	origin: !isProductionEnv,
-	credentials: true,
-}))
+app.use(
+	cors({
+		origin: !isProductionEnv,
+		credentials: true,
+	}),
+)
 
 const maxAge = 14 * day
 
-app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true,
-	store: new MongoDBStore({
-		uri: process.env.ATLAS_URI,
-		maxAge,
+app.use(
+	session({
+		secret: 'secret',
+		resave: true,
+		saveUninitialized: true,
+		store: new MongoDBStore({
+			uri: process.env.ATLAS_URI,
+			collection: 'sessions',
+			expires: maxAge,
+		}),
+		cookie: {
+			maxAge,
+			secure: isProductionEnv,
+		},
 	}),
-	cookie: { maxAge /*secure: isProductionEnv*/ },
-}))
+)
 
 app.use(passport.initialize())
 app.use(passport.session())
 
-const context = ({ req, res }) => (
-	buildContext({ req, res, User, getUserInfo })
-)
-new ApolloServer({ typeDefs, resolvers, context })
-	.applyMiddleware({ app: app, path: '/api', cors: false })
+const server = new ApolloServer({
+	typeDefs,
+	resolvers,
+	context: ({ req, res }) => {
+		return buildContext({ req, res, User, getUserInfo })
+	},
+})
 
-app.listen(process.env.PORT)
+server.start().then(() => {
+	server.applyMiddleware({ app: app, path: '/api', cors: false })
+	app.listen(process.env.PORT)
+})

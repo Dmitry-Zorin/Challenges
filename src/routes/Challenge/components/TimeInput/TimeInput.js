@@ -1,18 +1,21 @@
 import { Animation, Switch } from 'components'
 import { motion } from 'framer-motion'
 import { upperFirst } from 'lodash'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { getTimeObj, toMs } from 'scripts/time'
 import NumberInput from './components/NumberInput'
-import { unknown } from './TimeInput.module.scss'
+import styles from './TimeInput.module.scss'
 
 const TimeInput = ({ ms, ...props }) => {
 	const [disabled, setDisabled] = useState(ms > toMs.MANY_YEARS)
-	
+
 	return (
-		<div className='padding-text-top'>
-			<div className='uk-flex uk-flex-middle'>
-				<p className='uk-text-primary uk-width-expand'>
+		<div className="padding-text-top">
+			<div
+				className="uk-flex uk-flex-middle"
+				style={{ marginLeft: '0.5rem', marginBottom: '0.25rem' }}
+			>
+				<p className="uk-text-primary uk-width-expand">
 					{upperFirst(props.name)}
 				</p>
 				<Switch
@@ -23,13 +26,14 @@ const TimeInput = ({ ms, ...props }) => {
 					}}
 				/>
 			</div>
-			<div className='uk-position-relative'>
+			<div className="uk-position-relative">
 				<motion.div
-					className='uk-flex uk-grid-small'
+					className="uk-flex uk-grid-small"
 					initial={false}
-					animate={disabled
-						? { opacity: 0, transition: { duration: 0 } }
-						: { opacity: 1 }
+					animate={
+						disabled
+							? { opacity: 0, transition: { duration: 0 } }
+							: { opacity: 1 }
 					}
 				>
 					{Object.entries(getTimeObj(ms)).map(([l, t]) => (
@@ -44,10 +48,11 @@ const TimeInput = ({ ms, ...props }) => {
 					))}
 				</motion.div>
 				{disabled && (
-					<Animation type='fade' className={`${unknown} uk-position-cover`}>
-						<p className='uk-position-center uk-text-italic'>
-							Unknown
-						</p>
+					<Animation
+						type="fade"
+						className={`${styles.unknown} uk-position-cover`}
+					>
+						<p className="uk-position-center uk-text-italic">Unknown</p>
 					</Animation>
 				)}
 			</div>

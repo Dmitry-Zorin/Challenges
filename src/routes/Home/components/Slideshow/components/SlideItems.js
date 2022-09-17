@@ -1,18 +1,18 @@
 import Animation from 'components/Animation'
 import { AnimatePresence } from 'framer-motion'
-import React from 'react'
+
 import features from 'routes/Home/features'
 
 const SlideItems = ({ isVisible }) => (
-	<ul className='uk-slideshow-items'>
+	<ul className="uk-slideshow-items">
 		{features.map(({ src, Component }) => (
-			<li key={src} className='round-border'>
-				<img src={src} alt=''/>
+			<li key={src} className="round-border">
+				<img src={src} alt="" />
 				<AnimatePresence>
 					{isVisible && (
-						<Animation type='fade' animate='animate' exit='initial'>
+						<Animation type="fade" animate="animate" exit="initial">
 							<div
-								className='
+								className="
 									uk-overlay
 									uk-overlay-primary
 									uk-position-top-right
@@ -21,9 +21,9 @@ const SlideItems = ({ isVisible }) => (
 									uk-transition-fade
 									uk-width-1-3
 									primary-border
-								'
+								"
 							>
-								<Component/>
+								<Component />
 							</div>
 						</Animation>
 					)}

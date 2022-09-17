@@ -1,5 +1,5 @@
-import React, { StrictMode } from 'react'
-import ReactDOM from 'react-dom'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import 'scripts/icons'
 import * as serviceWorker from 'scripts/serviceWorker'
 import 'styles/global.scss'
@@ -7,11 +7,13 @@ import 'styles/uikit/theme.scss'
 import '../node_modules/uikit/dist/js/uikit.min.js'
 import App from './App' // import App after styles
 
-ReactDOM.render(
+const container = document.getElementById('root')
+const root = createRoot(container)
+
+root.render(
 	<StrictMode>
-		<App/>
+		<App />
 	</StrictMode>,
-	document.getElementById('root'),
 )
 
 // Learn more about service workers: https://bit.ly/CRA-PWA

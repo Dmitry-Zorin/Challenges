@@ -1,18 +1,16 @@
-import Animation from 'components/Animation'
 import Card from 'components/Card'
-import React from 'react'
 import features from 'routes/Home/features'
-import { container } from './Features.module.scss'
+import style from './Features.module.scss'
 
 const Features = () => (
-	<Card className={`${container} uk-padding`}>
-		<div className='uk-grid-divider uk-child-width-expand@m' data-uk-grid>
+	<Card className={`${style.container} uk-padding`}>
+		<div
+			data-uk-grid
+			className="uk-grid-divider uk-child-width-expand@m"
+			style={{ height: '100%' }}
+		>
 			{features.map(({ Component }, i) => (
-				<div key={i}>
-					<Animation type='zoom'>
-						<Component/>
-					</Animation>
-				</div>
+				<Component key={i} />
 			))}
 		</div>
 	</Card>

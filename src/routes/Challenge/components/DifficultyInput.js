@@ -1,5 +1,4 @@
 import { Subnav } from 'components'
-import React from 'react'
 
 const difficultyTypes = {
 	Easy: 'success',
@@ -14,11 +13,19 @@ const DifficultyInput = ({ difficulty, setState }) => {
 		active: d === difficulty,
 		onClick: () => setState(d),
 	}))
-	
+
 	return (
-		<div className='padding-text-top'>
-			<p className='uk-text-primary'>Difficulty</p>
-			<Subnav padding={false} {...{ items }}/>
+		<div className="padding-text-top">
+			<p
+				className="uk-text-primary"
+				style={{
+					marginLeft: '0.5rem',
+					marginBottom: '0.25rem',
+				}}
+			>
+				Difficulty
+			</p>
+			<Subnav items={items} padding={false} />
 		</div>
 	)
 }

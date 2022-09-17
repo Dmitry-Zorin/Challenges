@@ -28,10 +28,5 @@
 		"title": "Log out error",
 		"message": "?",
 		"type": "danger"
-	},
-	"settings": {
-		"title": "Settings update error",
-		"message": "?",
-		"type": "danger"
 	}
 }

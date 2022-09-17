@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion'
-import React from 'react'
-import { off, on, slider, switch as _switch } from './Switch.module.scss'
+import { gentleSpringConfig } from 'scripts/animations'
+
+import styles from './Switch.module.scss'
+
+const { off, on, slider, switch: _switch } = styles
 
 const Switch = ({ isOn, onClick, ...props }) => (
 	<div
@@ -12,7 +15,7 @@ const Switch = ({ isOn, onClick, ...props }) => (
 			className={slider}
 			initial={false}
 			animate={{ x: `${100 * isOn}%` }}
-			transition={{ type: 'spring', mass: 0.25 }}
+			transition={gentleSpringConfig}
 		/>
 	</div>
 )

@@ -1,8 +1,6 @@
 @import '../../../../styles/variables';
 @import '../../../../styles/mixins';
 
-$height: 85px;
-
 .container {
 	list-style: none;
 	padding: 0;
@@ -10,7 +8,7 @@ $height: 85px;
 	position: fixed;
 	right: 0;
 	z-index: $z-index + 10;
-	
+
 	@media (max-width: $breakpoint-small) {
 		left: 0;
 	}
@@ -20,26 +18,21 @@ $height: 85px;
 	align-items: center;
 	border-radius: $border-radius-large;
 	cursor: pointer;
+	pointer-events: all;
 	display: flex;
 	margin: $card-margin-small;
-	min-height: $height;
-	padding: 0;
-	pointer-events: all;
+	padding: $text-padding $padding;
 	box-shadow: $shadow;
 	border: 1px solid $muted-color;
 	color: white;
-	
+
 	@media (min-width: $breakpoint-small) {
 		margin: $card-margin-large;
 		width: 350px;
 	}
-	
-	p {
-		@include text-crop(0.6);
-	}
-	
+
 	svg {
-		min-width: $height;
+		margin-right: $padding;
 	}
 }
 

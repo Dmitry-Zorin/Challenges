@@ -4,7 +4,7 @@
 		"icon": "tasks"
 	},
 	"edit": {
-		"title": "Challenge updated",
+		"title": "Challenge updated!",
 		"icon": "sync-alt"
 	},
 	"start": {
@@ -12,7 +12,7 @@
 		"icon": "stopwatch"
 	},
 	"startReady": {
-		"title": "Challenge is ready to start",
+		"title": "Challenge is ready to be started!",
 		"icon": "clock"
 	},
 	"complete": {
@@ -21,11 +21,11 @@
 		"type": "success"
 	},
 	"completeReady": {
-		"title": "Challenge is ready to complete",
+		"title": "Challenge is ready to be completed!",
 		"icon": "clock"
 	},
 	"delete": {
-		"title": "Challenge deleted",
+		"title": "Challenge deleted!",
 		"icon": "trash-alt",
 		"type": "danger"
 	}

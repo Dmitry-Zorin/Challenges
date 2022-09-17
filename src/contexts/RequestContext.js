@@ -4,10 +4,12 @@ import challenges from 'data/notifications/challenges.json'
 import errors from 'data/notifications/errors.json'
 import user from 'data/notifications/user.json'
 import { upperFirst } from 'lodash'
-import React, { createContext, useContext } from 'react'
+import { createContext, useContext } from 'react'
 
-const server = process.env.NODE_ENV === 'production' ? ''
-	: `http://${window.location.hostname}:${process.env.REACT_APP_API_PORT}`
+const server =
+	process.env.NODE_ENV === 'production'
+		? ''
+		: `http://${window.location.hostname}:${process.env.REACT_APP_API_PORT}`
 
 const apiServer = server + '/api'
 
@@ -21,75 +23,74 @@ const challengesQuery = `challenges {
 	completed ${challengeQuery}
 }`
 
-const settingsQuery = `settings {
-	theme
-}`
-
 const userQuery = `{
 	username
 	${challengesQuery}
-	${settingsQuery}
 }`
 
 // Shortcuts
-const resolve = args => Promise.resolve(args)
-const reject = args => Promise.reject(args)
+const resolve = (args) => Promise.resolve(args)
+const reject = (args) => Promise.reject(args)
 
 const RequestContext = createContext()
 
 export const RequestProvider = ({ children }) => {
 	const { showSpinner } = useContext(SpinnerContext)
 	const { addNotification } = useContext(NotificationContext)
-	
+
 	const postQuery = (query, action, variables) => {
 		const api = query.match(/{\s*([^({ ]+)\s*[({]/)[1]
 		showSpinner()
-		
-		return axios.post(
-			apiServer,
-			{ query: query.replace(/\s+/g, ' '), variables },
-			{ withCredentials: true },
-		)
-			.then(res => resolve(res.data.data[api]))
-			.catch(err => {
+
+		return axios
+			.post(
+				apiServer,
+				{ query: query.replace(/\s+/g, ' '), variables },
+				{ withCredentials: true },
+			)
+			.then((res) => resolve(res.data.data[api]))
+			.catch((err) => {
 				console.log(err)
 				const errors = err.response?.data?.errors
 				if (errors) {
-					console.log('Errors', errors.map(e => e.message))
+					console.log(
+						'Errors',
+						errors.map((e) => e.message),
+					)
 				}
-				return reject(addNotification({
-					title: 'Error',
-					message: `Failed to ${action}`,
-					type: 'danger',
-				}))
+				return reject(
+					addNotification({
+						title: 'Error',
+						message: `Failed to ${action}`,
+						type: 'danger',
+					}),
+				)
 			})
 			.finally(() => showSpinner(false))
 	}
-	
+
 	const requests = {
-		getUserInfo: () => (
+		getUserInfo: () =>
 			postQuery(`{ user { user ${userQuery} } }`, 'get user info')
-				.then(res => (
+				.then((res) =>
 					res?.user !== undefined
 						? resolve(res.user)
-						: reject(addNotification(errors.response))
-				))
-				.catch(reject)
-		),
-		
+						: reject(addNotification(errors.response)),
+				)
+				.catch(reject),
+
 		authorize: (action, variables) => {
 			const query = `mutation($username: String!, $password: String!) {
 		    ${action}(username: $username, password: $password) {
 		      user ${userQuery}
 		    }
 		  }`
-			const actionName = `${
-				action.slice(0, -2)} ${action.slice(-2).toLowerCase()
-			}`
-			
+			const actionName = `${action.slice(0, -2)} ${action
+				.slice(-2)
+				.toLowerCase()}`
+
 			return postQuery(query, actionName, variables)
-				.then(res => {
-					console.log(res)
+				.then((res) => {
 					if (res?.user === null) {
 						return reject(addNotification(errors[action]))
 					}
@@ -101,10 +102,10 @@ export const RequestProvider = ({ children }) => {
 				})
 				.catch(reject)
 		},
-		
-		logout: (message) => (
+
+		logout: (message) =>
 			postQuery('mutation { logout { user { username } } }', 'log out')
-				.then(res => {
+				.then((res) => {
 					if (res?.user) {
 						return reject(addNotification(errors.logout))
 					}
@@ -116,28 +117,8 @@ export const RequestProvider = ({ children }) => {
 						message,
 					})
 				})
-				.catch(reject)
-		),
-		
-		saveSettings: (settings) => {
-			const query = `mutation($theme: String!) {
-				settingsEdit(settings: { theme: $theme }) {
-					${settingsQuery}
-				}
-			}`
-			return postQuery(query, 'save user settings', settings)
-				.then(res => {
-					if (res?.settings === null) {
-						return reject(addNotification(errors.settings))
-					}
-					if (res?.settings === undefined) {
-						return reject(addNotification(errors.response))
-					}
-					addNotification(user.settings)
-				})
-				.catch(reject)
-		},
-		
+				.catch(reject),
+
 		saveChallenge: (action, variables) => {
 			const info = {
 				create: {
@@ -153,7 +134,7 @@ export const RequestProvider = ({ children }) => {
 					action: 'update',
 				},
 			}[action]
-			
+
 			const query = `mutation(
 		    ${info.id}
 		    $name: String!
@@ -173,9 +154,9 @@ export const RequestProvider = ({ children }) => {
 		      ${challengesQuery}
 		    }
 		  }`
-			
+
 			return postQuery(query, `${info.action} challenge`, variables)
-				.then(res => {
+				.then((res) => {
 					if (!res?.challenges) {
 						return reject(addNotification(errors.response))
 					}
@@ -184,7 +165,7 @@ export const RequestProvider = ({ children }) => {
 				})
 				.catch(reject)
 		},
-		
+
 		updateChallenge: (action, variables, name) => {
 			const query = `mutation($id: String!) {
 		    challenge${upperFirst(action)}(id: $id) {
@@ -192,17 +173,16 @@ export const RequestProvider = ({ children }) => {
 		    }
 		  }`
 			return postQuery(query, action, variables)
-				.then(res => {
-					if (!res?.challenges)
-						return reject(addNotification(errors.response))
-					
+				.then((res) => {
+					if (!res?.challenges) return reject(addNotification(errors.response))
+
 					addNotification({ ...challenges[action], message: name })
 					return resolve(res.challenges)
 				})
 				.catch(reject)
 		},
 	}
-	
+
 	return (
 		<RequestContext.Provider value={requests}>
 			{children}

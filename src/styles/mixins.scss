@@ -1,37 +1,12 @@
-@import './variables';
+@use 'sass:math';
+
+@use './variables';
 
 @mixin button($background, $color: white) {
-	&, &:hover, &:active {
+	&,
+	&:hover,
+	&:active {
 		background: $background !important;
 		color: $color !important;
-	}
-}
-
-// http://text-crop.eightshapes.com
-@mixin text-crop($line-height: 1.4, $adjustment: -3px) {
-	$top-crop: 0;
-	$bottom-crop: 6;
-	$crop-font-size: 36;
-	$crop-line-height: 1.2;
-	
-	$dynamic-top-crop: max(($top-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
-	$dynamic-bottom-crop: max(($bottom-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
-	
-	line-height: $line-height;
-	
-	&::before,
-	&::after {
-		content: '';
-		display: block;
-		height: 0;
-		width: 0;
-	}
-	
-	&::before {
-		margin-bottom: calc(-#{$dynamic-top-crop}em + #{$adjustment});
-	}
-	
-	&::after {
-		margin-top: calc(-#{$dynamic-bottom-crop}em + #{$adjustment});
 	}
 }

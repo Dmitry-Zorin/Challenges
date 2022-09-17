@@ -1,29 +1,37 @@
-import { notificationTimeout } from 'data/settings.json'
-import React, { createContext, useState } from 'react'
+import settings from 'data/settings.json'
+import { createContext, useState } from 'react'
 
 const NotificationContext = createContext()
 
 export const NotificationProvider = ({ children }) => {
 	const [notifications, setNotifications] = useState([])
-	
+
 	const addNotification = (info) => {
-		const notification = {
-			id: new Date().getTime(),
-			icon: `${info.type === 'danger' ? 'exclamation' : 'info'}-circle`,
-			...info,
-		}
-		setNotifications(n => [...n, notification])
-		setTimeout(() => {
-			setNotifications(n => (
-				n[0]?.id === notification.id ? n.slice(1) : n
-			))
-		}, notificationTimeout)
+		const id = JSON.stringify(info)
+
+		setNotifications((n) => {
+			if (n.some((e) => e.id === id)) {
+				return n
+			}
+
+			const notification = {
+				id,
+				icon: `${info.type === 'danger' ? 'exclamation' : 'info'}-circle`,
+				...info,
+			}
+
+			setTimeout(() => {
+				setNotifications((n) => (n[0]?.id === id ? n.slice(1) : n))
+			}, settings.notificationTimeout)
+
+			return [...n, notification]
+		})
 	}
-	
+
 	const removeNotification = (id) => {
-		setNotifications(n => n.filter(n => n.id !== id))
+		setNotifications((n) => n.filter((n) => n.id !== id))
 	}
-	
+
 	return (
 		<NotificationContext.Provider
 			value={{ notifications, addNotification, removeNotification }}

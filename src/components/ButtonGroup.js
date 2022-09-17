@@ -1,6 +1,12 @@
-import React, { Children } from 'react'
+import { Children } from 'react'
 
-const ButtonGroup = ({ padding = true, className = '', children, subnav, ...props }) => (
+const ButtonGroup = ({
+	padding = true,
+	className = '',
+	children,
+	subnav,
+	...props
+}) => (
 	<div className={padding ? 'padding' : ''}>
 		<div
 			className={`
@@ -11,12 +17,9 @@ const ButtonGroup = ({ padding = true, className = '', children, subnav, ...prop
 				${subnav ? '' : 'uk-grid-small'}
 				${className}
 			`}
-			//style={{ overflowY: 'hidden' }}
 			{...props}
 		>
-			{Children.map(children, (c, i) => c && (
-				<div key={i}>{c}</div>
-			))}
+			{Children.map(children, (c, i) => c && <div key={i}>{c}</div>)}
 		</div>
 	</div>
 )

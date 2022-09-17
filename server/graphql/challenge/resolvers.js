@@ -1,18 +1,19 @@
-const { challengeGroups } = require('../../settings.json')
+const settings = require('../../settings.json')
 
 const resolvers = {
 	Mutation: {
-		challengeAdd: (...args) => (
-			getUpdatedChallenges(args, ({ challenges }, { challenge }) => {
-				addChallenge(challenges, challenge)
+		challengeAdd: (...args) => {
+			return getUpdatedChallenges(args, (user, { challenge }) => {
+				addChallenge(user, challenge)
 			})
-		),
-		challengeStart: (...args) => (
-			getUpdatedChallenges(args, (user, { id }) => {
+		},
+		challengeStart: (...args) => {
+			return getUpdatedChallenges(args, (user, { id }) => {
 				const { challenges } = user
-				const challenge = findChallenge(challenges.upcoming, id)
+				const challenge = challenges.upcoming.id(id)
+				console.log(challenges.upcoming, challenge, id)
 				const now = new Date().getTime()
-				
+
 				deleteChallenge(user, id, ['upcoming'])
 				challenges.ongoing.push(
 					Object.assign(challenge, {
@@ -21,14 +22,14 @@ const resolvers = {
 					}),
 				)
 			})
-		),
-		challengeComplete: (...args) => (
-			getUpdatedChallenges(args, (user, { id }) => {
+		},
+		challengeComplete: (...args) => {
+			return getUpdatedChallenges(args, (user, { id }) => {
 				const { challenges } = user
-				const ongoing = findChallenge(challenges.ongoing, id)
-				const challenge = ongoing || findChallenge(challenges.upcoming, id)
+				const ongoing = challenges.ongoing.id(id)
+				const challenge = ongoing || challenges.upcoming.id(id)
 				const now = new Date().getTime()
-				
+
 				deleteChallenge(user, id, [ongoing ? 'ongoing' : 'upcoming'])
 				challenges.completed.push(
 					Object.assign(challenge, {
@@ -37,24 +38,25 @@ const resolvers = {
 					}),
 				)
 			})
-		),
-		challengeDelete: (...args) => (
-			getUpdatedChallenges(args, (user, { id }) => {
+		},
+		challengeDelete: (...args) => {
+			return getUpdatedChallenges(args, (user, { id }) => {
 				deleteChallenge(user, id)
 			})
-		),
-		challengeEdit: (...args) => (
-			getUpdatedChallenges(args, (user, { id, challenge }) => {
+		},
+		challengeEdit: (...args) => {
+			return getUpdatedChallenges(args, (user, { id, challenge }) => {
 				deleteChallenge(user, id)
-				addChallenge(user.challenges, challenge)
+				addChallenge(user, challenge)
 			})
-		),
+		},
 	},
 }
 
-const addChallenge = (challenges, { name, difficulty, duration, delay }) => {
+const addChallenge = (user, { name, difficulty, duration, delay }) => {
 	const now = new Date().getTime()
-	challenges[delay ? 'upcoming' : 'ongoing'].push({
+	const group = user.challenges[delay ? 'upcoming' : 'ongoing']
+	group.push({
 		difficulty,
 		name: name.slice(0, 250),
 		startDate: now + delay,
@@ -62,31 +64,26 @@ const addChallenge = (challenges, { name, difficulty, duration, delay }) => {
 	})
 }
 
-const deleteChallenge = (user, id, groups = challengeGroups) => {
+const deleteChallenge = (user, id, groups = settings.challengeGroups) => {
 	for (const g of groups) {
-		user.challenges[g] = user.challenges[g]
-			.filter(c => c._id.toString() !== id)
+		user.challenges[g].id(id)?.remove()
 	}
 }
 
-const findChallenge = (group, id) => (
-	group.find(c => c._id.toString() === id)
-)
-
-const getUpdatedChallenges = ([obj, args, context], update) => {
+const getUpdatedChallenges = async ([, args, context], update) => {
 	const user = context.getUser()
 	let challenges = null
-	
+
 	try {
 		if (update) {
 			update(user, args)
-			user.save().catch(err => console.log(err))
+			await user.save()
 		}
 		challenges = context.getUserInfo(user).challenges
-	}
-	catch (err) {
+	} catch (err) {
 		console.log(err)
 	}
+
 	return { challenges }
 }
 
